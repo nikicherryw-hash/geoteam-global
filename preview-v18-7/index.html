@@ -2433,5 +2433,17 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   </script>
 
   <!-- RFQ details and copy-draft form live exclusively on sourcing.html. -->
-<footer class="gt-legal-footer gt-footer-singleline" aria-label="Footer"><span>© 2026 GeoTeam</span><a class="gt-footer-about" href="about.html">About Us <span aria-hidden="true">↗</span></a><a href="privacy.html">Privacy Policy</a><a href="rfq-privacy.html">KVKK / RFQ</a></footer></body>
+<footer class="gt-legal-footer gt-footer-singleline" aria-label="Footer"><span>© 2026 GeoTeam</span><a class="gt-footer-about" href="about.html">About Us <span aria-hidden="true">↗</span></a><a href="privacy.html">Privacy Policy</a><a href="rfq-privacy.html">KVKK / RFQ</a></footer><script id="gt-clock-independent">
+(function(){
+ function tick(){
+   var el=document.getElementById('timeIstanbul');
+   if(!el) return;
+   try{el.textContent=new Intl.DateTimeFormat('tr-TR',{timeZone:'Europe/Istanbul',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date());}
+   catch(e){el.textContent='IST';}
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',tick,{once:true});
+ else tick();
+ setInterval(tick,30000);
+})();
+</script></body>
 </html>
