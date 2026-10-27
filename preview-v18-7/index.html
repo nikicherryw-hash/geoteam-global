@@ -1187,7 +1187,7 @@ header .right{ position: relative !important; z-index: 99999 !important; }
         </div>
 
         <div class="mega-foot">
-          <a href="contact.html" class="mega-cta" data-close-mega="1" id="megaCta">Request a Quote</a>
+          <a href="sourcing.html" class="mega-cta" data-close-mega="1" id="megaCta">Request a Quote</a>
         </div>
       </div>
     </div>
@@ -2384,47 +2384,6 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   }
   </script>
 
-  <!-- RFQ Modal (Index) -->
-  <div id="rfqModal" class="modal" aria-hidden="true">
-    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="rfqTitle">
-      <div class="modal-head">
-        <div>
-          <div class="kicker" id="rfqKicker">RFQ</div>
-          <div class="h2" id="rfqTitle">Request for Quote</div>
-        </div>
-        <button class="modal-close" id="rfqCloseBtn" aria-label="Close">×</button>
-      </div>
-      <div class="modal-body">
-        <label class="field">
-          <span class="field-label" id="rfqLblName">Company / Name</span>
-          <input id="rfqName" autocomplete="name" placeholder="Your company or name">
-        </label>
-        <label class="field">
-          <span class="field-label" id="rfqLblEmail">Email</span>
-          <input id="rfqEmail" type="email" autocomplete="email" placeholder="name@company.com">
-        </label>
-        <label class="field">
-          <span class="field-label" id="rfqLblDestination">Destination / Incoterms</span>
-          <input id="rfqDest" placeholder="e.g., Istanbul (DDP), Dubai (EXW)">
-        </label>
-        <label class="field">
-          <span class="field-label" id="rfqLblDetails">What do you need?</span>
-          <textarea id="rfqDetails" placeholder="Paste part numbers, quantities, condition, target lead time, documents required (CoC, traceability, photos)"></textarea>
-        </label>
-      </div>
-      <div class="modal-actions">
-        <button type="button" class="btn" id="rfqCopyBtn" onclick="window.__gt_rfq_copy?.()">Copy RFQ</button>
-        <button type="button" class="btn secondary" id="rfqEmailBtn" onclick="window.__gt_rfq_email?.()">Send Mail</button>
-        <button type="button" class="btn secondary" id="rfqWaBtn" onclick="window.__gt_rfq_wa?.()">WhatsApp</button>
-      </div>
-      <div class="rfq-tip" id="rfqTip">Tip: paste your list with PN + qty. Photos help. We respond fast.</div>
-    </div>
-  </div>
-
-  
-
-  
-  
-  
+  <!-- RFQ details and copy-draft form live exclusively on sourcing.html. -->
 <footer class="gt-legal-footer" aria-label="Legal information"><span>© 2026 GeoTeam Global</span><span aria-hidden="true">·</span><a href="privacy.html">Privacy Policy &amp; KVKK</a><span aria-hidden="true">·</span><a href="rfq-privacy.html">RFQ Privacy Notice</a></footer></body>
 </html>
