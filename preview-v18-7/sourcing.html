@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#041b25">
 <meta name="robots" content="noindex,nofollow">
-<title>Request a batch · GeoTeam Global</title>
+<title>Global Sourcing · GeoTeam Global</title>
 <style>
 :root{color-scheme:dark;--bg:#061a23;--teal:#2ff0df;--text:#eaf7f7;--muted:#b6d0d5;--line:rgba(156,244,235,.19);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);background:radial-gradient(700px 550px at 50% 0%,rgba(22,126,135,.33),transparent 76%),linear-gradient(160deg,#06171f,#0a3943 70%,#081e27);min-height:100vh}
@@ -58,6 +58,15 @@ button{cursor:pointer}
 #feedback{min-height:20px;font-size:12px;color:#80f0e4;display:block;padding-top:4px}
 [hidden]{display:none!important}
 @media(max-width:720px){header{padding:16px 17px}.brand strong{font-size:20px}.brand small{font-size:10px}main{padding:34px 14px 44px}.grid{grid-template-columns:1fr 1fr}.grid label:first-child{grid-column:span 2}.details{grid-template-columns:1fr}.card{padding:19px;border-radius:19px}.form-foot{align-items:stretch}.buttons,.buttons button{width:100%}.back{font-size:12px;padding:9px 12px}h1{font-size:30px}}
+
+/* v18.9 visual consistency across landing, sourcing and About */
+.brand strong{font-family:"Avenir Next","Trebuchet MS","Gill Sans",Arial,sans-serif;font-weight:700;font-size:23px;letter-spacing:.015em;text-shadow:0 0 9px rgba(65,229,217,.22)}
+.brand small{font-family:"Avenir Next","Trebuchet MS","Gill Sans",Arial,sans-serif;font-weight:650;font-size:10.5px;letter-spacing:.31em}
+.gt-footer-singleline{flex-wrap:nowrap!important;white-space:nowrap!important;justify-content:center!important;gap:clamp(9px,3vw,23px)!important;overflow-x:auto!important;scrollbar-width:thin!important;padding:16px 11px 25px!important}
+.gt-footer-singleline>a,.gt-footer-singleline>span{flex:0 0 auto;font-size:11.5px}
+.gt-footer-singleline .about-link{border:1px solid rgba(108,232,221,.28);padding:6px 12px;border-radius:999px;color:#d9f4f0}
+.gt-footer-singleline .about-link:hover{border-color:#74f5e6}
+@media(max-width:580px){.brand strong{font-size:19px}.brand small{font-size:9.5px}.gt-footer-singleline{justify-content:flex-start!important;gap:10px!important}.gt-footer-singleline>a,.gt-footer-singleline>span{font-size:10.5px}.gt-footer-singleline .about-link{padding:5px 7px}}
 </style>
 </head>
 <body>
@@ -92,7 +101,7 @@ button{cursor:pointer}
 </section>
 <p class="notice" id="notice">GeoTeam Global does not guarantee stock, supplier authenticity, lead time or final customs charges from an initial search. Any proposal is subject to verification and applicable trade-compliance review.</p>
 </main>
-<footer class="legal"><span>© 2026 GeoTeam Global</span><span>·</span><a href="privacy.html" id="privacy">Privacy Policy &amp; KVKK</a><span>·</span><a href="rfq-privacy.html" id="rfqPrivacy">RFQ Privacy Notice</a></footer>
+<footer class="legal gt-footer-singleline"><span>© 2026 GeoTeam</span><a class="about-link" href="about.html">About Us</a><a href="privacy.html" id="privacy">Privacy Policy</a><a href="rfq-privacy.html" id="rfqPrivacy">KVKK / RFQ</a></footer>
 <script>
 (()=>{'use strict';
 const by=id=>document.getElementById(id);const list=[];let lang='en';let busy=false;
