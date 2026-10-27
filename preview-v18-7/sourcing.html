@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#041b25">
+<meta name="robots" content="noindex,nofollow">
+<title>Request a batch · GeoTeam Global</title>
+<style>
+:root{color-scheme:dark;--bg:#061a23;--teal:#2ff0df;--text:#eaf7f7;--muted:#b6d0d5;--line:rgba(156,244,235,.19);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);background:radial-gradient(700px 550px at 50% 0%,rgba(22,126,135,.33),transparent 76%),linear-gradient(160deg,#06171f,#0a3943 70%,#081e27);min-height:100vh}
+a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}
+header{height:auto;min-height:90px;padding:21px max(22px,calc((100vw - 1180px)/2));border-bottom:1px solid rgba(177,241,234,.12);background:rgba(2,22,31,.57);backdrop-filter:blur(13px);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:inline-flex;flex-direction:column;align-items:center;gap:5px;line-height:1.1;white-space:nowrap;min-width:115px}
+.brand strong{font-size:23px;letter-spacing:-.035em;font-weight:780;text-shadow:0 0 14px rgba(95,246,231,.37)}
+.brand small{font-size:11px;font-weight:750;letter-spacing:.245em;color:#ace6e3;text-align:center;width:100%;text-shadow:0 0 11px rgba(85,240,232,.25)}
+.top-nav{display:flex;gap:18px;align-items:center}
+.back{font-size:13px;color:var(--muted);border:1px solid var(--line);padding:10px 15px;border-radius:999px;white-space:nowrap}.back:hover{color:#fff;border-color:#5adfd2}
+.lang{font-size:12px;font-weight:800;color:#eafffb;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.05);width:36px;height:36px;cursor:pointer}
+main{max-width:1050px;margin:0 auto;padding:50px 22px 64px}
+.kicker{display:flex;align-items:center;gap:9px;font-size:11px;text-transform:uppercase;color:#7bebe0;letter-spacing:.16em;font-weight:800}.kicker:before{content:"";display:inline-block;background:#50eedd;width:7px;height:7px;box-shadow:0 0 10px #3fecdb;border-radius:50%}
+h1{font-size:clamp(27px,4.2vw,46px);line-height:1.13;letter-spacing:-.035em;margin:12px 0}
+.lead{color:var(--muted);font-size:15px;line-height:1.7;max-width:670px;margin:8px 0 26px}
+.info{display:flex;gap:10px;align-items:center;font-size:12px;color:#a7cfd0;background:rgba(27,109,110,.14);border:1px solid rgba(110,233,218,.15);border-radius:11px;padding:10px 13px;margin:0 0 23px}
+.info span{color:#86f1e2;font-weight:800;white-space:nowrap}
+.card{background:linear-gradient(145deg,rgba(6,48,57,.93),rgba(4,30,40,.93));border:1px solid rgba(127,246,230,.19);box-shadow:0 24px 80px rgba(0,0,0,.16);border-radius:24px;padding:26px;margin:0 0 18px}
+.card h2{font-size:19px;letter-spacing:-.02em;margin:0 0 6px}
+.hint{font-size:12.5px;line-height:1.65;color:var(--muted);margin:0 0 19px}
+.grid{display:grid;grid-template-columns:2fr 1fr 1.25fr;gap:15px}
+label{display:flex;flex-direction:column;gap:8px;min-width:0;color:#d5e9e9;font-size:12px;font-weight:650}
+input,textarea,select{border:1px solid rgba(156,235,226,.24);border-radius:11px;background:rgba(1,19,27,.65);padding:12px;color:#fff;min-height:45px;width:100%;outline:none;font-size:14px}
+input:focus,textarea:focus,select:focus{border-color:#6cf9e6;box-shadow:0 0 0 3px rgba(73,237,221,.12)}
+input::placeholder,textarea::placeholder{color:#849fa8}
+textarea{resize:vertical;min-height:85px}
+.details{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px}
+.form-foot{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-top:21px}
+.buttons{display:flex;gap:10px;flex-wrap:wrap}
+button{cursor:pointer}
+.primary,.secondary{min-height:44px;border-radius:999px;padding:10px 22px;font-size:13px;font-weight:760;letter-spacing:.01em;transition:transform .2s,border .2s,box-shadow .2s}
+.primary{border:1px solid #78f2e3;background:linear-gradient(120deg,#126e76,#084f5b);color:#effffb;box-shadow:0 0 0 1px rgba(85,244,228,.1),0 0 18px rgba(53,227,218,.23)}
+.primary:hover{box-shadow:0 0 22px rgba(64,247,224,.4);transform:translateY(-1px)}
+.secondary{border:1px solid rgba(130,243,225,.38);background:rgba(63,168,159,.07);color:#dcfaf7}.secondary:hover{border-color:#78f2e3}
+.small{color:#9dbfc3;font-size:12px;line-height:1.5}
+.state{border:1px solid rgba(153,233,223,.18);border-radius:14px;background:rgba(3,28,36,.55);padding:18px;color:#c5dddd;font-size:13px;line-height:1.6}
+.state strong{font-size:14px;display:block;color:#eff}
+#results{margin-top:15px}#results:empty{display:none}
+.result{border:1px solid rgba(124,226,215,.21);border-radius:13px;padding:15px;margin-top:12px;background:rgba(16,74,82,.25)}
+.result strong{display:block;font-size:14px}.result p{color:#bcd5d8;font-size:13px;line-height:1.5;margin-bottom:0}
+.rowhead{display:flex;align-items:baseline;justify-content:space-between;gap:15px;margin-bottom:14px}
+#count{color:#81e6dc;font-weight:760;font-size:12px}
+.basketitem{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border-bottom:1px solid rgba(166,239,230,.12);padding:14px 0}
+.basketitem:last-child{border:0}.basketitem strong{display:block;font-size:14px;word-break:break-word}.basketitem span{display:block;color:#b3cfd3;font-size:12px;margin-top:5px}
+.remove{border:1px solid rgba(159,233,229,.28);border-radius:999px;color:#cde8e9;background:transparent;padding:7px 11px;white-space:nowrap;font-size:12px}
+.empty{font-size:13px;color:#a1bbc1;padding:14px 0}
+.legal{border-top:1px solid rgba(160,235,222,.16);padding:25px 15px 38px;margin:0 auto;max-width:1020px;display:flex;align-items:center;justify-content:center;gap:15px;flex-wrap:wrap;text-align:center;color:#a8c5c7;font-size:12px}
+.legal a:hover{color:#7ef3e5;text-decoration:underline}
+.notice{font-size:12px;line-height:1.65;color:#9ec9cb}
+#feedback{min-height:20px;font-size:12px;color:#80f0e4;display:block;padding-top:4px}
+[hidden]{display:none!important}
+@media(max-width:720px){header{padding:16px 17px}.brand strong{font-size:20px}.brand small{font-size:10px}main{padding:34px 14px 44px}.grid{grid-template-columns:1fr 1fr}.grid label:first-child{grid-column:span 2}.details{grid-template-columns:1fr}.card{padding:19px;border-radius:19px}.form-foot{align-items:stretch}.buttons,.buttons button{width:100%}.back{font-size:12px;padding:9px 12px}h1{font-size:30px}}
+</style>
+</head>
+<body>
+<header><a class="brand" href="index.html" aria-label="GeoTeam Global homepage"><strong>GeoTeam</strong><small>GLOBAL</small></a><div class="top-nav"><a class="back" href="index.html" id="back">← Back to site</a><button class="lang" id="lang" type="button" aria-label="Switch language">EN</button></div></header>
+<main>
+<div class="kicker" id="kicker">GeoTeam global sourcing</div>
+<h1 id="title">Request a specific batch</h1>
+<p class="lead" id="lead">Enter the exact part number, quantity and delivery requirements. Search global sourcing channels, then build one consolidated RFQ. Availability and price are confirmed before an offer.</p>
+<div class="info"><span id="mode">Preview</span><div id="modeText">The public design preview does not send RFQs or invent supplier stock and prices.</div></div>
+<section class="card" aria-labelledby="detailsTitle">
+<h2 id="detailsTitle">1. Item &amp; delivery details</h2>
+<p class="hint" id="detailsHint">Specify the actual batch — manufacturer, part number, condition and delivery destination.</p>
+<div class="grid">
+<label><span id="labelPart">Part number / manufacturer *</span><input id="part" required maxlength="160" autocomplete="off" placeholder="Phoenix Contact 2742748"></label>
+<label><span id="labelQty">Quantity *</span><input id="qty" type="number" min="1" max="999999" step="1" value="1" inputmode="numeric"></label>
+<label><span id="labelCondition">Condition</span><select id="condition"><option value="new">New / original</option><option value="unused">Unused surplus</option><option value="any">Any — verify</option></select></label>
+<label><span id="labelDestination">Destination / country *</span><input id="dest" maxlength="100" placeholder="Türkiye, Istanbul"></label>
+<label><span id="labelLead">Required delivery</span><input id="leadTime" maxlength="90" placeholder="e.g. 4 weeks"></label>
+<label><span id="labelPurpose">End use / equipment</span><input id="endUse" maxlength="180" placeholder="Equipment and application"></label>
+</div>
+<div class="details"><label><span id="labelNotes">Specification / additional requirements</span><textarea id="notes" maxlength="2400" placeholder="Datasheet, OEM reference, acceptable documentation, preferred Incoterms..."></textarea></label>
+<label><span id="labelBOM">BOM / specification file (local selection)</span><input id="bom" type="file" accept=".pdf,.xlsx,.xls,.csv,.doc,.docx,.txt"><small class="small" id="bomNote">Files are not uploaded in this preview. Attachments will require an approved secure RFQ backend.</small></label></div>
+<div class="form-foot"><div class="buttons"><button id="search" type="button" class="primary">Search worldwide ↗</button><button id="add" type="button" class="secondary">+ Add to batch</button></div><span class="small" id="searchHint">13-region research engine · supplier verification before quoting</span></div>
+<span id="feedback" role="status" aria-live="polite"></span>
+<div id="results" aria-live="polite"></div>
+</section>
+<section class="card" aria-labelledby="basketTitle">
+<div class="rowhead"><h2 id="basketTitle">2. Batch RFQ</h2><span id="count">0 items</span></div>
+<p class="hint" id="basketHint">Combine several positions into one request. No supplier identities, costs or unverified inventory are disclosed.</p>
+<div id="basket"><p class="empty" id="empty">Add the first item to create your batch.</p></div>
+<div class="form-foot"><div class="buttons"><button class="primary" type="button" id="copy">Copy RFQ draft</button></div><p class="small" id="copyHint">Draft only. No automatic sending or personal-data transmission.</p></div>
+</section>
+<p class="notice" id="notice">GeoTeam Global does not guarantee stock, supplier authenticity, lead time or final customs charges from an initial search. Any proposal is subject to verification and applicable trade-compliance review.</p>
+</main>
+<footer class="legal"><span>© 2026 GeoTeam Global</span><span>·</span><a href="privacy.html" id="privacy">Privacy Policy &amp; KVKK</a><span>·</span><a href="rfq-privacy.html" id="rfqPrivacy">RFQ Privacy Notice</a></footer>
+<script>
+(()=>{'use strict';
+const by=id=>document.getElementById(id);const list=[];let lang='en';let busy=false;
+const words={
+en:{back:'← Back to site',kicker:'GeoTeam global sourcing',title:'Request a specific batch',lead:'Enter the exact part number, quantity and delivery requirements. Search global sourcing channels, then build one consolidated RFQ. Availability and price are confirmed before an offer.',mode:'Preview',modeText:'The public design preview does not send RFQs or invent supplier stock and prices.',detailsTitle:'1. Item & delivery details',detailsHint:'Specify the actual batch — manufacturer, part number, condition and delivery destination.',labelPart:'Part number / manufacturer *',labelQty:'Quantity *',labelCondition:'Condition',labelDestination:'Destination / country *',labelLead:'Required delivery',labelPurpose:'End use / equipment',labelNotes:'Specification / additional requirements',labelBOM:'BOM / specification file (local selection)',bomNote:'Files are not uploaded in this preview. Attachments will require an approved secure RFQ backend.',search:'Search worldwide ↗',add:'+ Add to batch',searchHint:'13-region research engine · supplier verification before quoting',basketTitle:'2. Batch RFQ',basketHint:'Combine several positions into one request. No supplier identities, costs or unverified inventory are disclosed.',copy:'Copy RFQ draft',copyHint:'Draft only. No automatic sending or personal-data transmission.',notice:'GeoTeam Global does not guarantee stock, supplier authenticity, lead time or final customs charges from an initial search. Any proposal is subject to verification and applicable trade-compliance review.',privacy:'Privacy Policy & KVKK',rfqPrivacy:'RFQ Privacy Notice',empty:'Add the first item to create your batch.',qRequired:'Enter the part number or manufacturer first.',destRequired:'Enter the delivery destination.',qtyRequired:'Enter a valid quantity of at least 1.',added:'Item added to batch.',copied:'RFQ draft copied. No request has been sent.',notCopied:'Copy failed. Please select and copy the text manually.',nothing:'Add at least one item to prepare your RFQ.',offlineTitle:'Live search is not connected in this preview',offlineText:'The public review is design-only; search APIs require secure backend configuration. Your batch details can still be prepared and copied.',searching:'Searching international sources…',failed:'Search unavailable. No inventory or price is assumed.',noOffers:'No confirmed offers. GeoTeam can review the submitted RFQ.',leads:'Unverified global source leads (not stock or price offers)',leadNote:'Candidate only. Stock, original condition, lead time and commercial terms are unconfirmed.',items:'items',remove:'Remove'},
+tr:{back:'← Siteye dön',kicker:'GeoTeam küresel tedarik',title:'Belirli bir parti için teklif talebi',lead:'Üretici ve parça numarasını, miktarı ve teslimat koşullarını girin. Küresel kaynakları arayın ve tek bir RFQ hazırlayın. Stok ve fiyat tekliften önce doğrulanır.',mode:'Önizleme',modeText:'Bu demo RFQ göndermez; stok ve fiyat bilgisi üretmez.',detailsTitle:'1. Ürün ve teslimat bilgileri',detailsHint:'Üretici, parça kodu, durum ve teslimat yerini belirtin.',labelPart:'Parça No / üretici *',labelQty:'Miktar *',labelCondition:'Ürün durumu',labelDestination:'Teslimat ülkesi *',labelLead:'Teslim süresi',labelPurpose:'Kullanım amacı / ekipman',labelNotes:'Teknik özellikler / ek talepler',labelBOM:'BOM / şartname (yerel seçim)',bomNote:'Bu demoda dosya gönderilmez; yükleme onaylı güvenli RFQ servisi gerektirir.',search:'Dünya çapında ara ↗',add:'+ Partiye ekle',searchHint:'13 bölge · tekliften önce tedarikçi doğrulaması',basketTitle:'2. Parti RFQ',basketHint:'Birden fazla pozisyonu tek talepte birleştirin. Doğrulanmamış stok, maliyet veya tedarikçi gösterilmez.',copy:'RFQ taslağını kopyala',copyHint:'Sadece taslak. Otomatik gönderim veya kişisel veri aktarımı yok.',notice:'İlk arama; stok, orijinallik, teslim süresi veya gümrük masrafları garantisi değildir. Her teklif doğrulama ve ticaret uyum kontrolüne tabidir.',privacy:'Gizlilik Politikası ve KVKK',rfqPrivacy:'RFQ Aydınlatma Metni',empty:'Talep oluşturmak için ilk ürünü ekleyin.',qRequired:'Önce parça numarası veya üretici girin.',destRequired:'Teslimat yerini girin.',qtyRequired:'En az 1 adet geçerli miktar girin.',added:'Pozisyon talebe eklendi.',copied:'RFQ taslağı kopyalandı; gönderilmedi.',notCopied:'Kopyalanamadı; metni elle kopyalayın.',nothing:'Önce en az bir ürün ekleyin.',offlineTitle:'Canlı arama bu önizlemede bağlı değil',offlineText:'Bu önizleme tasarım incelemesidir. Arama API bağlantısı sunucuda yapılmalıdır. Talebinizi hazırlayıp kopyalayabilirsiniz.',searching:'Uluslararası kaynaklar aranıyor…',failed:'Arama kullanılamıyor. Stok ve fiyat varsayılmaz.',noOffers:'Doğrulanmış teklif yok. GeoTeam RFQ inceleyebilir.',leads:'Doğrulanmamış global kaynak adayları',leadNote:'Sadece aday; stok, orijinallik, teslim ve fiyat teyit edilmedi.',items:'ürün',remove:'Kaldır'}};
+function t(k){return words[lang][k]||words.en[k]||k}
+const keys=['back','kicker','title','lead','mode','modeText','detailsTitle','detailsHint','labelPart','labelQty','labelCondition','labelDestination','labelLead','labelPurpose','labelNotes','labelBOM','bomNote','search','add','searchHint','basketTitle','basketHint','copy','copyHint','notice','privacy','rfqPrivacy'];
+function setLang(v){lang=v;document.documentElement.lang=v;by('lang').textContent=v.toUpperCase();keys.forEach(k=>{const e=by(k);if(e)e.textContent=t(k)});render();}
+by('lang').addEventListener('click',()=>setLang(lang==='en'?'tr':'en'));
+function feedback(message){by('feedback').textContent=message;}
+function record(){const p=by('part').value.trim(),d=by('dest').value.trim(),q=Number(by('qty').value);if(!p){feedback(t('qRequired'));by('part').focus();return null}if(!d){feedback(t('destRequired'));by('dest').focus();return null}if(!Number.isInteger(q)||q<1||q>999999){feedback(t('qtyRequired'));by('qty').focus();return null}return{part:p,qty:q,dest:d,condition:by('condition').value,lead:by('leadTime').value.trim(),purpose:by('endUse').value.trim(),notes:by('notes').value.trim(),bom:by('bom').files?.[0]?.name||''};}
+function render(){const box=by('basket');box.replaceChildren();by('count').textContent=list.length+' '+t('items');if(!list.length){const p=document.createElement('p');p.className='empty';p.textContent=t('empty');box.append(p);return;}
+list.forEach((x,i)=>{const wrap=document.createElement('div');wrap.className='basketitem';const txt=document.createElement('div');const a=document.createElement('strong');a.textContent=(i+1)+'. '+x.part;const b=document.createElement('span');b.textContent=x.qty+' pcs · '+x.condition+' · '+x.dest+(x.lead?' · '+x.lead:'');txt.append(a,b);const del=document.createElement('button');del.className='remove';del.textContent=t('remove');del.type='button';del.addEventListener('click',()=>{list.splice(i,1);render()});wrap.append(txt,del);box.append(wrap)})}
+by('add').addEventListener('click',()=>{const x=record();if(!x)return;list.push(x);render();feedback(t('added'));by('part').value='';by('part').focus()});
+function searchMessage(title,body){const r=by('results');r.replaceChildren();const el=document.createElement('div');el.className='state';const h=document.createElement('strong');h.textContent=title;const p=document.createElement('span');p.textContent=body;el.append(h,p);r.append(el)}
+by('search').addEventListener('click',async()=>{const req=record();if(!req||busy)return;const preview=/^(?:raw|rawcdn)\.githack\.com$|github\.io$|localhost$|127\.0\.0\.1$/.test(location.hostname);if(preview){searchMessage(t('offlineTitle'),t('offlineText'));return;}
+busy=true;by('search').disabled=true;searchMessage(t('searching'),'');
+try{const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),20000);let resp;try{resp=await fetch('/api/sourcing/search',{method:'POST',headers:{'Content-Type':'application/json'},signal:ctrl.signal,body:JSON.stringify({query:req.part,quantity:req.qty,destination:req.dest,lang})})}finally{clearTimeout(timer)}
+const data=await resp.json();if(!resp.ok||data.ok!==true)throw Error(data.message||data.code||t('failed'));const rows=Array.isArray(data.results)?data.results:[];if(!rows.length){searchMessage(t('noOffers'),data.notice||'');return;}
+const r=by('results');r.replaceChildren();const h=document.createElement('h3');h.textContent=t('leads')+' · '+rows.length;r.append(h);rows.slice(0,40).forEach(row=>{const card=document.createElement('div');card.className='result';const head=document.createElement('strong');head.textContent=[String(row.partQuery||req.part).slice(0,140),String(row.region||'').toUpperCase()].filter(Boolean).join(' · ');const info=document.createElement('p');info.textContent=t('leadNote');card.append(head,info);r.append(card)})}
+catch(e){searchMessage(t('failed'),String(e?.message||''))}
+finally{busy=false;by('search').disabled=false}});
+by('copy').addEventListener('click',async()=>{if(!list.length){const x=record();if(x){list.push(x);render()}else return}
+const lines=['GEOTEAM GLOBAL — RFQ DRAFT','Not submitted / Not a binding quotation','',...list.map((x,i)=>[(i+1)+'. Part / manufacturer: '+x.part,'Quantity: '+x.qty,'Condition: '+x.condition,'Destination: '+x.dest,x.lead?'Required delivery: '+x.lead:'',x.purpose?'End use: '+x.purpose:'',x.notes?'Specifications: '+x.notes:'',x.bom?'File selected (NOT uploaded): '+x.bom:''].filter(Boolean).join('\n')+'\n'),'Contact: rfq@geoteam-global.com'];try{await navigator.clipboard.writeText(lines.join('\n'));feedback(t('copied'))}catch{const a=document.createElement('textarea');a.value=lines.join('\n');a.style.width='100%';a.style.minHeight='170px';by('results').replaceChildren(a);a.select();feedback(t('notCopied'))}});
+setLang('en');
+})();
+</script>
+</body></html>
