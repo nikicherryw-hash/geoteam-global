@@ -244,7 +244,7 @@ footer a:hover{color:#92e8df!important}
 <div class="cta"><div><h2>Есть артикул или спецификация?</h2><p>Начните с одного наименования или добавьте несколько позиций в общую заявку RFQ.</p></div><a class="primary" href="sourcing.html?lang=ru">Начать поиск <span aria-hidden="true">↗</span></a></div>
 </main>
 </div>
-<footer><span>© 2026 GeoTeam</span><a class="active" href="about.html" id="footAbout">About Us</a><a href="privacy.html" id="footPrivacy">Privacy Policy</a><a href="rfq-privacy.html">KVKK / RFQ</a></footer>
+<footer><span>© 2026 GeoTeam</span><a class="active" href="about.html" id="footAbout">About Us</a><a id="whatWeSource" href="en/what-we-source.html">What We Source</a><a href="privacy.html" id="footPrivacy">Privacy Policy</a><a href="rfq-privacy.html">KVKK / RFQ</a></footer>
 <script>
 function chooseLanguage(code){
  const l=['en','tr','ru'].includes(code)?code:'en';document.documentElement.lang=l;
@@ -254,6 +254,7 @@ function chooseLanguage(code){
  document.getElementById('goBack').href='index.html?lang='+l;
  document.getElementById('footAbout').textContent=l==='ru'?'О компании':l==='tr'?'Hakkımızda':'About Us';
  document.getElementById('footPrivacy').textContent=l==='ru'?'Конфиденциальность':l==='tr'?'Gizlilik Politikası':'Privacy Policy';
+ const what=document.getElementById('whatWeSource');what.href=l+'/what-we-source.html';what.textContent=l==='ru'?'Что поставляем':l==='tr'?'Tedarik Alanlarımız':'What We Source';
  document.querySelectorAll('#english a[href="sourcing.html"],#turkish a[href="sourcing.html"]').forEach(x=>x.href='sourcing.html?lang='+l);
  try{localStorage.setItem('gt_lang',l)}catch(e){}
 }
