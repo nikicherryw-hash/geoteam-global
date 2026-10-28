@@ -1805,6 +1805,57 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
 .gt-step strong{font-size:13px!important}.gt-step p{font-size:12.2px!important}
 }
 </style>
+
+<style id="gt-v18-25-ticker-and-services">
+/* Fix regression: main news headlines were enlarged in v18.24; compact at every viewport. */
+.page>header .ticker .ticker-track a.tick,
+.page>header .ticker .ticker-track .tick{
+ font-size:10.2px!important;
+ line-height:1.28!important;
+ font-weight:550!important;
+ letter-spacing:.002em!important;
+}
+.page>header .ticker .ticker-track .tick span:not(.tick-src):not(.tick-flag){font-size:inherit!important;line-height:inherit!important;font-weight:inherit!important}
+.page>header .ticker .ticker-tag{
+ font-size:9.6px!important;font-weight:690!important;
+ letter-spacing:.025em!important;line-height:1.25!important;
+ padding:3px 7px!important;
+}
+.page>header .ticker .ticker-track .tick-src{
+ font-size:9.3px!important;font-weight:510!important;
+ line-height:1.25!important;
+}
+.page>header .ticker{min-height:27px!important;padding:4px 9px!important;gap:8px!important}
+.gt-expertise-grid{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:0 clamp(16px,3vw,37px)!important;
+}
+.gt-expertise-item{padding:18px 10px 17px 0!important;border-left:0!important;min-width:0}
+.gt-expertise-item+.gt-expertise-item{border-left:0!important;padding-left:0!important}
+.gt-expertise-item:nth-child(even){border-left:1px solid rgba(151,231,222,.14)!important;padding-left:clamp(18px,3vw,36px)!important}
+.gt-expertise-item:nth-child(n+3){border-top:1px solid rgba(151,231,222,.14)!important}
+.gt-expertise-item h3{font-size:clamp(14.5px,1.4vw,17px)!important;font-weight:685!important}
+.gt-expertise-item p{font-size:clamp(12.8px,1.06vw,14px)!important;line-height:1.56!important;max-width:51ch!important}
+.gt-expertise h2{font-size:clamp(23px,2.5vw,31px)!important}
+@media(max-width:750px){
+ .gt-expertise-grid{grid-template-columns:1fr!important;gap:0!important}
+ .gt-expertise-item{border-left:0!important;border-top:0!important;padding:13px 0!important}
+ .gt-expertise-item:nth-child(even){border-left:0!important;padding-left:0!important}
+ .gt-expertise-item+.gt-expertise-item{border-top:1px solid rgba(151,231,222,.13)!important}
+ .gt-expertise-item h3{font-size:14.5px!important}
+ .gt-expertise-item p{font-size:13px!important;max-width:51ch!important}
+}
+@media(max-width:580px){
+ .page>header .ticker .ticker-track a.tick,
+ .page>header .ticker .ticker-track .tick{font-size:9.6px!important;line-height:1.26!important}
+ .page>header .ticker .ticker-tag{font-size:9.1px!important;padding:3px 6px!important}
+ .page>header .ticker .ticker-track .tick-src{font-size:8.8px!important}
+ .page>header .ticker{min-height:26px!important;padding:4px 7px!important}
+ .gt-expertise-item{padding:12px 0!important}
+ .gt-expertise-item p{font-size:12.8px!important;line-height:1.52!important}
+ .gt-expertise h2{font-size:clamp(22px,5.8vw,26px)!important}
+}
+</style>
 </head>
 
 <body>
@@ -1881,11 +1932,30 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
 
       <section class="gt-expertise" id="capabilities" aria-labelledby="gtExpertiseHead">
  <div class="gt-expertise-top"><div>
- <span class="gt-expertise-eyebrow" data-gt-en="WHAT WE DO" data-gt-tr="NELER YAPIYORUZ" data-gt-ru="НАШИ ВОЗМОЖНОСТИ">WHAT WE DO</span>
- <h2 id="gtExpertiseHead" data-gt-en="Supply, sourcing and manufacturing." data-gt-tr="Tedarik, kaynak araştırması ve üretim." data-gt-ru="Поставки, поиск и изготовление.">Supply, sourcing and manufacturing.</h2>
- </div></div><div class="gt-expertise-grid"><article class="gt-expertise-item"><span class="gt-expertise-index">01</span><h3 data-gt-en="Equipment &amp; components" data-gt-tr="Ekipman ve bileşen tedariği" data-gt-ru="Оборудование и компоненты">Equipment &amp; components</h3><p data-gt-en="Aviation parts, industrial equipment, electronics and spares — from single items to complete lists." data-gt-tr="Havacılık parçaları, sanayi ekipmanları, elektronik ve yedek parçalar — tek kalemden kapsamlı listelere." data-gt-ru="Авиационные компоненты, промышленное оборудование, электроника и запчасти — от одной позиции до спецификации.">Aviation parts, industrial equipment, electronics and spares — from single items to complete lists.</p></article>
-<article class="gt-expertise-item"><span class="gt-expertise-index">02</span><h3 data-gt-en="Hard-to-source items" data-gt-tr="Zor bulunan parçalar" data-gt-ru="Сложные позиции">Hard-to-source items</h3><p data-gt-en="Discontinued parts, scarce part numbers and possible alternatives. We research sources and check supply terms." data-gt-tr="Üretimi durmuş parçalar, zor bulunan ürün kodları ve olası muadiller için kaynakları ve tedarik koşullarını araştırıyoruz." data-gt-ru="Дефицитные артикулы, снятые с производства изделия и возможные аналоги. Ищем источники и уточняем условия.">Discontinued parts, scarce part numbers and possible alternatives. We research sources and check supply terms.</p></article>
-<article class="gt-expertise-item"><span class="gt-expertise-index">03</span><h3 data-gt-en="Manufacturing to drawings" data-gt-tr="Teknik çizime göre üretim" data-gt-ru="Изготовление по чертежам">Manufacturing to drawings</h3><p data-gt-en="Custom parts and assemblies from drawings, samples or specifications — through manufacturing partners." data-gt-tr="Çizim, numune veya teknik şartnameye göre özel parçalar ve gruplar — üretim ortaklarımız aracılığıyla." data-gt-ru="Детали и узлы по чертежам, образцам и ТЗ — через производственных партнёров.">Custom parts and assemblies from drawings, samples or specifications — through manufacturing partners.</p></article></div></section>
+ <span class="gt-expertise-eyebrow" data-gt-en="CORE CAPABILITIES" data-gt-tr="UZMANLIK ALANLARIMIZ" data-gt-ru="НАПРАВЛЕНИЯ РАБОТЫ">CORE CAPABILITIES</span>
+ <h2 id="gtExpertiseHead" data-gt-en="Part numbers. Specifications. Drawings." data-gt-tr="Parça kodları. Teknik listeler. Çizimler." data-gt-ru="Артикулы. Спецификации. Чертежи.">Part numbers. Specifications. Drawings.</h2>
+ </div></div>
+ <div class="gt-expertise-grid"><article class="gt-expertise-item">
+  <span class="gt-expertise-index">01</span>
+  <h3 data-gt-en="Aviation &amp; MRO parts" data-gt-tr="Havacılık ve MRO parçaları" data-gt-ru="Авиационные компоненты">Aviation &amp; MRO parts</h3>
+  <p data-gt-en="Source by P/N and condition. We request traceability documents, availability and lead time." data-gt-tr="P/N ve ürün durumuna göre kaynak araştırması; izlenebilirlik belgeleri, stok ve teslim süresi sorgusu." data-gt-ru="Поиск по P/N и состоянию. Запрашиваем документы происхождения, доступность и сроки поставки.">Source by P/N and condition. We request traceability documents, availability and lead time.</p>
+ </article>
+<article class="gt-expertise-item">
+  <span class="gt-expertise-index">02</span>
+  <h3 data-gt-en="Industrial equipment &amp; automation" data-gt-tr="Endüstriyel ekipman ve otomasyon" data-gt-ru="Промышленность и автоматизация">Industrial equipment &amp; automation</h3>
+  <p data-gt-en="PLCs, HMIs, drives, sensors, pumps and spare parts — by part number, nameplate or BOM." data-gt-tr="PLC, HMI, sürücü, sensör, pompa ve yedek parçalar — ürün kodu, etiket veya BOM ile." data-gt-ru="ПЛК, HMI, приводы, датчики, насосы и запчасти — по артикулу, шильдику или спецификации.">PLCs, HMIs, drives, sensors, pumps and spare parts — by part number, nameplate or BOM.</p>
+ </article>
+<article class="gt-expertise-item">
+  <span class="gt-expertise-index">03</span>
+  <h3 data-gt-en="Obsolete &amp; hard-to-find" data-gt-tr="Üretimi durmuş ve zor bulunan parçalar" data-gt-ru="Дефицитные и снятые с выпуска">Obsolete &amp; hard-to-find</h3>
+  <p data-gt-en="Legacy equipment and EOL part numbers. We search remaining stock and research potential replacements." data-gt-tr="Eski sistemler ve üretimi bitmiş parça kodları: kalan stoklar ve olası muadiller araştırılır." data-gt-ru="Legacy-оборудование и EOL-артикулы. Ищем остатки и прорабатываем возможные замены.">Legacy equipment and EOL part numbers. We search remaining stock and research potential replacements.</p>
+ </article>
+<article class="gt-expertise-item">
+  <span class="gt-expertise-index">04</span>
+  <h3 data-gt-en="Manufacturing to drawings" data-gt-tr="Teknik çizime göre imalat" data-gt-ru="Изготовление по чертежам">Manufacturing to drawings</h3>
+  <p data-gt-en="Custom parts and assemblies from drawings, 3D files or samples, with material and tolerance requirements." data-gt-tr="Çizim, 3D dosyası veya numuneye göre; malzeme ve tolerans şartlarıyla özel parça ve montajlar." data-gt-ru="Детали и узлы по чертежам, 3D-моделям и образцам, с учётом материалов и допусков.">Custom parts and assemblies from drawings, 3D files or samples, with material and tolerance requirements.</p>
+ </article></div>
+</section>
       <section class="gt-about-home" id="how-it-works" aria-labelledby="gtAboutHeading">
         <div class="gt-about-copy">
           <span class="gt-about-eyebrow" id="gtAboutEyebrow" data-gt-en="ABOUT GEOTEAM GLOBAL" data-gt-tr="GEOTEAM GLOBAL HAKKINDA" data-gt-ru="О КОМПАНИИ GEOTEAM GLOBAL">ABOUT GEOTEAM GLOBAL</span>
