@@ -1731,6 +1731,20 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
  .hero .sub.gt-hero-description{font-size:13px!important}
  .hero .gt-hero-detail{font-size:11.6px!important;max-width:295px!important}
 }
+</style><style id="gt-v18-22-clean-hero">
+/* Three visual levels only: sectors, unified title, single-line benefit. */
+.hero .headline.gt-hero-title{margin:4px auto 0!important}
+.hero .sub.gt-hero-description{margin:11px auto 0!important;max-width:850px!important;font-weight:520!important;letter-spacing:-.02em!important;text-wrap:balance!important}
+.hero #gtHeroDetail{display:none!important}
+.page>main .hero{gap:9px!important}
+@media(max-width:720px){
+ .hero .headline.gt-hero-title{margin:3px auto 0!important}
+ .hero .sub.gt-hero-description{margin:9px auto 0!important;max-width:calc(100vw - 28px)!important}
+}
+@media(max-width:430px){
+ .hero .sub.gt-hero-description{font-size:clamp(12.5px,3.28vw,14px)!important;white-space:nowrap!important;letter-spacing:-.035em!important;max-width:calc(100vw - 12px)!important}
+}
+@media(max-width:350px){.hero .sub.gt-hero-description{font-size:11.7px!important;letter-spacing:-.04em!important}}
 </style></head>
 
 <body>
@@ -1794,7 +1808,7 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
           <span data-gt-en="Electronics" data-gt-tr="Elektronik" data-gt-ru="Электроника">Electronics</span>
         </div>
         <h1 class="headline gt-hero-title" id="headline" aria-label="Intelligent sourcing of equipment and components"><span>Intelligent sourcing</span><span>of equipment &amp; components.</span></h1>
-        <p class="sub gt-hero-description" id="sub">From technical requirements to the right solution.</p><p class="gt-hero-detail" id="gtHeroDetail">Part numbers and specifications. Supplier sourcing, offer comparison and procurement support.</p>
+        <p class="sub gt-hero-description" id="sub">From technical requirements to the right solution.</p><p class="gt-hero-detail" id="gtHeroDetail" hidden>Part numbers and specifications. Supplier sourcing, offer comparison and procurement support.</p>
 
         <div class="stage" aria-label="Rotating earth">
           <canvas id="globe"></canvas>
