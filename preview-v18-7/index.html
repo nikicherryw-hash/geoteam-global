@@ -1856,6 +1856,64 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
  .gt-expertise h2{font-size:clamp(22px,5.8vw,26px)!important}
 }
 </style>
+
+<style id="gt-v18-26-home-quiet-hero">
+/* Calm editorial homepage: clearer foreground, lighter first-screen atmosphere. */
+body::before{opacity:.36!important}
+.page>main .hero{
+ background:radial-gradient(ellipse 68% 59% at 50% 56%,rgba(19,124,127,.13) 0%,rgba(17,94,102,.065) 45%,transparent 77%)!important;
+}
+.hero .sub.gt-hero-description,.hero .gt-hero-detail{display:none!important}
+.page>main .hero .stage{margin-top:4px!important}
+.gt-single-action{margin:11px auto 23px!important}
+.gt-single-action #gtMainRfq.gt-primary-cta{
+ min-width:0!important;width:auto!important;
+ min-height:44px!important;padding:10px 14px!important;
+ border:0!important;border-radius:9px!important;
+ background:transparent!important;box-shadow:none!important;
+ color:#e9fffc!important;font-family:var(--font)!important;
+ font-size:clamp(15px,1.45vw,17px)!important;
+ font-weight:680!important;letter-spacing:.005em!important;
+ gap:11px!important;text-shadow:0 0 14px rgba(87,232,214,.16)!important;
+ text-decoration:none!important;
+}
+.gt-single-action #gtMainRfq.gt-primary-cta span{
+ color:#86f4e3!important;font-size:21px!important;font-weight:600!important;
+ transition:transform .2s ease!important
+}
+.gt-single-action #gtMainRfq.gt-primary-cta:hover,.gt-single-action #gtMainRfq.gt-primary-cta:focus-visible{
+ background:rgba(87,217,201,.045)!important;border:0!important;
+ box-shadow:none!important;color:#fff!important;
+ transform:none!important;text-decoration:underline!important;text-decoration-color:rgba(128,239,225,.65)!important;text-underline-offset:5px!important;
+}
+.gt-single-action #gtMainRfq.gt-primary-cta:hover span{transform:translate(2px,-2px)!important}
+.gt-single-action #gtMainRfq.gt-primary-cta:focus-visible{outline:2px solid rgba(133,243,229,.8)!important;outline-offset:3px!important}
+.gt-expertise{border-top-color:rgba(146,243,222,.23)!important}
+.gt-expertise-eyebrow{color:#a3eee5!important}
+.gt-expertise h2{color:#f5fffd!important;text-shadow:0 0 16px rgba(148,240,231,.08)!important}
+.gt-expertise-item{position:relative!important;padding-top:22px!important}
+.gt-expertise-item::before{
+ content:"";display:block;width:29px;height:2px;
+ background:linear-gradient(90deg,#7dede0,rgba(125,237,224,.22));
+ border-radius:2px;margin:0 0 14px;
+}
+.gt-expertise-item h3{color:#f3fffc!important;font-weight:710!important;letter-spacing:-.015em!important}
+.gt-expertise-item p{color:#d3e9e7!important;font-weight:460!important;line-height:1.57!important}
+.gt-expertise-item:nth-child(even){border-left-color:rgba(151,231,222,.17)!important}
+.gt-expertise-item:nth-child(n+3){border-top-color:rgba(151,231,222,.17)!important}
+@media(max-width:750px){
+ .gt-expertise-item{padding:16px 0!important}
+ .gt-expertise-item::before{width:23px;margin:0 0 10px!important}
+}
+@media(max-width:580px){
+ .page>main .hero{background:radial-gradient(ellipse 90% 56% at 50% 60%,rgba(24,120,122,.16),transparent 81%)!important}
+ .gt-single-action{margin:8px auto 19px!important}
+ .gt-single-action #gtMainRfq.gt-primary-cta{font-size:15px!important;padding:10px 13px!important;min-height:44px!important}
+ .gt-expertise-item h3{color:#f3fffd!important}
+ .gt-expertise-item p{font-size:13px!important;line-height:1.58!important;color:#d0e6e4!important}
+}
+@media(prefers-reduced-motion:reduce){.gt-single-action #gtMainRfq.gt-primary-cta span{transition:none!important}}
+</style>
 </head>
 
 <body>
@@ -1866,15 +1924,6 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
       <div class="nav">
         <div class="brand-wrap" aria-label="GeoTeam Global">
           <a class="brand gt-brand-refined gt-wordmark" href="index.html" aria-label="GeoTeam Global — home"><span class="gt-brand-text"><span class="top">GeoTeam</span><span class="bottom">GLOBAL</span></span></a>
-          <div class="timepill timepill--compact" aria-label="Time">
-            <div class="timeclock" aria-hidden="true">
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
-                <path d="M12 7v6l4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="time-row"><span class="time-label" data-en="IST" data-tr="IST" data-ru="MSK">IST</span> <span class="time-val" id="timeIstanbul">--:--</span></div>
-</div>
           
         </div>
 
@@ -1919,7 +1968,7 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
           <span data-gt-en="Electronics" data-gt-tr="Elektronik" data-gt-ru="Электроника">Electronics</span>
         </div>
         <h1 class="headline gt-hero-title" id="headline" aria-label="Intelligent sourcing of equipment and components"><span>Intelligent sourcing</span><span>of equipment &amp; components.</span></h1>
-        <p class="sub gt-hero-description" id="sub">From technical requirements to the right solution.</p><p class="gt-hero-detail" id="gtHeroDetail" hidden>Part numbers and specifications. Supplier sourcing, offer comparison and procurement support.</p>
+        
 
         <div class="stage" aria-label="Rotating earth">
           <canvas id="globe"></canvas>
@@ -1936,22 +1985,22 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
  <h2 id="gtExpertiseHead" data-gt-en="Part numbers. Specifications. Drawings." data-gt-tr="Parça kodları. Teknik listeler. Çizimler." data-gt-ru="Артикулы. Спецификации. Чертежи.">Part numbers. Specifications. Drawings.</h2>
  </div></div>
  <div class="gt-expertise-grid"><article class="gt-expertise-item">
-  <span class="gt-expertise-index">01</span>
+  
   <h3 data-gt-en="Aviation &amp; MRO parts" data-gt-tr="Havacılık ve MRO parçaları" data-gt-ru="Авиационные компоненты">Aviation &amp; MRO parts</h3>
   <p data-gt-en="Source by P/N and condition. We request traceability documents, availability and lead time." data-gt-tr="P/N ve ürün durumuna göre kaynak araştırması; izlenebilirlik belgeleri, stok ve teslim süresi sorgusu." data-gt-ru="Поиск по P/N и состоянию. Запрашиваем документы происхождения, доступность и сроки поставки.">Source by P/N and condition. We request traceability documents, availability and lead time.</p>
  </article>
 <article class="gt-expertise-item">
-  <span class="gt-expertise-index">02</span>
+  
   <h3 data-gt-en="Industrial equipment &amp; automation" data-gt-tr="Endüstriyel ekipman ve otomasyon" data-gt-ru="Промышленность и автоматизация">Industrial equipment &amp; automation</h3>
   <p data-gt-en="PLCs, HMIs, drives, sensors, pumps and spare parts — by part number, nameplate or BOM." data-gt-tr="PLC, HMI, sürücü, sensör, pompa ve yedek parçalar — ürün kodu, etiket veya BOM ile." data-gt-ru="ПЛК, HMI, приводы, датчики, насосы и запчасти — по артикулу, шильдику или спецификации.">PLCs, HMIs, drives, sensors, pumps and spare parts — by part number, nameplate or BOM.</p>
  </article>
 <article class="gt-expertise-item">
-  <span class="gt-expertise-index">03</span>
+  
   <h3 data-gt-en="Obsolete &amp; hard-to-find" data-gt-tr="Üretimi durmuş ve zor bulunan parçalar" data-gt-ru="Дефицитные и снятые с выпуска">Obsolete &amp; hard-to-find</h3>
   <p data-gt-en="Legacy equipment and EOL part numbers. We search remaining stock and research potential replacements." data-gt-tr="Eski sistemler ve üretimi bitmiş parça kodları: kalan stoklar ve olası muadiller araştırılır." data-gt-ru="Legacy-оборудование и EOL-артикулы. Ищем остатки и прорабатываем возможные замены.">Legacy equipment and EOL part numbers. We search remaining stock and research potential replacements.</p>
  </article>
 <article class="gt-expertise-item">
-  <span class="gt-expertise-index">04</span>
+  
   <h3 data-gt-en="Manufacturing to drawings" data-gt-tr="Teknik çizime göre imalat" data-gt-ru="Изготовление по чертежам">Manufacturing to drawings</h3>
   <p data-gt-en="Custom parts and assemblies from drawings, 3D files or samples, with material and tolerance requirements." data-gt-tr="Çizim, 3D dosyası veya numuneye göre; malzeme ve tolerans şartlarıyla özel parça ve montajlar." data-gt-ru="Детали и узлы по чертежам, 3D-моделям и образцам, с учётом материалов и допусков.">Custom parts and assemblies from drawings, 3D files or samples, with material and tolerance requirements.</p>
  </article></div>
@@ -3214,25 +3263,5 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   </script>
 
   <!-- RFQ details and copy-draft form live exclusively on sourcing.html. -->
-<footer class="gt-legal-footer gt-footer-singleline" aria-label="Footer"><span>© 2026 GeoTeam</span><a class="gt-footer-about" href="about.html">About Us <span aria-hidden="true">↗</span></a><a id="gtWhatWeSource" href="en/what-we-source.html">What We Source</a><a href="privacy.html">Privacy Policy</a><a href="rfq-privacy.html">KVKK / RFQ</a></footer><script id="gt-clock-independent">
-(function(){
-  const tz = {
-    ru: new Intl.DateTimeFormat("ru-RU",{timeZone:"Europe/Moscow",hour:"2-digit",minute:"2-digit",hour12:false}),
-    other: new Intl.DateTimeFormat("tr-TR",{timeZone:"Europe/Istanbul",hour:"2-digit",minute:"2-digit",hour12:false})
-  };
-  function tick(){
-    const el=document.getElementById("timeIstanbul");
-    if(!el)return;
-    const ru=document.documentElement.lang==="ru";
-    try {el.textContent=(ru?tz.ru:tz.other).format(new Date());}
-    catch(e){el.textContent="--:--";}
-    const label=document.querySelector(".time-row .time-label");
-    if(label)label.textContent=ru?"MSK":"IST";
-  }
-  document.addEventListener("gt-language-changed",tick);
-  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",tick,{once:true});
-  else tick();
-  setInterval(tick,15000);
-})();
-</script></body>
+<footer class="gt-legal-footer gt-footer-singleline" aria-label="Footer"><span>© 2026 GeoTeam</span><a class="gt-footer-about" href="about.html">About Us <span aria-hidden="true">↗</span></a><a id="gtWhatWeSource" href="en/what-we-source.html">What We Source</a><a href="privacy.html">Privacy Policy</a><a href="rfq-privacy.html">KVKK / RFQ</a></footer></body>
 </html>
