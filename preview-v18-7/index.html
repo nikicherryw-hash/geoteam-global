@@ -22,7 +22,7 @@
   --accent2:#16c8c0;
   --shadow: 0 18px 70px rgba(0,0,0,.40);
   --shadowSoft: 0 10px 40px rgba(0,0,0,.25);
-  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
@@ -61,11 +61,11 @@
     header{
       width:100%;
       padding:16px 0 8px;
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: linear-gradient(to bottom, rgba(4,16,24,.72), rgba(3,27,29,0));
-      backdrop-filter: blur(10px);
+      position: relative;
+      top: auto;
+      z-index: 1;
+      background: linear-gradient(to bottom, rgba(4,16,24,.54), rgba(3,27,29,0));
+      backdrop-filter: none;
     }
     .nav{
       width:100%;
@@ -1156,6 +1156,51 @@ header .ticker .ticker-tag{font-size:9.5px!important;font-weight:700!important;l
 .gt-step p{margin:3px 0 0!important;font:400 11.5px/1.52 system-ui,sans-serif!important;color:#a9c2c7}
 @media(max-width:800px){.gt-about-home{grid-template-columns:1fr;gap:19px;margin-top:17px}.gt-about-process{border-left:0;border-top:1px solid rgba(128,225,212,.17);padding:18px 0 0}.gt-clean-nav a{font-size:11px!important}}
 @media(max-width:580px){.gt-about-home{padding:22px 18px 18px;border-radius:16px;margin-top:14px}.gt-about-copy h2{font-size:25px!important}.gt-about-copy p{font-size:13px!important}.gt-about-location{margin-top:12px}.gt-step{padding:9px 0}.gt-clean-nav{display:none!important}}
+</style>
+<style id="gt-v18-12-type-and-scroll">
+/* v18.12: premium typography pass; zero external fonts, no tracking requests. */
+:root{--font:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif!important}
+html,body{font-family:var(--font)!important;font-synthesis:none}
+body{font-feature-settings:"kern" 1;font-kerning:normal;text-rendering:optimizeLegibility}
+.page>header{position:relative!important;top:auto!important;bottom:auto!important;transform:none!important;z-index:1!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+/* Deliberately do NOT pin the news ticker; the complete header scrolls with the document. */
+.page>header .tickerbar{position:relative!important;top:auto!important;transform:none!important}
+/* Wordmark in a single native system-family: identical hierarchy on iOS/Android/Windows. */
+.gt-wordmark .gt-brand-text .top{font-family:var(--font)!important;font-size:23px!important;font-weight:710!important;letter-spacing:-.028em!important;line-height:1.04!important;text-shadow:0 0 7px rgba(81,235,223,.17)!important}
+.gt-wordmark .gt-brand-text .bottom{font-family:var(--font)!important;font-size:10px!important;font-weight:660!important;letter-spacing:.28em!important;line-height:1.2!important;text-shadow:none!important}
+.gt-wordmark:hover .gt-brand-text .top{text-shadow:0 0 13px rgba(81,235,223,.28)!important}
+/* Headline hierarchy: avoid the heavy 800-weight letterforms and mismatched spacing. */
+.hero .headline{font-family:var(--font)!important;font-size:clamp(27px,4vw,45px)!important;font-weight:690!important;letter-spacing:-.034em!important;line-height:1.13!important;text-shadow:0 10px 32px rgba(0,0,0,.24)!important}
+.hero .sub{font-family:var(--font)!important;font-size:clamp(13px,1.45vw,15px)!important;font-weight:430!important;letter-spacing:0!important;line-height:1.68!important;max-width:69ch!important;text-shadow:none!important}
+.gt-clean-nav a{font-family:var(--font)!important;font-size:12px!important;font-weight:580!important;letter-spacing:.005em!important}
+.gt-single-action .gt-primary-cta{font-family:var(--font)!important;font-size:13px!important;font-weight:675!important;letter-spacing:.01em!important;box-shadow:0 0 0 1px rgba(88,229,216,.13),0 0 13px rgba(42,215,202,.16)!important}
+.gt-single-action .gt-primary-cta:hover{box-shadow:0 0 0 2px rgba(83,220,212,.19),0 0 22px rgba(47,222,211,.31)!important}
+/* About: match the same family and typography rather than mixing Avenir with system UI. */
+.gt-about-copy h2{font-family:var(--font)!important;font-weight:685!important;letter-spacing:-.032em!important}
+.gt-about-copy p{font-family:var(--font)!important;font-size:13.5px!important;font-weight:410!important;line-height:1.73!important}
+.gt-about-read{font-family:var(--font)!important;font-weight:660!important}
+.gt-about-process-head,.gt-about-eyebrow{font-family:var(--font)!important;font-weight:680!important;letter-spacing:.14em!important}
+.gt-step strong{font-family:var(--font)!important;font-weight:650!important}
+.gt-step p{font-family:var(--font)!important;line-height:1.62!important}
+/* Small-scale type refinement to the already slim news bar; no geometry change. */
+header .ticker .tick{font-family:var(--font)!important;font-weight:500!important;letter-spacing:.004em!important}
+header .ticker .tick-src{font-family:var(--font)!important;font-weight:550!important}
+header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!important}
+.gt-footer-singleline,.gt-footer-singleline a,.gt-footer-singleline span{font-family:var(--font)!important;font-weight:490!important}
+/* Reduce ornamental shadows, but keep the approved globe and palette. */
+.hero .stage{filter:drop-shadow(0 23px 58px rgba(0,0,0,.4)) drop-shadow(0 10px 24px rgba(0,0,0,.13))!important}
+.gt-about-home{box-shadow:none!important}
+@media(max-width:580px){
+ .gt-wordmark .gt-brand-text .top{font-size:18px!important}
+ .gt-wordmark .gt-brand-text .bottom{font-size:9px!important;letter-spacing:.22em!important}
+ .hero .headline{font-size:clamp(26px,7vw,34px)!important}
+ .hero .sub{font-size:13.5px!important}
+ .gt-about-copy p{font-size:13px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .ticker-track{animation-duration:75s!important}
+ html{scroll-behavior:auto!important}
+}
 </style></head>
 
 <body>
