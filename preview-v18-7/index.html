@@ -1329,6 +1329,14 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
 @media(prefers-reduced-motion:reduce){
   .gt-single-action .gt-primary-cta,.gt-about-read{transition:none!important}
 }
+</style><style id="gt-v18-15-language-selector">
+.gt-lang-wrap{position:relative;display:inline-flex;align-items:center;flex:0 0 auto;max-width:150px!important}
+.gt-lang-select{appearance:none;-webkit-appearance:none;min-width:119px;max-width:145px;padding:8px 24px 8px 11px;border-radius:999px;color:#e8f7f5;background:rgba(8,44,53,.24);border:1px solid rgba(148,229,217,.25);font:650 11px/1.2 system-ui,sans-serif;cursor:pointer}
+.gt-lang-wrap:after{content:"⌄";position:absolute;right:11px;top:6px;color:#a6d5d4;pointer-events:none}
+.gt-lang-select:focus-visible{outline:2px solid #83f2e3;outline-offset:2px}
+.gt-lang-select option,.gt-lang-select optgroup{background:#0a2933;color:#e5f7f4}
+#langToggle[hidden]{display:none!important}
+@media(max-width:580px){.gt-lang-select{min-width:102px;max-width:108px;font-size:10px;padding:7px 17px 7px 8px}.gt-lang-wrap:after{right:7px}}
 </style></head>
 
 <body>
@@ -1368,12 +1376,12 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.75 6.5a1.05 1.05 0 1 1-1.05 1.05 1.05 1.05 0 0 1 1.05-1.05z"/></svg>
             </a>
           </div>
-          <div class="lang"><button id="langToggle" type="button" class="langToggle" aria-label="Language">EN</button></div>
+          <div class="lang"><button id="langToggle" type="button" class="langToggle" aria-label="Legacy language toggle" hidden>EN</button><label class="gt-lang-wrap" aria-label="Website language"><select class="gt-lang-select" id="gtLanguageSelect" aria-label="Choose language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><optgroup label="More languages — planned"><option disabled>DE · Deutsch</option><option disabled>FR · Français</option><option disabled>ES · Español</option><option disabled>IT · Italiano</option><option disabled>PT · Português</option><option disabled>AR · العربية</option><option disabled>ZH · 中文</option></optgroup></select></label></div>
         </div>
       </div>
       <div class="tickerbar" aria-label="News ticker">
         <div class="ticker" role="marquee" aria-label="News">
-          <span class="ticker-tag" id="tickerTag" data-en="News" data-tr="Haberler">News</span>
+          <span class="ticker-tag" id="tickerTag" data-en="News" data-tr="Haberler" data-ru="Новости">News</span>
           <div class="ticker-viewport">
             <div class="ticker-track" id="tickerTrack"></div>
           </div>
@@ -1399,18 +1407,18 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
 
       <section class="gt-about-home" id="how-it-works" aria-labelledby="gtAboutHeading">
         <div class="gt-about-copy">
-          <span class="gt-about-eyebrow" id="gtAboutEyebrow" data-gt-en="ABOUT GEOTEAM GLOBAL" data-gt-tr="GEOTEAM GLOBAL HAKKINDA">ABOUT GEOTEAM GLOBAL</span>
-          <h2 id="gtAboutHeading" data-gt-en="Global reach. Clear procurement." data-gt-tr="Küresel erişim. Net tedarik.">Global reach. Clear procurement.</h2>
-          <p id="gtAboutSummary" data-gt-en="We connect precise technical requirements with sourcing opportunities across international markets. From a single replacement part to a multi-item batch, we help you identify options, review supplier evidence and organize the next procurement step." data-gt-tr="Kesin teknik ihtiyaçları uluslararası pazarlardaki tedarik olanaklarıyla buluşturuyoruz. Tek bir yedek parçadan çok kalemli taleplere kadar kaynakları araştırıyor, tedarikçi belgelerini inceliyor ve satın alma sürecini planlıyoruz.">We connect precise technical requirements with sourcing opportunities across international markets. From a single replacement part to a multi-item batch, we help you identify options, review supplier evidence and organize the next procurement step.</p>
-          <a class="gt-about-read" id="gtAboutRead" href="about.html" data-gt-en="Meet GeoTeam" data-gt-tr="GeoTeam'i tanıyın">Meet GeoTeam <span aria-hidden="true">↗</span></a>
-          <div class="gt-about-location" id="gtAboutLocation" data-gt-en="Based in Türkiye · International B2B sourcing" data-gt-tr="Türkiye merkezli · Uluslararası B2B tedarik">Based in Türkiye · International B2B sourcing</div>
+          <span class="gt-about-eyebrow" id="gtAboutEyebrow" data-gt-en="ABOUT GEOTEAM GLOBAL" data-gt-tr="GEOTEAM GLOBAL HAKKINDA" data-gt-ru="О КОМПАНИИ GEOTEAM GLOBAL">ABOUT GEOTEAM GLOBAL</span>
+          <h2 id="gtAboutHeading" data-gt-en="Global reach. Clear procurement." data-gt-tr="Küresel erişim. Net tedarik." data-gt-ru="Сложные закупки. Понятный процесс.">Global reach. Clear procurement.</h2>
+          <p id="gtAboutSummary" data-gt-en="We connect precise technical requirements with sourcing opportunities across international markets. From a single replacement part to a multi-item batch, we help you identify options, review supplier evidence and organize the next procurement step." data-gt-tr="Kesin teknik ihtiyaçları uluslararası pazarlardaki tedarik olanaklarıyla buluşturuyoruz. Tek bir yedek parçadan çok kalemli taleplere kadar kaynakları araştırıyor, tedarikçi belgelerini inceliyor ve satın alma sürecini planlıyoruz." data-gt-ru="Мы помогаем компаниям находить промышленные, авиационные и электронные комплектующие на международных рынках. От одного артикула до многопозиционной заявки: изучаем технические требования, возможные источники поставки и условия закупки.">We connect precise technical requirements with sourcing opportunities across international markets. From a single replacement part to a multi-item batch, we help you identify options, review supplier evidence and organize the next procurement step.</p>
+          <a class="gt-about-read" id="gtAboutRead" href="about.html" data-gt-en="Meet GeoTeam" data-gt-tr="GeoTeam'i tanıyın" data-gt-ru="Подробнее о компании">Meet GeoTeam <span aria-hidden="true">↗</span></a>
+          <div class="gt-about-location" id="gtAboutLocation" data-gt-en="Based in Türkiye · International B2B sourcing" data-gt-tr="Türkiye merkezli · Uluslararası B2B tedarik" data-gt-ru="Турция · Международные B2B-поставки">Based in Türkiye · International B2B sourcing</div>
         </div>
         <div class="gt-about-process" aria-label="Our sourcing process">
-          <div class="gt-about-process-head" id="gtProcessHeading" data-gt-en="HOW WE WORK" data-gt-tr="NASIL ÇALIŞIYORUZ">HOW WE WORK</div>
-          <div class="gt-step"><span>01</span><div><strong data-gt-en="Define the requirement" data-gt-tr="İhtiyacı tanımlayın">Define the requirement</strong><p data-gt-en="Part number, quantity, condition and delivery destination." data-gt-tr="Parça kodu, miktar, ürün durumu ve teslimat noktası.">Part number, quantity, condition and delivery destination.</p></div></div>
-          <div class="gt-step"><span>02</span><div><strong data-gt-en="Explore global sources" data-gt-tr="Uluslararası kaynakları araştırın">Explore global sources</strong><p data-gt-en="Research relevant manufacturers, distributors and specialist channels." data-gt-tr="Üretici, distribütör ve uzman tedarik kanallarını araştırın.">Research relevant manufacturers, distributors and specialist channels.</p></div></div>
-          <div class="gt-step"><span>03</span><div><strong data-gt-en="Verify before quoting" data-gt-tr="Teklif öncesi doğrulayın">Verify before quoting</strong><p data-gt-en="Review product identity, documentation, availability and trade requirements." data-gt-tr="Ürün kimliği, belgeler, stok ve ticari gereklilikleri inceleyin.">Review product identity, documentation, availability and trade requirements.</p></div></div>
-          <div class="gt-step"><span>04</span><div><strong data-gt-en="Coordinate supply" data-gt-tr="Tedariki koordine edin">Coordinate supply</strong><p data-gt-en="Align the offer, lead time, shipping route and supporting documents." data-gt-tr="Teklif, termin, sevkiyat ve belgeleri uyumlu hâle getirin.">Align the offer, lead time, shipping route and supporting documents.</p></div></div>
+          <div class="gt-about-process-head" id="gtProcessHeading" data-gt-en="HOW WE WORK" data-gt-tr="NASIL ÇALIŞIYORUZ" data-gt-ru="КАК МЫ РАБОТАЕМ">HOW WE WORK</div>
+          <div class="gt-step"><span>01</span><div><strong data-gt-en="Define the requirement" data-gt-ru="Определяем потребность" data-gt-tr="İhtiyacı tanımlayın">Define the requirement</strong><p data-gt-en="Part number, quantity, condition and delivery destination." data-gt-ru="Артикул, количество, состояние и место доставки." data-gt-tr="Parça kodu, miktar, ürün durumu ve teslimat noktası.">Part number, quantity, condition and delivery destination.</p></div></div>
+          <div class="gt-step"><span>02</span><div><strong data-gt-en="Explore global sources" data-gt-ru="Ищем источники поставки" data-gt-tr="Uluslararası kaynakları araştırın">Explore global sources</strong><p data-gt-en="Research relevant manufacturers, distributors and specialist channels." data-gt-ru="Исследуем производителей, дистрибьюторов и специализированные каналы." data-gt-tr="Üretici, distribütör ve uzman tedarik kanallarını araştırın.">Research relevant manufacturers, distributors and specialist channels.</p></div></div>
+          <div class="gt-step"><span>03</span><div><strong data-gt-en="Verify before quoting" data-gt-ru="Проверяем информацию" data-gt-tr="Teklif öncesi doğrulayın">Verify before quoting</strong><p data-gt-en="Review product identity, documentation, availability and trade requirements." data-gt-ru="Уточняем исполнение, документы, наличие и торговые условия." data-gt-tr="Ürün kimliği, belgeler, stok ve ticari gereklilikleri inceleyin.">Review product identity, documentation, availability and trade requirements.</p></div></div>
+          <div class="gt-step"><span>04</span><div><strong data-gt-en="Coordinate supply" data-gt-ru="Согласовываем поставку" data-gt-tr="Tedariki koordine edin">Coordinate supply</strong><p data-gt-en="Align the offer, lead time, shipping route and supporting documents." data-gt-ru="Согласовываем предложение, сроки, маршрут и необходимые документы." data-gt-tr="Teklif, termin, sevkiyat ve belgeleri uyumlu hâle getirin.">Align the offer, lead time, shipping route and supporting documents.</p></div></div>
         </div>
       </section>
     </main>
@@ -1984,6 +1992,20 @@ const loadTicker = async (lang) => {
       }
     };
 
+    // Russian is an active, reviewed language; other languages remain planned.
+    dict.ru={...dict.en,
+      navAbout:"О компании",navSourcing:"Глобальный поиск",navHow:"Как мы работаем",
+      navProducts:"Оборудование",navIndustries:"Отрасли",navCapabilities:"Возможности",navQuality:"Документы",
+      navCases:"Примеры",navContact:"Контакты",
+      headline:"Промышленные и авиационные комплектующие. Международные поставки.",
+      sub:"Ищете оборудование, запасную часть или электронный компонент? Отправьте заводской артикул или спецификацию — мы рассмотрим возможности международной закупки.",
+      btnRfq:"Глобальный поиск",btnBrowse:"Каталог",
+      megaKicker:"Оборудование",megaTitle:"Категории",megaNote:"Поиск по направлениям",
+      aboutTitle:"О компании",aboutNote:"Международный поиск технических компонентов",
+      brandsTitle:"Производители",productsTitle:"Категории оборудования",
+      contactTitle:"Связаться с нами",formHint:"Укажите артикул, количество и место доставки.",
+      phMsg:"Артикул, количество, место доставки, документы"
+    };
     const langToggle = $("langToggle");
     let currentLang = "en";
 
@@ -2042,20 +2064,21 @@ const loadTicker = async (lang) => {
 
 
     const setLang = (lang) => {
-      currentLang = (lang === "tr") ? "tr" : "en";
+      currentLang = ["en","tr","ru"].includes(lang)?lang:"en";
       try{ localStorage.setItem("gt_lang", currentLang); }catch(e){}
       const d = dict[currentLang];
       // Compact three-page homepage translations
       document.documentElement.lang = currentLang;
       document.querySelectorAll("[data-gt-en][data-gt-tr]").forEach((el) => {
-        el.textContent = el.getAttribute(currentLang === "tr" ? "data-gt-tr" : "data-gt-en");
+        const attribute=currentLang==="ru"?"data-gt-ru":currentLang==="tr"?"data-gt-tr":"data-gt-en";
+        el.textContent = el.getAttribute(attribute)||el.getAttribute("data-gt-en");
       });
       const aboutLink = document.getElementById("gtAboutRead");
       if (aboutLink) aboutLink.appendChild(Object.assign(document.createElement("span"), {textContent:" ↗"}));
-      setText("navSourcing", currentLang === "tr" ? "Küresel Tedarik" : "Global Sourcing");
-      setText("navHow", currentLang === "tr" ? "Nasıl Çalışıyoruz" : "How We Work");
+      setText("navSourcing", currentLang==="ru"?"Глобальный поиск":currentLang === "tr" ? "Küresel Tedarik" : "Global Sourcing");
+      setText("navHow", currentLang==="ru"?"Как мы работаем":currentLang === "tr" ? "Nasıl Çalışıyoruz" : "How We Work");
       const heroButton = document.getElementById("gtMainRfq");
-      if (heroButton && heroButton.firstChild) heroButton.firstChild.textContent = currentLang === "tr" ? "Küresel Tedarik " : "Global Sourcing ";
+      if (heroButton && heroButton.firstChild) heroButton.firstChild.textContent = currentLang==="ru"?"Глобальный поиск ":currentLang === "tr" ? "Küresel Tedarik " : "Global Sourcing ";
 
       // Top
       setText("navProducts", d.navProducts);
@@ -2227,15 +2250,23 @@ const loadTicker = async (lang) => {
 
       // Generic swaps for small labels that use data-en/data-tr
       document.querySelectorAll('[data-en][data-tr]').forEach((el) => {
-        const v = (currentLang === 'tr') ? el.getAttribute('data-tr') : el.getAttribute('data-en');
+        const v=currentLang==="ru"?(el.getAttribute("data-ru")||el.getAttribute("data-en")):(currentLang==="tr"?el.getAttribute("data-tr"):el.getAttribute("data-en"));
         if (v) el.textContent = v;
       });
 
       refreshTicker();
 
-      if (langToggle) langToggle.textContent = (currentLang === "tr" ? "TR" : "EN");
-document.documentElement.lang = (currentLang === "tr") ? "tr" : "en";
-      if (langToggle) langToggle.textContent = (currentLang === "tr" ? "TR" : "EN");
+      if (langToggle) langToggle.textContent=currentLang.toUpperCase();
+      document.documentElement.lang=currentLang;
+      const choice=document.getElementById("gtLanguageSelect");
+      if(choice)choice.value=currentLang;
+      const footerAbout=document.querySelector(".gt-footer-about");
+      if(footerAbout)footerAbout.textContent=currentLang==="ru"?"О компании ↗":currentLang==="tr"?"Hakkımızda ↗":"About Us ↗";
+      const footerPrivacy=document.querySelector(".gt-footer-singleline a[href='privacy.html']");
+      if(footerPrivacy)footerPrivacy.textContent=currentLang==="ru"?"Конфиденциальность":currentLang==="tr"?"Gizlilik Politikası":"Privacy Policy";
+      document.querySelectorAll("a[href^='sourcing.html'],a[href^='about.html']").forEach(a=>{
+       const base=a.getAttribute("href").split("?")[0];a.setAttribute("href",base+"?lang="+currentLang);
+      });
     };
 
     const isCompactLang = () => {
@@ -2243,9 +2274,10 @@ document.documentElement.lang = (currentLang === "tr") ? "tr" : "en";
     };
 
     // On mobile we show only ONE button (the active one). Clicking it should toggle EN<->TR.
-    langToggle?.addEventListener("click", ()=> setLang(currentLang === "en" ? "tr" : "en"));
+    document.getElementById("gtLanguageSelect")?.addEventListener("change",e=>setLang(e.target.value));
 const savedLang = (()=>{ try{return localStorage.getItem("gt_lang");}catch(e){return null;} })();
-    setLang(savedLang === "tr" ? "tr" : "en");
+    const urlLang=new URLSearchParams(window.location.search).get("lang");
+    setLang(["en","tr","ru"].includes(urlLang)?urlLang:(["en","tr","ru"].includes(savedLang)?savedLang:"en"));
 
     // Make sure the ticker is live immediately, then refresh every 3 minutes.
     refreshTicker();
