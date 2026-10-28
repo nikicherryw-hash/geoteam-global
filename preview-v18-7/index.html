@@ -3540,6 +3540,66 @@ $("btnBrowse")?.addEventListener("click", (e) => {
     );
     group.add(glow);
 
+
+    // v18.29: actual georeferenced lights inside the rotating Three.js sphere.
+    // SphereGeometry equirectangular orientation: 0° at +X, east at -Z.
+    // One draw call, no DOM overlays, no independent screen-space animation.
+    const logisticsHubs = [
+      ["Istanbul",       41.0082,    28.9784],
+      ["Frankfurt",      50.1109,     8.6821],
+      ["London",         51.5074,    -0.1278],
+      ["Dubai",          25.2048,    55.2708],
+      ["Mumbai",         19.0760,    72.8777],
+      ["Singapore",       1.3521,   103.8198],
+      ["Hong Kong",      22.3193,   114.1694],
+      ["Shanghai",       31.2304,   121.4737],
+      ["Tokyo",          35.6762,   139.6503],
+      ["New York",       40.7128,   -74.0060],
+      ["Chicago",        41.8781,   -87.6298],
+      ["Los Angeles",    34.0522,  -118.2437],
+      ["São Paulo",     -23.5505,   -46.6333],
+      ["Johannesburg",  -26.2041,    28.0473],
+      ["Sydney",        -33.8688,   151.2093]
+    ];
+    const hubPositions = new Float32Array(logisticsHubs.length * 3);
+    const hubPhases = new Float32Array(logisticsHubs.length);
+    const hubWeights = new Float32Array(logisticsHubs.length);
+    const hubRadius = R * 1.016; // slightly above the 1.012R cloud shell
+    logisticsHubs.forEach((hub, i) => {
+      const latitude = THREE.MathUtils.degToRad(hub[1]);
+      const longitude = THREE.MathUtils.degToRad(hub[2]);
+      const parallel = Math.cos(latitude) * hubRadius;
+      hubPositions[3*i]   = parallel * Math.cos(longitude);
+      hubPositions[3*i+1] = hubRadius * Math.sin(latitude);
+      hubPositions[3*i+2] = -parallel * Math.sin(longitude);
+      hubPhases[i] = (i * 2.399963229728653) % (Math.PI * 2);
+      hubWeights[i] = 0.87 + (i % 4) * 0.035;
+    });
+    const hubGeometry = new THREE.BufferGeometry();
+    hubGeometry.setAttribute("position", new THREE.BufferAttribute(hubPositions, 3));
+    hubGeometry.setAttribute("aPhase", new THREE.BufferAttribute(hubPhases, 1));
+    hubGeometry.setAttribute("aWeight", new THREE.BufferAttribute(hubWeights, 1));
+    const reduceBeaconMotion = window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const hubMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 },
+        uDpr: { value: Math.min(window.devicePixelRatio || 1, 2) },
+        uScale: { value: 1 },
+        uPulse: { value: reduceBeaconMotion ? 0 : 1 }
+      },
+      vertexShader: "precision highp float;\nattribute float aPhase;\nattribute float aWeight;\nuniform float uTime;\nuniform float uDpr;\nuniform float uScale;\nuniform float uPulse;\nvarying float vPulse;\nvarying float vFacing;\nvarying float vWeight;\nvoid main() {\n  vec4 worldPoint = modelMatrix * vec4(position, 1.0);\n  vec3 normalAtPoint = normalize(worldPoint.xyz);\n  vec3 towardsCamera = normalize(cameraPosition - worldPoint.xyz);\n  vFacing = smoothstep(0.075, 0.28, dot(normalAtPoint, towardsCamera));\n  float wave = 0.5 + 0.5 * sin(uTime * 1.72 + aPhase);\n  vPulse = mix(0.70, wave, uPulse);\n  vWeight = aWeight;\n  vec4 viewPoint = viewMatrix * worldPoint;\n  gl_Position = projectionMatrix * viewPoint;\n  float perspective = clamp(3.1 / max(1.0, -viewPoint.z), 0.82, 1.17);\n  gl_PointSize = (12.0 + 2.0 * vPulse) * uDpr * uScale * perspective;\n  if (vFacing < 0.006) gl_PointSize = 0.0;\n}",
+      fragmentShader: "precision highp float;\nvarying float vPulse;\nvarying float vFacing;\nvarying float vWeight;\nvoid main() {\n  vec2 p = gl_PointCoord * 2.0 - 1.0;\n  float r = length(p);\n  if (r > 1.0 || vFacing < 0.006) discard;\n  float halo = pow(1.0 - smoothstep(0.0, 1.0, r), 2.4);\n  float core = 1.0 - smoothstep(0.075, 0.25, r);\n  float pulseLight = mix(0.70, 1.0, vPulse);\n  float alpha = (0.20 * halo + 0.73 * core) * pulseLight * vFacing * vWeight;\n  if (alpha < 0.007) discard;\n  vec3 mint = vec3(0.43, 0.96, 0.86);\n  vec3 pearl = vec3(0.91, 1.0, 0.97);\n  vec3 light = mix(mint, pearl, core * 0.88);\n  gl_FragColor = vec4(light, clamp(alpha, 0.0, 0.95));\n}",
+      transparent: true,
+      depthTest: true, // Globe surface hides markers on the far hemisphere.
+      depthWrite: false,
+      blending: THREE.NormalBlending
+    });
+    const hubLights = new THREE.Points(hubGeometry, hubMaterial);
+    hubLights.renderOrder = 4;
+    hubLights.frustumCulled = false;
+    group.add(hubLights);
+
     // Start view: Europe/Africa centered (just camera-facing orientation; geography is correct either way)
     group.rotation.set(0, -1.05, 0);
 
@@ -3548,6 +3608,9 @@ $("btnBrowse")?.addEventListener("click", (e) => {
       const w = Math.max(1, Math.floor(rect.width));
       const h = Math.max(1, Math.floor(rect.height));
       renderer.setSize(w, h, false);
+      // Smaller, softer beacons on narrow/Retina screens.
+      hubMaterial.uniforms.uDpr.value = Math.min(window.devicePixelRatio || 1, 2);
+      hubMaterial.uniforms.uScale.value = Math.max(0.70, Math.min(1.0, w / 380));
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
     }
@@ -3560,6 +3623,7 @@ $("btnBrowse")?.addEventListener("click", (e) => {
 
       group.rotation.y += 0.00115;
       clouds.rotation.y += 0.00175;
+      hubMaterial.uniforms.uTime.value = performance.now() * 0.001;
 
       if (earthMat.userData.shader){
         earthMat.userData.shader.uniforms.uTime.value = t;
