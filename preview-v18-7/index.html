@@ -1636,6 +1636,101 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
  .hero .headline.gt-hero-title span+span{font-size:.74em!important}
  .hero .sub.gt-hero-description{max-width:290px!important;font-size:12.1px!important}
 }
+</style><style id="gt-v18-21-typographic-hero">
+/* Clear hierarchy: sector eyebrow / two-line promise / lead / supporting facts. */
+.hero .gt-sectors{margin:0 auto 4px!important;transform:translateY(-3px)!important;letter-spacing:.10em!important}
+.hero .headline.gt-hero-title{
+ font-family:"Avenir Next","Inter","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+ font-size:clamp(31px,3.65vw,48px)!important;
+ font-weight:690!important;
+ line-height:1.13!important;
+ letter-spacing:-.048em!important;
+ color:#f2fcfb!important;
+ max-width:1080px!important;
+ width:100%!important;
+ margin:1px auto 0!important;
+ text-wrap:balance!important;
+}
+.hero .headline.gt-hero-title span{
+ display:block!important;
+ white-space:nowrap!important;
+ font-size:1em!important;
+ font-weight:inherit!important;
+ line-height:inherit!important;
+ letter-spacing:inherit!important;
+ color:inherit!important;
+ margin:0!important;
+}
+.hero .sub.gt-hero-description{
+ font-family:"Avenir Next","Inter","SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+ font-size:clamp(16px,1.55vw,19px)!important;
+ line-height:1.36!important;
+ font-weight:530!important;
+ letter-spacing:-.018em!important;
+ color:#d7f1ee!important;
+ max-width:660px!important;
+ width:100%!important;
+ margin:12px auto 0!important;
+ text-wrap:balance!important;
+}
+.hero .gt-hero-detail{
+ font-family:"Avenir Next","Inter","SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+ color:rgba(202,227,226,.72)!important;
+ font-size:clamp(12px,1.1vw,14px)!important;
+ font-weight:400!important;
+ line-height:1.62!important;
+ letter-spacing:.001em!important;
+ text-align:center!important;
+ max-width:580px!important;
+ width:100%!important;
+ margin:0 auto!important;
+ text-wrap:pretty!important;
+}
+.page>main .hero{gap:10px!important;padding-top:10px!important}
+@media(max-width:720px){
+ .hero .headline.gt-hero-title{
+   font-size:clamp(25px,5.3vw,35px)!important;
+   letter-spacing:-.045em!important;
+   max-width:calc(100vw - 24px)!important;
+   line-height:1.16!important;
+ }
+ .hero .sub.gt-hero-description{
+   font-size:clamp(14.5px,3.2vw,17px)!important;
+   margin:9px auto 0!important;
+   line-height:1.4!important;
+   max-width:calc(100vw - 32px)!important;
+ }
+ .hero .gt-hero-detail{
+   font-size:clamp(12px,2.75vw,13.5px)!important;
+   max-width:370px!important;
+   line-height:1.58!important;
+ }
+ .page>main .hero{gap:9px!important;padding-top:8px!important}
+}
+@media(max-width:430px){
+ .hero .headline.gt-hero-title{
+   font-size:clamp(20px,5.55vw,24px)!important;
+   letter-spacing:-.052em!important;
+   max-width:calc(100vw - 18px)!important;
+   line-height:1.2!important;
+ }
+ .hero .sub.gt-hero-description{
+   font-size:clamp(13.4px,3.35vw,14.5px)!important;
+   max-width:340px!important;
+   margin:7px auto 0!important;
+ }
+ .hero .gt-hero-detail{
+   font-size:clamp(11.6px,3.05vw,12.7px)!important;
+   max-width:325px!important;
+   line-height:1.57!important;
+ }
+ .hero .gt-sectors{margin-bottom:3px!important}
+}
+@media(max-width:350px){
+ .hero .headline.gt-hero-title{font-size:clamp(18px,5.55vw,20px)!important;letter-spacing:-.054em!important}
+ .hero .sub.gt-hero-description{font-size:13px!important}
+ .hero .gt-hero-detail{font-size:11.6px!important;max-width:295px!important}
+}
 </style></head>
 
 <body>
@@ -1698,8 +1793,8 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
           <i aria-hidden="true"></i>
           <span data-gt-en="Electronics" data-gt-tr="Elektronik" data-gt-ru="Электроника">Electronics</span>
         </div>
-        <h1 class="headline gt-hero-title" id="headline" aria-label="Intelligent sourcing for equipment and components"><span>Intelligent sourcing</span><span>for equipment &amp; components.</span></h1>
-        <p class="sub gt-hero-description" id="sub">By manufacturer part number, drawing or technical specification. From a single item to a complete procurement requirement.</p>
+        <h1 class="headline gt-hero-title" id="headline" aria-label="Intelligent sourcing of equipment and components"><span>Intelligent sourcing</span><span>of equipment &amp; components.</span></h1>
+        <p class="sub gt-hero-description" id="sub">From technical requirements to the right solution.</p><p class="gt-hero-detail" id="gtHeroDetail">Part numbers and specifications. Supplier sourcing, offer comparison and procurement support.</p>
 
         <div class="stage" aria-label="Rotating earth">
           <canvas id="globe"></canvas>
@@ -1998,8 +2093,9 @@ const loadTicker = async (lang) => {
         navCases: "Cases",
         navAbout: "About",
         navContact: "Contact",
-        headline: "Intelligent sourcing|for equipment & components.",
-        sub: "By manufacturer part number, drawing or technical specification. From a single item to a complete procurement requirement.",
+        headline: "Intelligent sourcing|of equipment & components.",
+        sub: "From technical requirements to the right solution.",
+        heroDetail: "Part numbers and specifications. Supplier sourcing, offer comparison and procurement support.",
         btnRfq: "Start RFQ",
         btnBrowse: "Browse Products",
 
@@ -2163,8 +2259,9 @@ const loadTicker = async (lang) => {
         navCases: "Örnekler",
         navAbout: "Hakkımızda",
         navContact: "İletişim",
-        headline: "Akıllı parça eşleştirme|ve ekipman tedariği.",
-        sub: "Üretici parça numarası, teknik çizim veya şartnameyle. Tek parçadan kapsamlı tedarik taleplerine.",
+        headline: "Akıllı ekipman|ve bileşen tedariği.",
+        sub: "Teknik talepten en uygun çözüme.",
+        heroDetail: "Parça numaraları ve teknik şartnameler. Tedarikçi araştırması, teklif karşılaştırması ve satın alma desteği.",
         btnRfq: "RFQ Başlat",
         btnBrowse: "Ürünlere Göz At",
 
@@ -2327,8 +2424,9 @@ const loadTicker = async (lang) => {
       navAbout:"О компании",navSourcing:"Глобальный поиск",navHow:"Как мы работаем",
       navProducts:"Оборудование",navIndustries:"Отрасли",navCapabilities:"Возможности",navQuality:"Документы",
       navCases:"Примеры",navContact:"Контакты",
-      headline:"Интеллектуальный подбор|оборудования и комплектующих.",
-      sub:"По заводскому артикулу, чертежу или спецификации. От одной позиции до комплексной поставки.",
+      headline:"Интеллектуальный подбор|оборудования и компонентов.",
+      sub:"От технического запроса до оптимального решения.",
+      heroDetail:"Поиск по артикулам и спецификациям. Анализ источников, сравнение предложений и сопровождение закупки.",
       btnRfq:"Глобальный поиск",btnBrowse:"Каталог",
       megaKicker:"Оборудование",megaTitle:"Категории",megaNote:"Поиск по направлениям",
       aboutTitle:"О компании",aboutNote:"Международный поиск технических компонентов",
@@ -2430,6 +2528,7 @@ const loadTicker = async (lang) => {
         heroHeading.setAttribute("aria-label",lines.join(" ").trim());
       }
       setText("sub", d.sub);
+      setText("gtHeroDetail", d.heroDetail);
       setText("btnRfq", d.btnRfq);
       setText("btnBrowse", d.btnBrowse);
 
