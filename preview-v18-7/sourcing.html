@@ -201,8 +201,8 @@ by('wa').addEventListener('click',()=>{
  // WhatsApp supports URL prefill, not file attachments. User confirms final send.
  const short=text.length>2800?text.slice(0,2700)+'\n\n[Details truncated — send additional specifications separately.]':text;
  const link='https://wa.me/'+WA+'?text='+encodeURIComponent(short);
- const win=window.open(link,'_blank','noopener,noreferrer');
- if(!win){window.location.href=link}
+ // Open one externally-owned draft only after the user explicitly clicks WhatsApp.
+ window.open(link,'_blank','noopener,noreferrer');
 });
 changeLang('en');
 })();
