@@ -2278,60 +2278,77 @@ a:focus-visible,button:focus-visible,select:focus-visible{
 .gt-about-story .gt-process-closing{color:#ebfffa!important;font-size:13.3px!important;line-height:1.65!important;font-weight:610!important;border-left:2px solid #91f2e1;padding:12px 13px!important;background:linear-gradient(90deg,rgba(47,150,147,.12),transparent 90%);margin:22px 0 0!important}
 @media(max-width:860px){.gt-about-home.gt-about-story{grid-template-columns:1fr!important;gap:28px!important}.gt-about-story .gt-about-process{padding-top:23px!important}}
 @media(max-width:580px){.gt-about-story .gt-process-intro{font-size:13.4px!important}.gt-about-story .gt-step{padding:15px 0!important}.gt-about-story .gt-step p{font-size:12.85px!important;line-height:1.65!important}.gt-about-story .gt-process-closing{font-size:12.9px!important}}
-</style><style id="gt-v18-35-search-and-reading-glow">
-/* CTA: visibly clickable and softly breathing, not a flashing banner. */
+</style><style id="gt-v18-36-inner-glow-reading">
+/* Sourcing is a soft light source, never an outlined chip or bordered button. */
 .gt-single-action #gtMainRfq.gt-primary-cta{
- position:relative!important;isolation:isolate!important;
- min-height:48px!important;padding:11px 24px!important;
- border:1px solid rgba(139,244,231,.57)!important;
- border-radius:999px!important;
- background:linear-gradient(135deg,rgba(18,107,114,.60),rgba(7,65,77,.74))!important;
- color:#f5fffd!important;
- box-shadow:inset 0 1px rgba(234,255,251,.13),0 5px 22px rgba(0,16,28,.19),0 0 18px rgba(72,224,207,.12)!important;
- text-decoration:none!important;
- -webkit-tap-highlight-color:rgba(93,230,217,.18);
+  position:relative!important;isolation:isolate!important;overflow:hidden!important;
+  border:0!important;border-radius:13px!important;
+  background:rgba(16,91,99,.19)!important;
+  color:#effffc!important;
+  padding:11px 22px!important;min-height:48px!important;
+  box-shadow:inset 0 0 23px rgba(54,216,196,.11)!important;
+  text-decoration:none!important;
+  text-shadow:0 0 12px rgba(145,255,238,.17)!important;
 }
 .gt-single-action #gtMainRfq.gt-primary-cta::before{
- content:"";position:absolute;inset:-4px;pointer-events:none;border-radius:inherit;
- border:1px solid rgba(145,248,233,.23);
- box-shadow:0 0 14px rgba(80,238,218,.20);
- opacity:.4;animation:gt-search-cta-glow 5.5s ease-in-out infinite;
+  content:"";position:absolute;z-index:-1;
+  inset:0!important;pointer-events:none;
+  border:0!important;border-radius:inherit!important;box-shadow:none!important;
+  background:radial-gradient(ellipse 84% 125% at 50% 52%,rgba(88,241,218,.31),rgba(42,192,178,.13) 52%,transparent 92%);
+  filter:blur(10px);
+  opacity:.36;
+  animation:gt36-inner-light 6s ease-in-out infinite;
 }
-@keyframes gt-search-cta-glow{0%,100%{opacity:.22}50%{opacity:.87}}
 .gt-single-action #gtMainRfq.gt-primary-cta:hover,
 .gt-single-action #gtMainRfq.gt-primary-cta:focus-visible{
- background:linear-gradient(135deg,rgba(20,120,125,.86),rgba(9,74,86,.95))!important;
- border-color:rgba(192,255,244,.9)!important;
- box-shadow:0 0 0 2px rgba(100,237,224,.12),0 0 25px rgba(79,227,208,.27)!important;
- text-decoration:none!important;
+  background:rgba(18,104,110,.28)!important;border:0!important;
+  box-shadow:inset 0 0 30px rgba(72,234,212,.21)!important;
+  color:#fff!important;text-decoration:none!important;transform:none!important;
 }
-.gt-clean-nav #navSourcing{
- color:#b9fff0!important;
- background:rgba(58,172,159,.09)!important;
- border-radius:8px!important;
- box-shadow:inset 0 0 0 1px rgba(147,242,224,.16)!important;
- text-shadow:0 0 14px rgba(122,240,220,.16)!important;
+.gt-single-action #gtMainRfq.gt-primary-cta:hover::before,
+.gt-single-action #gtMainRfq.gt-primary-cta:focus-visible::before{opacity:.78}
+@keyframes gt36-inner-light{
+  0%,100%{opacity:.26}
+  50%{opacity:.63}
 }
-/* Reader guidance: only the current paragraph gains a faint illumination. */
-.gt-about-story .gt-about-copy p,.gt-about-story .gt-about-copy h3{
- transition:color .58s ease,text-shadow .58s ease!important;
+/* Scroll-guided reading illumination: a soft wash behind actual text, not a border. */
+.gt-about-story .gt-read-unit{
+  position:relative!important;isolation:isolate!important;
+  transition:color .6s ease,text-shadow .6s ease!important;
 }
+.gt-about-story .gt-read-unit::before{
+  content:"";position:absolute;z-index:-1;pointer-events:none;
+  inset:-5px -10px;border-radius:10px;
+  background:radial-gradient(ellipse 85% 140% at 26% 50%,rgba(76,218,200,.13),rgba(68,197,182,.055) 59%,transparent 95%);
+  box-shadow:inset 0 0 17px rgba(70,202,190,.04);
+  opacity:0;
+  transition:opacity .68s ease!important;
+}
+.gt-about-story .gt-read-unit.gt-read-active::before{opacity:1}
 .gt-about-story .gt-about-copy p.gt-read-active,
-.gt-about-story .gt-about-copy #gtAboutSummary.gt-read-active{
- color:#f1fffa!important;
- text-shadow:0 0 17px rgba(112,245,221,.20)!important;
+.gt-about-story .gt-about-copy #gtAboutSummary.gt-read-active,
+.gt-about-story .gt-about-copy h3.gt-read-active,
+.gt-about-story .gt-about-process p.gt-read-active,
+.gt-about-story .gt-about-process .gt-step.gt-read-active p{
+  color:#f3fffb!important;
+  text-shadow:0 0 15px rgba(143,254,230,.22)!important;
 }
-.gt-about-story .gt-about-copy h3.gt-read-active{
- color:#d4fff3!important;
- text-shadow:0 0 14px rgba(123,248,228,.20)!important;
+.gt-about-story .gt-about-process .gt-step.gt-read-active strong{
+  color:#c1fff0!important;
+  text-shadow:0 0 13px rgba(138,247,226,.25)!important;
 }
-@media(prefers-reduced-motion:reduce){
- .gt-single-action #gtMainRfq.gt-primary-cta::before{animation:none!important;opacity:.44!important}
- .gt-about-story .gt-about-copy p,.gt-about-story .gt-about-copy h3{transition:none!important}
+.gt-about-story .gt-about-copy h3.gt-read-active{color:#c5fff0!important}
+@media(hover:hover) and (pointer:fine){
+  .gt-about-story .gt-read-unit:hover::before{opacity:.75}
+  .gt-about-story .gt-read-unit:hover{text-shadow:0 0 15px rgba(143,254,230,.16)!important}
 }
 @media(max-width:580px){
- .gt-single-action #gtMainRfq.gt-primary-cta{min-height:46px!important;padding:11px 23px!important}
- .gt-clean-nav #navSourcing{background:transparent!important}
+  .gt-single-action #gtMainRfq.gt-primary-cta{min-height:46px!important;padding:10px 20px!important}
+  .gt-about-story .gt-read-unit::before{inset:-4px -7px}
+}
+@media(prefers-reduced-motion:reduce){
+  .gt-single-action #gtMainRfq.gt-primary-cta::before{animation:none!important;opacity:.52!important}
+  .gt-about-story .gt-read-unit,.gt-about-story .gt-read-unit::before{transition:none!important}
 }
 </style>
 </head>
@@ -3755,42 +3772,56 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   </script>
 
   <!-- RFQ details and copy-draft form live exclusively on sourcing.html. -->
-<footer class="gt-legal-footer gt-footer-singleline" aria-label="Footer"><span>© 2026 GeoTeam</span><a class="gt-footer-about" href="about.html">About Us <span aria-hidden="true">↗</span></a><a id="gtWhatWeSource" href="en/what-we-source.html">What We Source</a><a href="privacy.html">Privacy Policy</a><a href="rfq-privacy.html">KVKK / RFQ</a></footer><script id="gt-v18-35-reading-focus">
-/* Scroll-guided editorial emphasis. Independent of WebGL and external scripts. */
+<footer class="gt-legal-footer gt-footer-singleline" aria-label="Footer"><span>© 2026 GeoTeam</span><a class="gt-footer-about" href="about.html">About Us <span aria-hidden="true">↗</span></a><a id="gtWhatWeSource" href="en/what-we-source.html">What We Source</a><a href="privacy.html">Privacy Policy</a><a href="rfq-privacy.html">KVKK / RFQ</a></footer><script id="gt-v18-36-reading-focus">
+/* Highlights the section nearest the reading line as visitors scroll. */
 (function(){
   "use strict";
-  const area=document.querySelector(".gt-about-story .gt-about-copy");
-  if(!area || !window.requestAnimationFrame) return;
-  const units=Array.from(area.querySelectorAll("p,h3"));
-  if(!units.length) return;
-  let active=null,queued=false;
+  const about=document.querySelector(".gt-about-story");
+  if(!about || !window.requestAnimationFrame) return;
+  const groups=[
+    Array.from(about.querySelectorAll(".gt-about-copy > p, .gt-about-copy > h3")),
+    Array.from(about.querySelectorAll(".gt-about-process > .gt-process-intro, .gt-about-process > .gt-step, .gt-about-process > .gt-process-closing"))
+  ];
+  const all=groups.flat();
+  if(!all.length) return;
+  all.forEach(el=>el.classList.add("gt-read-unit"));
+  let previous=[null,null],queued=false;
   function update(){
     queued=false;
-    const viewH=window.innerHeight||document.documentElement.clientHeight;
-    const box=area.getBoundingClientRect();
-    if(box.bottom<0||box.top>viewH){
-      if(active){active.classList.remove("gt-read-active");active=null;}
+    const viewHeight=window.innerHeight || document.documentElement.clientHeight;
+    const boundary=about.getBoundingClientRect();
+    if(boundary.bottom<=0 || boundary.top>=viewHeight){
+      for(let i=0;i<previous.length;i++){
+        if(previous[i]) previous[i].classList.remove("gt-read-active");
+        previous[i]=null;
+      }
       return;
     }
-    const focusY=viewH*.44;
-    let nearest=null,score=Infinity;
-    for(const el of units){
-      const r=el.getBoundingClientRect();
-      if(r.bottom<0||r.top>viewH) continue;
-      const dist=r.top<=focusY&&r.bottom>=focusY?0:Math.min(Math.abs(r.top-focusY),Math.abs(r.bottom-focusY));
-      if(dist<score){score=dist;nearest=el;}
-    }
-    if(nearest!==active){
-      if(active)active.classList.remove("gt-read-active");
-      active=nearest;
-      if(active)active.classList.add("gt-read-active");
-    }
+    const targetY=Math.min(viewHeight-72,Math.max(90,viewHeight*.47));
+    groups.forEach((units,i)=>{
+      let choice=null,score=Infinity;
+      for(const el of units){
+        const rect=el.getBoundingClientRect();
+        if(rect.bottom<=0 || rect.top>=viewHeight) continue;
+        const distance=rect.top<=targetY && rect.bottom>=targetY
+          ? 0 : Math.min(Math.abs(rect.top-targetY),Math.abs(rect.bottom-targetY));
+        if(distance<score){score=distance;choice=el;}
+      }
+      if(choice===previous[i])return;
+      if(previous[i])previous[i].classList.remove("gt-read-active");
+      previous[i]=choice;
+      if(choice)choice.classList.add("gt-read-active");
+    });
   }
-  function queue(){if(!queued){queued=true;window.requestAnimationFrame(update);}}
-  window.addEventListener("scroll",queue,{passive:true});
-  window.addEventListener("resize",queue,{passive:true});
-  document.addEventListener("gt-language-changed",queue);
-  queue();
+  function schedule(){
+    if(queued)return;
+    queued=true;
+    requestAnimationFrame(update);
+  }
+  window.addEventListener("scroll",schedule,{passive:true});
+  window.addEventListener("resize",schedule,{passive:true});
+  document.addEventListener("gt-language-changed",schedule);
+  schedule();
 })();
 </script>
 </body>
