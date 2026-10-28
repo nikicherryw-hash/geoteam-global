@@ -11,8 +11,8 @@
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--fg);background:radial-gradient(750px 450px at 50% 0,rgba(21,116,125,.24),transparent 74%),linear-gradient(160deg,#061821,#0a3540 72%,#081f28);min-height:100vh}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.55;cursor:wait}
 header{height:auto;min-height:84px;padding:17px max(20px,calc((100vw - 1110px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(144,239,225,.13);background:rgba(2,22,30,.48);backdrop-filter:blur(12px)}
 .brand{display:inline-flex;flex-direction:column;align-items:center;gap:4px;min-width:116px;white-space:nowrap}
-.brand strong{font:700 23px/1.05 "Avenir Next","Trebuchet MS","Gill Sans",Arial,sans-serif;letter-spacing:.015em;text-shadow:0 0 12px rgba(92,247,231,.28)}
-.brand small{font:650 10.5px/1.1 "Avenir Next","Trebuchet MS","Gill Sans",Arial,sans-serif;letter-spacing:.31em;color:#b2dfde}
+.brand strong{font:700 23px/1.05 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;letter-spacing:.015em;text-shadow:0 0 12px rgba(92,247,231,.28)}
+.brand small{font:650 10.5px/1.1 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;letter-spacing:.31em;color:#b2dfde}
 .top-nav{display:flex;align-items:center;gap:10px}.back{border:1px solid var(--line);padding:9px 15px;border-radius:999px;color:#b8d8dc;font-size:12px}.back:hover{border-color:#84f5e6;color:#eaffff}
 .lang{border:1px solid var(--line);border-radius:50%;height:36px;width:36px;background:rgba(255,255,255,.045);color:#d8f8f3;font-size:12px;font-weight:800}
 main{max-width:1040px;margin:auto;padding:42px 21px 36px}
@@ -72,7 +72,19 @@ footer>a:hover{color:#79f3e3}footer .about{border:1px solid rgba(155,232,220,.25
 @media(max-width:720px){header{padding:14px 16px;min-height:74px}.brand{min-width:100px}.brand strong{font-size:20px}.brand small{font-size:9.5px}main{padding:32px 14px 27px}.workspace{padding:19px;border-radius:16px}.fields{grid-template-columns:1fr 105px}.fields .destination{grid-column:1/-1}.more-fields{grid-template-columns:1fr}.notes-field{grid-column:auto}.help-row{flex-direction:column;align-items:stretch}.help-actions{width:100%}.help-btn{flex:1 1 29%}}
 @media(max-width:430px){.fields{grid-template-columns:1fr 82px;gap:9px}.brand strong{font-size:19px}.brand small{font-size:9px}.primary,.secondary{padding:9px 14px;min-height:40px}.help-btn{font-size:11px;padding:6px 9px}.help-btn .ico{width:14px}footer{justify-content:flex-start;font-size:10.5px;gap:10px}}
 </style>
-</head>
+
+<style id="gt-v18-12-sourcing-type">
+:root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif!important}
+body{font-family:inherit!important;font-feature-settings:"kern" 1;text-rendering:optimizeLegibility}
+.brand strong{font-weight:710!important;letter-spacing:-.025em!important;text-shadow:0 0 7px rgba(81,235,223,.16)!important}
+.brand small{font-weight:660!important;letter-spacing:.28em!important}
+h1{font-weight:685!important;letter-spacing:-.035em!important}
+.subtitle{font-weight:415!important;line-height:1.7!important}
+.section-head h2{font-weight:675!important;letter-spacing:-.025em!important}
+.field{font-weight:580!important;letter-spacing:.008em!important}
+.primary,.secondary,.help-btn{font-family:inherit!important;font-weight:660!important}
+.workspace{box-shadow:0 15px 42px rgba(0,0,0,.09)!important}
+</style></head>
 <body>
 <header><a class="brand" href="index.html"><strong>GeoTeam</strong><small>GLOBAL</small></a><div class="top-nav"><a class="back" href="index.html" id="back">← Back to site</a><button type="button" class="lang" id="lang" aria-label="Switch language">EN</button></div></header>
 <main>
