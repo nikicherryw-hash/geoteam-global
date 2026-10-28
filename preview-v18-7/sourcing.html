@@ -397,10 +397,20 @@ function localHints(raw){
  );
  const out=[{label:q,type:'exact',value:q}];const seen=new Set([q.toLowerCase()]);
  for(const m of matched.slice(0,5)){
- const text=m.name.toLowerCase()===low?m.name:(low.includes(m.name.toLowerCase())?q:m.name);
- if(!seen.has(text.toLowerCase())){out.push({label:m.name,type:'maker',value:text});seen.add(text.toLowerCase())}
- // Keep the typed part number in the entry, but never generate fake SKU completions
- const prefix=m.prefixes.find(p=>norm.includes(p));if(prefix && !low.includes(m.name.toLowerCase())){const v=m.name+' '+q;if(!seen.has(v.toLowerCase())){out.push({label:v,type:'prefix',value:v});seen.add(v.toLowerCase())}}
+ const brandTyped=low.includes(m.name.toLowerCase());
+ const prefix=m.prefixes.find(p=>norm.includes(p));
+ const exactText=brandTyped?q:m.name+' '+q;
+ // The category hint is useful even when an exact query already mentions the manufacturer.
+ const makerLabel=m.name+' · '+m.category;
+ if(!seen.has(makerLabel.toLowerCase())){
+ out.push({label:makerLabel,type:'maker',value:exactText});seen.add(makerLabel.toLowerCase());
+ }
+ if(prefix){
+ const prefixLabel=m.name+' · '+prefix+' family (not a complete part number)';
+ if(!seen.has(prefixLabel.toLowerCase())){
+ out.push({label:prefixLabel,type:'prefix',value:exactText});seen.add(prefixLabel.toLowerCase());
+ }
+ }
  }
  return out.slice(0,7)
 }
