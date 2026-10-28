@@ -392,13 +392,19 @@ function renderSuggestions(rows){
 function localHints(raw){
  const q=raw.trim().replace(/\s+/g,' ');if(q.length<2)return [];
  const low=q.toLowerCase();const norm=q.toUpperCase().replace(/[^A-Z0-9]/g,'');
- const matched=MANUFACTURERS.map(([name,category,prefixes])=>({name,category,prefixes:prefixes.split(',').filter(Boolean)})).filter(x=>
- x.name.toLowerCase().includes(low)||low.includes(x.name.toLowerCase())||x.prefixes.some(p=>p.length>=2&&(norm.startsWith(p)||norm.includes(p)))
+ const prepared=MANUFACTURERS.map(([name,category,prefixes])=>{
+  const names=[name.toLowerCase(),name.toLowerCase().split(' ')[0]].filter(Boolean);
+  const alias=names.find(x=>low===x||low.startsWith(x+' '));
+  const number=alias?q.slice(alias.length).trim().toUpperCase().replace(/[^A-Z0-9]/g,''):norm;
+  return{name,category,prefixes:prefixes.split(',').filter(Boolean),brandTyped:!!alias,number};
+ });
+ const matched=prepared.filter(x=>
+  x.name.toLowerCase().includes(low)||x.brandTyped||x.prefixes.some(p=>p.length>=2&&x.number.startsWith(p))
  );
  const out=[{label:q,type:'exact',value:q}];const seen=new Set([q.toLowerCase()]);
  for(const m of matched.slice(0,5)){
- const brandTyped=low.includes(m.name.toLowerCase());
- const prefix=m.prefixes.find(p=>norm.includes(p));
+ const brandTyped=m.brandTyped;
+ const prefix=m.prefixes.find(p=>m.number.startsWith(p));
  const exactText=brandTyped?q:m.name+' '+q;
  // The category hint is useful even when an exact query already mentions the manufacturer.
  const makerLabel=m.name+' · '+m.category;
