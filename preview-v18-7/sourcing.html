@@ -237,9 +237,24 @@ footer{border-color:rgba(151,231,222,.155)!important;color:#b3cdd0!important}
 footer a{color:#c8e4e3!important}
 footer a:hover{color:#92e8df!important}
 footer .about{border-color:rgba(149,229,220,.26)!important}
+</style><style id="gt-v18-15-search-ui">
+.lang-wrap{display:inline-flex;align-items:center;min-width:0}
+.lang-choice{height:36px;max-width:150px;min-width:128px;appearance:none;padding:6px 23px 6px 11px;background:rgba(5,32,41,.5);color:#e5f8f6;border:1px solid rgba(151,231,222,.25);border-radius:999px;font:650 11px/1.2 system-ui,sans-serif;cursor:pointer}
+.lang-wrap{position:relative}.lang-wrap:after{content:"⌄";position:absolute;right:11px;top:6px;color:#a7d6d0;pointer-events:none}
+.lang-choice:focus-visible{outline:2px solid #87f0e5;outline-offset:2px}
+.lang-choice option,.lang-choice optgroup{background:#09242e;color:#eaf7f7}
+.part-field{position:relative}
+.suggestions{position:absolute;top:calc(100% - 5px);left:0;right:0;z-index:30;display:flex;flex-direction:column;gap:0;max-height:290px;overflow-y:auto;background:#092933;border:1px solid rgba(128,234,220,.43);border-radius:11px;box-shadow:0 15px 38px rgba(0,0,0,.35);padding:5px}
+.suggestions[hidden]{display:none!important}
+.suggestion{display:flex;justify-content:space-between;align-items:center;gap:14px;width:100%;border:0;background:transparent;color:#ecffff;padding:10px;border-radius:8px;cursor:pointer;text-align:left}
+.suggestion:hover,.suggestion[aria-selected="true"]{background:rgba(48,159,155,.19)}
+.suggestion-main{font:650 12.5px/1.4 system-ui,sans-serif;white-space:normal;overflow-wrap:anywhere}
+.suggestion-desc{display:block;font:400 10px/1.45 system-ui,sans-serif;color:#afc9cb;margin-top:3px}
+.suggest-hint{color:#95b8bb;font:400 10.5px/1.4 system-ui,sans-serif;min-height:13px;max-width:100%}
+@media(max-width:560px){.lang-choice{max-width:125px;min-width:110px;padding-left:9px;font-size:10px}.part-field .suggestions{max-height:240px}}
 </style></head>
 <body>
-<header><a class="brand" href="index.html"><strong>GeoTeam</strong><small>GLOBAL</small></a><div class="top-nav"><a class="back" href="index.html" id="back">← Back to site</a><button type="button" class="lang" id="lang" aria-label="Switch language">EN</button></div></header>
+<header><a class="brand" href="index.html"><strong>GeoTeam</strong><small>GLOBAL</small></a><div class="top-nav"><a class="back" href="index.html" id="back">← Back to site</a><label class="lang-wrap" aria-label="Website language"><select class="lang-choice" id="lang" title="Website language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><optgroup label="More languages — planned"><option disabled>DE · Deutsch</option><option disabled>FR · Français</option><option disabled>ES · Español</option><option disabled>IT · Italiano</option><option disabled>PT · Português</option><option disabled>AR · العربية</option><option disabled>ZH · 中文</option></optgroup></select></label></div></header>
 <main>
 <div class="eyebrow" id="eyebrow">GLOBAL SOURCING</div>
 <h1 id="title">Find the right part, worldwide.</h1>
@@ -247,7 +262,7 @@ footer .about{border-color:rgba(149,229,220,.26)!important}
 <section class="workspace" aria-labelledby="searchHeading">
  <div class="section-head"><h2 id="searchHeading">Find a component</h2><span id="stepHint">Start with the essentials</span></div>
  <div class="fields">
-  <label class="field"><span id="partLabel">Part number / manufacturer *</span><input id="part" type="text" maxlength="160" autocomplete="off" placeholder="Phoenix Contact 2742748"></label>
+  <label class="field part-field"><span id="partLabel">Part number / manufacturer *</span><input id="part" type="text" maxlength="160" autocomplete="off" placeholder="e.g. Siemens 6ES7..." role="combobox" aria-autocomplete="list" aria-controls="suggestions" aria-expanded="false"><span id="suggestions" class="suggestions" role="listbox" aria-label="Part and manufacturer suggestions" hidden></span><small id="suggestHint" class="suggest-hint">Manufacturer and part number suggestions — not stock or price offers.</small></label>
   <label class="field"><span id="qtyLabel">Quantity *</span><input id="qty" type="number" min="1" max="999999" step="1" inputmode="numeric" value="1"></label>
   <label class="field destination"><span id="destLabel">Delivery destination *</span><input id="dest" type="text" maxlength="100" autocomplete="off" placeholder="Istanbul, Türkiye"></label>
  </div>
@@ -302,16 +317,124 @@ const items=[];
 let lang='en',busy=false;
 const W={
 en:{back:'← Back to site',eyebrow:'GLOBAL SOURCING',title:'Find the right part, worldwide.',subtitle:'Search by part number and quantity. If no verified source appears, send the same request directly to our team.',searchHeading:'Find a component',stepHint:'Start with the essentials',partLabel:'Part number / manufacturer *',qtyLabel:'Quantity *',destLabel:'Delivery destination *',extraLabel:'More details & attachment',conditionLabel:'Condition',leadLabel:'Required delivery',notesLabel:'Specification / technical requirements',fileLabel:'Specification file (optional)',chooseFile:'Choose file',noFile:'No file selected',fileNotice:'Files remain on your device in this preview. Attach manually when opening email or WhatsApp.',searchLabel:'Search worldwide',addLabel:'Add item',batchTitle:'Your RFQ list',helpTitle:"Can't find it? Send us an RFQ.",helpSubtitle:'Our team can review availability and sourcing routes.',waLabel:'WhatsApp',emailLabel:'Email RFQ',copyLabel:'Copy RFQ',helpNotice:'Email and WhatsApp open drafts in your own apps. You review and send them yourself. Attach files manually.',legalNote:'Search leads are not confirmed stock or prices. Orders require supplier, documentation and trade-compliance verification.',about:'About Us',privacy:'Privacy Policy',rfqPrivacy:'KVKK / RFQ',items:'items',empty:'Add products here to send one request.',requiredPart:'Enter a part number or manufacturer.',requiredDest:'Enter the delivery destination.',requiredQty:'Enter a valid quantity of at least 1.',added:'Item added to your RFQ list.',removed:'Item removed.',searchPreviewTitle:'Live supplier search is not connected in this preview.',searchPreviewText:'This review shows the design only. Send your RFQ via WhatsApp or email to request a manual sourcing check.',searchErrorTitle:'No confirmed result available.',searchErrorText:'We can review this request directly. Use WhatsApp or email below.',searchSearching:'Checking worldwide sources…',searchNoResult:'No verified source found yet.',searchLeadTitle:'Potential source',searchLeadText:'Unverified sourcing lead — stock and price require confirmation.',copied:'RFQ draft copied. Nothing has been sent.',copyFail:'Could not copy automatically. Select the draft text shown below.',chooseValid:'Add a product or fill in the part number and destination first.',fileType:'Choose a PDF, Word, Excel, CSV or TXT file.',fileLarge:'File exceeds the 10 MB local preview limit.',remove:'Remove',new:'New / original',unused:'Unused surplus',any:'Any — verify',leadPlaceholder:'e.g. 4 weeks',notesPlaceholder:'OEM reference, compliance documents, Incoterms...'},
-tr:{back:'← Siteye dön',eyebrow:'KÜRESEL TEDARİK',title:'Doğru parçayı dünya çapında bulun.',subtitle:'Parça kodu ve miktara göre arayın. Doğrulanmış kaynak bulunamazsa aynı talebi ekibimize doğrudan iletin.',searchHeading:'Parça arayın',stepHint:'Temel bilgilerle başlayın',partLabel:'Parça No / üretici *',qtyLabel:'Miktar *',destLabel:'Teslimat yeri *',extraLabel:'Ek bilgiler ve dosya',conditionLabel:'Ürün durumu',leadLabel:'İstenen teslim süresi',notesLabel:'Teknik şartname / ek açıklama',fileLabel:'Teknik dosya (isteğe bağlı)',chooseFile:'Dosya seç',noFile:'Dosya seçilmedi',fileNotice:'Dosyalar bu önizlemede cihazınızdan yüklenmez. E-posta veya WhatsApp üzerinden kendiniz ekleyin.',searchLabel:'Dünya çapında ara',addLabel:'Ürün ekle',batchTitle:'RFQ listeniz',helpTitle:'Bulamadınız mı? RFQ gönderin.',helpSubtitle:'Ekibimiz stok ve tedarik seçeneklerini inceleyebilir.',waLabel:'WhatsApp',emailLabel:'E-posta RFQ',copyLabel:'RFQ kopyala',helpNotice:'E-posta ve WhatsApp yalnızca taslak açar. Kontrol ederek kendiniz gönderirsiniz. Dosyaları ayrıca ekleyin.',legalNote:'Arama sonuçları kesin stok veya fiyat değildir. Sipariş öncesinde tedarikçi, belge ve ticari uygunluk doğrulanır.',about:'Hakkımızda',privacy:'Gizlilik Politikası',rfqPrivacy:'KVKK / RFQ',items:'ürün',empty:'Tek bir talep oluşturmak için ürünleri buraya ekleyin.',requiredPart:'Parça numarası veya üretici girin.',requiredDest:'Teslimat noktasını girin.',requiredQty:'En az 1 adet geçerli miktar girin.',added:'Ürün RFQ listesine eklendi.',removed:'Ürün kaldırıldı.',searchPreviewTitle:'Bu önizlemede canlı tedarikçi araması bağlı değil.',searchPreviewText:'Burada yalnızca tasarım gösteriliyor. Manuel tedarik araştırması için WhatsApp veya e-posta ile RFQ gönderin.',searchErrorTitle:'Henüz doğrulanmış sonuç yok.',searchErrorText:'Talebi ekibimiz değerlendirebilir. Aşağıdan WhatsApp veya e-posta seçin.',searchSearching:'Dünya çapında kaynaklar kontrol ediliyor…',searchNoResult:'Henüz doğrulanmış kaynak bulunamadı.',searchLeadTitle:'Olası kaynak',searchLeadText:'Doğrulanmamış kaynak adayı; stok ve fiyat teyit edilmelidir.',copied:'RFQ taslağı kopyalandı. Hiçbir şey gönderilmedi.',copyFail:'Otomatik kopyalama yapılamadı. Aşağıdaki taslağı elle seçin.',chooseValid:'Önce bir ürün ekleyin veya parça kodunu ve teslimat yerini doldurun.',fileType:'PDF, Word, Excel, CSV veya TXT dosyası seçin.',fileLarge:'Dosya 10 MB yerel önizleme sınırını aşıyor.',remove:'Kaldır',new:'Yeni / orijinal',unused:'Kullanılmamış stok',any:'Herhangi biri — doğrula',leadPlaceholder:'ör. 4 hafta',notesPlaceholder:'OEM referansı, uyumluluk belgeleri, teslim şekli...'}
+tr:{back:'← Siteye dön',eyebrow:'KÜRESEL TEDARİK',title:'Doğru parçayı dünya çapında bulun.',subtitle:'Parça kodu ve miktara göre arayın. Doğrulanmış kaynak bulunamazsa aynı talebi ekibimize doğrudan iletin.',searchHeading:'Parça arayın',stepHint:'Temel bilgilerle başlayın',partLabel:'Parça No / üretici *',qtyLabel:'Miktar *',destLabel:'Teslimat yeri *',extraLabel:'Ek bilgiler ve dosya',conditionLabel:'Ürün durumu',leadLabel:'İstenen teslim süresi',notesLabel:'Teknik şartname / ek açıklama',fileLabel:'Teknik dosya (isteğe bağlı)',chooseFile:'Dosya seç',noFile:'Dosya seçilmedi',fileNotice:'Dosyalar bu önizlemede cihazınızdan yüklenmez. E-posta veya WhatsApp üzerinden kendiniz ekleyin.',searchLabel:'Dünya çapında ara',addLabel:'Ürün ekle',batchTitle:'RFQ listeniz',helpTitle:'Bulamadınız mı? RFQ gönderin.',helpSubtitle:'Ekibimiz stok ve tedarik seçeneklerini inceleyebilir.',waLabel:'WhatsApp',emailLabel:'E-posta RFQ',copyLabel:'RFQ kopyala',helpNotice:'E-posta ve WhatsApp yalnızca taslak açar. Kontrol ederek kendiniz gönderirsiniz. Dosyaları ayrıca ekleyin.',legalNote:'Arama sonuçları kesin stok veya fiyat değildir. Sipariş öncesinde tedarikçi, belge ve ticari uygunluk doğrulanır.',about:'Hakkımızda',privacy:'Gizlilik Politikası',rfqPrivacy:'KVKK / RFQ',items:'ürün',empty:'Tek bir talep oluşturmak için ürünleri buraya ekleyin.',requiredPart:'Parça numarası veya üretici girin.',requiredDest:'Teslimat noktasını girin.',requiredQty:'En az 1 adet geçerli miktar girin.',added:'Ürün RFQ listesine eklendi.',removed:'Ürün kaldırıldı.',searchPreviewTitle:'Bu önizlemede canlı tedarikçi araması bağlı değil.',searchPreviewText:'Burada yalnızca tasarım gösteriliyor. Manuel tedarik araştırması için WhatsApp veya e-posta ile RFQ gönderin.',searchErrorTitle:'Henüz doğrulanmış sonuç yok.',searchErrorText:'Talebi ekibimiz değerlendirebilir. Aşağıdan WhatsApp veya e-posta seçin.',searchSearching:'Dünya çapında kaynaklar kontrol ediliyor…',searchNoResult:'Henüz doğrulanmış kaynak bulunamadı.',searchLeadTitle:'Olası kaynak',searchLeadText:'Doğrulanmamış kaynak adayı; stok ve fiyat teyit edilmelidir.',copied:'RFQ taslağı kopyalandı. Hiçbir şey gönderilmedi.',copyFail:'Otomatik kopyalama yapılamadı. Aşağıdaki taslağı elle seçin.',chooseValid:'Önce bir ürün ekleyin veya parça kodunu ve teslimat yerini doldurun.',fileType:'PDF, Word, Excel, CSV veya TXT dosyası seçin.',fileLarge:'Dosya 10 MB yerel önizleme sınırını aşıyor.',remove:'Kaldır',new:'Yeni / orijinal',unused:'Kullanılmamış stok',any:'Herhangi biri — doğrula',leadPlaceholder:'ör. 4 hafta',notesPlaceholder:'OEM referansı, uyumluluk belgeleri, teslim şekli...'}, 
+ru:{
+back:'← На главную',eyebrow:'МЕЖДУНАРОДНЫЕ ПОСТАВКИ',title:'Найдём нужную деталь по всему миру.',subtitle:'Введите производителя и артикул. Если доступность пока не подтверждена, отправьте запрос нашей команде.',
+searchHeading:'Поиск комплектующих',stepHint:'Начните с основных данных',partLabel:'Артикул / производитель *',qtyLabel:'Количество *',destLabel:'Страна и город доставки *',
+extraLabel:'Дополнительные условия и файл',conditionLabel:'Состояние',leadLabel:'Необходимый срок поставки',notesLabel:'Технические требования',fileLabel:'Спецификация или чертёж (необязательно)',chooseFile:'Выбрать файл',noFile:'Файл не выбран',fileNotice:'В демонстрации файл остаётся на вашем устройстве. Приложите его вручную при отправке email или сообщения.',
+searchLabel:'Найти поставщиков',addLabel:'Добавить позицию',batchTitle:'Ваша заявка RFQ',helpTitle:'Ничего не нашли? Отправьте RFQ.',helpSubtitle:'Наш отдел закупок проверит возможные источники и условия поставки.',
+waLabel:'WhatsApp',emailLabel:'RFQ по email',copyLabel:'Копировать RFQ',helpNotice:'Откроется готовый черновик. Отправка только после вашего подтверждения; файл нужно приложить отдельно.',
+legalNote:'Найденный источник — не подтверждённое наличие или цена. Поставщик, документация и условия сделки проверяются до предложения.',
+about:'О компании',privacy:'Политика конфиденциальности',rfqPrivacy:'KVKK / RFQ',items:'позиций',empty:'Добавьте позицию для оформления общего запроса.',
+requiredPart:'Укажите артикул или производителя.',requiredDest:'Укажите место доставки.',requiredQty:'Укажите целое количество не менее одной штуки.',
+added:'Позиция добавлена в заявку.',removed:'Позиция удалена.',searchPreviewTitle:'Онлайн-поиск поставщиков пока не подключён к предпросмотру.',
+searchPreviewText:'Подсказки по артикулам доступны, но остатки и цены не проверяются. Вы можете отправить RFQ по email или WhatsApp.',
+searchErrorTitle:'Подтверждённых предложений пока нет.',searchErrorText:'Отправьте RFQ на ручную проверку нашим специалистам.',
+searchSearching:'Проверяем возможные источники…',searchNoResult:'Проверенных результатов пока нет.',searchLeadTitle:'Возможный источник',searchLeadText:'Неподтверждённая информация: наличие и цены требуют проверки.',
+copied:'Текст RFQ скопирован. Ничего не отправлено.',copyFail:'Автоматически скопировать не удалось. Выделите текст запроса ниже.',
+chooseValid:'Добавьте позицию или заполните артикул и место доставки.',fileType:'Поддерживаются PDF, Word, Excel, CSV и TXT.',fileLarge:'Размер файла превышает 10 МБ.',
+remove:'Убрать',new:'Новое / оригинал',unused:'Неиспользованный остаток',any:'Любое — уточнить',
+leadPlaceholder:'Например, 4 недели',notesPlaceholder:'OEM, документы, условия доставки...',
+suggestHint:'Подсказки по производителям и артикулам. Не подтверждают наличие и цену.',
+suggestDir:'Каталог производителя · наличие не проверено',
+suggestExact:'Искать по указанному артикулу · наличие не проверено',
+suggestPrefix:'Серия / префикс артикула · требуется уточнение'
+}
 };
 const T=(k)=>W[lang][k]||W.en[k]||k;
-const trans=['back','eyebrow','title','subtitle','searchHeading','stepHint','partLabel','qtyLabel','destLabel','extraLabel','conditionLabel','leadLabel','notesLabel','fileLabel','chooseFile','fileNotice','searchLabel','addLabel','batchTitle','helpTitle','helpSubtitle','waLabel','emailLabel','copyLabel','helpNotice','legalNote','about','privacy','rfqPrivacy'];
-function changeLang(next){lang=next;document.documentElement.lang=next;by('lang').textContent=next.toUpperCase();for(const id of trans){const el=by(id);if(el)el.textContent=T(id)}
+const trans=['suggestHint','back','eyebrow','title','subtitle','searchHeading','stepHint','partLabel','qtyLabel','destLabel','extraLabel','conditionLabel','leadLabel','notesLabel','fileLabel','chooseFile','fileNotice','searchLabel','addLabel','batchTitle','helpTitle','helpSubtitle','waLabel','emailLabel','copyLabel','helpNotice','legalNote','about','privacy','rfqPrivacy'];
+function changeLang(next){lang=['en','tr','ru'].includes(next)?next:'en';document.documentElement.lang=lang;by('lang').value=lang;try{localStorage.setItem('gt_lang',lang)}catch(e){};for(const id of trans){const el=by(id);if(el)el.textContent=T(id)}
  const opts=by('condition').options;['new','unused','any'].forEach((x,i)=>opts[i].textContent=T(x));
  by('leadTime').placeholder=T('leadPlaceholder');by('notes').placeholder=T('notesPlaceholder');
  if(!by('bom').files.length)by('fileName').textContent=T('noFile');renderBatch()}
-by('lang').addEventListener('click',()=>changeLang(lang==='en'?'tr':'en'));
+by('lang').addEventListener('change',()=>changeLang(by('lang').value));
 function flash(s){by('feedback').textContent=s}
+
+/* Manufacturer dictionary + prefix hints. A suggestion is NOT a verified listing. */
+const MANUFACTURERS=[
+ ['Siemens','Automation, drives, PLCs','6ES7,6SL,6FX,3LD'],
+ ['Schneider Electric','Automation and electrical controls','XPSU,LC1D,TAC'],
+ ['ABB','Controls, drives and industrial electrics','DI5,ACS'],
+ ['Phoenix Contact','PLC interfaces, connectors and industrial networks','FL,QUINT'],
+ ['Bosch Rexroth','Hydraulics, motion and drives','R9,RD'],
+ ['Eaton','Switchgear and industrial electrics','DIL,PKZ'],
+ ['SMC','Pneumatics and automation','SY,CQ'],
+ ['Festo','Pneumatics and process automation','VUVG,DSBC'],
+ ['Omron','Automation, sensors and controllers','E2E,CJ,NX'],
+ ['Rockwell Automation','Controllers and industrial automation','1756,1734'],
+ ['Honeywell','Sensors and controls','TAC'],
+ ['Mitsubishi Electric','Drives and factory automation','FR,FX'],
+ ['Grundfos','Pumps and systems','CRN,CR'],
+ ['Wilo','Pump systems','REXA'],
+ ['HERMLE','Machine tools and service parts',''],
+ ['DMG MORI','CNC equipment and spare parts',''],
+ ['Texas Instruments','Semiconductors and electronics','SN74,LM'],
+ ['STMicroelectronics','Microcontrollers and semiconductors','STM32,STP']
+];
+const suggest=by('suggestions'), partInput=by('part');
+let selectedSuggestion=-1, typedSuggestionTimer=0, suggestController=null;
+function collapseSuggestions(){suggest.hidden=true;partInput.setAttribute('aria-expanded','false');selectedSuggestion=-1;}
+function renderSuggestions(rows){
+ suggest.replaceChildren();selectedSuggestion=-1;
+ if(!rows.length){collapseSuggestions();return}
+ rows.slice(0,7).forEach((entry,i)=>{
+ const el=document.createElement('button');el.type='button';el.className='suggestion';el.setAttribute('role','option');el.setAttribute('aria-selected','false');
+ const txt=document.createElement('span');const name=document.createElement('span');name.className='suggestion-main';name.textContent=entry.label;
+ const meta=document.createElement('span');meta.className='suggestion-desc';meta.textContent=entry.type==='exact'?T('suggestExact'):entry.type==='prefix'?T('suggestPrefix'):T('suggestDir');
+ txt.append(name,meta);el.append(txt);
+ // mousedown to select before the input loses focus; never submit or open external URL
+ el.addEventListener('mousedown',e=>e.preventDefault());
+ el.addEventListener('click',()=>{partInput.value=entry.value;collapseSuggestions();partInput.focus()});
+ suggest.append(el)
+ });
+ suggest.hidden=false;partInput.setAttribute('aria-expanded','true');
+}
+function localHints(raw){
+ const q=raw.trim().replace(/\s+/g,' ');if(q.length<2)return [];
+ const low=q.toLowerCase();const norm=q.toUpperCase().replace(/[^A-Z0-9]/g,'');
+ const matched=MANUFACTURERS.map(([name,category,prefixes])=>({name,category,prefixes:prefixes.split(',').filter(Boolean)})).filter(x=>
+ x.name.toLowerCase().includes(low)||low.includes(x.name.toLowerCase())||x.prefixes.some(p=>p.length>=2&&(norm.startsWith(p)||norm.includes(p)))
+ );
+ const out=[{label:q,type:'exact',value:q}];const seen=new Set([q.toLowerCase()]);
+ for(const m of matched.slice(0,5)){
+ const text=m.name.toLowerCase()===low?m.name:(low.includes(m.name.toLowerCase())?q:m.name);
+ if(!seen.has(text.toLowerCase())){out.push({label:m.name,type:'maker',value:text});seen.add(text.toLowerCase())}
+ // Keep the typed part number in the entry, but never generate fake SKU completions
+ const prefix=m.prefixes.find(p=>norm.includes(p));if(prefix && !low.includes(m.name.toLowerCase())){const v=m.name+' '+q;if(!seen.has(v.toLowerCase())){out.push({label:v,type:'prefix',value:v});seen.add(v.toLowerCase())}}
+ }
+ return out.slice(0,7)
+}
+async function refreshHints(q){
+ if(!q||q.trim().length<2){collapseSuggestions();return}
+ const local=localHints(q);renderSuggestions(local);
+ if(isDemo || !navigator.onLine)return;
+ if(suggestController)suggestController.abort();
+ suggestController=new AbortController();
+ try{
+ const res=await fetch('/api/sourcing/suggest?q='+encodeURIComponent(q.trim().slice(0,80))+'&lang='+encodeURIComponent(lang),{signal:suggestController.signal,headers:{'Accept':'application/json'},credentials:'same-origin'});
+ if(!res.ok)return;
+ const obj=await res.json();
+ if(partInput.value.trim()!==q.trim())return;
+ const data=Array.isArray(obj.suggestions)?obj.suggestions:[];
+ const verifiedShape=data.slice(0,7).filter(x=>x&&typeof x.label==='string'&&typeof x.value==='string'&&x.label.length<161&&x.value.length<161)
+  .map(x=>({label:x.label,type:['maker','prefix','exact'].includes(x.type)?x.type:'exact',value:x.value}));
+ if(verifiedShape.length)renderSuggestions(verifiedShape);
+ }catch(e){/* offline: retain safe manufacturer hints */}
+}
+partInput.addEventListener('input',()=>{clearTimeout(typedSuggestionTimer);const q=partInput.value;typedSuggestionTimer=setTimeout(()=>refreshHints(q),180)});
+partInput.addEventListener('focus',()=>{if(partInput.value.trim().length>=2)refreshHints(partInput.value)});
+partInput.addEventListener('keydown',e=>{
+ const buttons=Array.from(suggest.querySelectorAll('button.suggestion'));if(suggest.hidden||!buttons.length)return;
+ if(e.key==='Escape'){collapseSuggestions();return}
+ if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+ e.preventDefault();selectedSuggestion=e.key==='ArrowDown'?(selectedSuggestion+1)%buttons.length:(selectedSuggestion-1+buttons.length)%buttons.length;
+ buttons.forEach((b,i)=>b.setAttribute('aria-selected',String(i===selectedSuggestion)));
+ buttons[selectedSuggestion].scrollIntoView({block:'nearest'});
+ }
+ if(e.key==='Enter'&&selectedSuggestion>=0){e.preventDefault();buttons[selectedSuggestion].click()}
+});
+document.addEventListener('click',e=>{if(!e.target.closest('.part-field'))collapseSuggestions()});
+
 function product(){const part=by('part').value.trim(),dest=by('dest').value.trim(),qty=Number(by('qty').value);
  if(!part){flash(T('requiredPart'));by('part').focus();return null}
  if(!Number.isSafeInteger(qty)||qty<1||qty>999999){flash(T('requiredQty'));by('qty').focus();return null}
@@ -369,7 +492,7 @@ by('wa').addEventListener('click',()=>{
  // Open one externally-owned draft only after the user explicitly clicks WhatsApp.
  window.open(link,'_blank','noopener,noreferrer');
 });
-changeLang('en');
+const saved=(()=>{try{return new URLSearchParams(location.search).get('lang')||localStorage.getItem('gt_lang')}catch(e){return null}})();changeLang(['en','tr','ru'].includes(saved)?saved:'en');
 })();
 </script>
 </body></html>
