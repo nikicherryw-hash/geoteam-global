@@ -1582,6 +1582,60 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
     padding:1px 1px!important;
   }
 }
+</style><style id="gt-v18-20-intelligent-hero">
+/* Editorial two-level headline. Larger benefit, quieter category in one coherent typographic block. */
+.hero .headline.gt-hero-title{
+ width:min(970px,100%)!important;
+ max-width:970px!important;
+ font-size:clamp(28px,3.55vw,44px)!important;
+ line-height:1.15!important;
+ letter-spacing:-.042em!important;
+ font-weight:710!important;
+ margin:2px auto 0!important;
+}
+.hero .headline.gt-hero-title span{display:block!important;white-space:normal!important;text-wrap:balance!important}
+.hero .headline.gt-hero-title span+span{
+ font-size:.80em!important;
+ font-weight:540!important;
+ line-height:1.32!important;
+ letter-spacing:-.027em!important;
+ color:#d5eceb!important;
+ margin-top:2px!important;
+}
+.hero .sub.gt-hero-description{
+ max-width:590px!important;
+ width:100%!important;
+ line-height:1.57!important;
+ margin:1px auto 0!important;
+ color:rgba(226,243,241,.77)!important;
+}
+@media(max-width:580px){
+ .page>main .hero{gap:10px!important;padding-top:7px!important}
+ .hero .headline.gt-hero-title{
+  font-size:clamp(21px,6.1vw,28px)!important;
+  line-height:1.19!important;
+  letter-spacing:-.043em!important;
+  width:100%!important;
+  max-width:355px!important;
+  margin:1px auto 0!important;
+ }
+ .hero .headline.gt-hero-title span+span{
+  font-size:.77em!important;
+  letter-spacing:-.028em!important;
+  margin-top:4px!important;
+ }
+ .hero .sub.gt-hero-description{
+  max-width:330px!important;
+  font-size:clamp(12.4px,3.35vw,13.5px)!important;
+  line-height:1.61!important;
+  margin:1px auto 0!important;
+ }
+}
+@media(max-width:350px){
+ .hero .headline.gt-hero-title{font-size:clamp(20px,6vw,22px)!important;max-width:300px!important}
+ .hero .headline.gt-hero-title span+span{font-size:.74em!important}
+ .hero .sub.gt-hero-description{max-width:290px!important;font-size:12.1px!important}
+}
 </style></head>
 
 <body>
@@ -1644,8 +1698,8 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
           <i aria-hidden="true"></i>
           <span data-gt-en="Electronics" data-gt-tr="Elektronik" data-gt-ru="Электроника">Electronics</span>
         </div>
-        <h1 class="headline gt-hero-title" id="headline" aria-label="Equipment and component supply"><span>Equipment &amp; component supply.</span></h1>
-        <p class="sub gt-hero-description" id="sub">By manufacturer part number and technical specification — from individual items to complex procurement lists.</p>
+        <h1 class="headline gt-hero-title" id="headline" aria-label="Intelligent sourcing for equipment and components"><span>Intelligent sourcing</span><span>for equipment &amp; components.</span></h1>
+        <p class="sub gt-hero-description" id="sub">By manufacturer part number, drawing or technical specification. From a single item to a complete procurement requirement.</p>
 
         <div class="stage" aria-label="Rotating earth">
           <canvas id="globe"></canvas>
@@ -1944,8 +1998,8 @@ const loadTicker = async (lang) => {
         navCases: "Cases",
         navAbout: "About",
         navContact: "Contact",
-        headline: "Equipment & component supply.",
-        sub: "By manufacturer part number and technical specification — from individual items to complex procurement lists.",
+        headline: "Intelligent sourcing|for equipment & components.",
+        sub: "By manufacturer part number, drawing or technical specification. From a single item to a complete procurement requirement.",
         btnRfq: "Start RFQ",
         btnBrowse: "Browse Products",
 
@@ -2109,8 +2163,8 @@ const loadTicker = async (lang) => {
         navCases: "Örnekler",
         navAbout: "Hakkımızda",
         navContact: "İletişim",
-        headline: "Ekipman ve bileşen tedariği.",
-        sub: "Üretici parça numaraları ve teknik şartnamelere göre — tek parçadan kapsamlı satın alma listelerine.",
+        headline: "Akıllı parça eşleştirme|ve ekipman tedariği.",
+        sub: "Üretici parça numarası, teknik çizim veya şartnameyle. Tek parçadan kapsamlı tedarik taleplerine.",
         btnRfq: "RFQ Başlat",
         btnBrowse: "Ürünlere Göz At",
 
@@ -2273,8 +2327,8 @@ const loadTicker = async (lang) => {
       navAbout:"О компании",navSourcing:"Глобальный поиск",navHow:"Как мы работаем",
       navProducts:"Оборудование",navIndustries:"Отрасли",navCapabilities:"Возможности",navQuality:"Документы",
       navCases:"Примеры",navContact:"Контакты",
-      headline:"Поставки оборудования|и комплектующих.",
-      sub:"По заводским артикулам и техническим спецификациям — от отдельных позиций до комплексных закупок.",
+      headline:"Интеллектуальный подбор|оборудования и комплектующих.",
+      sub:"По заводскому артикулу, чертежу или спецификации. От одной позиции до комплексной поставки.",
       btnRfq:"Глобальный поиск",btnBrowse:"Каталог",
       megaKicker:"Оборудование",megaTitle:"Категории",megaNote:"Поиск по направлениям",
       aboutTitle:"О компании",aboutNote:"Международный поиск технических компонентов",
