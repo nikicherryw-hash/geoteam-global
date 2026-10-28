@@ -306,7 +306,7 @@ footer .about{border-color:rgba(149,229,220,.26)!important}
 </section>
 <p class="bottom-note" id="legalNote">Search leads are not confirmed stock or prices. Orders require supplier, documentation and trade-compliance verification.</p>
 </main>
-<footer><span>© 2026 GeoTeam</span><a class="about" href="about.html" id="about">About Us</a><a href="privacy.html" id="privacy">Privacy Policy</a><a href="rfq-privacy.html" id="rfqPrivacy">KVKK / RFQ</a></footer>
+<footer><span>© 2026 GeoTeam</span><a class="about" href="about.html" id="about">About Us</a><a id="whatWeSource" href="en/what-we-source.html">What We Source</a><a href="privacy.html" id="privacy">Privacy Policy</a><a href="rfq-privacy.html" id="rfqPrivacy">KVKK / RFQ</a></footer>
 <script>
 (()=>{'use strict';
 const by=(id)=>document.getElementById(id);
@@ -346,7 +346,7 @@ const trans=['suggestHint','back','eyebrow','title','subtitle','searchHeading','
 function changeLang(next){lang=['en','tr','ru'].includes(next)?next:'en';document.documentElement.lang=lang;by('lang').value=lang;try{localStorage.setItem('gt_lang',lang)}catch(e){};for(const id of trans){const el=by(id);if(el)el.textContent=T(id)}
  const opts=by('condition').options;['new','unused','any'].forEach((x,i)=>opts[i].textContent=T(x));
  by('leadTime').placeholder=T('leadPlaceholder');by('notes').placeholder=T('notesPlaceholder');
- if(!by('bom').files.length)by('fileName').textContent=T('noFile');renderBatch()}
+ if(!by('bom').files.length)by('fileName').textContent=T('noFile');const w=by('whatWeSource');if(w){w.href=lang+'/what-we-source.html';w.textContent=lang==='ru'?'Что поставляем':lang==='tr'?'Tedarik Alanlarımız':'What We Source';}renderBatch()}
 by('lang').addEventListener('change',()=>changeLang(by('lang').value));
 function flash(s){by('feedback').textContent=s}
 
