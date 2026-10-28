@@ -154,9 +154,15 @@ header{background:linear-gradient(to bottom,rgba(4,16,24,.56),rgba(3,27,29,.10))
 .primary:hover{box-shadow:0 0 0 2px rgba(81,221,209,.17),0 0 19px rgba(75,219,206,.22)!important}
 footer{border-top-color:rgba(151,231,222,.155)!important;color:#b3cdd0!important}
 footer a:hover{color:#92e8df!important}
+</style><style id="gt-v18-15-languages">
+.lang-wrap{position:relative;display:inline-flex;align-items:center}
+.lang-choice{appearance:none;max-width:149px;min-width:124px;height:36px;padding:7px 23px 7px 10px;border-radius:999px;border:1px solid rgba(151,231,222,.24);background:rgba(8,44,53,.26);color:#eaf7f7;font:650 11px/1.2 system-ui,sans-serif;cursor:pointer}
+.lang-wrap:after{content:"⌄";position:absolute;right:10px;top:6px;color:#b6d8d6;pointer-events:none}
+.lang-choice option,.lang-choice optgroup{background:#092831;color:#eaf7f7}
+@media(max-width:540px){.lang-choice{min-width:104px;max-width:112px;font-size:10px;padding-left:8px}.lang-wrap:after{right:6px}}
 </style></head>
 <body>
-<header><a class="logo" href="index.html" aria-label="GeoTeam Global homepage"><strong>GeoTeam</strong><small>GLOBAL</small></a><div class="hdr-right"><a id="goBack" class="back" href="index.html">← Back to site</a><button id="lang" class="lang" type="button" aria-label="Change language">EN</button></div></header>
+<header><a class="logo" href="index.html" aria-label="GeoTeam Global homepage"><strong>GeoTeam</strong><small>GLOBAL</small></a><div class="hdr-right"><a id="goBack" class="back" href="index.html">← Back to site</a><label class="lang-wrap" aria-label="Website language"><select id="lang" class="lang-choice" aria-label="Choose language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><optgroup label="More languages — planned"><option disabled>DE · Deutsch</option><option disabled>FR · Français</option><option disabled>ES · Español</option><option disabled>IT · Italiano</option><option disabled>PT · Português</option><option disabled>AR · العربية</option><option disabled>ZH · 中文</option></optgroup></select></label></div></header>
 <div id="english">
 <main>
 <section class="hero">
@@ -205,8 +211,54 @@ footer a:hover{color:#92e8df!important}
 <div class="cta"><div><h2>Parça numaranız, çiziminiz veya BOM listeniz var mı?</h2><p>Neye ihtiyacınız olduğunu ve teslimat noktasını bildirin. Tek kalemle başlayın veya birden fazla ürünü bir talepte birleştirin.</p></div><a class="primary" href="sourcing.html">Küresel Tedarike Başlayın <span aria-hidden="true">↗</span></a></div>
 </main>
 </div>
+
+<div id="russian" hidden>
+<main>
+<section class="hero">
+ <div>
+  <div class="eyebrow">О GEOTEAM GLOBAL</div>
+  <h1>Когда нужную деталь сложно найти.</h1>
+  <p class="lead">GeoTeam Global занимается международным поиском промышленных, авиационных и электронных комплектующих. Мы работаем с точными заводскими артикулами, чертежами и спецификациями — от одной запасной части до многопозиционной закупки.</p>
+  <a class="primary" href="sourcing.html?lang=ru">Перейти к поиску <span aria-hidden="true">↗</span></a>
+ </div>
+ <aside class="note"><div class="big">Один запрос.</div><h2>Поиск, проверка, условия поставки.</h2><p>Для начала достаточно артикула и количества. Затем мы уточняем исполнение, техническую документацию, доступность, стоимость и условия доставки. Предварительно найденный источник не означает подтверждённый складской остаток.</p></aside>
+</section>
+<section class="section company-identity"><div class="eyebrow">Кто мы</div><h2>Международные закупки технической номенклатуры.</h2>
+ <p>GeoTeam Global — торговое наименование компании <strong>GEOTEAM İNŞAAT EMLAK TİCARET LİMİTED ŞİRKETİ</strong>, зарегистрированной в Фетхие, Турция. Мы работаем с корпоративными закупщиками, которым необходимо найти конкретные комплектующие и разобраться в доступных каналах поставки.</p>
+ <p>Наша задача — не просто назвать возможного поставщика, а помочь разобраться в соответствии продукции техническому запросу, наличии необходимых документов и коммерческих условиях. Где информация требует подтверждения, мы прямо об этом сообщаем.</p>
+ <p class="company-mail"><a href="mailto:rfq@geoteam-global.com">rfq@geoteam-global.com</a></p>
+</section>
+<section class="section"><div class="eyebrow">Как устроена работа</div><h2>От артикула к конкретному предложению.</h2>
+<div class="grid">
+ <article class="step"><div class="num">01 / ЗАПРОС</div><h3>Уточняем номенклатуру</h3><p>Артикул, производитель, количество, состояние и место доставки. При необходимости — чертёж, шильдик или спецификация.</p></article>
+ <article class="step"><div class="num">02 / ПОИСК</div><h3>Изучаем источники</h3><p>Рассматриваем производителей, дистрибьюторов и специализированные каналы международных поставок.</p></article>
+ <article class="step"><div class="num">03 / ПРОВЕРКА</div><h3>Проверяем детали</h3><p>Исполнение, документы, происхождение, наличие, сроки и применимые торговые ограничения.</p></article>
+ <article class="step"><div class="num">04 / ПРЕДЛОЖЕНИЕ</div><h3>Согласовываем закупку</h3><p>Готовим условия предложения и рассматриваем доставку и необходимые сопровождающие документы.</p></article>
+</div></section>
+<section class="section"><div class="eyebrow">Направления</div><h2>Оборудование и комплектующие для сложных задач.</h2>
+<div class="cols">
+ <div class="feature"><h3>Промышленная автоматизация</h3><p>PLC, панели HMI, приводы, насосы, датчики, электротехника, гидравлика, пневматика и промышленные запчасти.</p></div>
+ <div class="feature"><h3>Авиационные компоненты</h3><p>Комплектующие и оборудование для обслуживания авиационной техники. Документация и прослеживаемость обсуждаются по конкретной заявке.</p></div>
+ <div class="feature"><h3>Микроэлектроника и станки</h3><p>Микросхемы, электронные модули, разъёмы, компоненты ЧПУ и специализированное оборудование.</p></div>
+</div></section>
+<div class="cta"><div><h2>Есть артикул или спецификация?</h2><p>Начните с одного наименования или добавьте несколько позиций в общую заявку RFQ.</p></div><a class="primary" href="sourcing.html?lang=ru">Начать поиск <span aria-hidden="true">↗</span></a></div>
+</main>
+</div>
 <footer><span>© 2026 GeoTeam</span><a class="active" href="about.html" id="footAbout">About Us</a><a href="privacy.html" id="footPrivacy">Privacy Policy</a><a href="rfq-privacy.html">KVKK / RFQ</a></footer>
 <script>
-document.getElementById('lang').addEventListener('click',()=>{let tr=document.documentElement.lang!=='tr';document.documentElement.lang=tr?'tr':'en';document.getElementById('english').hidden=tr;document.getElementById('turkish').hidden=!tr;document.getElementById('lang').textContent=tr?'TR':'EN';document.getElementById('goBack').textContent=tr?'← Siteye dön':'← Back to site';document.getElementById('footAbout').textContent=tr?'Hakkımızda':'About Us';document.getElementById('footPrivacy').textContent=tr?'Gizlilik Politikası':'Privacy Policy';});
+function chooseLanguage(code){
+ const l=['en','tr','ru'].includes(code)?code:'en';document.documentElement.lang=l;
+ ['english','turkish','russian'].forEach((id,i)=>{document.getElementById(id).hidden=['en','tr','ru'][i]!==l});
+ document.getElementById('lang').value=l;
+ document.getElementById('goBack').textContent=l==='ru'?'← На главную':l==='tr'?'← Siteye dön':'← Back to site';
+ document.getElementById('goBack').href='index.html?lang='+l;
+ document.getElementById('footAbout').textContent=l==='ru'?'О компании':l==='tr'?'Hakkımızda':'About Us';
+ document.getElementById('footPrivacy').textContent=l==='ru'?'Конфиденциальность':l==='tr'?'Gizlilik Politikası':'Privacy Policy';
+ document.querySelectorAll('#english a[href="sourcing.html"],#turkish a[href="sourcing.html"]').forEach(x=>x.href='sourcing.html?lang='+l);
+ try{localStorage.setItem('gt_lang',l)}catch(e){}
+}
+document.getElementById('lang').addEventListener('change',e=>chooseLanguage(e.target.value));
+let selected='en';try{selected=new URLSearchParams(location.search).get('lang')||localStorage.getItem('gt_lang')||'en'}catch(e){}
+chooseLanguage(selected);
 </script>
 </body></html>
