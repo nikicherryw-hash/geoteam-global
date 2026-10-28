@@ -2260,6 +2260,8 @@ const loadTicker = async (lang) => {
       document.documentElement.lang=currentLang;
       const choice=document.getElementById("gtLanguageSelect");
       if(choice)choice.value=currentLang;
+      const sourceLink=document.getElementById("gtWhatWeSource");
+      if(sourceLink){sourceLink.href=currentLang+"/what-we-source.html";sourceLink.textContent=currentLang==="ru"?"Что поставляем":currentLang==="tr"?"Tedarik Alanlarımız":"What We Source";}
       const footerAbout=document.querySelector(".gt-footer-about");
       if(footerAbout)footerAbout.textContent=currentLang==="ru"?"О компании ↗":currentLang==="tr"?"Hakkımızda ↗":"About Us ↗";
       const footerPrivacy=document.querySelector(".gt-footer-singleline a[href='privacy.html']");
@@ -2633,7 +2635,7 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   </script>
 
   <!-- RFQ details and copy-draft form live exclusively on sourcing.html. -->
-<footer class="gt-legal-footer gt-footer-singleline" aria-label="Footer"><span>© 2026 GeoTeam</span><a class="gt-footer-about" href="about.html">About Us <span aria-hidden="true">↗</span></a><a href="privacy.html">Privacy Policy</a><a href="rfq-privacy.html">KVKK / RFQ</a></footer><script id="gt-clock-independent">
+<footer class="gt-legal-footer gt-footer-singleline" aria-label="Footer"><span>© 2026 GeoTeam</span><a class="gt-footer-about" href="about.html">About Us <span aria-hidden="true">↗</span></a><a id="gtWhatWeSource" href="en/what-we-source.html">What We Source</a><a href="privacy.html">Privacy Policy</a><a href="rfq-privacy.html">KVKK / RFQ</a></footer><script id="gt-clock-independent">
 (function(){
  function tick(){
    var el=document.getElementById('timeIstanbul');
