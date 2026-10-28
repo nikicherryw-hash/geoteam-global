@@ -2278,51 +2278,62 @@ a:focus-visible,button:focus-visible,select:focus-visible{
 .gt-about-story .gt-process-closing{color:#ebfffa!important;font-size:13.3px!important;line-height:1.65!important;font-weight:610!important;border-left:2px solid #91f2e1;padding:12px 13px!important;background:linear-gradient(90deg,rgba(47,150,147,.12),transparent 90%);margin:22px 0 0!important}
 @media(max-width:860px){.gt-about-home.gt-about-story{grid-template-columns:1fr!important;gap:28px!important}.gt-about-story .gt-about-process{padding-top:23px!important}}
 @media(max-width:580px){.gt-about-story .gt-process-intro{font-size:13.4px!important}.gt-about-story .gt-step{padding:15px 0!important}.gt-about-story .gt-step p{font-size:12.85px!important;line-height:1.65!important}.gt-about-story .gt-process-closing{font-size:12.9px!important}}
-</style><style id="gt-v18-36-inner-glow-reading">
-/* Sourcing is a soft light source, never an outlined chip or bordered button. */
+</style><style id="gt-v18-37-text-light">
+/* Plain text-link CTA, consistent with v18.26: the letters glow, not a pill. */
 .gt-single-action #gtMainRfq.gt-primary-cta{
-  position:relative!important;isolation:isolate!important;overflow:hidden!important;
-  border:0!important;border-radius:13px!important;
-  background:rgba(16,91,99,.19)!important;
-  color:#effffc!important;
-  padding:11px 22px!important;min-height:48px!important;
-  box-shadow:inset 0 0 23px rgba(54,216,196,.11)!important;
+  position:relative!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  overflow:visible!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#ecfffc!important;
+  min-height:44px!important;
+  padding:10px 12px!important;
   text-decoration:none!important;
-  text-shadow:0 0 12px rgba(145,255,238,.17)!important;
+  text-shadow:0 0 10px rgba(128,252,229,.32),0 0 22px rgba(71,228,210,.13)!important;
+  animation:gt37-letters-glow 5.6s ease-in-out infinite!important;
 }
-.gt-single-action #gtMainRfq.gt-primary-cta::before{
-  content:"";position:absolute;z-index:-1;
-  inset:0!important;pointer-events:none;
-  border:0!important;border-radius:inherit!important;box-shadow:none!important;
-  background:radial-gradient(ellipse 84% 125% at 50% 52%,rgba(88,241,218,.31),rgba(42,192,178,.13) 52%,transparent 92%);
-  filter:blur(10px);
-  opacity:.36;
-  animation:gt36-inner-light 6s ease-in-out infinite;
+.gt-single-action #gtMainRfq.gt-primary-cta::before,
+.gt-single-action #gtMainRfq.gt-primary-cta::after{
+  content:none!important;
+  display:none!important;
+  border:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  animation:none!important;
 }
-.gt-single-action #gtMainRfq.gt-primary-cta:hover,
+.gt-single-action #gtMainRfq.gt-primary-cta span{
+  color:#91f8e7!important;
+  text-shadow:0 0 10px rgba(131,251,227,.29)!important;
+}
+.gt-single-action #gtMainRfq.gt-primary-cta:hover{
+  border:0!important;border-radius:0!important;background:transparent!important;
+  box-shadow:none!important;text-decoration:none!important;
+  text-shadow:0 0 16px rgba(148,255,232,.62),0 0 31px rgba(81,235,212,.32)!important;
+}
 .gt-single-action #gtMainRfq.gt-primary-cta:focus-visible{
-  background:rgba(18,104,110,.28)!important;border:0!important;
-  box-shadow:inset 0 0 30px rgba(72,234,212,.21)!important;
-  color:#fff!important;text-decoration:none!important;transform:none!important;
+  border:0!important;background:transparent!important;box-shadow:none!important;
+  outline:2px solid rgba(137,243,231,.66)!important;outline-offset:4px!important;
 }
-.gt-single-action #gtMainRfq.gt-primary-cta:hover::before,
-.gt-single-action #gtMainRfq.gt-primary-cta:focus-visible::before{opacity:.78}
-@keyframes gt36-inner-light{
-  0%,100%{opacity:.26}
-  50%{opacity:.63}
+@keyframes gt37-letters-glow{
+  0%,100%{text-shadow:0 0 8px rgba(131,253,229,.24),0 0 19px rgba(68,223,210,.11)}
+  50%{text-shadow:0 0 13px rgba(149,255,235,.52),0 0 28px rgba(74,232,213,.25)}
 }
-/* Scroll-guided reading illumination: a soft wash behind actual text, not a border. */
+/* Reading illumination, slightly brighter than v18.36. Starts at Capabilities. */
 .gt-about-story .gt-read-unit{
   position:relative!important;isolation:isolate!important;
-  transition:color .6s ease,text-shadow .6s ease!important;
+  transition:color .58s ease,text-shadow .58s ease!important;
 }
 .gt-about-story .gt-read-unit::before{
   content:"";position:absolute;z-index:-1;pointer-events:none;
-  inset:-5px -10px;border-radius:10px;
-  background:radial-gradient(ellipse 85% 140% at 26% 50%,rgba(76,218,200,.13),rgba(68,197,182,.055) 59%,transparent 95%);
-  box-shadow:inset 0 0 17px rgba(70,202,190,.04);
+  inset:-6px -10px;border-radius:11px;
+  background:radial-gradient(ellipse 86% 150% at 29% 50%,rgba(90,240,213,.21),rgba(67,215,192,.09) 62%,transparent 97%);
+  box-shadow:inset 0 0 21px rgba(94,231,210,.07);
   opacity:0;
-  transition:opacity .68s ease!important;
+  transition:opacity .62s ease!important;
 }
 .gt-about-story .gt-read-unit.gt-read-active::before{opacity:1}
 .gt-about-story .gt-about-copy p.gt-read-active,
@@ -2330,25 +2341,64 @@ a:focus-visible,button:focus-visible,select:focus-visible{
 .gt-about-story .gt-about-copy h3.gt-read-active,
 .gt-about-story .gt-about-process p.gt-read-active,
 .gt-about-story .gt-about-process .gt-step.gt-read-active p{
-  color:#f3fffb!important;
-  text-shadow:0 0 15px rgba(143,254,230,.22)!important;
+  color:#f6fffc!important;
+  text-shadow:0 0 17px rgba(152,255,234,.31)!important;
 }
-.gt-about-story .gt-about-process .gt-step.gt-read-active strong{
-  color:#c1fff0!important;
-  text-shadow:0 0 13px rgba(138,247,226,.25)!important;
+.gt-about-story .gt-about-process .gt-step.gt-read-active strong,
+.gt-about-story .gt-about-copy h3.gt-read-active{
+  color:#cefff1!important;
+  text-shadow:0 0 17px rgba(150,254,233,.32)!important;
 }
-.gt-about-story .gt-about-copy h3.gt-read-active{color:#c5fff0!important}
+/* Expertise section: overlay stays behind the content, preserving the original card. */
+.gt-expertise .gt-expertise-top.gt-read-unit,
+.gt-expertise .gt-expertise-item.gt-read-unit{position:relative!important;isolation:isolate!important}
+.gt-expertise .gt-expertise-top.gt-read-unit::after,
+.gt-expertise .gt-expertise-item.gt-read-unit::after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  border:0;border-radius:inherit;
+  background:radial-gradient(ellipse 95% 110% at 34% 50%,rgba(96,235,207,.22),rgba(48,184,168,.10) 57%,transparent 90%);
+  opacity:0;
+  transition:opacity .62s ease!important;
+}
+.gt-expertise .gt-expertise-top.gt-read-unit::after{inset:-9px -12px;border-radius:12px}
+.gt-expertise .gt-expertise-item.gt-read-active::after,
+.gt-expertise .gt-expertise-top.gt-read-active::after{opacity:.85}
+.gt-expertise .gt-expertise-item h3,
+.gt-expertise .gt-expertise-item p,
+.gt-expertise .gt-expertise-top h2{
+  transition:color .58s ease,text-shadow .58s ease!important;
+}
+.gt-expertise .gt-expertise-item.gt-read-active h3,
+.gt-expertise .gt-expertise-top.gt-read-active h2{
+  color:#fafffd!important;
+  text-shadow:0 0 15px rgba(147,255,232,.31)!important;
+}
+.gt-expertise .gt-expertise-item.gt-read-active p{
+  color:#edfff9!important;
+  text-shadow:0 0 13px rgba(150,249,229,.27)!important;
+}
 @media(hover:hover) and (pointer:fine){
   .gt-about-story .gt-read-unit:hover::before{opacity:.75}
-  .gt-about-story .gt-read-unit:hover{text-shadow:0 0 15px rgba(143,254,230,.16)!important}
+  .gt-expertise .gt-expertise-item.gt-read-unit:hover::after{opacity:.7}
 }
 @media(max-width:580px){
-  .gt-single-action #gtMainRfq.gt-primary-cta{min-height:46px!important;padding:10px 20px!important}
-  .gt-about-story .gt-read-unit::before{inset:-4px -7px}
+  .gt-about-story .gt-read-unit::before{inset:-5px -7px}
+  .gt-expertise .gt-expertise-top.gt-read-unit::after{inset:-6px -8px}
+  .gt-single-action #gtMainRfq.gt-primary-cta{
+    padding:10px 13px!important;
+    min-height:44px!important;
+    background:transparent!important;
+  }
 }
 @media(prefers-reduced-motion:reduce){
-  .gt-single-action #gtMainRfq.gt-primary-cta::before{animation:none!important;opacity:.52!important}
-  .gt-about-story .gt-read-unit,.gt-about-story .gt-read-unit::before{transition:none!important}
+  .gt-single-action #gtMainRfq.gt-primary-cta{animation:none!important;
+    text-shadow:0 0 12px rgba(149,255,235,.4),0 0 23px rgba(74,232,213,.18)!important}
+  .gt-about-story .gt-read-unit,
+  .gt-about-story .gt-read-unit::before,
+  .gt-expertise .gt-read-unit::after,
+  .gt-expertise .gt-expertise-item h3,
+  .gt-expertise .gt-expertise-item p,
+  .gt-expertise .gt-expertise-top h2{transition:none!important}
 }
 </style>
 </head>
@@ -3772,56 +3822,80 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   </script>
 
   <!-- RFQ details and copy-draft form live exclusively on sourcing.html. -->
-<footer class="gt-legal-footer gt-footer-singleline" aria-label="Footer"><span>© 2026 GeoTeam</span><a class="gt-footer-about" href="about.html">About Us <span aria-hidden="true">↗</span></a><a id="gtWhatWeSource" href="en/what-we-source.html">What We Source</a><a href="privacy.html">Privacy Policy</a><a href="rfq-privacy.html">KVKK / RFQ</a></footer><script id="gt-v18-36-reading-focus">
-/* Highlights the section nearest the reading line as visitors scroll. */
+<footer class="gt-legal-footer gt-footer-singleline" aria-label="Footer"><span>© 2026 GeoTeam</span><a class="gt-footer-about" href="about.html">About Us <span aria-hidden="true">↗</span></a><a id="gtWhatWeSource" href="en/what-we-source.html">What We Source</a><a href="privacy.html">Privacy Policy</a><a href="rfq-privacy.html">KVKK / RFQ</a></footer><script id="gt-v18-37-reading-focus">
+/* Reading-line focus across Capabilities, About and workflow; no overlays or tracking. */
 (function(){
   "use strict";
+  const expertise=document.querySelector(".gt-expertise");
   const about=document.querySelector(".gt-about-story");
-  if(!about || !window.requestAnimationFrame) return;
-  const groups=[
-    Array.from(about.querySelectorAll(".gt-about-copy > p, .gt-about-copy > h3")),
-    Array.from(about.querySelectorAll(".gt-about-process > .gt-process-intro, .gt-about-process > .gt-step, .gt-about-process > .gt-process-closing"))
-  ];
-  const all=groups.flat();
-  if(!all.length) return;
-  all.forEach(el=>el.classList.add("gt-read-unit"));
-  let previous=[null,null],queued=false;
-  function update(){
-    queued=false;
-    const viewHeight=window.innerHeight || document.documentElement.clientHeight;
-    const boundary=about.getBoundingClientRect();
-    if(boundary.bottom<=0 || boundary.top>=viewHeight){
-      for(let i=0;i<previous.length;i++){
-        if(previous[i]) previous[i].classList.remove("gt-read-active");
-        previous[i]=null;
-      }
-      return;
-    }
-    const targetY=Math.min(viewHeight-72,Math.max(90,viewHeight*.47));
-    groups.forEach((units,i)=>{
-      let choice=null,score=Infinity;
-      for(const el of units){
-        const rect=el.getBoundingClientRect();
-        if(rect.bottom<=0 || rect.top>=viewHeight) continue;
-        const distance=rect.top<=targetY && rect.bottom>=targetY
-          ? 0 : Math.min(Math.abs(rect.top-targetY),Math.abs(rect.bottom-targetY));
-        if(distance<score){score=distance;choice=el;}
-      }
-      if(choice===previous[i])return;
-      if(previous[i])previous[i].classList.remove("gt-read-active");
-      previous[i]=choice;
-      if(choice)choice.classList.add("gt-read-active");
+  if(!window.requestAnimationFrame || (!expertise && !about)) return;
+  const groups=[];
+  if(expertise)groups.push({
+    root:expertise,
+    rows:Array.from(expertise.querySelectorAll(".gt-expertise-top, .gt-expertise-item")),
+    pairedDesktop:true
+  });
+  if(about){
+    groups.push({
+      root:about,
+      rows:Array.from(about.querySelectorAll(".gt-about-copy > p, .gt-about-copy > h3")),
+      pairedDesktop:false
+    });
+    groups.push({
+      root:about,
+      rows:Array.from(about.querySelectorAll(".gt-about-process > .gt-process-intro, .gt-about-process > .gt-step, .gt-about-process > .gt-process-closing")),
+      pairedDesktop:false
     });
   }
-  function schedule(){
-    if(queued)return;
-    queued=true;
-    requestAnimationFrame(update);
+  groups.forEach(group=>{
+    group.active=new Set();
+    group.rows.forEach(el=>el.classList.add("gt-read-unit"));
+  });
+  let pending=false;
+  function update(){
+    pending=false;
+    const viewH=window.innerHeight||document.documentElement.clientHeight;
+    const focusY=Math.min(viewH-68,Math.max(90,viewH*.46));
+    for(const group of groups){
+      const boundary=group.root.getBoundingClientRect();
+      let selections=[];
+      if(boundary.bottom>0 && boundary.top<viewH){
+        let nearest=null,best=Infinity;
+        for(const el of group.rows){
+          const r=el.getBoundingClientRect();
+          if(r.bottom<=0 || r.top>=viewH)continue;
+          const distance=(r.top<=focusY&&r.bottom>=focusY)?0:
+            Math.min(Math.abs(r.top-focusY),Math.abs(r.bottom-focusY));
+          if(distance<best){best=distance;nearest=el;}
+        }
+        if(nearest){
+          selections=[nearest];
+          /* On desktop both service cards in the same row illuminate together. */
+          if(group.pairedDesktop && window.innerWidth>750 && nearest.classList.contains("gt-expertise-item")){
+            const first=nearest.getBoundingClientRect();
+            selections=group.rows.filter(el=>{
+              if(!el.classList.contains("gt-expertise-item"))return false;
+              const r=el.getBoundingClientRect();
+              return Math.abs(r.top-first.top)<15 && r.bottom>0 && r.top<viewH;
+            });
+          }
+        }
+      }
+      const chosen=new Set(selections);
+      for(const prev of group.active)if(!chosen.has(prev))prev.classList.remove("gt-read-active");
+      for(const el of chosen)if(!group.active.has(el))el.classList.add("gt-read-active");
+      group.active=chosen;
+    }
   }
-  window.addEventListener("scroll",schedule,{passive:true});
-  window.addEventListener("resize",schedule,{passive:true});
-  document.addEventListener("gt-language-changed",schedule);
-  schedule();
+  function queue(){
+    if(pending)return;
+    pending=true;
+    window.requestAnimationFrame(update);
+  }
+  window.addEventListener("scroll",queue,{passive:true});
+  window.addEventListener("resize",queue,{passive:true});
+  document.addEventListener("gt-language-changed",queue);
+  queue();
 })();
 </script>
 </body>
