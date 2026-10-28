@@ -2278,7 +2278,62 @@ a:focus-visible,button:focus-visible,select:focus-visible{
 .gt-about-story .gt-process-closing{color:#ebfffa!important;font-size:13.3px!important;line-height:1.65!important;font-weight:610!important;border-left:2px solid #91f2e1;padding:12px 13px!important;background:linear-gradient(90deg,rgba(47,150,147,.12),transparent 90%);margin:22px 0 0!important}
 @media(max-width:860px){.gt-about-home.gt-about-story{grid-template-columns:1fr!important;gap:28px!important}.gt-about-story .gt-about-process{padding-top:23px!important}}
 @media(max-width:580px){.gt-about-story .gt-process-intro{font-size:13.4px!important}.gt-about-story .gt-step{padding:15px 0!important}.gt-about-story .gt-step p{font-size:12.85px!important;line-height:1.65!important}.gt-about-story .gt-process-closing{font-size:12.9px!important}}
-</style></head>
+</style><style id="gt-v18-35-search-and-reading-glow">
+/* CTA: visibly clickable and softly breathing, not a flashing banner. */
+.gt-single-action #gtMainRfq.gt-primary-cta{
+ position:relative!important;isolation:isolate!important;
+ min-height:48px!important;padding:11px 24px!important;
+ border:1px solid rgba(139,244,231,.57)!important;
+ border-radius:999px!important;
+ background:linear-gradient(135deg,rgba(18,107,114,.60),rgba(7,65,77,.74))!important;
+ color:#f5fffd!important;
+ box-shadow:inset 0 1px rgba(234,255,251,.13),0 5px 22px rgba(0,16,28,.19),0 0 18px rgba(72,224,207,.12)!important;
+ text-decoration:none!important;
+ -webkit-tap-highlight-color:rgba(93,230,217,.18);
+}
+.gt-single-action #gtMainRfq.gt-primary-cta::before{
+ content:"";position:absolute;inset:-4px;pointer-events:none;border-radius:inherit;
+ border:1px solid rgba(145,248,233,.23);
+ box-shadow:0 0 14px rgba(80,238,218,.20);
+ opacity:.4;animation:gt-search-cta-glow 5.5s ease-in-out infinite;
+}
+@keyframes gt-search-cta-glow{0%,100%{opacity:.22}50%{opacity:.87}}
+.gt-single-action #gtMainRfq.gt-primary-cta:hover,
+.gt-single-action #gtMainRfq.gt-primary-cta:focus-visible{
+ background:linear-gradient(135deg,rgba(20,120,125,.86),rgba(9,74,86,.95))!important;
+ border-color:rgba(192,255,244,.9)!important;
+ box-shadow:0 0 0 2px rgba(100,237,224,.12),0 0 25px rgba(79,227,208,.27)!important;
+ text-decoration:none!important;
+}
+.gt-clean-nav #navSourcing{
+ color:#b9fff0!important;
+ background:rgba(58,172,159,.09)!important;
+ border-radius:8px!important;
+ box-shadow:inset 0 0 0 1px rgba(147,242,224,.16)!important;
+ text-shadow:0 0 14px rgba(122,240,220,.16)!important;
+}
+/* Reader guidance: only the current paragraph gains a faint illumination. */
+.gt-about-story .gt-about-copy p,.gt-about-story .gt-about-copy h3{
+ transition:color .58s ease,text-shadow .58s ease!important;
+}
+.gt-about-story .gt-about-copy p.gt-read-active{
+ color:#f1fffa!important;
+ text-shadow:0 0 17px rgba(112,245,221,.20)!important;
+}
+.gt-about-story .gt-about-copy h3.gt-read-active{
+ color:#d4fff3!important;
+ text-shadow:0 0 14px rgba(123,248,228,.20)!important;
+}
+@media(prefers-reduced-motion:reduce){
+ .gt-single-action #gtMainRfq.gt-primary-cta::before{animation:none!important;opacity:.44!important}
+ .gt-about-story .gt-about-copy p,.gt-about-story .gt-about-copy h3{transition:none!important}
+}
+@media(max-width:580px){
+ .gt-single-action #gtMainRfq.gt-primary-cta{min-height:46px!important;padding:11px 23px!important}
+ .gt-clean-nav #navSourcing{background:transparent!important}
+}
+</style>
+</head>
 
 <body>
   <div class="bg-overlay"></div>
@@ -2373,11 +2428,10 @@ a:focus-visible,button:focus-visible,select:focus-visible{
   <div class="gt-about-copy">
     <span class="gt-about-eyebrow" id="gtAboutEyebrow" data-gt-en="ABOUT US" data-gt-tr="HAKKIMIZDA" data-gt-ru="О НАС">ABOUT US</span>
     <h2 id="gtAboutHeading" data-gt-en="International sourcing. Global opportunities." data-gt-tr="Uluslararası tedarik. Küresel fırsatlar." data-gt-ru="Международное снабжение. Глобальные возможности.">International sourcing. Global opportunities.</h2>
-    <p id="gtAboutSummary" data-gt-en="GeoTeam Global is an international company specializing in the supply of industrial equipment, components and spare parts since 2022." data-gt-tr="GeoTeam Global, 2022 yılından bu yana endüstriyel ekipman, bileşen ve yedek parça tedarikinde uzmanlaşmış uluslararası bir şirkettir." data-gt-ru="GeoTeam Global — международная компания, специализирующаяся на поставках промышленного оборудования, комплектующих и запасных частей с 2022 года.">GeoTeam Global is an international company specializing in the supply of industrial equipment, components and spare parts since 2022.</p>
-    <p class="gt-about-geo" data-gt-en="Our business connects European and Asian sourcing markets. Through professional relationships in Türkiye and Malaysia, we work with suppliers and manufacturers across Europe, Asia, North America, Australia and other regions worldwide." data-gt-tr="Faaliyetlerimiz Avrupa ve Asya tedarik pazarlarını birbirine bağlar. Türkiye ve Malezya'daki profesyonel ilişkilerimiz sayesinde Avrupa, Asya, Kuzey Amerika, Avustralya ve dünyanın diğer bölgelerindeki üreticiler ve tedarikçilerle çalışıyoruz." data-gt-ru="Наша деятельность объединяет европейское и азиатское направления международной торговли. Опираясь на профессиональные связи в Турции и Малайзии, мы взаимодействуем с поставщиками и производителями Европы, Азии, Северной Америки, Австралии и других регионов мира.">Our business connects European and Asian sourcing markets. Through professional relationships in Türkiye and Malaysia, we work with suppliers and manufacturers across Europe, Asia, North America, Australia and other regions worldwide.</p>
-    <h3 class="gt-about-subhead" data-gt-en="Global network. Professional relationships." data-gt-tr="Küresel ağ. Profesyonel bağlantılar." data-gt-ru="Глобальная сеть. Профессиональные связи.">Global network. Professional relationships.</h3>
-    <p data-gt-en="Our work is based on an international network of professional relationships with equipment manufacturers, authorized distributors, specialist trading companies, independent suppliers and major stock distribution centers." data-gt-tr="Çalışmalarımızın temelinde ekipman üreticileri, yetkili distribütörler, uzman ticaret şirketleri, bağımsız tedarikçiler ve büyük stok dağıtım merkezleriyle kurduğumuz uluslararası profesyonel bağlantılar yer alır." data-gt-ru="В основе нашей работы — международная сеть профессиональных контактов с производителями оборудования, официальными дистрибьюторами, специализированными торговыми компаниями, независимыми поставщиками и крупнейшими центрами складской дистрибуции.">Our work is based on an international network of professional relationships with equipment manufacturers, authorized distributors, specialist trading companies, independent suppliers and major stock distribution centers.</p>
-    <p data-gt-en="We combine direct business relationships, specialist industry resources and modern digital technologies to extend sourcing far beyond standard catalogs and publicly accessible marketplaces." data-gt-tr="Doğrudan iş bağlantılarını, sektörel bilgi kaynaklarını ve modern dijital teknolojileri bir araya getirerek tedarik aramalarını standart katalogların ve herkese açık ticaret platformlarının ötesine taşıyoruz." data-gt-ru="Мы объединяем прямые деловые связи, отраслевые информационные ресурсы и современные цифровые технологии, расширяя возможности поиска далеко за пределы стандартных каталогов и общедоступных торговых площадок.">We combine direct business relationships, specialist industry resources and modern digital technologies to extend sourcing far beyond standard catalogs and publicly accessible marketplaces.</p>
+    <p id="gtAboutSummary" data-gt-en="GeoTeam Global is an international company supplying industrial equipment, components and spare parts to businesses across markets since 2021." data-gt-tr="GeoTeam Global, 2021 yılından bu yana farklı ülkelerdeki işletmelere endüstriyel ekipman, bileşen ve yedek parça tedarik eden uluslararası bir şirkettir." data-gt-ru="GeoTeam Global — международная компания, которая с 2021 года поставляет промышленное оборудование, комплектующие и запасные части предприятиям в разных странах.">GeoTeam Global is an international company supplying industrial equipment, components and spare parts to businesses across markets since 2021.</p>
+    <p class="gt-about-geo" data-gt-en="Our presence in Türkiye and Malaysia connects European and Asian sourcing markets. We work directly with manufacturers, distributors and specialist suppliers across Europe, Asia, North America and Australia, selecting sources and supply routes for each customer's requirements." data-gt-tr="Türkiye ve Malezya'daki varlığımız, Avrupa ve Asya tedarik pazarlarını birbirine bağlamamızı sağlıyor. Avrupa, Asya, Kuzey Amerika ve Avustralya'daki üreticiler, distribütörler ve uzman tedarikçilerle doğrudan çalışıyor, her müşterinin ihtiyacına uygun tedarik kaynaklarını ve güzergâhlarını belirliyoruz." data-gt-ru="Присутствие в Турции и Малайзии позволяет нам объединять европейские и азиатские рынки снабжения. Мы напрямую работаем с производителями, дистрибьюторами и профильными поставщиками Европы, Азии, Северной Америки и Австралии, подбирая источники и маршруты поставки под конкретную задачу.">Our presence in Türkiye and Malaysia connects European and Asian sourcing markets. We work directly with manufacturers, distributors and specialist suppliers across Europe, Asia, North America and Australia, selecting sources and supply routes for each customer's requirements.</p>
+    h<p data-gt-en="Our work is built on an international network of professional relationships and direct agreements with manufacturers, authorized distributors and specialist trading companies. This network is complemented by relationships with industry suppliers and major stock distributors." data-gt-tr="Çalışmalarımızın temelinde üreticiler, yetkili distribütörler ve uzman ticaret şirketleriyle kurduğumuz uluslararası profesyonel bağlantılar ve doğrudan anlaşmalar yer alır. Bu ağı sektörel tedarikçiler ve büyük stok distribütörleriyle iş birlikleri tamamlar." data-gt-ru="В основе нашей работы — международная сеть профессиональных контактов и прямых договорных отношений с производителями, официальными дистрибьюторами и специализированными торговыми компаниями. Её дополняют связи с отраслевыми поставщиками и крупными складскими дистрибьюторами.">Our work is built on an international network of professional relationships and direct agreements with manufacturers, authorized distributors and specialist trading companies. This network is complemented by relationships with industry suppliers and major stock distributors.</p> 
+ <p data-gt-en="We combine direct market communication, specialist industry resources and digital search tools. This gives us access to sourcing channels beyond ordinary catalogs and publicly available marketplaces across global markets." data-gt-tr="Doğrudan pazar iletişimini, sektörel bilgi kaynaklarını ve dijital arama araçlarını bir araya getiriyoruz. Böylece dünyanın farklı pazarlarında standart katalogların ve herkese açık ticaret platformlarının ötesindeki tedarik kanallarını değerlendirebiliyoruz." data-gt-ru="Мы объединяем прямое взаимодействие с участниками рынка, специализированные отраслевые ресурсы и цифровые инструменты поиска. Благодаря этому поиск выходит за рамки общедоступных каталогов и охватывает профессиональные каналы поставок по всему миру.">We combine direct market communication, specialist industry resources and digital search tools. This gives us access to sourcing channels beyond ordinary catalogs and publicly available marketplaces across global markets.</p>
     <h3 class="gt-about-subhead" data-gt-en="A unified international sourcing platform" data-gt-tr="Tek bir uluslararası tedarik platformu" data-gt-ru="Единая платформа международного снабжения">A unified international sourcing platform</h3>
     <p data-gt-en="GeoTeam Global's digital platform brings sourcing channels, professional expertise and procurement coordination tools together in one place." data-gt-tr="GeoTeam Global'ın dijital platformu farklı tedarik kanallarını, profesyonel uzmanlığı ve satın alma koordinasyon araçlarını tek yerde buluşturur." data-gt-ru="Собственная цифровая платформа GeoTeam Global объединяет различные каналы поиска, профессиональную экспертизу и инструменты организации закупок.">GeoTeam Global's digital platform brings sourcing channels, professional expertise and procurement coordination tools together in one place.</p>
     <p data-gt-en="From standard industrial components to hard-to-find spare parts, legacy equipment and custom manufacturing to technical drawings, we evaluate each request against the customer's requirements and the capabilities of global markets." data-gt-tr="Standart endüstriyel bileşenlerden zor bulunan yedek parçalara, eski nesil ekipmanlara ve teknik çizimlere göre özel imalata kadar her talebi müşterinin gereksinimlerini ve küresel pazarın olanaklarını dikkate alarak değerlendiriyoruz." data-gt-ru="От стандартных промышленных компонентов до редких запасных частей, оборудования предыдущих поколений и изделий по технической документации — мы рассматриваем каждый запрос с учётом требований заказчика и возможностей международного рынка.">From standard industrial components to hard-to-find spare parts, legacy equipment and custom manufacturing to technical drawings, we evaluate each request against the customer's requirements and the capabilities of global markets.</p>
@@ -2387,9 +2441,9 @@ a:focus-visible,button:focus-visible,select:focus-visible{
     <div class="gt-about-process-head" id="gtProcessHeading" data-gt-en="HOW WE WORK" data-gt-tr="NASIL ÇALIŞIYORUZ" data-gt-ru="КАК МЫ РАБОТАЕМ">HOW WE WORK</div>
     <p class="gt-process-intro" data-gt-en="From one request to coordinated delivery. The GeoTeam Global platform is designed to simplify international procurement by bringing every stage of the request into a single digital workspace." data-gt-tr="Tek talepten koordineli teslimata. GeoTeam Global platformu, talebin tüm aşamalarını tek bir dijital çalışma alanında birleştirerek uluslararası satın almayı kolaylaştırmak üzere tasarlanmıştır." data-gt-ru="От одного запроса до организации поставки. Платформа GeoTeam Global создана для того, чтобы упростить международные закупки и объединить все этапы работы с заявкой в одном цифровом пространстве.">From one request to coordinated delivery. The GeoTeam Global platform is designed to simplify international procurement by bringing every stage of the request into a single digital workspace.</p>
     <div class="gt-step"><span>01</span><div><strong data-gt-en="Submit your request" data-gt-tr="Talebinizi gönderin" data-gt-ru="Отправьте запрос">Submit your request</strong><p data-gt-en="Enter a part number or equipment name, or upload a specification, technical document or drawing. Add the required quantity and delivery location. Available information is enough to start; missing details can be clarified as needed." data-gt-tr="Parça numarasını veya ekipman adını girin ya da teknik şartname, belge veya çizim yükleyin. Miktarı ve teslimat konumunu ekleyin. Mevcut bilgilerle arama başlatılabilir; eksik ayrıntılar gerektiğinde netleştirilir." data-gt-ru="Укажите артикул, наименование оборудования или загрузите спецификацию, техническую документацию либо чертёж. Добавьте необходимое количество и место доставки. Для начала поиска достаточно имеющейся информации. При необходимости система поможет уточнить технические характеристики.">Enter a part number or equipment name, or upload a specification, technical document or drawing. Add the required quantity and delivery location. Available information is enough to start; missing details can be clarified as needed.</p></div></div>
-    <div class="gt-step"><span>02</span><div><strong data-gt-en="Receive supplier offers" data-gt-tr="Tedarikçi tekliflerini alın" data-gt-ru="Получите предложения поставщиков">Receive supplier offers</strong><p data-gt-en="The platform searches available and connected catalogs, reference sources and partner channels, comparing manufacturer, distributor and specialist offers. Where data is available, it can generate a preliminary price, availability and lead-time estimate. For unavailable items, specialist sourcing or manufacturing to drawings, the request moves to an RFQ process with relevant suppliers." data-gt-tr="Platform mevcut ve bağlı kataloglarda, bilgi kaynaklarında ve iş ortağı kanallarında arama yaparak üretici, distribütör ve uzman tedarikçi tekliflerini karşılaştırır. Verilerin bulunduğu durumlarda ön fiyat, bulunabilirlik ve teslim süresi tahmini oluşturulabilir. Bulunamayan ürünler, özel aramalar ve çizime göre üretim için uygun tedarikçilere RFQ (teklif talebi) yönlendirilir." data-gt-ru="Платформа анализирует доступные и подключённые источники, обращается к каталогам и информационным системам, сопоставляет предложения производителей, дистрибьюторов и специализированных поставщиков. При наличии данных формируется предварительное ценовое предложение с указанием стоимости, доступности и возможных сроков поставки. Если позиция отсутствует в открытом предложении, требует индивидуального поиска или изготовления по чертежам, запрос переходит в процедуру RFQ с профильными поставщиками.">The platform searches available and connected catalogs, reference sources and partner channels, comparing manufacturer, distributor and specialist offers. Where data is available, it can generate a preliminary price, availability and lead-time estimate. For unavailable items, specialist sourcing or manufacturing to drawings, the request moves to an RFQ process with relevant suppliers.</p></div></div>
-    <div class="gt-step"><span>03</span><div><strong data-gt-en="Understand the full purchase cost" data-gt-tr="Toplam satın alma maliyetini görün" data-gt-ru="Оцените полную стоимость закупки">Understand the full purchase cost</strong><p data-gt-en="Offers are assessed against the product's location and your delivery address. Where reliable data is available, the indicative calculation may include the item price, domestic and international transport, customs clearance and related costs. Any items requiring confirmation are agreed individually." data-gt-tr="Teklifler ürünün bulunduğu yer ve teslimat adresiniz dikkate alınarak değerlendirilir. Güvenilir veriler mevcutsa tahmini hesap; ürün bedeli, yurt içi ve uluslararası taşıma, gümrük işlemleri ve ilgili giderleri içerebilir. Doğrulanması gereken koşullar ayrıca netleştirilir." data-gt-ru="Предложение рассматривается с учётом места нахождения товара и конечного адреса доставки. При наличии достоверных данных предварительный расчёт может включать стоимость оборудования, внутреннюю и международную логистику, таможенное оформление и другие сопутствующие расходы. Вы видите ориентировочную стоимость получения товара в вашей локации, а условия, требующие подтверждения, согласуются отдельно.">Offers are assessed against the product's location and your delivery address. Where reliable data is available, the indicative calculation may include the item price, domestic and international transport, customs clearance and related costs. Any items requiring confirmation are agreed individually.</p></div></div>
-    <div class="gt-step"><span>04</span><div><strong data-gt-en="Track your request in one place" data-gt-tr="Talebinizi tek ekrandan takip edin" data-gt-ru="Контролируйте заявку в одном окне">Track your request in one place</strong><p data-gt-en="The customer workspace is intended to show each stage: sourcing, supplier replies, technical clarifications, agreed terms and delivery coordination. Questions, answers, documents and status changes remain together in the request history. Standard items with sufficient data can receive a faster preliminary result; complex requests are handled through RFQ and specialist review." data-gt-tr="Müşteri paneli; arama, tedarikçi yanıtları, teknik açıklamalar, koşulların mutabakatı ve teslimat koordinasyonu aşamalarını tek yerden göstermeyi amaçlar. Sorular, yanıtlar, belgeler ve durum değişiklikleri talep geçmişinde bir arada tutulur. Yeterli veriye sahip standart ürünler için daha hızlı ön sonuç alınabilir; karmaşık talepler RFQ ve uzman incelemesine yönlendirilir." data-gt-ru="Личный кабинет предназначен для отображения этапов обработки запроса: поиск источников, поступление предложений, уточнение характеристик, согласование условий и организация поставки. Вопросы, ответы, документы и изменения статуса объединяются в истории заявки. По стандартной номенклатуре с доступными данными предварительный результат может формироваться быстрее; сложные и нестандартные запросы проходят обработку через RFQ и специалистов.">The customer workspace is intended to show each stage: sourcing, supplier replies, technical clarifications, agreed terms and delivery coordination. Questions, answers, documents and status changes remain together in the request history. Standard items with sufficient data can receive a faster preliminary result; complex requests are handled through RFQ and specialist review.</p></div></div>
+    <div class="gt-step"><span>02</span><div>s<p data-gt-en="The platform searches connected catalogs, reference databases and partner channels in real time, comparing offers from manufacturers, distributors and specialist suppliers. You receive an indicative quotation showing item price, availability and estimated lead time. Hard-to-find items and parts requiring manufacturing to drawings are forwarded to suitable suppliers through an RFQ." data-gt-tr="Platform, bağlı kataloglarda, bilgi veri tabanlarında ve iş ortağı kanallarında gerçek zamanlı arama yaparak üretici, distribütör ve uzman tedarikçi tekliflerini karşılaştırır. Ürün fiyatını, bulunabilirliği ve tahmini teslim süresini gösteren bir ön teklif alırsınız. Nadir bulunan ürünler ve çizime göre üretilmesi gereken parçalar RFQ üzerinden ilgili tedarikçilere yönlendirilir." data-gt-ru="Платформа в режиме онлайн сопоставляет предложения производителей, дистрибьюторов и специализированных поставщиков через подключённые каталоги, базы и партнёрские каналы. Вы получаете предварительное предложение с ценой товара, доступностью и ориентировочным сроком поставки. Если позиция требует индивидуального поиска или изготовления по чертежу, запрос направляется профильным поставщикам в формате RFQ.">The platform searches connected catalogs, reference databases and partner channels in real time, comparing offers from manufacturers, distributors and specialist suppliers. You receive an indicative quotation showing item price, availability and estimated lead time. Hard-to-find items and parts requiring manufacturing to drawings are forwarded to suitable suppliers through an RFQ.</p></div></div>
+    <div class="gt-step"><span>03</span><div>s<p data-gt-en="The indicative calculation includes the equipment price, domestic and international transport, customs clearance and related costs. You see an estimated delivered cost for your location, reflecting the route and delivery terms. Details requiring confirmation are agreed before the order is placed." data-gt-tr="Ön hesaplama; ekipman bedelini, yurt içi ve uluslararası taşımayı, gümrük işlemlerini ve ilgili giderleri kapsar. Güzergâh ve teslimat koşulları dikkate alınarak bulunduğunuz konuma kadar tahmini teslim maliyetini görürsünüz. Teyit edilmesi gereken ayrıntılar siparişten önce netleştirilir." data-gt-ru="Предварительный расчёт включает стоимость оборудования, внутреннюю и международную логистику, таможенное оформление и сопутствующие расходы. Вы видите ориентировочную стоимость поставки до вашей локации с учётом маршрута и условий доставки. Параметры, требующие дополнительного подтверждения, согласовываются до оформления заказа.">The indicative calculation includes the equipment price, domestic and international transport, customs clearance and related costs. You see an estimated delivered cost for your location, reflecting the route and delivery terms. Details requiring confirmation are agreed before the order is placed.</p></div></div>
+    <div class="gt-step"><span>04</span><div>s<p data-gt-en="In your account, you can follow each stage of your request: sourcing, supplier offers, specification checks, term approvals and delivery coordination. Questions, answers, documents and status changes are kept together in the request history. Routine items are processed faster, while complex requests and manufacturing to drawings are handled by specialists through RFQ." data-gt-tr="Hesabınızda talebinizin her aşamasını görürsünüz: kaynak arama, tedarikçi teklifleri, teknik özelliklerin doğrulanması, koşulların onaylanması ve teslimat koordinasyonu. Sorular, yanıtlar, belgeler ve durum değişiklikleri talep geçmişinde bir arada tutulur. Standart ürünler daha hızlı işlenirken karmaşık talepler ve çizime göre imalat RFQ üzerinden uzmanlar tarafından değerlendirilir." data-gt-ru="В личном кабинете вы видите весь процесс обработки заявки: поиск источников, предложения поставщиков, уточнение характеристик, согласование условий и организацию доставки. Вопросы, ответы, документы и изменения статуса сохраняются в единой истории. Стандартные позиции обрабатываются быстрее, а сложные запросы и изготовление по чертежам сопровождаются специалистами через RFQ.">In your account, you can follow each stage of your request: sourcing, supplier offers, specification checks, term approvals and delivery coordination. Questions, answers, documents and status changes are kept together in the request history. Routine items are processed faster, while complex requests and manufacturing to drawings are handled by specialists through RFQ.</p></div></div>
     <p class="gt-process-closing" data-gt-en="You decide what to source and where it needs to go. GeoTeam Global brings sourcing, offer comparison and delivery coordination into one process." data-gt-tr="Neye ihtiyaç duyduğunuzu ve nereye teslim edilmesini istediğinizi siz belirlersiniz. GeoTeam Global aramayı, teklif karşılaştırmasını ve teslimat koordinasyonunu tek süreçte birleştirir." data-gt-ru="Вы определяете, что необходимо приобрести и куда доставить. GeoTeam Global объединяет поиск, сравнение предложений и организацию поставки в едином процессе.">You decide what to source and where it needs to go. GeoTeam Global brings sourcing, offer comparison and delivery coordination into one process.</p>
   </div>
 </section>
@@ -2978,7 +3032,7 @@ const loadTicker = async (lang) => {
 
     // Russian is an active, reviewed language; other languages remain planned.
     dict.ru={...dict.en,
-      navAbout:"О компании",navSourcing:"Глобальный поиск",navHow:"Как мы работаем",
+      navAbout:"О нас",navSourcing:"Глобальный поиск",navHow:"Как мы работаем",
       navProducts:"Оборудование",navIndustries:"Отрасли",navCapabilities:"Возможности",navQuality:"Документы",
       navCases:"Примеры",navContact:"Контакты",
       headline:"Интеллектуальный подбор|оборудования и компонентов.",
@@ -2986,7 +3040,7 @@ const loadTicker = async (lang) => {
       heroDetail:"Поиск по артикулам и спецификациям. Анализ источников, сравнение предложений и сопровождение закупки.",
       btnRfq:"Глобальный поиск",btnBrowse:"Каталог",
       megaKicker:"Оборудование",megaTitle:"Категории",megaNote:"Поиск по направлениям",
-      aboutTitle:"О компании",aboutNote:"Международный поиск технических компонентов",
+      aboutTitle:"О нас",aboutNote:"Международный поиск технических компонентов",
       brandsTitle:"Производители",productsTitle:"Категории оборудования",
       contactTitle:"Связаться с нами",formHint:"Укажите артикул, количество и место доставки.",
       phMsg:"Артикул, количество, место доставки, документы"
@@ -3263,7 +3317,7 @@ const loadTicker = async (lang) => {
       const sourceLink=document.getElementById("gtWhatWeSource");
       if(sourceLink){sourceLink.href=currentLang+"/what-we-source.html";sourceLink.textContent=currentLang==="ru"?"Что поставляем":currentLang==="tr"?"Tedarik Alanlarımız":"What We Source";}
       const footerAbout=document.querySelector(".gt-footer-about");
-      if(footerAbout)footerAbout.textContent=currentLang==="ru"?"О компании ↗":currentLang==="tr"?"Hakkımızda ↗":"About Us ↗";
+      if(footerAbout)footerAbout.textContent=currentLang==="ru"?"О нас ↗":currentLang==="tr"?"Hakkımızda ↗":"About Us ↗";
       const footerPrivacy=document.querySelector(".gt-footer-singleline a[href='privacy.html']");
       if(footerPrivacy)footerPrivacy.textContent=currentLang==="ru"?"Конфиденциальность":currentLang==="tr"?"Gizlilik Politikası":"Privacy Policy";
       document.querySelectorAll("a[href^='sourcing.html'],a[href^='about.html']").forEach(a=>{
@@ -3699,5 +3753,43 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   </script>
 
   <!-- RFQ details and copy-draft form live exclusively on sourcing.html. -->
-<footer class="gt-legal-footer gt-footer-singleline" aria-label="Footer"><span>© 2026 GeoTeam</span><a class="gt-footer-about" href="about.html">About Us <span aria-hidden="true">↗</span></a><a id="gtWhatWeSource" href="en/what-we-source.html">What We Source</a><a href="privacy.html">Privacy Policy</a><a href="rfq-privacy.html">KVKK / RFQ</a></footer></body>
+<footer class="gt-legal-footer gt-footer-singleline" aria-label="Footer"><span>© 2026 GeoTeam</span><a class="gt-footer-about" href="about.html">About Us <span aria-hidden="true">↗</span></a><a id="gtWhatWeSource" href="en/what-we-source.html">What We Source</a><a href="privacy.html">Privacy Policy</a><a href="rfq-privacy.html">KVKK / RFQ</a></footer><script id="gt-v18-35-reading-focus">
+/* Scroll-guided editorial emphasis. Independent of WebGL and external scripts. */
+(function(){
+  "use strict";
+  const area=document.querySelector(".gt-about-story .gt-about-copy");
+  if(!area || !window.requestAnimationFrame) return;
+  const units=Array.from(area.querySelectorAll("p,h3"));
+  if(!units.length) return;
+  let active=null,queued=false;
+  function update(){
+    queued=false;
+    const viewH=window.innerHeight||document.documentElement.clientHeight;
+    const box=area.getBoundingClientRect();
+    if(box.bottom<0||box.top>viewH){
+      if(active){active.classList.remove("gt-read-active");active=null;}
+      return;
+    }
+    const focusY=viewH*.44;
+    let nearest=null,score=Infinity;
+    for(const el of units){
+      const r=el.getBoundingClientRect();
+      if(r.bottom<0||r.top>viewH) continue;
+      const dist=r.top<=focusY&&r.bottom>=focusY?0:Math.min(Math.abs(r.top-focusY),Math.abs(r.bottom-focusY));
+      if(dist<score){score=dist;nearest=el;}
+    }
+    if(nearest!==active){
+      if(active)active.classList.remove("gt-read-active");
+      active=nearest;
+      if(active)active.classList.add("gt-read-active");
+    }
+  }
+  function queue(){if(!queued){queued=true;window.requestAnimationFrame(update);}}
+  window.addEventListener("scroll",queue,{passive:true});
+  window.addEventListener("resize",queue,{passive:true});
+  document.addEventListener("gt-language-changed",queue);
+  queue();
+})();
+</script>
+</body>
 </html>
