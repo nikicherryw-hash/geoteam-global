@@ -8,8 +8,8 @@
   <meta name="apple-mobile-web-app-title" content="GeoTeam Global" />
   <meta property="og:site_name" content="GeoTeam Global" />
 
-  <title>GeoTeam Global</title>
-  <meta name="description" content="GeoTeam Global — global sourcing and reliable delivery for aviation, industrial automation, microelectronics, and specialized materials." />
+  <title>Aviation, Industrial & Electronic Components | GeoTeam Global</title>
+  <meta name="description" content="International B2B supply of aviation components, industrial equipment and electronics. Hard-to-find parts and manufacturing to drawings through partner facilities." />
   <meta name="theme-color" content="#031b1d" />
   <style>
     :root{
@@ -1337,6 +1337,24 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
 .gt-lang-select option,.gt-lang-select optgroup{background:#0a2933;color:#e5f7f4}
 #langToggle[hidden]{display:none!important}
 @media(max-width:580px){.gt-lang-select{min-width:102px;max-width:108px;font-size:10px;padding:7px 17px 7px 8px}.gt-lang-wrap:after{right:7px}}
+</style><style id="gt-v18-16-capabilities">
+/* Three short specialties, not a second homepage of cards. */
+.gt-sectors{display:flex;align-items:center;justify-content:center;gap:clamp(8px,1.7vw,18px);flex-wrap:wrap;max-width:920px;margin:2px auto 0;color:#b5dddd;font:650 clamp(10.5px,1.1vw,12px)/1.5 var(--font);letter-spacing:.013em;text-align:center}
+.gt-sectors span{white-space:nowrap}
+.gt-sectors i{width:3px;height:3px;flex:0 0 3px;border-radius:50%;background:#65b5b5;opacity:.7}
+.gt-expertise{width:min(var(--gt-content),100%);margin:5px auto 8px;padding:23px 1px 8px;border-top:1px solid rgba(159,227,224,.16);color:#eaf7f7}
+.gt-expertise-top{display:flex;align-items:end;justify-content:space-between;margin:0 0 13px}
+.gt-expertise-eyebrow{font:700 10px/1.4 var(--font);letter-spacing:.14em;color:#95ddd7}
+.gt-expertise h2{margin:8px 0 0;color:#f0fafa;font:670 clamp(19px,2.35vw,27px)/1.15 var(--font);letter-spacing:-.025em}
+.gt-expertise-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.gt-expertise-item{min-width:0;padding:12px clamp(13px,2.2vw,26px) 9px 0}
+.gt-expertise-item+.gt-expertise-item{border-left:1px solid rgba(151,231,222,.13);padding-left:clamp(14px,2.2vw,26px)}
+.gt-expertise-index{display:block;font:690 11px/1.4 var(--font);color:#87d4ce;margin-bottom:7px}
+.gt-expertise-item h3{font:660 clamp(12px,1.15vw,14px)/1.35 var(--font);margin:0 0 7px;color:#e8f6f5;letter-spacing:-.008em}
+.gt-expertise-item p{font:420 12px/1.65 var(--font);color:#b2cbcc;margin:0}
+.gt-about-home{margin-top:13px!important}
+@media(max-width:750px){.gt-expertise{padding:20px 0 8px}.gt-expertise-grid{grid-template-columns:1fr}.gt-expertise-item{padding:13px 0!important}.gt-expertise-item+.gt-expertise-item{border-left:0;border-top:1px solid rgba(151,231,222,.11)}.gt-expertise-item p{max-width:65ch}}
+@media(max-width:580px){.gt-sectors{gap:5px 9px;font-size:10px!important;max-width:365px}.gt-sectors i{width:2px;height:2px;flex-basis:2px}.gt-expertise{padding:17px 0 8px}.gt-expertise h2{font-size:21px}.gt-expertise-item h3{font-size:13px}.gt-expertise-item p{font-size:11.7px;line-height:1.62}.gt-about-home{margin-top:9px!important}}
 </style></head>
 
 <body>
@@ -1392,10 +1410,17 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
     <!-- Focused three-page GeoTeam website: no legacy product mega menu. -->
 <main>
       <section class="hero">
-        <h1 class="headline" id="headline">Supplying Industrial Equipment &amp; Components</h1>
-        <p class="sub" id="sub">
-          Global sourcing, RFQs, and reliable delivery for aviation, industrial automation, microelectronics, and specialized materials.
-        </p>
+        <h1 class="headline" id="headline">Aviation, Industry & Electronics. Sourced Worldwide.</h1>
+        <p class="sub" id="sub">Equipment, OEM parts and technical materials — from standard supply to discontinued components. We also manufacture precision parts and mechanical assemblies to drawings through our production partners.</p>
+        <div class="gt-sectors" aria-label="Main sourcing sectors">
+          <span data-gt-en="Aviation & MRO" data-gt-tr="Havacılık & MRO" data-gt-ru="Авиация и MRO">Aviation &amp; MRO</span>
+          <i aria-hidden="true"></i>
+          <span data-gt-en="Industrial Equipment" data-gt-tr="Endüstriyel Ekipman" data-gt-ru="Промышленность">Industrial Equipment</span>
+          <i aria-hidden="true"></i>
+          <span data-gt-en="Electronics" data-gt-tr="Elektronik" data-gt-ru="Электроника">Electronics</span>
+          <i aria-hidden="true"></i>
+          <span data-gt-en="Technical Materials" data-gt-tr="Teknik Malzemeler" data-gt-ru="Технические материалы">Technical Materials</span>
+        </div>
 
         <div class="stage" aria-label="Rotating earth">
           <canvas id="globe"></canvas>
@@ -1405,11 +1430,37 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
         <div class="actions gt-single-action"><a class="btn gt-primary-cta" id="gtMainRfq" href="sourcing.html" data-en="Global Sourcing" data-tr="Küresel Tedarik" aria-label="Global Sourcing — search and request industrial and aviation components worldwide">Global Sourcing <span aria-hidden="true">↗</span></a></div>
       </section>
 
+
+      <section class="gt-expertise" id="capabilities" aria-labelledby="gtExpertiseHead">
+        <div class="gt-expertise-top">
+          <div>
+            <span class="gt-expertise-eyebrow" data-gt-en="OUR ADDED CAPABILITIES" data-gt-tr="EK UZMANLIKLARIMIZ" data-gt-ru="ДОПОЛНИТЕЛЬНЫЕ ВОЗМОЖНОСТИ">OUR ADDED CAPABILITIES</span>
+            <h2 id="gtExpertiseHead" data-gt-en="Beyond the standard catalogue." data-gt-tr="Standart kataloğun ötesinde." data-gt-ru="Больше, чем поставка по каталогу.">Beyond the standard catalogue.</h2>
+          </div>
+        </div>
+        <div class="gt-expertise-grid">
+<article class="gt-expertise-item" aria-label="Hard-to-Find &amp; Discontinued">
+ <span class="gt-expertise-index">01</span>
+ <h3 data-gt-en="Hard-to-Find &amp; Discontinued" data-gt-tr="Bulunması Zor ve Üretimden Kalkmış" data-gt-ru="Редкая и снятая с производства номенклатура">Hard-to-Find &amp; Discontinued</h3>
+ <p data-gt-en="We source rare parts, legacy equipment and components no longer available through standard distribution." data-gt-tr="Standart dağıtım kanallarında bulunmayan nadir parçalar, eski sistem ekipmanları ve üretimi sona ermiş bileşenleri tedarik ediyoruz." data-gt-ru="Находим редкие комплектующие, оборудование прежних поколений и позиции, недоступные через обычные каналы продаж.">We source rare parts, legacy equipment and components no longer available through standard distribution.</p>
+ </article>
+<article class="gt-expertise-item" aria-label="Specialist Supply Channels">
+ <span class="gt-expertise-index">02</span>
+ <h3 data-gt-en="Specialist Supply Channels" data-gt-tr="Uzman Tedarik Kanalları" data-gt-ru="Специализированные каналы поставки">Specialist Supply Channels</h3>
+ <p data-gt-en="Our supplier network helps us handle standard orders as well as complex, multi-market procurement requests." data-gt-tr="Tedarikçi ağımızla standart siparişlerin yanı sıra farklı pazarlarda araştırma gerektiren karmaşık talepleri yönetiyoruz." data-gt-ru="Работаем как с обычными заказами, так и со сложными заявками, требующими поиска на разных рынках.">Our supplier network helps us handle standard orders as well as complex, multi-market procurement requests.</p>
+ </article>
+<article class="gt-expertise-item" aria-label="Manufacturing to Drawings">
+ <span class="gt-expertise-index">03</span>
+ <h3 data-gt-en="Manufacturing to Drawings" data-gt-tr="Teknik Çizime Göre İmalat" data-gt-ru="Изготовление по чертежам">Manufacturing to Drawings</h3>
+ <p data-gt-en="Through our production partners, we manufacture precision parts, mechanical assemblies and custom components to drawings, samples and material specifications." data-gt-tr="Üretim ortaklarımızla teknik çizim, numune ve malzeme şartnamelerine göre hassas parçalar, mekanik gruplar ve özel bileşenler imal ediyoruz." data-gt-ru="Через производственных партнёров изготавливаем прецизионные детали, механические узлы и нестандартные компоненты по чертежам, образцам и требованиям к материалам.">Through our production partners, we manufacture precision parts, mechanical assemblies and custom components to drawings, samples and material specifications.</p>
+ </article>
+        </div>
+      </section>
       <section class="gt-about-home" id="how-it-works" aria-labelledby="gtAboutHeading">
         <div class="gt-about-copy">
           <span class="gt-about-eyebrow" id="gtAboutEyebrow" data-gt-en="ABOUT GEOTEAM GLOBAL" data-gt-tr="GEOTEAM GLOBAL HAKKINDA" data-gt-ru="О КОМПАНИИ GEOTEAM GLOBAL">ABOUT GEOTEAM GLOBAL</span>
-          <h2 id="gtAboutHeading" data-gt-en="Global reach. Clear procurement." data-gt-tr="Küresel erişim. Net tedarik." data-gt-ru="Сложные закупки. Понятный процесс.">Global reach. Clear procurement.</h2>
-          <p id="gtAboutSummary" data-gt-en="We connect precise technical requirements with sourcing opportunities across international markets. From a single replacement part to a multi-item batch, we help you identify options, review supplier evidence and organize the next procurement step." data-gt-tr="Kesin teknik ihtiyaçları uluslararası pazarlardaki tedarik olanaklarıyla buluşturuyoruz. Tek bir yedek parçadan çok kalemli taleplere kadar kaynakları araştırıyor, tedarikçi belgelerini inceliyor ve satın alma sürecini planlıyoruz." data-gt-ru="Мы помогаем компаниям находить промышленные, авиационные и электронные комплектующие на международных рынках. От одного артикула до многопозиционной заявки: изучаем технические требования, возможные источники поставки и условия закупки.">We connect precise technical requirements with sourcing opportunities across international markets. From a single replacement part to a multi-item batch, we help you identify options, review supplier evidence and organize the next procurement step.</p>
+          <h2 id="gtAboutHeading" data-gt-en="From a part number to a workable supply." data-gt-tr="Parça kodundan uygulanabilir tedariğe." data-gt-ru="От артикула до реальной поставки.">From a part number to a workable supply.</h2>
+          <p id="gtAboutSummary" data-gt-en="GeoTeam Global supports international B2B procurement across aviation, industrial equipment, electronics and specialist materials. We clarify technical requirements, research supply options and coordinate documentation and commercial terms — for one component or a complete BOM." data-gt-tr="GeoTeam Global; havacılık, endüstriyel ekipman, elektronik ve özel malzemelerde uluslararası kurumsal tedariği destekler. Tek parçadan kapsamlı BOM listesine kadar teknik gereklilikleri netleştirir, kaynakları inceler ve belge ile ticari koşulları koordine eder." data-gt-ru="GeoTeam Global работает с международными B2B-закупками в авиации, промышленности, электронике и технических материалах. Уточняем требования, подбираем источники и согласовываем документацию и коммерческие условия — от одной детали до полной спецификации.">GeoTeam Global supports international B2B procurement across aviation, industrial equipment, electronics and specialist materials. We clarify technical requirements, research supply options and coordinate documentation and commercial terms — for one component or a complete BOM.</p>
           <a class="gt-about-read" id="gtAboutRead" href="about.html" data-gt-en="Meet GeoTeam" data-gt-tr="GeoTeam'i tanıyın" data-gt-ru="Подробнее о компании">Meet GeoTeam <span aria-hidden="true">↗</span></a>
           <div class="gt-about-location" id="gtAboutLocation" data-gt-en="Based in Türkiye · International B2B sourcing" data-gt-tr="Türkiye merkezli · Uluslararası B2B tedarik" data-gt-ru="Турция · Международные B2B-поставки">Based in Türkiye · International B2B sourcing</div>
         </div>
@@ -1668,8 +1719,8 @@ const loadTicker = async (lang) => {
         navCases: "Cases",
         navAbout: "About",
         navContact: "Contact",
-        headline: "Supplying Industrial Equipment & Components",
-        sub: "Global sourcing, RFQs, and reliable delivery for aviation, industrial automation, microelectronics, and specialized materials.",
+        headline: "Aviation, Industry & Electronics. Sourced Worldwide.",
+        sub: "Equipment, OEM parts and technical materials — from standard supply to discontinued components. We also manufacture precision parts and mechanical assemblies to drawings through our production partners.",
         btnRfq: "Start RFQ",
         btnBrowse: "Browse Products",
 
@@ -1833,8 +1884,8 @@ const loadTicker = async (lang) => {
         navCases: "Örnekler",
         navAbout: "Hakkımızda",
         navContact: "İletişim",
-        headline: "Endüstriyel Ekipman ve Bileşen Tedariki",
-        sub: "Havacılık, endüstriyel otomasyon, mikroelektronik ve özel malzemeler için küresel tedarik, RFQ yönetimi ve güvenilir teslimat.",
+        headline: "Havacılık, Sanayi ve Elektronik. Küresel Tedarik.",
+        sub: "Ekipman, OEM parçalar ve teknik malzemeler — standart tedariğin yanı sıra üretimden kalkmış bileşenler. Üretim ortaklarımızla teknik çizimlere göre hassas parçalar ve mekanik gruplar da imal ediyoruz.",
         btnRfq: "RFQ Başlat",
         btnBrowse: "Ürünlere Göz At",
 
@@ -1997,8 +2048,8 @@ const loadTicker = async (lang) => {
       navAbout:"О компании",navSourcing:"Глобальный поиск",navHow:"Как мы работаем",
       navProducts:"Оборудование",navIndustries:"Отрасли",navCapabilities:"Возможности",navQuality:"Документы",
       navCases:"Примеры",navContact:"Контакты",
-      headline:"Промышленные и авиационные комплектующие. Международные поставки.",
-      sub:"Ищете оборудование, запасную часть или электронный компонент? Отправьте заводской артикул или спецификацию — мы рассмотрим возможности международной закупки.",
+      headline:"Авиация, промышленность и электроника. Международные поставки.",
+      sub:"Оборудование, заводские комплектующие и технические материалы — от серийных позиций до снятых с производства. Изготавливаем прецизионные детали и механические узлы по чертежам через производственных партнёров.",
       btnRfq:"Глобальный поиск",btnBrowse:"Каталог",
       megaKicker:"Оборудование",megaTitle:"Категории",megaNote:"Поиск по направлениям",
       aboutTitle:"О компании",aboutNote:"Международный поиск технических компонентов",
@@ -2074,7 +2125,7 @@ const loadTicker = async (lang) => {
         el.textContent = el.getAttribute(attribute)||el.getAttribute("data-gt-en");
       });
       const aboutLink = document.getElementById("gtAboutRead");
-      if (aboutLink) aboutLink.appendChild(Object.assign(document.createElement("span"), {textContent:" ↗"}));
+      if (aboutLink) {const arrow=document.createElement("span");arrow.setAttribute("aria-hidden","true");arrow.textContent=" ↗";aboutLink.appendChild(arrow);}
       setText("navSourcing", currentLang==="ru"?"Глобальный поиск":currentLang === "tr" ? "Küresel Tedarik" : "Global Sourcing");
       setText("navHow", currentLang==="ru"?"Как мы работаем":currentLang === "tr" ? "Nasıl Çalışıyoruz" : "How We Work");
       const heroButton = document.getElementById("gtMainRfq");
