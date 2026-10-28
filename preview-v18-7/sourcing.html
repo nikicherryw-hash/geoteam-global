@@ -262,7 +262,7 @@ footer .about{border-color:rgba(149,229,220,.26)!important}
 <section class="workspace" aria-labelledby="searchHeading">
  <div class="section-head"><h2 id="searchHeading">Find a component</h2><span id="stepHint">Start with the essentials</span></div>
  <div class="fields">
-  <label class="field part-field"><span id="partLabel">Part number / manufacturer *</span><input id="part" type="text" maxlength="160" autocomplete="off" placeholder="e.g. Siemens 6ES7..." role="combobox" aria-autocomplete="list" aria-controls="suggestions" aria-expanded="false"><span id="suggestions" class="suggestions" role="listbox" aria-label="Part and manufacturer suggestions" hidden></span><small id="suggestHint" class="suggest-hint">Manufacturer and part number suggestions — not stock or price offers.</small></label>
+  <div class="field part-field"><label id="partLabel" for="part">Part number / manufacturer *</label><input id="part" type="text" maxlength="160" autocomplete="off" placeholder="e.g. Siemens 6ES7..." role="combobox" aria-autocomplete="list" aria-controls="suggestions" aria-expanded="false" aria-labelledby="partLabel"><span id="suggestions" class="suggestions" role="listbox" aria-label="Part and manufacturer suggestions" hidden></span><small id="suggestHint" class="suggest-hint">Manufacturer and part number suggestions — not stock or price offers.</small></div>
   <label class="field"><span id="qtyLabel">Quantity *</span><input id="qty" type="number" min="1" max="999999" step="1" inputmode="numeric" value="1"></label>
   <label class="field destination"><span id="destLabel">Delivery destination *</span><input id="dest" type="text" maxlength="100" autocomplete="off" placeholder="Istanbul, Türkiye"></label>
  </div>
