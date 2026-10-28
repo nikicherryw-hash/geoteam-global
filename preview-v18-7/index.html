@@ -1443,6 +1443,105 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
   .hero .headline.gt-hero-title{font-size:19px!important;letter-spacing:-.045em!important}
   .hero .gt-sectors{font-size:8.2px!important;gap:4px!important;letter-spacing:.01em!important}
 }
+</style><style id="gt-v18-18-minimal-hero-header">
+/* v18.18: compact editorial header + fully usable 10-language menu, with IST always visible. */
+.page>main .hero{padding-top:7px!important;gap:10px!important}
+.hero .gt-sectors{margin:0 auto 0!important;transform:translateY(-2px);font-weight:670!important}
+.hero .headline.gt-hero-title{
+  max-width:900px!important;
+  font-size:clamp(27px,3vw,37px)!important;
+  font-weight:670!important;
+  line-height:1.19!important;
+  letter-spacing:-.036em!important;
+  text-shadow:0 5px 23px rgba(0,0,0,.13)!important
+}
+.hero .headline.gt-hero-title span{white-space:normal!important;text-wrap:balance}
+.hero .sub.gt-hero-description{
+  max-width:620px!important;
+  font-size:clamp(13px,1.18vw,14px)!important;
+  line-height:1.58!important;
+  color:rgba(224,242,241,.73)!important;
+  margin-top:0!important
+}
+/* Native select remains keyboard and touch operable; visible code takes almost no space. */
+.page>header .gt-lang-wrap{
+  display:inline-flex!important;position:relative!important;
+  align-items:center!important;justify-content:center!important;
+  width:68px!important;min-width:68px!important;max-width:68px!important;
+  height:31px!important;border-radius:999px!important;
+  border:1px solid rgba(148,229,217,.24)!important;
+  background:rgba(8,44,53,.30)!important;
+  flex:0 0 auto!important
+}
+.page>header .gt-lang-wrap:after{content:none!important}
+.page>header .gt-lang-display{
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  color:#e8f7f5;font:680 10.5px/1 var(--font,system-ui);
+  pointer-events:none;white-space:nowrap
+}
+.page>header .gt-lang-chevron{font-size:14px;color:#aad1ce;line-height:1}
+.page>header .gt-lang-select{
+  position:absolute!important;inset:0!important;
+  display:block!important;width:100%!important;min-width:0!important;max-width:none!important;
+  height:100%!important;padding:0!important;margin:0!important;
+  opacity:0!important;appearance:none!important;-webkit-appearance:none!important;
+  border:0!important;cursor:pointer!important
+}
+.page>header .gt-lang-wrap:focus-within{outline:2px solid #83f2e3;outline-offset:2px}
+.page>header .gt-lang-select option,.page>header .gt-lang-select optgroup{color:#e5f7f4!important;background:#092831!important}
+/* Retain the Istanbul time, logo and all 3 socials on one row. */
+@media(max-width:720px){
+ .page>header .nav{
+  width:calc(100% - 20px)!important;max-width:none!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  gap:5px!important;min-height:43px!important
+ }
+ .page>header .brand-wrap{gap:2px!important;flex-wrap:nowrap!important;min-width:0!important}
+ .page>header .right{justify-self:end!important;gap:5px!important;flex-wrap:nowrap!important;min-width:0!important}
+ .page>header .socials{gap:4px!important;flex-wrap:nowrap!important}
+ .page>header .social{width:25px!important;height:25px!important;min-width:25px!important;min-height:25px!important;box-shadow:none!important}
+ .page>header .social svg{width:13px!important;height:13px!important}
+ .page>header .lang{padding:0!important;margin:0!important}
+ .page>header .gt-lang-wrap{width:60px!important;min-width:60px!important;max-width:60px!important;height:29px!important}
+ .page>header .brand-wrap .timepill.timepill--compact{
+   display:flex!important;margin-left:1px!important;padding:4px 5px!important;gap:3px!important;
+   flex-shrink:0!important;max-width:none!important
+ }
+ .page>header .brand-wrap .timepill .time-label{display:inline!important;font-size:8.5px!important;letter-spacing:0!important}
+ .page>header .brand-wrap .timepill .time-val{display:inline!important;font-size:10.5px!important;letter-spacing:0!important}
+ .page>header .brand-wrap .timepill .time-row{gap:3px!important}
+ .page>main .hero{padding-top:6px!important;gap:9px!important}
+ .hero .headline.gt-hero-title{font-size:clamp(24px,6.5vw,30px)!important;line-height:1.16!important;max-width:350px!important}
+ .hero .sub.gt-hero-description{font-size:clamp(12.4px,3.35vw,13.4px)!important;max-width:335px!important;line-height:1.55!important}
+}
+@media(max-width:390px){
+ .page>header .nav{width:calc(100% - 14px)!important;gap:4px!important}
+ .page>header .gt-wordmark{min-width:84px!important;padding:4px 0!important}
+ .page>header .gt-wordmark .gt-brand-text .top{font-size:16px!important}
+ .page>header .gt-wordmark .gt-brand-text .bottom{font-size:8.3px!important}
+ .page>header .right{gap:4px!important}
+ .page>header .socials{gap:3px!important}
+ .page>header .social{width:23px!important;min-width:23px!important;height:23px!important;min-height:23px!important}
+ .page>header .social svg{width:12px!important;height:12px!important}
+ .page>header .gt-lang-wrap{width:57px!important;min-width:57px!important;max-width:57px!important;height:27px!important}
+ .page>header .brand-wrap .timepill.timepill--compact{padding:3px 4px!important;margin-left:0!important}
+ .page>header .brand-wrap .timepill .time-val{font-size:10px!important}
+ .page>header .brand-wrap .timepill .time-label{font-size:8px!important}
+ .hero .headline.gt-hero-title{font-size:clamp(23px,6.1vw,26px)!important}
+}
+@media(max-width:340px){
+ .page>header .gt-wordmark{min-width:78px!important}
+ .page>header .gt-wordmark .gt-brand-text .top{font-size:15px!important}
+ .page>header .gt-wordmark .gt-brand-text .bottom{font-size:7.9px!important}
+ .page>header .socials{gap:2px!important}
+ .page>header .social{width:21px!important;min-width:21px!important;height:21px!important;min-height:21px!important}
+ .page>header .social svg{width:11px!important;height:11px!important}
+ .page>header .gt-lang-wrap{width:53px!important;min-width:53px!important;max-width:53px!important;height:26px!important}
+ .page>header .gt-lang-display{font-size:9.5px!important;gap:3px!important}
+ .page>header .brand-wrap .timepill.timepill--compact{padding:2px 3px!important}
+ .page>header .brand-wrap .timepill .time-val{font-size:9.4px!important}
+ .page>header .brand-wrap .timepill .time-label{font-size:7.5px!important}
+}
 </style></head>
 
 <body>
@@ -1482,7 +1581,7 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.75 6.5a1.05 1.05 0 1 1-1.05 1.05 1.05 1.05 0 0 1 1.05-1.05z"/></svg>
             </a>
           </div>
-          <div class="lang"><button id="langToggle" type="button" class="langToggle" aria-label="Legacy language toggle" hidden>EN</button><label class="gt-lang-wrap" aria-label="Website language"><select class="gt-lang-select" id="gtLanguageSelect" aria-label="Choose language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><optgroup label="More languages — planned"><option disabled>DE · Deutsch</option><option disabled>FR · Français</option><option disabled>ES · Español</option><option disabled>IT · Italiano</option><option disabled>PT · Português</option><option disabled>AR · العربية</option><option disabled>ZH · 中文</option></optgroup></select></label></div>
+          <div class="lang"><button id="langToggle" type="button" class="langToggle" aria-label="Legacy language toggle" hidden>EN</button><label class="gt-lang-wrap" aria-label="Website language"><span class="gt-lang-display" aria-hidden="true"><span id="gtLangCode">EN</span><span class="gt-lang-chevron">⌄</span></span><select class="gt-lang-select" id="gtLanguageSelect" aria-label="Choose language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><optgroup label="More languages — planned"><option disabled>DE · Deutsch</option><option disabled>FR · Français</option><option disabled>ES · Español</option><option disabled>IT · Italiano</option><option disabled>PT · Português</option><option disabled>AR · العربية</option><option disabled>ZH · 中文</option></optgroup></select></label></div>
         </div>
       </div>
       <div class="tickerbar" aria-label="News ticker">
@@ -1505,8 +1604,8 @@ header .ticker .ticker-tag{font-family:var(--font)!important;font-weight:670!imp
           <i aria-hidden="true"></i>
           <span data-gt-en="Electronics" data-gt-tr="Elektronik" data-gt-ru="Электроника">Electronics</span>
         </div>
-        <h1 class="headline gt-hero-title" id="headline" aria-label="From standard equipment to unique parts."><span>From standard equipment</span><span>to custom-engineered parts.</span></h1>
-        <p class="sub gt-hero-description" id="sub">We supply equipment and components, including hard-to-source and discontinued items. We manufacture parts and mechanical assemblies to drawings.</p>
+        <h1 class="headline gt-hero-title" id="headline" aria-label="Equipment and component supply"><span>Equipment &amp; component supply.</span></h1>
+        <p class="sub gt-hero-description" id="sub">By manufacturer part number and technical specification — from individual items to complex procurement lists.</p>
 
         <div class="stage" aria-label="Rotating earth">
           <canvas id="globe"></canvas>
@@ -1805,8 +1904,8 @@ const loadTicker = async (lang) => {
         navCases: "Cases",
         navAbout: "About",
         navContact: "Contact",
-        headline: "From standard equipment|to custom-engineered parts.",
-        sub: "We supply equipment and components, including hard-to-source and discontinued items. We manufacture parts and mechanical assemblies to drawings.",
+        headline: "Equipment & component supply.",
+        sub: "By manufacturer part number and technical specification — from individual items to complex procurement lists.",
         btnRfq: "Start RFQ",
         btnBrowse: "Browse Products",
 
@@ -1970,8 +2069,8 @@ const loadTicker = async (lang) => {
         navCases: "Örnekler",
         navAbout: "Hakkımızda",
         navContact: "İletişim",
-        headline: "Standart ekipmanlardan|özel üretim parçalara.",
-        sub: "Temini zor ve üretimden kalkmış ürünler dâhil ekipman ve bileşen tedarik ediyoruz. Teknik çizimlere göre parça ve mekanik gruplar imal ediyoruz.",
+        headline: "Ekipman ve bileşen tedariği.",
+        sub: "Üretici parça numaraları ve teknik şartnamelere göre — tek parçadan kapsamlı satın alma listelerine.",
         btnRfq: "RFQ Başlat",
         btnBrowse: "Ürünlere Göz At",
 
@@ -2134,8 +2233,8 @@ const loadTicker = async (lang) => {
       navAbout:"О компании",navSourcing:"Глобальный поиск",navHow:"Как мы работаем",
       navProducts:"Оборудование",navIndustries:"Отрасли",navCapabilities:"Возможности",navQuality:"Документы",
       navCases:"Примеры",navContact:"Контакты",
-      headline:"От серийного оборудования|до уникальных деталей.",
-      sub:"Поставляем оборудование и комплектующие, включая сложные и снятые с производства позиции. Изготавливаем детали и механические узлы по чертежам.",
+      headline:"Поставки оборудования|и комплектующих.",
+      sub:"По заводским артикулам и техническим спецификациям — от отдельных позиций до комплексных закупок.",
       btnRfq:"Глобальный поиск",btnBrowse:"Каталог",
       megaKicker:"Оборудование",megaTitle:"Категории",megaNote:"Поиск по направлениям",
       aboutTitle:"О компании",aboutNote:"Международный поиск технических компонентов",
@@ -2407,6 +2506,7 @@ const loadTicker = async (lang) => {
       document.documentElement.lang=currentLang;
       const choice=document.getElementById("gtLanguageSelect");
       if(choice)choice.value=currentLang;
+      const compactCode=document.getElementById("gtLangCode");if(compactCode)compactCode.textContent=currentLang.toUpperCase();
       const sourceLink=document.getElementById("gtWhatWeSource");
       if(sourceLink){sourceLink.href=currentLang+"/what-we-source.html";sourceLink.textContent=currentLang==="ru"?"Что поставляем":currentLang==="tr"?"Tedarik Alanlarımız":"What We Source";}
       const footerAbout=document.querySelector(".gt-footer-about");
