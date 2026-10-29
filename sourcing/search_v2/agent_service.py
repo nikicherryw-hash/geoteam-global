@@ -44,8 +44,7 @@ async def research(req:SearchRequest,x_geoteam_internal_token: str|None=Header(d
         try:
             pilot=PilotBudget(budget_path)
             async with httpx.AsyncClient(trust_env=False,follow_redirects=False) as client:
-                result=await search_once(req.query,req.locale,pick(req.query),api_key,model,client)
-            # Reserve before any outbound request, not after. Keep a reservation on errors.
+                result=await search_once(req.query,req.locale,pick(req.query),api_key,model,client,pilot)
             result["pilot"]=pilot.status()
             return result
         except BudgetExhausted:
