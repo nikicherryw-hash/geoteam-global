@@ -13,7 +13,7 @@ Preserve the current website, RU/EN/TR translations, RFQ draft actions, header, 
 
 ## Candidate coverage
 
-- **269 source records total:** **266 supplier/catalog/marketplace/classified/auction/used-equipment sources**, **3 logistics references**.
+- **313 source records total:** **310 supplier/catalog/marketplace/classified/auction/used-equipment sources**, **3 logistics references**.
 - Incremental extension from v18.40: +135 public-web candidates (source file `sourcing/foundation/source_expansion_v18_41.psv`).
 - Countries/areas: Russia + neighboring markets, Türkiye, Malaysia, Indonesia, China,
   Korea, Japan, Singapore, India, ASEAN, Europe, North America, Mexico, Brazil, other
@@ -27,8 +27,8 @@ Preserve the current website, RU/EN/TR translations, RFQ draft actions, header, 
   Kitmondo, AllSurplus, Grays, Superbid, BidSpotter, MachineryTrader,
   1688, Alibaba, Goofish, tradeKorea, Jiji and many others.
 
-**Important:** These are **candidate site URLs**, not 266 live connectors or
-266 automatic provider searches. Candidate URL/site accessibility and listing search
+**Important:** These are **candidate site URLs**, not 310 live connectors or
+310 automatic provider searches. Candidate URL/site accessibility and listing search
 conditions are not confirmed in bulk. Many platforms disallow unauthenticated
 search/automation, return different results by locale, or require seller login.
 All providers retain `enabled:false`, `integration_status:"NOT_CONNECTED"`,
@@ -40,7 +40,7 @@ commercial feeds, third-party queries, purchases or RFQ sends are introduced.
 1. User enters maker/part number, quantity, delivery location, optional category
    and optional used/new preference. Default condition **Any**.
 2. Engine classifies known industrial/aviation/electronics queries and ranks
-   all **266** sources, with soft region preference derived from delivery address.
+   all **310** sources, with optional soft regional ranking hints derived from delivery address; no foreign region is filtered out.
 3. First 12 cards intentionally mix industrial distributor, manufacturer, used,
    surplus, private classifieds, auction, B2B directory and marketplace channels.
 4. All remaining cards are accessible through incremental **Show more**.
@@ -85,7 +85,7 @@ needs serial numbers, hours, technical condition, test evidence and export clear
 - Connector onboarding for authorized official APIs/feeds; global query router
   dispatches only to approved and category-relevant providers with bounded
   concurrency, rate limits, retries, circuit breakers and quotas. Never fan out
-  266 third-party requests on every user search.
+  310 third-party requests on every user search.
 - Real HTML search-index coverage, where allowed by provider terms, via approved
   search engine APIs; independent legal review of crawling/robots and data reuse.
 - Per listing TTL, immediate end/sold suppression on verified source status,
@@ -111,7 +111,7 @@ needs serial numbers, hours, technical condition, test evidence and export clear
 7. If failed, disable/roll back the isolated new site; leave GeoTeam's
    original site and Functions unaffected.
 
-**Current testing:** isolated V8 JS unit/API contract suite passed after v18.41
+**Current testing:** isolated V8 JS unit/API contract suite passed after registry/type fixes; real Node/Python/browser runtime checks remain NOT RUN in this connector environment
 changes; real Node test process, Python validation, browser E2E, provider URL
 validation at scale and Firebase HTTP readback are NOT RUN. Never report
 DEPLOYED_VERIFIED until a real release is installed and checked.
@@ -123,3 +123,11 @@ every listing worldwide or verify current prices and auction status without
 authorized provider/search API access. Site-restricted search-engine links
 can include out-of-date listings; they are clearly labelled unverified.
 Expansion is a durable registry foundation for the eventual real global aggregator.
+
+## v18.41 final global-default adjustment
+
+- No required **supplier geography** selector. No search-engine selector. The user gives a part number, quantity, desired condition and delivery location; search considers **all 310 product candidates worldwide** and ranks them by type, model clues and distance only as a soft preference.
+- Search-engine link for each candidate chooses Yandex for Russia/Kazakhstan/Belarus and Baidu for China; Google otherwise. Separate worldwide links to Google, Bing, Yandex, Baidu stay available. Each external search begins only after a user's explicit click.
+- Categories include private classifieds (Avito, Sahibinden, Gumtree, OLX), local marketplaces (Ozon, Trendyol, Amazon, eBay, regional stores), specialist used industrial machines (Machinio, Machineseeker, Surplex), auctions, surplus and manufacturers.
+- Site links and source counts **do not establish a live product search across all web sites**. Automating third-party listing retrieval requires documented, permitted API/feeds or separately reviewed integrations. Never assert that terminated auctions or sold inventory is available. Any results from a search engine are outside GeoTeam's control until they have been verified against the authoritative listing.
+- The old separate Hosting release script must be reviewed with **313/310** expectations, immutable Git SHA and no geography dropdown before deployment.
