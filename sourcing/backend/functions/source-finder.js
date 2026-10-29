@@ -1,6 +1,6 @@
-/* GeoTeam Global Source Finder v1: real, authorized supplier DIRECTORY routing.
- * This module DOES NOT query external inventory or claim verified stock/prices.
- * No credentials, scraping, third-party background requests, or RFQ sends.
+/* GeoTeam Global — v18.40 worldwide source discovery (NO third-party API or crawling).
+ * Registry source URLs are candidates for manual search, not verified stock or prices.
+ * Search provider queries are transmitted ONLY when a person clicks the outbound link.
  */
 (function(root,factory){
   "use strict";
@@ -8,129 +8,230 @@
   if(typeof module==="object"&&module.exports)module.exports=api;
   root.GeoTeamSourceFinder=api;
 })(typeof globalThis!=="undefined"?globalThis:this,function(){
-  "use strict";
-  const SEGMENT_LABELS={
-    electronics:{ru:"Электроника и автоматика",en:"Electronics & automation",tr:"Elektronik ve otomasyon"},
-    aviation:{ru:"Авиационные компоненты",en:"Aviation components",tr:"Havacılık bileşenleri"},
-    industrial:{ru:"Промышленное оборудование",en:"Industrial equipment",tr:"Endüstriyel ekipman"},
-    manufacturer:{ru:"Каталоги производителей",en:"Manufacturer catalogs",tr:"Üretici katalogları"},
-    general_b2b:{ru:"Международные B2B-площадки",en:"Global B2B directories",tr:"Küresel B2B platformları"},
-    marketplace:{ru:"Торговые площадки",en:"Marketplaces",tr:"Pazar yerleri"}
-  };
-  const TXT={
-    ru:{title:"Подобраны мировые источники",subtitle:"Поиск площадок по артикулу и категории. Остатки, цены и сроки поставки ещё не проверены.",results:"источников",view:"Открыть площадку",lookup:"Искать артикул",meta:"Доступ к каталогу · данные поставщика не подтверждены",none:"Для этой категории источники пока не зарегистрированы.",fallback:"Не удалось загрузить реестр источников. Повторите запрос позже.",mode:"Тип доступа",manual:"Информация поступает с сайтов поставщиков. Для подтверждённого КП добавьте позицию в RFQ.",route:"Релевантность подбора",score:"приоритет",info:"Для точного поиска откроется Google с ограничением на сайт выбранного поставщика. Запрос передаётся только после вашего нажатия."},
-    en:{title:"Worldwide sourcing channels",subtitle:"Supplier directories matched to your part number and category. Stock, prices and lead times are not verified.",results:"sources",view:"Open source",lookup:"Search this part",meta:"Catalog discovery · supplier data not confirmed",none:"No matching sources are registered for this category yet.",fallback:"Source directory could not be loaded. Please try again.",mode:"Access type",manual:"Supplier data lives at each provider. Add the item to your RFQ to request a confirmed quotation.",route:"Source routing relevance",score:"priority",info:"The part search opens Google restricted to the selected provider domain. Your query is sent only when you click."},
-    tr:{title:"Küresel tedarik kaynakları",subtitle:"Parça numaranız ve kategoriye göre uygun kaynaklar. Stok, fiyat ve teslim süresi henüz doğrulanmadı.",results:"kaynak",view:"Kaynağı aç",lookup:"Parçayı ara",meta:"Katalog araştırması · tedarikçi bilgileri doğrulanmadı",none:"Bu kategori için henüz kayıtlı kaynak bulunamadı.",fallback:"Kaynak dizini yüklenemedi. Lütfen tekrar deneyin.",mode:"Erişim türü",manual:"Tedarikçi verileri kendi sitelerindedir. Onaylı teklif için ürünü RFQ'ya ekleyin.",route:"Kaynak uygunluğu",score:"öncelik",info:"Parça araması, seçilen sağlayıcı alanıyla sınırlı Google araması açar. Sorgunuz yalnızca tıklamanızla iletilir."}
-  };
-  const STRONG_BRANDS={
-    electronics:/\b(siemens|schneider|abb|phoenix\s*contact|eaton|rockwell|allen[ -]?bradley|omron|smc|festo|bosch\s*rexroth|rexroth|mitsubishi\s*electric|danfoss|wago|ifm|beckhoff|pilz|pepperl|balluff|turck|lenze|yaskawa|fanuc|sew[ -]?eurodrive|weidmuller)\b/i,
-    aviation:/\b(airbus|boeing|cessna|embraer|bombardier|aircraft|aviation|airframe|turbine|jet engine|aerospace|helicopter|uçak|havacılık|uçak yedek)\b|(?:ми[\s-]?8|ми[\s-]?17|вертол|самол[её]т|авиаци)/i,
-    industrial:/\b(pump|valve|gearbox|actuator|spindle|compressor|motor|cnc|hermle|dmg\s*mori|grundfos|wilo|sulzer|kessler|irt[yı]sh|pompa|vana)\b|(?:иртыш|насос|клапан|шпиндел|подшипник|редуктор|станок|электродвигател)/i
-  };
-  const AVIATION_NUMBERS=/\b(?:NAS\d{3,}|MS\d{4,}|AN\d{4,}|BAC\d{4,})\b/i;
-  let cached=null, loading=null;
-  function classify(query,requested){
-    if(["electronics","aviation","industrial","general_b2b"].includes(requested))return requested;
-    const q=String(query||"");
-    const weights={electronics:0,aviation:0,industrial:0,general_b2b:1};
-    if(STRONG_BRANDS.electronics.test(q))weights.electronics+=7;
-    if(STRONG_BRANDS.aviation.test(q)||AVIATION_NUMBERS.test(q))weights.aviation+=9;
-    if(STRONG_BRANDS.industrial.test(q))weights.industrial+=6;
-    if(/\b(?:6ES7|6SL\d|3LD\d|XPSU|LC1D\d|DI52\d|FL\s*BT|[A-Z]{1,3}\d{4,}-\d{2})\b/i.test(q))weights.electronics+=4;
-    if(/drawing|черт[её]ж|по\s+эскизу|manufactur|изготовлен|производств|technical drawing/i.test(q))weights.industrial+=6;
-    const sorted=Object.entries(weights).sort((a,b)=>b[1]-a[1]);
-    return sorted[0][1]>1?sorted[0][0]:"general_b2b";
+"use strict";
+const REGIONS=Object.freeze({
+  all:[],
+  russia_cis:["russia","kazakhstan","belarus","ukraine","cis"],
+  asia:["asia","china","korea","japan","taiwan","hong_kong","indonesia","thailand","singapore","malaysia","india"],
+  europe:["europe","dach"],
+  north_america:["north_america"],
+  latin_america:["latin_america"],
+  turkey_mena:["turkey","middle_east","africa"],
+  oceania:["oceania"]
+});
+const ENGINES=Object.freeze({
+  google:{base:"https://www.google.com/search?q=",parameter:"q"},
+  bing:{base:"https://www.bing.com/search?q=",parameter:"q"},
+  yandex:{base:"https://yandex.ru/search/?text=",parameter:"text"},
+  baidu:{base:"https://www.baidu.com/s?wd=",parameter:"wd"}
+});
+const SECTORS={
+ electronics:{ru:"Электроника и автоматика",en:"Electronics & automation",tr:"Elektronik ve otomasyon"},
+ aviation:{ru:"Авиационные компоненты",en:"Aviation components",tr:"Havacılık bileşenleri"},
+ industrial:{ru:"Промышленное оборудование",en:"Industrial equipment",tr:"Endüstriyel ekipman"},
+ manufacturer:{ru:"Производитель",en:"Manufacturer",tr:"Üretici"},
+ general_b2b:{ru:"B2B-каталог",en:"B2B directory",tr:"B2B dizini"},
+ marketplace:{ru:"Торговая площадка",en:"Marketplace",tr:"Pazar yeri"}
+};
+const WORDS={
+  ru:{
+    title:"Площадки для проверки поставщиков",
+    subtitle:"Каталоги подобраны по товарной категории и региону. Это не результаты проверки наличия, цены или срока поставки.",
+    count:"источников для проверки",search:"Поиск артикула",view:"Открыть сайт",
+    status:"Данные о товаре не получены · проверьте предложение непосредственно у продавца",
+    showMore:"Показать ещё источники",shown:"Показано",
+    worldwide:"Искать во всём интернете",notice:"Откроется выбранная поисковая система. Запрос передаётся ей только после нажатия.",
+    cardNotice:"Площадка указана в реестре кандидатов. Доступность сайта, права использования данных, поставка и контрагент не подтверждены.",
+    noResults:"Для этого сочетания категории и региона пока нет подходящих источников. Попробуйте «Весь мир».",
+    rfq:"Для цены с доставкой и подтверждения наличия подготовьте RFQ. Возможность поставки зависит от экспортных, таможенных и других применимых ограничений.",
+    sector:"Направление",region:"Регион",number:"№",engine:"Поисковая система"
+  },
+  en:{
+    title:"Supplier websites to investigate",
+    subtitle:"Sources are selected by product type and region, not by confirmed stock, price or lead time.",
+    count:"candidate sources",search:"Search part",view:"Open site",
+    status:"Product data not retrieved · confirm any offer with its seller",
+    showMore:"Show more sources",shown:"Showing",
+    worldwide:"Search the open web",notice:"The selected search engine opens on your click. No background queries are sent.",
+    cardNotice:"Candidate registry entry. Site availability, reuse rights, trade eligibility and seller identity are not verified.",
+    noResults:"No matching sources registered in this category and region. Try Worldwide.",
+    rfq:"For delivery-inclusive pricing and confirmed inventory, prepare an RFQ. Export, customs and other applicable restrictions remain subject to review.",
+    sector:"Category",region:"Region",number:"No.",engine:"Search engine"
+  },
+  tr:{
+    title:"Araştırılacak tedarikçi kaynakları",
+    subtitle:"Kaynaklar ürün türüne ve bölgeye göre seçilir; stok, fiyat ve teslim süresi doğrulanmış değildir.",
+    count:"aday kaynak",search:"Parçayı ara",view:"Siteyi aç",
+    status:"Ürün verileri alınmadı · satıcıdan doğrulayın",
+    showMore:"Diğer kaynakları göster",shown:"Gösterilen",
+    worldwide:"Tüm internette ara",notice:"Seçilen arama motoru yalnızca tıklayınca açılır. Arka planda sorgu gönderilmez.",
+    cardNotice:"Aday kaynak kaydı. Site erişimi, veri kullanım hakkı, ticari uygunluk ve satıcı doğrulanmamıştır.",
+    noResults:"Bu kategori ve bölgede uygun kaynak bulunamadı. Dünya geneline bakın.",
+    rfq:"Teslimat dahil fiyat ve doğrulanmış stok için RFQ hazırlayın. İhracat ve gümrük kısıtları ayrıca değerlendirilmelidir.",
+    sector:"Kategori",region:"Bölge",number:"No.",engine:"Arama motoru"
   }
-  function canonical(q){
-    return String(q||"").normalize("NFKC").trim().replace(/\s+/g," ").slice(0,160);
-  }
-  function domain(url){
-    const v=new URL(url);
-    if(v.protocol!=="https:"||v.username||v.password||!v.hostname||v.hostname.includes("@"))throw Error("Invalid provider URL");
-    return v.hostname.replace(/^www\./,"");
-  }
-  function validateRegistry(obj){
-    if(!obj||obj.product_id!=="GEOTEAM_GLOBAL"||!Array.isArray(obj.sources))throw Error("Invalid GeoTeam registry");
-    const seen=new Set();
-    return obj.sources.filter(src=>{
-      if(!src||typeof src.id!=="string"||seen.has(src.id)||typeof src.name!=="string"||typeof src.url!=="string")return false;
-      if(src.segment==="logistics")return false;
-      try{domain(src.url)}catch{return false}
-      if(src.enabled!==false||src.integration_status!=="NOT_CONNECTED")return false;
-      seen.add(src.id);return true;
-    });
-  }
-  async function loadRegistry(url){
-    if(cached)return cached;
-    if(loading)return loading;
-    const path=url||new URL("data/sources.v1.json?v=39-44",typeof location!=="undefined"?location.href:"https://geoteam-global.com/sourcing.html").href;
-    loading=(async()=>{
-      const ctrl=new AbortController();
-      const timer=setTimeout(()=>ctrl.abort(),9000);
-      try{
-        const res=await fetch(path,{headers:{"Accept":"application/json"},signal:ctrl.signal,credentials:"same-origin"});
-        if(!res.ok)throw Error("Registry HTTP "+res.status);
-        const obj=await res.json();
-        cached=validateRegistry(obj);
-        if(!cached.length)throw Error("Empty directory");
-        return cached;
-      }finally{clearTimeout(timer);loading=null}
-    })();
-    return loading;
-  }
-  function scoring(source,category){
-    const base={electronics:0,aviation:0,industrial:0,general_b2b:0};
-    if(category==="electronics"){base.electronics=90;base.manufacturer=62;base.industrial=21;base.general_b2b=18;base.marketplace=7}
-    if(category==="aviation"){base.aviation=95;base.general_b2b=25;base.industrial=12;base.marketplace=7}
-    if(category==="industrial"){base.industrial=96;base.manufacturer=67;base.electronics=42;base.general_b2b=37;base.marketplace=9}
-    if(category==="general_b2b"){base.general_b2b=75;base.industrial=54;base.manufacturer=45;base.electronics=44;base.aviation=27;base.marketplace=20}
-    const number=base[source.segment]||0;
-    return number-(source.priority-1)*5;
-  }
-  function route(sources,input){
-    const query=canonical(input?.part||input?.query);
-    const qty=Number(input?.qty??input?.quantity);
-    if(query.length<2||query.length>160)throw Error("Part number is required");
-    if(!Number.isSafeInteger(qty)||qty<1||qty>999999)throw Error("Invalid quantity");
-    const category=classify(query,input?.sector);
-    const results=sources.map(src=>({id:src.id,name:src.name,segment:src.segment,scope:src.scope||[],mode:src.mode,provider_url:src.url,score:scoring(src,category),requires_confirmation:true,verified_inventory:false,verified_price:false}))
-      .filter(x=>x.score>=18).sort((a,b)=>b.score-a.score||a.name.localeCompare(b.name)).slice(0,13);
-    return {product_id:"GEOTEAM_GLOBAL",request:{query,quantity:qty,destination:String(input?.dest||input?.destination||"").slice(0,100)},category,total:results.length,results,mode:"SOURCE_DISCOVERY_ONLY",price_confirmed:false,stock_confirmed:false,checked_at:new Date().toISOString()};
-  }
-  async function search(input,options){
-    const registry=await loadRegistry(options?.indexUrl);
-    return route(registry,input);
-  }
-  function productSearchUrl(provider,query){
-    const host=domain(provider.provider_url);
-    // A public search engine site: query is NOT sent until the user opens the link.
-    return "https://www.google.com/search?q="+encodeURIComponent("site:"+host+" "+canonical(query));
-  }
-  function render(target,data,options){
-    const lang=["ru","en","tr"].includes(options?.lang)?options.lang:"en",t=TXT[lang];
-    target.replaceChildren();
-    target.classList.add("is-visible","gt-source-results");
-    const h=document.createElement("h3");
-    h.className="gt-source-headline";h.textContent=t.title+" · "+data.results.length+" "+t.results;
-    const description=document.createElement("p");description.className="gt-source-descr";description.textContent=t.subtitle;
-    target.append(h,description);
-    const meta=document.createElement("p");meta.className="gt-source-info";meta.textContent=t.info;
-    target.append(meta);
-    if(!data.results.length){const p=document.createElement("p");p.textContent=t.none;target.append(p);return}
-    const list=document.createElement("div");list.className="gt-source-grid";
-    for(const entry of data.results){
-      const card=document.createElement("article");card.className="gt-source-card";
-      const brand=document.createElement("strong");brand.textContent=entry.name;
-      const badge=document.createElement("span");badge.className="gt-source-sector";badge.textContent=SEGMENT_LABELS[entry.segment]?.[lang]||entry.segment;
-      const buttons=document.createElement("div");buttons.className="gt-source-links";
-      const a=document.createElement("a");a.className="gt-source-find";a.target="_blank";a.rel="noopener noreferrer";a.href=productSearchUrl(entry,data.request.query);a.textContent=t.lookup+" ↗";
-      const direct=document.createElement("a");direct.className="gt-source-direct";direct.target="_blank";direct.rel="noopener noreferrer";direct.href=entry.provider_url;direct.textContent=t.view+" ↗";
-      const foot=document.createElement("small");foot.textContent=t.meta;
-      buttons.append(a,direct);card.append(brand,badge,buttons,foot);list.append(card);
-    }
-    target.append(list);
-    const notice=document.createElement("p");notice.className="gt-source-bottom";notice.textContent=t.manual;
-    target.append(notice);
-  }
-  return Object.freeze({classify,canonical,domain,validateRegistry,route,search,loadRegistry,productSearchUrl,render});
+};
+const BRAND_HINTS={
+ electronics:/\b(siemens|schneider|abb|phoenix\s*contact|eaton|rockwell|allen[ -]?bradley|omron|smc|festo|bosch\s*rexroth|rexroth|mitsubishi\s*electric|danfoss|wago|ifm|beckhoff|pilz|pepperl|balluff|turck|lenze|yaskawa|fanuc|weidmuller|honeywell|texas instruments)\b/i,
+ aviation:/\b(airbus|boeing|cessna|embraer|bombardier|aircraft|aviation|airframe|aerospace|helicopter)\b|(?:ми[\s-]?(?:8|17)|вертол|самол[её]т|авиаци)/i,
+ industrial:/\b(pump|valve|gearbox|actuator|spindle|compressor|motor|cnc|hermle|dmg\s*mori|grundfos|wilo|sulzer|kessler|misumi|pompa|vana)\b|(?:иртыш|насос|клапан|шпиндел|подшипник|редуктор|станок|электродвигател)/i
+};
+let cache=null,loading=null;
+function canonical(q){return String(q||"").normalize("NFKC").trim().replace(/\s+/g," ").slice(0,160)}
+function classify(query,requested){
+ if(["electronics","aviation","industrial","general_b2b"].includes(requested))return requested;
+ const q=canonical(query),scores={electronics:0,aviation:0,industrial:0,general_b2b:1};
+ if(BRAND_HINTS.electronics.test(q))scores.electronics+=8;
+ if(BRAND_HINTS.aviation.test(q)||/\b(?:NAS\d{3,}|MS\d{4,}|AN\d{4,}|BAC\d{4,})\b/i.test(q))scores.aviation+=10;
+ if(BRAND_HINTS.industrial.test(q))scores.industrial+=8;
+ if(/\b(?:6ES7|6SL\d|3LD\d|XPSU|LC1D\d|DI52\d|FL\s*BT|[A-Z]{1,3}\d{4,}-\d{2})\b/i.test(q))scores.electronics+=4;
+ if(/drawing|черт[её]ж|по\s+эскизу|manufactur|изготовлен|производств|technical drawing/i.test(q))scores.industrial+=6;
+ const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+ return sorted[0][1]>1?sorted[0][0]:"general_b2b";
+}
+function domain(url){
+ const u=new URL(url);
+ if(u.protocol!=="https:"||u.username||u.password||!u.hostname||u.hostname.includes("@"))throw Error("Invalid provider URL");
+ return u.hostname.replace(/^www\./,"");
+}
+function validateRegistry(obj){
+ if(!obj||obj.product_id!=="GEOTEAM_GLOBAL"||!Array.isArray(obj.sources))throw Error("Invalid GeoTeam registry");
+ const seen=new Set();
+ return obj.sources.filter(x=>{
+   if(!x||typeof x.id!=="string"||seen.has(x.id)||typeof x.name!=="string"||typeof x.url!=="string")return false;
+   if(x.segment==="logistics")return false;
+   if(x.enabled!==false||x.integration_status!=="NOT_CONNECTED"||x.rights_status!=="NOT_REVIEWED")return false;
+   if(!SECTORS[x.segment])return false;
+   try{domain(x.url)}catch{return false}
+   seen.add(x.id);return true;
+ });
+}
+function allowedRegion(src,region){
+ if(region==="all")return true;
+ const targets=REGIONS[region];
+ if(!targets)return false;
+ return (src.scope||[]).includes("global")||(src.scope||[]).some(v=>targets.includes(v));
+}
+function directRegion(src,region){
+ const targets=REGIONS[region];
+ return region!=="all"&&Array.isArray(targets)&&Array.isArray(src.scope)&&src.scope.some(v=>targets.includes(v));
+}
+function score(src,category,region){
+ const scores={
+ electronics:{electronics:110,manufacturer:88,industrial:39,general_b2b:36,marketplace:27},
+ aviation:{aviation:125,manufacturer:51,industrial:45,electronics:37,general_b2b:48,marketplace:27},
+ industrial:{industrial:116,manufacturer:102,electronics:59,general_b2b:69,marketplace:32,aviation:12},
+ general_b2b:{general_b2b:110,industrial:83,manufacturer:83,electronics:67,aviation:45,marketplace:50}
+ };
+ const base=scores[category]?.[src.segment]||0;
+ return base+(directRegion(src,region)?38:0)-(Number(src.priority||2)-1)*5;
+}
+function route(sources,input){
+ const query=canonical(input?.part||input?.query);
+ const quantity=Number(input?.qty??input?.quantity);
+ const region=Object.prototype.hasOwnProperty.call(REGIONS,input?.region)?input.region:"all";
+ if(query.length<2||query.length>160)throw Error("Part number required");
+ if(!Number.isSafeInteger(quantity)||quantity<1||quantity>999999)throw Error("Invalid quantity");
+ const category=classify(query,input?.sector);
+ const results=sources.filter(x=>allowedRegion(x,region)).map(x=>({
+   id:x.id,name:x.name,segment:x.segment,scope:x.scope||[],mode:x.mode,
+   provider_url:x.url,score:score(x,category,region),
+   verification_status:x.verification_status||"CANDIDATE_NOT_LIVE_VERIFIED",
+   requires_confirmation:true,verified_inventory:false,verified_price:false
+ })).filter(x=>x.score>=25)
+ .sort((a,b)=>b.score-a.score||a.name.localeCompare(b.name));
+ return{
+   product_id:"GEOTEAM_GLOBAL",request:{query,quantity,destination:String(input?.dest||input?.destination||"").slice(0,100)},
+   category,region,total:results.length,results,mode:"SOURCE_DISCOVERY_ONLY",
+   price_confirmed:false,stock_confirmed:false,checked_at:new Date().toISOString()
+ };
+}
+async function loadRegistry(url){
+ if(cache)return cache;
+ if(loading)return loading;
+ const path=url||new URL("data/sources.v1.json?v=40-worldwide",typeof location!=="undefined"?location.href:"https://geoteam-global.com/sourcing.html").href;
+ loading=(async()=>{
+   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),9000);
+   try{
+     const res=await fetch(path,{headers:{Accept:"application/json"},credentials:"same-origin",signal:controller.signal});
+     if(!res.ok)throw Error("Registry "+res.status);
+     const parsed=validateRegistry(await res.json());
+     if(parsed.length<30)throw Error("Incomplete source directory");
+     cache=parsed;
+     return cache;
+   }finally{clearTimeout(timer);loading=null}
+ })();
+ return loading;
+}
+async function search(input,options){
+ return route(await loadRegistry(options?.indexUrl),input);
+}
+function searchEngineUrl(provider,query,engine,withoutSite){
+ const type=Object.prototype.hasOwnProperty.call(ENGINES,engine)?engine:"google";
+ const suffix=withoutSite?"":"site:"+domain(provider.provider_url)+" ";
+ return ENGINES[type].base+encodeURIComponent(suffix+canonical(query));
+}
+function productSearchUrl(provider,query){return searchEngineUrl(provider,query,"google",false)}
+function render(target,data,options){
+ const lang=["ru","en","tr"].includes(options?.lang)?options.lang:"en";
+ const words=WORDS[lang];
+ const engine=Object.prototype.hasOwnProperty.call(ENGINES,options?.engine)?options.engine:"google";
+ const PAGE_SIZE=12;
+ target.replaceChildren();target.classList.add("is-visible","gt-source-results");
+ const title=document.createElement("h3");title.className="gt-source-headline";title.textContent=words.title+" · "+data.results.length+" "+words.count;
+ const description=document.createElement("p");description.className="gt-source-descr";description.textContent=words.subtitle;
+ target.append(title,description);
+ const globalBox=document.createElement("div");globalBox.className="gt-worldwide-search";
+ const head=document.createElement("strong");head.textContent=words.worldwide;
+ const group=document.createElement("div");group.className="gt-worldwide-engines";
+ for(const key of ["google","bing","yandex","baidu"]){
+   const link=document.createElement("a");
+   link.href=searchEngineUrl(null,data.request.query,key,true);
+   link.target="_blank";link.rel="noopener noreferrer";
+   link.textContent=key[0].toUpperCase()+key.slice(1)+" ↗";
+   group.append(link);
+ }
+ const notice=document.createElement("small");notice.textContent=words.notice;
+ globalBox.append(head,group,notice);target.append(globalBox);
+ if(!data.results.length){
+   const empty=document.createElement("p");empty.textContent=words.noResults;target.append(empty);return;
+ }
+ const list=document.createElement("div");list.className="gt-source-grid";
+ target.append(list);
+ const more=document.createElement("button");more.type="button";more.className="gt-source-more";
+ const progress=document.createElement("p");progress.className="gt-source-progress";
+ let shown=0;
+ function addBatch(){
+   const last=Math.min(shown+PAGE_SIZE,data.results.length);
+   for(;shown<last;shown++){
+     const item=data.results[shown];
+     const card=document.createElement("article");card.className="gt-source-card";
+     const brand=document.createElement("strong");brand.textContent=item.name;
+     const sector=document.createElement("span");sector.className="gt-source-sector";
+     sector.textContent=SECTORS[item.segment]?.[lang]||item.segment;
+     const scope=document.createElement("span");scope.className="gt-source-scope";
+     scope.textContent=(item.scope||[]).join(" · ");
+     const links=document.createElement("div");links.className="gt-source-links";
+     const exact=document.createElement("a");exact.href=searchEngineUrl(item,data.request.query,engine,false);
+     exact.target="_blank";exact.rel="noopener noreferrer";exact.className="gt-source-find";
+     exact.textContent=words.search+" · "+engine+" ↗";
+     const direct=document.createElement("a");direct.href=item.provider_url;direct.target="_blank";
+     direct.rel="noopener noreferrer";direct.className="gt-source-direct";direct.textContent=words.view+" ↗";
+     links.append(exact,direct);
+     const caption=document.createElement("small");caption.textContent=words.status;
+     card.append(brand,sector,scope,links,caption);list.append(card);
+   }
+   progress.textContent=words.shown+" "+shown+" / "+data.results.length;
+   more.hidden=shown>=data.results.length;
+ }
+ more.textContent=words.showMore;
+ more.addEventListener("click",addBatch);
+ target.append(progress,more);
+ const foot=document.createElement("p");foot.className="gt-source-bottom";foot.textContent=words.rfq+" "+words.cardNotice;target.append(foot);
+ addBatch();
+}
+return Object.freeze({
+ classify,canonical,domain,validateRegistry,route,search,loadRegistry,
+ productSearchUrl,searchEngineUrl,render,REGIONS,ENGINES
+});
 });
