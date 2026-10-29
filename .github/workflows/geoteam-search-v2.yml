@@ -1,0 +1,37 @@
+name: GeoTeam Search V2 backend QA
+on:
+  push:
+    branches:
+      - geoteam-v18-45-live-offers-backend
+  pull_request:
+    paths:
+      - "sourcing/search_v2/**"
+      - ".github/workflows/geoteam-search-v2.yml"
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install pinned backend requirements
+        run: |
+          python -m pip install -r sourcing/search_v2/requirements.txt
+      - name: Check all backend syntax
+        run: |
+          python -m compileall -q sourcing/search_v2
+      - name: Test core, model recognition, price provenance, errors, security
+        run: |
+          python -m unittest discover -v -s sourcing/search_v2 -p "test_*.py"
+      - name: Ensure isolated deployment only
+        run: |
+          python - <<'PY'
+          import inspect
+          from sourcing.search_v2 import service
+          assert service.app.title.startswith("GeoTeam")
+          assert not service.Config().allowed
+          assert not service.Config().searx_url
+          print("GEOTEAM_SEARCH_BACKEND_DEFAULT=NO_EXTERNAL_CALLS")
+          PY
