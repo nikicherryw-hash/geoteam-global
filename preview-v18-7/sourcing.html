@@ -569,7 +569,7 @@ function localHints(raw){
 async function refreshHints(q){
  if(!q||q.trim().length<2){collapseSuggestions();return}
  const local=localHints(q);renderSuggestions(local);
- if(isDemo || !navigator.onLine)return;
+ if(isDemo || window.GeoTeamSourceFinder || !navigator.onLine)return; // directory mode: use local suggestions, no unconfigured /api calls
  if(suggestController)suggestController.abort();
  suggestController=new AbortController();
  try{
