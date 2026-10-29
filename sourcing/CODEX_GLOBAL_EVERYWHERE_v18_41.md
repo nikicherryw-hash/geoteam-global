@@ -38,7 +38,7 @@ Market preference is optional and only affects priority/order. Do not ask users
 to choose a region to obtain global results. Preserve all existing site blocks,
 RFQ workflow, RU/EN/TR, responsive layout and design.
 
-Registry currently contains **269 candidate references**, **266 product-related**
+Registry currently contains **313 candidate references**, **310 product-related**
 and 3 logistics references. Includes Russia and CIS, Türkiye, Europe, China,
 Hong Kong, India, Korea, Japan, ASEAN, Middle East/Africa, North and South
 America, Australia/New Zealand. New sources explicitly include Avito, Youla,
@@ -61,7 +61,7 @@ Required UX:
   condition ANY, including new and used candidate channels.
 - Show diverse high-priority supplier types in the first 12 cards.
 - Show remaining candidates with incremental pagination. Do NOT cap at 13.
-- Preserve manual optional category and search-engine controls. Region option
+- Preserve the optional product-category control, but REMOVE the supplier-region selector and search-engine selector. Every request must automatically consider all registered world regions; search links choose a suitable engine per source and expose independent worldwide Google, Bing, Yandex and Baidu shortcuts. Region option
   is a ranking hint, NOT a filter.
 - Support Google/Bing/Yandex/Baidu outbound searches (explicit click only),
   plus native search on allowed common eBay/Amazon/Avito/Trendyol domains.
@@ -99,7 +99,7 @@ Do not connect any marketplace/private account or scrape without license.
   user-triggered flows and mobile iPhone viewport.
 - Test 20+ representative OEM, manufacturing, aviation, automation,
   electronics, pumps, industrial used equipment and global markets.
-- Check 269 records, 266 products, 3 logistics references, no duplicate
+- Check 313 records, 310 products, 3 logistics references, no duplicate
   IDs or URLs, disabled provider APIs, no unlicensed outward network calls.
 - Inspect candidate URLs for relevance and accessibility; mark clearly
   unverified/inaccessible ones and correct false/obsolete domains.
@@ -116,7 +116,7 @@ databases or billing. Do not enable Blaze or install paid connectors.
 Read `sourcing/deploy/publish_directory_cloud_shell.sh` first. This script
 originated from v18.39/40 and must be updated to a **reviewed immutable v18.41
 commit** containing every required UI, registry, test and doc. Validate
-`git checkout <PIN>` and source counts 269/266. Preserve the first-pass
+`git checkout <PIN>` and source counts 313/310. Preserve the first-pass
 read-only preflight, `node --test`, Python validation, and deployment to the
 specific additional Hosting target only. Do not run an unreviewed stale pin.
 
@@ -157,7 +157,17 @@ real test commands/results and browser evidence, stable verified public URL
 only if deployed, actual Firebase resources touched, confirmed default site
 preserved, remaining source coverage gaps, costs and quota usage, error list,
 rollback and VERIFIED / NOT RUN / UNVERIFIED / BLOCKED / DEPLOYED_VERIFIED.
-No unsupported "all web crawled" or "266 active supplier APIs" claims.
+No unsupported "all web crawled" or "310 active supplier APIs" claims.
 
 Goal: broad, reliable, truthful worldwide industrial supplier discovery
 TODAY, preserving existing GeoTeam Global production and budget.
+
+## Final patch/QA additions (mandatory)
+
+- Source registry current target: **313 entries total / 310 product source candidates / 3 logistics**. Compare canonical, static and backend copies byte-for-byte; fix any mismatch. No duplicate ids or URLs.
+- Test native searches for Avito, Ozon, Wildberries, Yandex Market, Trendyol, eBay regional stores, Amazon country stores. Never parse or store listings without approved access.
+- Check selectors `gtMarketRegion` and `gtSearchEngine` are absent from final HTML. A delivery destination may influence priority but NEVER source coverage, and server-search still uses `region:'all'`.
+- Verify `listingLifecycle` with ended auctions/sold/unknown stale offers; **static candidate cards must never show stock, price or active-status badges**.
+- Validate exact class of 313 candidates across Russia/CIS, Asia, ASEAN, Europe, Turkey, North and South America, Africa and Australia, plus industrial used/surplus/auction sources.
+- Validate mobile responsive disclosure and RU/EN/TR. Be truthful about scope: user-initiated source exploration is working, automated live supplier API ingestion not yet connected.
+- Update Cloud Shell release script with pinned complete SHA, counts 313/310, no geo/engine controls, Node22/Python preflight and separate Firebase Hosting target. Never deploy to the default live Hosting site or old Functions.
