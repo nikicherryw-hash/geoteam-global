@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# GeoTeam Global, v18.39: publish SECOND Firebase Hosting site, leave main site/Functions untouched.
+# GeoTeam Global, v18.40: publish SECOND Firebase Hosting site, leave main site/Functions untouched.
 set -Eeuo pipefail
 PROJECT="geoteam-global"
 SITE="geoteam-sourcing-20261029"
-PIN="874a8c82810d9ba66053277b5849921236082e24"
-BRANCH="geoteam-v18-39-global-search-mvp"
+PIN="51651a8fd9c042973f98f76c43dd902e20bd9e1d"
+BRANCH="geoteam-v18-40-worldwide-discovery"
 REPO="https://github.com/nikicherryw-hash/geoteam-global.git"
 
 echo "=== GEOTEAM SEARCH RELEASE / PREFLIGHT ==="
@@ -46,13 +46,14 @@ from pathlib import Path
 import json,sys
 p=Path(sys.argv[1]); sha=sys.argv[2]
 r=json.loads((p/"data/sources.v1.json").read_text())
-assert r["product_id"]=="GEOTEAM_GLOBAL" and len(r["sources"])==44
-assert sum(s["segment"]!="logistics" for s in r["sources"])==41
+assert r["product_id"]=="GEOTEAM_GLOBAL" and len(r["sources"])==134
+assert sum(s["segment"]!="logistics" for s in r["sources"])==131
 assert all(s["enabled"] is False and s["integration_status"]=="NOT_CONNECTED" for s in r["sources"])
 f=p/"sourcing.html"
 html=f.read_text()
 assert 'global-source-finder.js' in html and 'id="gtSector"' in html
-assert "engine.search({...req,sector})" in html
+assert "engine.search({...req,sector,region})" in html
+assert 'id="gtMarketRegion"' in html and 'id="gtSearchEngine"' in html
 f.write_text(html.replace('href="index.html"','href="https://geoteam-global.com/"'))
 (p/"index.html").write_text("""<!doctype html><html lang="ru"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -67,7 +68,7 @@ f.write_text(html.replace('href="index.html"','href="https://geoteam-global.com/
 <body><a href="https://geoteam-global.com/contact.html">Контакты</a></body></html>""")
 (p/"robots.txt").write_text("User-agent: *\nDisallow: /\n")
 (p/"release.json").write_text(json.dumps({"product_id":"GEOTEAM_GLOBAL",
-    "version":"v18.39","git_sha":sha,"search_mode":"SOURCE_DISCOVERY_ONLY",
+    "version":"v18.40","git_sha":sha,"search_mode":"SOURCE_DISCOVERY_ONLY",
     "supplier_api_connected":False,"prices_verified":False},indent=2)+"\n")
 print("SOURCE_PREFLIGHT=PASS SOURCES=44 PRODUCT_SOURCES=41")
 PY
@@ -102,7 +103,7 @@ firebase hosting:channel:deploy sourcing-preflight \
   --only sourcing --expires 1d --project "$PROJECT" --non-interactive
 echo "=== PUBLISH ONLY NEW HOSTING SITE ==="
 firebase deploy --only hosting:sourcing --project "$PROJECT" \
-  --non-interactive --message "GeoTeam Global directory search v18.39 ($PIN)"
+  --non-interactive --message "GeoTeam Global directory search v18.40 ($PIN)"
 
 echo "=== LIVE READBACK ==="
 BASE="https://${SITE}.web.app"
@@ -119,8 +120,10 @@ from pathlib import Path
 import json,sys
 p=Path(sys.argv[1]); pin=sys.argv[2]
 assert 'id="gtSector"' in (p/"live.html").read_text()
+assert 'id="gtMarketRegion"' in (p/"live.html").read_text()
+assert 'id="gtSearchEngine"' in (p/"live.html").read_text()
 assert "GeoTeamSourceFinder" in (p/"live.js").read_text()
-assert len(json.loads((p/"live.json").read_text())["sources"])==44
+assert len(json.loads((p/"live.json").read_text())["sources"])==134
 assert json.loads((p/"release.json").read_text())["git_sha"]==pin
 print("LIVE_READBACK=PASS")
 PY
