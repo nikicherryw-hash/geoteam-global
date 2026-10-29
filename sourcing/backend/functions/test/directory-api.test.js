@@ -20,8 +20,8 @@ const checks=[
 ];
 test("sources are safe, unique and deliberately NOT connected",()=>{
  assert.equal(registry.product_id,"GEOTEAM_GLOBAL");
- assert.equal(registry.sources.length,269);
- assert.equal(sources.length,266);
+ assert.equal(registry.sources.length,313);
+ assert.equal(sources.length,310);
  assert.equal(new Set(registry.sources.map(x=>x.id)).size,registry.sources.length);
  for(const source of registry.sources){
    assert.equal(source.enabled,false);
@@ -46,9 +46,9 @@ function mock(path,query={},method="GET",ip="client-"+Math.random()){
  sourceApi({path,query,method,ip},res);
  return res;
 }
-test("health reports directory-only and 266 candidates",()=>{
+test("health reports directory-only and 310 candidates",()=>{
  const r=mock("/api/sourcing/health");
- assert.equal(r.statusCode,200);assert.equal(r.body.source_count,266);
+ assert.equal(r.statusCode,200);assert.equal(r.body.source_count,310);
  assert.equal(r.body.mode,"SOURCE_DISCOVERY_ONLY");
 });
 test("GET search returns honest unverified source results",()=>{
@@ -83,14 +83,14 @@ test("unsafe source URL is rejected",()=>{
 });
 
 
-test("all 266 sources are considered worldwide regardless of chosen region",()=>{
+test("all 310 sources are considered worldwide regardless of chosen region",()=>{
  const sample={part:"Насос Иртыш ПФ2",qty:1,dest:"Istanbul",condition:"any"};
  const world=finder.route(sources,{...sample,region:"all"});
  const ru=finder.route(sources,{...sample,region:"russia_cis"});
  const asia=finder.route(sources,{...sample,region:"asia"});
- assert.equal(world.total,266);
- assert.equal(ru.total,266);
- assert.equal(asia.total,266);
+ assert.equal(world.total,310);
+ assert.equal(ru.total,310);
+ assert.equal(asia.total,310);
  assert.ok(world.results.some(x=>x.id==="avito_ru"));
  assert.ok(world.results.some(x=>x.id==="trendyol_tr"));
  assert.ok(world.results.some(x=>x.id==="olx_br"));
@@ -113,7 +113,7 @@ test("customer destination influences rank, not available coverage",()=>{
 });
 test("used machinery and auctions appear near top and are NOT confirmed listings",()=>{
  const r=finder.route(sources,{part:"used Siemens 6ES7",qty:1,dest:"Berlin",condition:"used"});
- assert.equal(r.total,266);
+ assert.equal(r.total,310);
  assert.ok(r.results.slice(0,12).some(x=>x.source_type==="used_equipment"));
  assert.ok(r.results.slice(0,12).some(x=>x.source_type==="classifieds"));
  assert.ok(r.results.slice(0,12).some(x=>x.source_type==="auction"));
@@ -146,7 +146,7 @@ test("future API honors market-region routing",()=>{
  assert.equal(rr.statusCode,200);
  assert.equal(rr.body.region,"all");
  assert.equal(rr.body.preferred_region,"russia_cis");
- assert.equal(rr.body.total,266);
+ assert.equal(rr.body.total,310);
  assert.ok(rr.body.results.some(x=>x.id==="pulscen"));
  assert.equal(mock("/api/sourcing/search",{...req,region:"mars"}).statusCode,422);
 });
@@ -173,11 +173,24 @@ test("multilingual discovery preserves requested OEM identifiers and requires us
 });
 test("static registry candidates are never treated as active supplier offers",()=>{
  const sources=finder.validateRegistry(registry);
- assert.equal(sources.length,266);
+ assert.equal(sources.length,310);
  const r=finder.route(sources,{part:"Siemens 6ES7",qty:2,dest:"Frankfurt",condition:"any"});
- assert.equal(r.total,266);
+ assert.equal(r.total,310);
  assert.ok(r.results.every(x=>x.listing_state==="UNKNOWN_NOT_CHECKED"));
  assert.ok(r.results.every(x=>x.verified_inventory===false&&x.verified_price===false));
  assert.equal(r.scope,"ALL_REGISTERED_PRODUCT_SOURCES");
  assert.equal(r.directory_generated_at?.length>0,true);
+});
+
+test("expanded worldwide marketplaces, classifieds and used-equipment sources are never considered confirmed live listings",()=>{
+ const mandatory=["avito_ru","ozon_ru","trendyol_tr","sahibinden_tr","amazon_us","ebay_browse","machinio","ironplanet","mercadolivre_br","gumtree_au","jiji_ng","xianyu_cn"];
+ for(const id of mandatory)assert.ok(sources.some(x=>x.id===id),id+" missing");
+ const r=finder.route(sources,{part:"Siemens 6ES7315",qty:2,dest:"Istanbul, Türkiye",region:"all"});
+ assert.equal(r.total,310);
+ assert.ok(r.results.every(x=>x.verified_inventory===false&&x.verified_price===false));
+ assert.ok(r.results.every(x=>x.listing_state==="UNKNOWN_NOT_CHECKED"));
+ const classified=sources.filter(x=>x.source_type==="classifieds");
+ const auctions=sources.filter(x=>x.source_type==="auction");
+ assert.ok(classified.length>=50);
+ assert.ok(auctions.length>=20);
 });
