@@ -1,0 +1,11 @@
+"use strict";
+const test=require("node:test"),assert=require("node:assert/strict");
+const {inspectListing}=require("../listing-status");
+const now=new Date("2026-10-29T12:00:00Z");
+const sample={provider_status:"active",provider_evidence:{source_url:"https://example.org/item/123",observed_at:"2026-10-29T11:59:00Z"},freshness_seconds:300};
+test("fresh listing remains unconfirmed",()=>{const x=inspectListing(sample,now);assert.equal(x.status,"OBSERVED_ACTIVE");assert.equal(x.purchasable,false)});
+test("ended auction is inactive",()=>assert.equal(inspectListing({...sample,auction_ends_at:"2026-10-29T11:00:00Z"},now).status,"INACTIVE"));
+test("sold eBay listing is inactive",()=>assert.equal(inspectListing({...sample,provider_status:"sold"},now).status,"INACTIVE"));
+test("stale data are not current offers",()=>assert.equal(inspectListing({...sample,provider_evidence:{...sample.provider_evidence,observed_at:"2026-10-20T11:00:00Z"}},now).status,"STALE"));
+test("missing direct evidence cannot be offered",()=>assert.equal(inspectListing({provider_status:"active"},now).status,"UNVERIFIED"));
+test("future dated evidence is rejected",()=>assert.equal(inspectListing({...sample,provider_evidence:{...sample.provider_evidence,observed_at:"2026-11-01T11:00:00Z"}},now).status,"UNVERIFIED"));
