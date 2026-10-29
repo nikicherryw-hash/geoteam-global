@@ -415,7 +415,14 @@ footer{max-width:var(--gt-search-max)!important}
 .gt-source-card small{color:#b8cbc7}
 @media(max-width:580px){.gt-global-auto-banner{padding:14px 13px;gap:12px}.gt-global-auto-banner strong{font-size:12.5px}.gt-global-auto-banner p{font-size:11.15px}}
 </style>
-</head>
+<style id="gt-voice-search-style">
+.gt-voice-input{position:relative;display:flex;align-items:center;min-width:0}
+.gt-voice-input input{padding-right:52px!important}
+.gt-microphone{position:absolute;right:7px;top:50%;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;width:38px;height:38px;border:0;border-radius:50%;color:#b7f5e8;background:rgba(24,118,110,.16);box-shadow:inset 0 0 11px rgba(74,216,189,.15)}
+.gt-microphone:hover,.gt-microphone:focus-visible{background:rgba(43,160,144,.22);box-shadow:inset 0 0 13px rgba(92,255,215,.33),0 0 9px rgba(94,251,220,.24);outline:2px solid transparent}
+.gt-microphone[aria-pressed="true"]{color:#fff;background:rgba(22,176,149,.28);box-shadow:0 0 13px rgba(78,235,188,.55)}
+.gt-voice-feedback{display:block;font-size:11px;line-height:1.35;color:#a8d6cb;margin-top:4px}.gt-voice-feedback:empty{display:none}
+</style></head>
 <body>
 <header><a class="brand" href="index.html"><strong>GeoTeam</strong><small>GLOBAL</small></a><div class="top-nav"><a class="back" href="index.html" id="back">← Back to site</a><label class="lang-wrap" aria-label="Website language"><select class="lang-choice" id="lang" title="Website language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><optgroup label="More languages — planned"><option disabled>DE · Deutsch</option><option disabled>FR · Français</option><option disabled>ES · Español</option><option disabled>IT · Italiano</option><option disabled>PT · Português</option><option disabled>AR · العربية</option><option disabled>ZH · 中文</option></optgroup></select></label></div></header>
 <main>
@@ -430,7 +437,7 @@ footer{max-width:var(--gt-search-max)!important}
 <section class="workspace" aria-labelledby="searchHeading">
  <div class="section-head"><h2 id="searchHeading">Start your search</h2><button type="button" class="gt-custom-link" id="customDrawing"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM9 9h6M9 13h4"/></svg><span id="drawingCta">Manufacturing to drawings</span><span aria-hidden="true">↗</span></button></div>
  <div class="fields">
-  <div class="field part-field"><label id="partLabel" for="part">Part number / manufacturer *</label><input id="part" type="text" maxlength="160" autocomplete="off" placeholder="e.g. Siemens 6ES7..." role="combobox" aria-autocomplete="list" aria-controls="suggestions" aria-expanded="false" aria-labelledby="partLabel"><span id="suggestions" class="suggestions" role="listbox" aria-label="Part and manufacturer suggestions" hidden></span><small id="suggestHint" class="suggest-hint">Manufacturer and part number suggestions — not stock or price offers.</small></div>
+  <div class="field part-field"><label id="partLabel" for="part">Part number / manufacturer *</label><div class="gt-voice-input"><input id="part" type="text" maxlength="160" autocomplete="off" placeholder="e.g. Siemens 6ES7..." role="combobox" aria-autocomplete="list" aria-controls="suggestions" aria-expanded="false" aria-labelledby="partLabel"><button type="button" id="voiceSearch" class="gt-microphone" aria-label="Speak your request" title="Speak your request" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5m-4 0h8"/></svg></button></div><small id="voiceStatus" role="status" aria-live="polite" class="gt-voice-feedback"></small><span id="suggestions" class="suggestions" role="listbox" aria-label="Part and manufacturer suggestions" hidden></span><small id="suggestHint" class="suggest-hint">Manufacturer and part number suggestions — not stock or price offers.</small></div>
   <label class="field"><span id="qtyLabel">Quantity *</span><input id="qty" type="number" min="1" max="999999" step="1" inputmode="numeric" value="1"></label>
   <label class="field destination"><span id="destLabel">Delivery destination *</span><input id="dest" type="text" maxlength="100" autocomplete="off" placeholder="Istanbul, Türkiye"></label>
  </div>
@@ -495,6 +502,7 @@ footer{max-width:var(--gt-search-max)!important}
 <footer><span>© 2026 GeoTeam</span><a class="about" href="about.html" id="about">About Us</a><a id="whatWeSource" href="en/what-we-source.html">What We Source</a><a href="privacy.html" id="privacy">Privacy Policy</a><a href="rfq-privacy.html" id="rfqPrivacy">KVKK / RFQ</a></footer>
 <script src="global-source-finder.js"></script>
 <script src="market-offers.js"></script>
+<script src="voice-search.js"></script>
 <script>
 (()=>{'use strict';
 const by=(id)=>document.getElementById(id);
@@ -658,6 +666,12 @@ function product(){const part=by('part').value.trim(),dest=by('dest').value.trim
  if(!Number.isSafeInteger(qty)||qty<1||qty>999999){flash(T('requiredQty'));by('qty').focus();return null}
  if(!dest){flash(T('requiredDest'));by('dest').focus();return null}
  return {part:part.slice(0,160),qty,dest:dest.slice(0,100),condition:by('condition').value,lead:by('leadTime').value.trim(),notes:by('notes').value.trim(),file:by('bom').files?.[0]?.name||''}}
+function searchRequest(){
+ const part=by('part').value.trim(),qty=Number(by('qty').value);
+ if(!part){flash(T('requiredPart'));by('part').focus();return null}
+ if(!Number.isSafeInteger(qty)||qty<1||qty>999999){flash(T('requiredQty'));by('qty').focus();return null}
+ return {part:part.slice(0,160),qty,dest:by('dest').value.trim().slice(0,100),condition:by('condition').value,lead:by('leadTime').value.trim(),notes:by('notes').value.trim()};
+}
 function productSilent(){const p=by('part').value.trim(),q=Number(by('qty').value),d=by('dest').value.trim();if(!p||!d||!Number.isSafeInteger(q)||q<1||q>999999)return null;return{part:p.slice(0,160),qty:q,dest:d.slice(0,100),condition:by('condition').value,lead:by('leadTime').value.trim(),notes:by('notes').value.trim(),file:by('bom').files?.[0]?.name||''}}
 function activeList(){const row=productSilent();if(!items.length&& !row)return null;const copy=items.slice();if(row && !copy.some(x=>x.part===row.part&&x.qty===row.qty&&x.dest===row.dest))copy.push(row);return copy}
 function rfqText(rows){return ['GeoTeam Global | RFQ','Request for sourcing review (not a binding order)','',...rows.map((r,i)=>[
@@ -685,7 +699,7 @@ for(const id of ['gtSector']){
  });
 }
 by('search').addEventListener('click',async()=>{
- const req=product();if(!req||busy)return;
+ const req=searchRequest();if(!req||busy)return;
  busy=true;by('search').disabled=true;state(T('searchSearching'),'');
  try{
    const engine=window.GeoTeamSourceFinder;

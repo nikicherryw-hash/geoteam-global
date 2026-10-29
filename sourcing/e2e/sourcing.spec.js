@@ -9,6 +9,8 @@ test("three languages, global search, source status and pagination",async({page}
   await page.locator("#dest").fill("Istanbul, Türkiye");
   await page.locator("#search").click();
   await expect(page.locator("#results.gt-source-results")).toBeVisible();
+  await expect(page.locator("#results .gt-price-empty")).toBeVisible();
+  await page.locator("#results .gt-price-catalog summary").click();
   await expect(page.locator("#results .gt-source-card")).toHaveCount(12);
   await page.locator("#results .gt-source-more").click();
   await expect(page.locator("#results .gt-source-card")).toHaveCount(24);
