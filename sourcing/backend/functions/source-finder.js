@@ -268,17 +268,27 @@ function searchEngineUrl(provider,query,engine,withoutSite){
  * Still not a live listing-state confirmation. Only documented common URL forms. */
 function nativeSearchUrl(provider,query){
  const host=domain(provider.provider_url),q=encodeURIComponent(canonical(query));
- if(/(^|\.)ebay\.(com|de|co\.uk|com\.au|ca)$/.test(host))return "https://"+host+"/sch/i.html?_nkw="+q;
- if(/(^|\.)amazon\.(com|de|co\.uk|com\.tr|com\.au|in|ae|ca)$/.test(host))return "https://"+host+"/s?k="+q;
+ if(/(^|\.)ebay\.(com|de|co\.uk|com\.au|ca|fr|it|es)$/.test(host))return "https://"+host+"/sch/i.html?_nkw="+q;
+ if(/(^|\.)amazon\.(com|de|co\.uk|com\.tr|com\.au|in|ae|ca|fr|it|es|sa|co\.jp)$/.test(host))return "https://"+host+"/s?k="+q;
  if(host==="avito.ru")return "https://www.avito.ru/all?q="+q;
+ if(host==="ozon.ru")return "https://www.ozon.ru/search/?text="+q;
+ if(host==="wildberries.ru")return "https://www.wildberries.ru/catalog/0/search.aspx?search="+q;
+ if(host==="market.yandex.ru")return "https://market.yandex.ru/search?text="+q;
  if(host==="trendyol.com")return "https://www.trendyol.com/sr?q="+q;
  return null;
 }
-function productSearchUrl(provider,query){return searchEngineUrl(provider,query,"google",false)}
+/* The search provider is selected per supplier region; the customer chooses no geography. */
+function preferredEngineForSource(source){
+ const regions=source?.scope||[];
+ if(regions.includes("russia")||regions.includes("belarus")||regions.includes("kazakhstan")||regions.includes("cis"))return "yandex";
+ if(regions.includes("china"))return "baidu";
+ return "google";
+}
+function productSearchUrl(provider,query){return searchEngineUrl(provider,query,preferredEngineForSource(provider),false)}
 function render(target,data,options){
  const lang=["ru","en","tr"].includes(options?.lang)?options.lang:"en";
  const words=WORDS[lang],extra=EXTRA_WORDS[lang];
- const engine=Object.prototype.hasOwnProperty.call(ENGINES,options?.engine)?options.engine:"google";
+ /* One-click global discovery; each site chooses its region-appropriate engine. */
  const PAGE_SIZE=12;
  target.replaceChildren();target.classList.add("is-visible","gt-source-results");
  const title=document.createElement("h3");title.className="gt-source-headline";title.textContent=words.title+" · "+data.results.length+" "+words.count;
@@ -335,9 +345,10 @@ function render(target,data,options){
      const scope=document.createElement("span");scope.className="gt-source-scope";
      scope.textContent=(item.scope||[]).join(" · ");
      const links=document.createElement("div");links.className="gt-source-links";
-     const exact=document.createElement("a");exact.href=searchEngineUrl(item,data.request.query,engine,false);
+     const chosenEngine=preferredEngineForSource(item);
+     const exact=document.createElement("a");exact.href=searchEngineUrl(item,data.request.query,chosenEngine,false);
      exact.target="_blank";exact.rel="noopener noreferrer";exact.className="gt-source-find";
-     exact.textContent=words.search+" · "+engine+" ↗";
+     exact.textContent=words.search+" · "+chosenEngine+" ↗";
      const direct=document.createElement("a");direct.href=item.provider_url;direct.target="_blank";
      direct.rel="noopener noreferrer";direct.className="gt-source-direct";direct.textContent=words.view+" ↗";
      const native=nativeSearchUrl(item,data.request.query);
@@ -363,6 +374,6 @@ function render(target,data,options){
 }
 return Object.freeze({
  classify,canonical,domain,validateRegistry,route,search,loadRegistry,
- productSearchUrl,nativeSearchUrl,searchEngineUrl,multilingualVariants,render,listingLifecycle,preferredRegion,usedIntent,REGIONS,ENGINES,SOURCE_TYPES
+ productSearchUrl,preferredEngineForSource,nativeSearchUrl,searchEngineUrl,multilingualVariants,render,listingLifecycle,preferredRegion,usedIntent,REGIONS,ENGINES,SOURCE_TYPES
 });
 });
