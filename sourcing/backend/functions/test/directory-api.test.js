@@ -20,8 +20,8 @@ const checks=[
 ];
 test("sources are safe, unique and deliberately NOT connected",()=>{
  assert.equal(registry.product_id,"GEOTEAM_GLOBAL");
- assert.equal(registry.sources.length,134);
- assert.equal(sources.length,131);
+ assert.equal(registry.sources.length,269);
+ assert.equal(sources.length,266);
  assert.equal(new Set(registry.sources.map(x=>x.id)).size,registry.sources.length);
  for(const source of registry.sources){
    assert.equal(source.enabled,false);
@@ -46,9 +46,9 @@ function mock(path,query={},method="GET",ip="client-"+Math.random()){
  sourceApi({path,query,method,ip},res);
  return res;
 }
-test("health reports directory-only and 131 candidates",()=>{
+test("health reports directory-only and 266 candidates",()=>{
  const r=mock("/api/sourcing/health");
- assert.equal(r.statusCode,200);assert.equal(r.body.source_count,131);
+ assert.equal(r.statusCode,200);assert.equal(r.body.source_count,266);
  assert.equal(r.body.mode,"SOURCE_DISCOVERY_ONLY");
 });
 test("GET search returns honest unverified source results",()=>{
@@ -83,20 +83,52 @@ test("unsafe source URL is rejected",()=>{
 });
 
 
-test("region filters prioritize registered territory-specific sites",()=>{
- const sample={part:"Насос Иртыш ПФ2",qty:1,dest:"Istanbul"};
- const global=finder.route(sources,{...sample,region:"all"});
- assert.ok(global.total>=100);
+test("all 266 sources are considered worldwide regardless of chosen region",()=>{
+ const sample={part:"Насос Иртыш ПФ2",qty:1,dest:"Istanbul",condition:"any"};
+ const world=finder.route(sources,{...sample,region:"all"});
  const ru=finder.route(sources,{...sample,region:"russia_cis"});
  const asia=finder.route(sources,{...sample,region:"asia"});
- const europe=finder.route(sources,{...sample,region:"europe"});
- assert.ok(ru.results.some(x=>x.id==="pulscen"));
+ assert.equal(world.total,266);
+ assert.equal(ru.total,266);
+ assert.equal(asia.total,266);
+ assert.ok(world.results.some(x=>x.id==="avito_ru"));
+ assert.ok(world.results.some(x=>x.id==="trendyol_tr"));
+ assert.ok(world.results.some(x=>x.id==="olx_br"));
+ assert.ok(world.results.some(x=>x.id==="machinio"));
+ assert.ok(world.results.some(x=>x.id==="kitmondo"));
  assert.ok(ru.results.some(x=>x.id==="etm_ru"));
  assert.ok(asia.results.some(x=>x.id==="china_1688"));
- assert.ok(asia.results.some(x=>x.id==="tradekorea"));
- assert.ok(europe.results.some(x=>x.id==="automation24"));
- assert.ok(ru.total<global.total && asia.total<global.total);
- assert.ok(ru.results.every(x=>x.scope.includes("global")||x.scope.some(z=>finder.REGIONS.russia_cis.includes(z))));
+ assert.ok(world.results.every(x=>x.listing_state==="UNKNOWN_NOT_CHECKED"&&!x.verified_inventory&&!x.verified_price));
+});
+test("customer destination influences rank, not available coverage",()=>{
+ const ru=finder.route(sources,{part:"Siemens 6ES7",qty:1,dest:"Москва",region:"all"});
+ const tr=finder.route(sources,{part:"Siemens 6ES7",qty:1,dest:"Istanbul",region:"all"});
+ assert.equal(ru.preferred_region,"russia_cis");
+ assert.equal(tr.preferred_region,"turkey_mena");
+ assert.equal(ru.region,"all");
+ assert.equal(tr.region,"all");
+ assert.equal(ru.total,tr.total);
+ assert.equal(finder.preferredRegion("Kuala Lumpur"),"asia");
+ assert.equal(finder.preferredRegion("São Paulo"),"latin_america");
+});
+test("used machinery and auctions appear near top and are NOT confirmed listings",()=>{
+ const r=finder.route(sources,{part:"used Siemens 6ES7",qty:1,dest:"Berlin",condition:"used"});
+ assert.equal(r.total,266);
+ assert.ok(r.results.slice(0,12).some(x=>x.source_type==="used_equipment"));
+ assert.ok(r.results.slice(0,12).some(x=>x.source_type==="classifieds"));
+ assert.ok(r.results.slice(0,12).some(x=>x.source_type==="auction"));
+ assert.ok(r.results.slice(0,12).some(x=>x.source_type==="surplus_stock"));
+ assert.ok(r.results.every(x=>x.search_access==="USER_CLICK_EXTERNAL_ONLY"));
+});
+test("listing status rejects ended, sold, stale and unsupported offers",()=>{
+ const now="2026-10-29T12:00:00Z";
+ assert.equal(finder.listingLifecycle({itemEndDate:"2026-10-28T23:00:00Z",sourceVerified:true,estimatedAvailabilityStatus:"AVAILABLE",verifiedAt:now},now),"ENDED");
+ assert.equal(finder.listingLifecycle({sold:true},now),"SOLD");
+ assert.equal(finder.listingLifecycle({availabilityStatus:"OUT_OF_STOCK"},now),"UNAVAILABLE");
+ assert.equal(finder.listingLifecycle({availabilityStatus:"AVAILABLE",sourceVerified:true,verifiedAt:"2026-10-29T10:00:00Z"},now),"UNKNOWN_UNVERIFIED");
+ assert.equal(finder.listingLifecycle({availabilityStatus:"AVAILABLE",sourceVerified:false,verifiedAt:now},now),"UNKNOWN_UNVERIFIED");
+ assert.equal(finder.listingLifecycle({availabilityStatus:"AVAILABLE",sourceVerified:true,verifiedAt:now},now),"ACTIVE_CONFIRMED");
+ assert.equal(finder.listingLifecycle({},now),"UNKNOWN_UNVERIFIED");
 });
 test("country-specific catalogs require explicit click; engine URLs use HTTPS",()=>{
  const p={provider_url:"https://www.elec.ru/"};const q="Siemens 6ES7315";
@@ -112,7 +144,18 @@ test("future API honors market-region routing",()=>{
  const req={query:"Насос Иртыш ПФ2",quantity:"2",destination:"Istanbul",region:"russia_cis"};
  const rr=mock("/api/sourcing/search",req);
  assert.equal(rr.statusCode,200);
- assert.equal(rr.body.region,"russia_cis");
+ assert.equal(rr.body.region,"all");
+ assert.equal(rr.body.preferred_region,"russia_cis");
+ assert.equal(rr.body.total,266);
  assert.ok(rr.body.results.some(x=>x.id==="pulscen"));
  assert.equal(mock("/api/sourcing/search",{...req,region:"mars"}).statusCode,422);
+});
+
+test("native marketplace search links use current platform search, not old snippets",()=>{
+ const link=finder.nativeSearchUrl({provider_url:"https://www.ebay.com/"},"Siemens 6ES7315");
+ assert.ok(link.startsWith("https://ebay.com/sch/i.html?_nkw="));
+ assert.ok(link.includes("Siemens%206ES7315"));
+ const amazon=finder.nativeSearchUrl({provider_url:"https://www.amazon.com.tr/"},"ABB DI524");
+ assert.ok(amazon.includes("/s?k="));
+ assert.equal(finder.nativeSearchUrl({provider_url:"https://www.machinio.com/"},"ABB DI524"),null);
 });
