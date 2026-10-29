@@ -5700,7 +5700,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "auction",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "auction",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "sima_land_ru",
@@ -5719,7 +5723,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "onliner_by",
@@ -5738,7 +5746,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "kufar_by",
@@ -5747,7 +5759,7 @@
       "scope": [
         "belarus"
       ],
-      "mode": "CLASSIFIED_DISCOVERY",
+      "mode": "CLASSIFIEDS_DISCOVERY",
       "url": "https://www.kufar.by/",
       "documentation_url": null,
       "priority": 2,
@@ -5757,7 +5769,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "classified",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "classifieds",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "olx_kz",
@@ -5766,7 +5782,7 @@
       "scope": [
         "kazakhstan"
       ],
-      "mode": "CLASSIFIED_DISCOVERY",
+      "mode": "CLASSIFIEDS_DISCOVERY",
       "url": "https://www.olx.kz/",
       "documentation_url": null,
       "priority": 2,
@@ -5776,7 +5792,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "classified",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "classifieds",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "kaspi_kz",
@@ -5795,7 +5815,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "olx_ua",
@@ -5804,7 +5828,7 @@
       "scope": [
         "ukraine"
       ],
-      "mode": "CLASSIFIED_DISCOVERY",
+      "mode": "CLASSIFIEDS_DISCOVERY",
       "url": "https://www.olx.ua/",
       "documentation_url": null,
       "priority": 2,
@@ -5814,7 +5838,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "classified",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "classifieds",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "pttavm_tr",
@@ -5833,7 +5861,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "ebay_fr",
@@ -5852,7 +5884,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "ebay_it",
@@ -5871,7 +5907,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "ebay_es",
@@ -5890,7 +5930,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "amazon_fr",
@@ -5909,7 +5953,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "amazon_it",
@@ -5928,7 +5976,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "amazon_es",
@@ -5947,7 +5999,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "amazon_sa",
@@ -5966,7 +6022,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "amazon_jp",
@@ -5985,7 +6045,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "willhaben_at",
@@ -5994,7 +6058,7 @@
       "scope": [
         "europe"
       ],
-      "mode": "CLASSIFIED_DISCOVERY",
+      "mode": "CLASSIFIEDS_DISCOVERY",
       "url": "https://www.willhaben.at/",
       "documentation_url": null,
       "priority": 2,
@@ -6004,7 +6068,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "classified",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "classifieds",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "tutti_ch",
@@ -6013,7 +6081,7 @@
       "scope": [
         "europe"
       ],
-      "mode": "CLASSIFIED_DISCOVERY",
+      "mode": "CLASSIFIEDS_DISCOVERY",
       "url": "https://www.tutti.ch/",
       "documentation_url": null,
       "priority": 2,
@@ -6023,7 +6091,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "classified",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "classifieds",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "2dehands_be",
@@ -6032,7 +6104,7 @@
       "scope": [
         "europe"
       ],
-      "mode": "CLASSIFIED_DISCOVERY",
+      "mode": "CLASSIFIEDS_DISCOVERY",
       "url": "https://www.2dehands.be/",
       "documentation_url": null,
       "priority": 2,
@@ -6042,7 +6114,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "classified",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "classifieds",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "bazos_sk",
@@ -6051,7 +6127,7 @@
       "scope": [
         "europe"
       ],
-      "mode": "CLASSIFIED_DISCOVERY",
+      "mode": "CLASSIFIEDS_DISCOVERY",
       "url": "https://www.bazos.sk/",
       "documentation_url": null,
       "priority": 2,
@@ -6061,7 +6137,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "classified",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "classifieds",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "olx_pt",
@@ -6070,7 +6150,7 @@
       "scope": [
         "europe"
       ],
-      "mode": "CLASSIFIED_DISCOVERY",
+      "mode": "CLASSIFIEDS_DISCOVERY",
       "url": "https://www.olx.pt/",
       "documentation_url": null,
       "priority": 2,
@@ -6080,7 +6160,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "classified",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "classifieds",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "cdiscount_fr",
@@ -6099,7 +6183,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "bol_nl",
@@ -6118,7 +6206,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "manomano_fr",
@@ -6137,7 +6229,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "machinetools",
@@ -6156,7 +6252,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "used_equipment",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "used_equipment",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "proxibid",
@@ -6175,7 +6275,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "auction",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "auction",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "auctiontime",
@@ -6194,7 +6298,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "auction",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "auction",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "hgr",
@@ -6213,7 +6321,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "used_equipment",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "used_equipment",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "hilcoglobal",
@@ -6232,7 +6344,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "auction",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "auction",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "shopee_br",
@@ -6251,7 +6367,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "mercadolibre_pe",
@@ -6270,7 +6390,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "shopee_sg",
@@ -6289,7 +6413,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "lazada_sg",
@@ -6308,7 +6436,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "shopee_th",
@@ -6327,7 +6459,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "lazada_th",
@@ -6346,7 +6482,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "rakuten_fr",
@@ -6365,7 +6505,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "naver_shopping",
@@ -6384,7 +6528,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "danawa_kr",
@@ -6403,7 +6551,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "electronics",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "udaan_in",
@@ -6422,7 +6574,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "general_b2b",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "jiji_ug",
@@ -6431,7 +6587,7 @@
       "scope": [
         "africa"
       ],
-      "mode": "CLASSIFIED_DISCOVERY",
+      "mode": "CLASSIFIEDS_DISCOVERY",
       "url": "https://jiji.ug/",
       "documentation_url": null,
       "priority": 2,
@@ -6441,7 +6597,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "classified",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "classifieds",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "takealot_sa",
@@ -6460,7 +6620,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "jumia_eg",
@@ -6479,7 +6643,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "allbids_au",
@@ -6498,7 +6666,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "auction",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "auction",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "kogan_au",
@@ -6517,7 +6689,11 @@
       "enabled": false,
       "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
       "channel_type": "marketplace",
-      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     }
   ]
 }
