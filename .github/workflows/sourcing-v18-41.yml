@@ -1,0 +1,52 @@
+name: GeoTeam sourcing v18.41 QA
+on:
+  push:
+    branches:
+      - geoteam-v18-41-global-everywhere
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-registry-and-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Use Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Validate source registry
+        run: python3 sourcing/foundation/validate_sources.py
+      - name: Verify registry mirrors and UI
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          root=Path(".")
+          reg=(root/"sourcing/foundation/source_registry.v1.json").read_bytes()
+          assert reg==(root/"sourcing/backend/functions/source_registry.json").read_bytes()
+          assert reg==(root/"preview-v18-7/data/sources.v1.json").read_bytes()
+          src=(root/"preview-v18-7/global-source-finder.js").read_bytes()
+          assert src==(root/"sourcing/backend/functions/source-finder.js").read_bytes()
+          html=(root/"preview-v18-7/sourcing.html").read_text()
+          assert 'id="gtMarketRegion"' in html
+          assert 'id="gtSearchEngine"' in html
+          assert 'value="any" selected' in html
+          assert 'engine.search({...req,sector,region,condition:req.condition})' in html
+          assert json.loads(reg)["product_id"]=="GEOTEAM_GLOBAL"
+          print("MIRROR_AND_UI=PASS")
+          PY
+      - name: Check JS syntax
+        run: |
+          node --check preview-v18-7/global-source-finder.js
+          node --check sourcing/backend/functions/directory-api.js
+      - name: Run unit and API contract tests (no network)
+        run: |
+          cd sourcing/backend/functions
+          node --test
