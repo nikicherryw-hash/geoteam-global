@@ -1,0 +1,16 @@
+name: GeoTeam v18.48 QA
+on:
+  push:
+    branches: [geoteam-v18-48-timeweb-multiprovider]
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r sourcing/search_v2/requirements.txt
+      - run: python -m compileall -q sourcing/search_v2
+      - run: python -m unittest discover -v -s sourcing/search_v2 -p 'test_*.py'
