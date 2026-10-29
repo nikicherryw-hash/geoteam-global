@@ -10,8 +10,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.12"
       - run: python -m pip install -r sourcing/search_v2/requirements.txt
       - run: python -m compileall -q sourcing/search_v2
       - run: python -m unittest discover -v -s sourcing/search_v2 -p "test_*.py"
       - run: bash -n sourcing/deploy/timeweb_readonly_preflight.sh
+      - run: bash -n sourcing/deploy/install_geoteam_native_timeweb.sh
