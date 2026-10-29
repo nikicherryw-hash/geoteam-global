@@ -5,6 +5,11 @@
  const api=factory();
  if(typeof module==="object"&&module.exports)module.exports=api;
  root.GeoTeamVoiceInput=api;
+ if(typeof document!=="undefined"){
+  const ready=()=>api.install();
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",ready,{once:true});
+  else ready();
+ }
 })(typeof globalThis!=="undefined"?globalThis:this,function(){
  "use strict";
  const TXT={
