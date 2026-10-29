@@ -24,7 +24,9 @@ WORK="$(mktemp -d)"
 SRC="$WORK/repo"
 OUT="$WORK/publish"
 mkdir -p "$OUT/public/data" "$OUT/public/en" "$OUT/public/ru" "$OUT/public/tr"
-git clone --quiet --depth 1 --single-branch --branch "$BRANCH" "$REPO" "$SRC"
+git clone --quiet --depth 25 --single-branch --branch "$BRANCH" "$REPO" "$SRC"
+git -C "$SRC" checkout --quiet --detach "$PIN" ||
+  { echo "BLOCKED: pinned source commit unavailable; no deployment." >&2; exit 13; }
 [[ "$(git -C "$SRC" rev-parse HEAD)" == "$PIN" ]] ||
   { echo "BLOCKED: source commit changed; no deployment." >&2; exit 13; }
 
