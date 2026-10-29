@@ -1,0 +1,743 @@
+{
+  "product_id": "GEOTEAM_GLOBAL",
+  "version": "0.2.0",
+  "as_of": "2026-10-29",
+  "purpose": "Candidate worldwide sourcing and logistics provider registry. This is NOT a connected or licensed search system.",
+  "integration_policy": {
+    "default_enabled": false,
+    "supplier_outreach": "OWNER_APPROVAL_REQUIRED",
+    "new_api_integration": "OWNER_APPROVAL_AND_SOURCE_RIGHTS_REQUIRED",
+    "scraping": "PROHIBITED_WITHOUT_EXPLICIT_PERMISSION_AND_LEGAL_REVIEW",
+    "data_reuse": "SOURCE_LICENSE_CONTROLS_STORAGE_RETENTION_AND_DISPLAY",
+    "personal_data": "MINIMIZE_AND_PROTECT",
+    "supplier_offer_status": "NOT_VERIFIED_UNTIL_PROVIDER_EVIDENCE",
+    "quote_generation": "NO_BINDING_AUTOMATED_OFFERS",
+    "export_compliance": "MUST_PASS_DESTINATION_PRODUCT_END_USE_RESTRICTIONS",
+    "infrastructure": "GEOTEAM_ONLY_NO_SHARED_SKS_RESOURCES"
+  },
+  "sources": [
+    {
+      "id": "trustedparts",
+      "name": "TrustedParts / ECIA",
+      "segment": "electronics",
+      "scope": [
+        "global"
+      ],
+      "mode": "OFFICIAL_API",
+      "url": "https://www.trustedparts.com/",
+      "documentation_url": "https://www.trustedparts.com/en/docs/api",
+      "priority": 1,
+      "requirements": "API access and display/storage rights review",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "mouser",
+      "name": "Mouser Electronics",
+      "segment": "electronics",
+      "scope": [
+        "global"
+      ],
+      "mode": "OFFICIAL_API",
+      "url": "https://www.mouser.com/",
+      "documentation_url": "https://www.mouser.com/en/api-search/",
+      "priority": 1,
+      "requirements": "API key; quotas and display/storage licensing",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "digikey",
+      "name": "DigiKey",
+      "segment": "electronics",
+      "scope": [
+        "global"
+      ],
+      "mode": "OFFICIAL_API",
+      "url": "https://www.digikey.com/",
+      "documentation_url": "https://developer.digikey.com/",
+      "priority": 1,
+      "requirements": "Developer registration, app approval and API credentials",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "nexar",
+      "name": "Nexar / Octopart",
+      "segment": "electronics",
+      "scope": [
+        "global"
+      ],
+      "mode": "OFFICIAL_API",
+      "url": "https://nexar.com/",
+      "documentation_url": "https://nexar.com/developer",
+      "priority": 1,
+      "requirements": "Account, OAuth app and plan/data rights",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "element14",
+      "name": "Farnell / Newark / element14",
+      "segment": "electronics",
+      "scope": [
+        "global"
+      ],
+      "mode": "OFFICIAL_API",
+      "url": "https://www.farnell.com/",
+      "documentation_url": "https://partner.element14.com/",
+      "priority": 1,
+      "requirements": "Registered partner API key; territory and contract price permissions",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "arrow",
+      "name": "Arrow Electronics",
+      "segment": "electronics",
+      "scope": [
+        "global"
+      ],
+      "mode": "OFFICIAL_API",
+      "url": "https://www.arrow.com/",
+      "documentation_url": "https://developers.arrow.com/api/index.php",
+      "priority": 1,
+      "requirements": "Partner API login/key; licensing and current endpoint qualification",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "partsbase",
+      "name": "PartsBase",
+      "segment": "aviation",
+      "scope": [
+        "global"
+      ],
+      "mode": "PARTNER_API",
+      "url": "https://www.partsbase.com/",
+      "documentation_url": "https://www.partsbase.com/integrations",
+      "priority": 1,
+      "requirements": "PartsBase account manager, credentials, subscription/usage rights",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "locatory",
+      "name": "Locatory.com",
+      "segment": "aviation",
+      "scope": [
+        "global"
+      ],
+      "mode": "PARTNER_API",
+      "url": "https://www.locatory.com/",
+      "documentation_url": "https://intercom.help/locatory/en/articles/10095710-api-integration-guide-a-step-by-step-process-for-clients",
+      "priority": 1,
+      "requirements": "Commercial subscription and approved API scope",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "ilsmart",
+      "name": "ILSmart / ILS",
+      "segment": "aviation",
+      "scope": [
+        "global"
+      ],
+      "mode": "SUBSCRIPTION_RESEARCH",
+      "url": "https://www.ilsmart.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Confirm subscription and available integration interfaces directly",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "thomasnet",
+      "name": "Thomasnet",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.thomasnet.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Supplier discovery only; automated data access unverified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "directindustry",
+      "name": "DirectIndustry",
+      "segment": "industrial",
+      "scope": [
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.directindustry.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Use approved supplier contacts/RFQ; no assumed catalog API",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "europages",
+      "name": "Europages",
+      "segment": "industrial",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.europages.co.uk/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Directory and RFQ; no assumed automated extraction permissions",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "wlw",
+      "name": "Wer liefert was (wlw)",
+      "segment": "industrial",
+      "scope": [
+        "dach",
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.wlw.de/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Supplier directory access only; API rights unverified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "siemens_pih",
+      "name": "Siemens Product Information Hub",
+      "segment": "manufacturer",
+      "scope": [
+        "global"
+      ],
+      "mode": "EARLY_ACCESS_API",
+      "url": "https://developer.siemens.com/",
+      "documentation_url": "https://developer.siemens.com/product-information-api/rest-api-spec.html",
+      "priority": 2,
+      "requirements": "Early access; confirm product/catalog scope and commercial rights",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "alibaba_open",
+      "name": "Alibaba.com Open Platform",
+      "segment": "general_b2b",
+      "scope": [
+        "asia",
+        "global"
+      ],
+      "mode": "APPROVAL_REQUIRED_API",
+      "url": "https://www.alibaba.com/",
+      "documentation_url": "https://openapi.alibaba.com/doc/doc.htm",
+      "priority": 2,
+      "requirements": "Developer registration, approved app/scopes and supplier authorizations; not a blanket catalog API",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "made_in_china",
+      "name": "Made-in-China.com",
+      "segment": "general_b2b",
+      "scope": [
+        "china",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.made-in-china.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Supplier listings/RFQ; automated feed requires provider permission",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "globalsources",
+      "name": "Global Sources",
+      "segment": "general_b2b",
+      "scope": [
+        "asia",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.globalsources.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Supplier discovery and RFQ; automation authorization unverified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "ebay_browse",
+      "name": "eBay Browse",
+      "segment": "marketplace",
+      "scope": [
+        "global"
+      ],
+      "mode": "OFFICIAL_API",
+      "url": "https://www.ebay.com/",
+      "documentation_url": "https://developer.ebay.com/develop/api/buy",
+      "priority": 2,
+      "requirements": "Developer account, OAuth, marketplace/site and data-redistribution constraints",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "amazon_spapi",
+      "name": "Amazon Selling Partner API",
+      "segment": "marketplace",
+      "scope": [
+        "global"
+      ],
+      "mode": "SELLER_AUTH_API",
+      "url": "https://sell.amazon.com/",
+      "documentation_url": "https://developer-docs.shipping.amazon.com/apis/docs/connecting-to-the-selling-partner-api",
+      "priority": 3,
+      "requirements": "Seller-authorized integration; NOT a general public worldwide product search",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "dhl_express",
+      "name": "DHL Express MyDHL",
+      "segment": "logistics",
+      "scope": [
+        "global"
+      ],
+      "mode": "ACCOUNT_API",
+      "url": "https://www.dhl.com/",
+      "documentation_url": "https://developer.dhl.com/api-reference/dhl-express-mydhl-api",
+      "priority": 1,
+      "requirements": "DHL Express customer account, credentials, rating/landed-cost data rights",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "ups_rating",
+      "name": "UPS Rating",
+      "segment": "logistics",
+      "scope": [
+        "global"
+      ],
+      "mode": "ACCOUNT_API",
+      "url": "https://www.ups.com/",
+      "documentation_url": "https://developer.ups.com/tag/Rating?loc=en_US",
+      "priority": 2,
+      "requirements": "Developer OAuth, account/terms, allowed rate display",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "fedex_rates",
+      "name": "FedEx Rates & Transit Times",
+      "segment": "logistics",
+      "scope": [
+        "global"
+      ],
+      "mode": "ACCOUNT_API",
+      "url": "https://www.fedex.com/",
+      "documentation_url": "https://developer.fedex.com/api/en-us/catalog/rate.html",
+      "priority": 2,
+      "requirements": "FedEx developer app and account; route, dimensions, tariffs",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "rs",
+      "name": "RS",
+      "segment": "electronics",
+      "scope": [
+        "europe",
+        "north_america",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.rs-online.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "tme",
+      "name": "TME — Transfer Multisort Elektronik",
+      "segment": "electronics",
+      "scope": [
+        "europe",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.tme.eu/en/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "avnet",
+      "name": "Avnet",
+      "segment": "electronics",
+      "scope": [
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.avnet.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "future_electronics",
+      "name": "Future Electronics",
+      "segment": "electronics",
+      "scope": [
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.futureelectronics.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "tti",
+      "name": "TTI Electronics",
+      "segment": "electronics",
+      "scope": [
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.tti.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "conrad",
+      "name": "Conrad Electronic",
+      "segment": "electronics",
+      "scope": [
+        "europe",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.conrad.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "rutronik",
+      "name": "Rutronik Elektronische Bauelemente",
+      "segment": "electronics",
+      "scope": [
+        "europe",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.rutronik.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "radwell",
+      "name": "Radwell International",
+      "segment": "industrial",
+      "scope": [
+        "north_america",
+        "europe",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.radwell.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "euautomation",
+      "name": "EU Automation",
+      "segment": "industrial",
+      "scope": [
+        "europe",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.euautomation.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "globalspec",
+      "name": "GlobalSpec",
+      "segment": "industrial",
+      "scope": [
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.globalspec.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "kompass",
+      "name": "Kompass",
+      "segment": "industrial",
+      "scope": [
+        "europe",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.kompass.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "industrystock",
+      "name": "IndustryStock",
+      "segment": "industrial",
+      "scope": [
+        "europe",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.industrystock.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "motion",
+      "name": "Motion Industries",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.motion.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "mroelectric",
+      "name": "MRO Electric and Supply",
+      "segment": "industrial",
+      "scope": [
+        "north_america",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.mroelectric.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "indiamart",
+      "name": "IndiaMART",
+      "segment": "general_b2b",
+      "scope": [
+        "india",
+        "asia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.indiamart.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "tradeindia",
+      "name": "TradeIndia",
+      "segment": "general_b2b",
+      "scope": [
+        "india",
+        "asia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.tradeindia.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "hktdc",
+      "name": "HKTDC Sourcing",
+      "segment": "general_b2b",
+      "scope": [
+        "hong_kong",
+        "asia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://sourcing.hktdc.com/en",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "taiwantrade",
+      "name": "Taiwantrade",
+      "segment": "general_b2b",
+      "scope": [
+        "taiwan",
+        "asia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.taiwantrade.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "mfg",
+      "name": "MFG.com — Contract Manufacturing",
+      "segment": "general_b2b",
+      "scope": [
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.mfg.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "satair",
+      "name": "Satair Market",
+      "segment": "aviation",
+      "scope": [
+        "global"
+      ],
+      "mode": "SUBSCRIPTION_RESEARCH",
+      "url": "https://market.satair.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Partner/account access and product rights; public-site discovery only pending approval",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "boeingdistribution",
+      "name": "Boeing Distribution",
+      "segment": "aviation",
+      "scope": [
+        "global"
+      ],
+      "mode": "SUBSCRIPTION_RESEARCH",
+      "url": "https://www.boeingdistribution.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Partner/account access and product rights; public-site discovery only pending approval",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "aeroxchange",
+      "name": "Aeroxchange",
+      "segment": "aviation",
+      "scope": [
+        "global"
+      ],
+      "mode": "SUBSCRIPTION_RESEARCH",
+      "url": "https://www.aeroxchange.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Partner/account access and product rights; public-site discovery only pending approval",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    }
+  ]
+}
