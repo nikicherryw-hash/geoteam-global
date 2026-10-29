@@ -4,6 +4,7 @@ No AI calls, stock inference, fake listings, redirects, or unattended supplier c
 from __future__ import annotations
 
 import json
+import ipaddress
 import re
 import unicodedata
 from datetime import datetime, timezone
@@ -76,6 +77,11 @@ def safe_url(url: str, allowed: set[str] | None = None) -> bool:
         host = parts.hostname.lower().removeprefix("www.")
         if host in {"localhost"} or host.endswith((".local", ".internal")):
             return False
+        try:
+            ipaddress.ip_address(host)
+            return False
+        except ValueError:
+            pass
         if not re.fullmatch(r"[a-z0-9.-]+", host) or "." not in host:
             return False
         if allowed is not None and host not in allowed:
@@ -98,6 +104,8 @@ def score_hit(hit: dict, query: str) -> int:
     # Require ALL numeric model tokens to match literally: 918 != 916.
     nums = [t for t in tokens if any(c.isdigit() for c in t)]
     body = title + " " + snippet
+    if product["manufacturer"] == "ROTAX" and "rotax" not in body:
+        return 0
     if any(not re.search(r"(?<!\w)" + re.escape(t) + r"(?!\w)", body) for t in nums):
         return 0
     matched = sum(1 for t in set(tokens) if re.search(r"(?<!\w)" + re.escape(t) + r"(?!\w)", body))
