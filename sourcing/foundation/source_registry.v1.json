@@ -20,7 +20,11 @@
     "geo_method": "USER_SUPPLIED_DELIVERY_DESTINATION_FOR_RANKING_ONLY_DO_NOT_RELY_ON_IP_OR_VPN",
     "private_classifieds": "USER_CLICK_ONLY_NO_AUTOMATED_MESSAGING_OR_ACCOUNT_ACCESS",
     "auction_listing_policy": "DO_NOT_LABEL_ACTIVE_WITHOUT_PROVIDER_STATUS_AND_CURRENT_END_DATE",
-    "listing_status_policy": "UNKNOWN_UNTIL_AUTHORITATIVE_PROVIDER_VERIFICATION"
+    "listing_status_policy": "UNKNOWN_UNTIL_AUTHORITATIVE_PROVIDER_VERIFICATION",
+    "destination_handling": "Delivery destination is only for logistics; do not restrict global sourcing by IP/VPN",
+    "market_discovery": "Always include all registered regions; no source-region chooser",
+    "listing_freshness": "Exclude expired/sold/ended offers only after authoritative per-listing status is checked; directory links are not inventory",
+    "candidate_search": "Third-party site searches initiated only by the user; no scraping or hidden requests"
   },
   "sources": [
     {
@@ -5678,6 +5682,842 @@
       "condition_focus": "mixed",
       "listing_status_capability": "UNVERIFIED_NO_API",
       "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "auction_ru",
+      "name": "Аукцион.ру",
+      "segment": "marketplace",
+      "scope": [
+        "russia"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://auction.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "auction",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "sima_land_ru",
+      "name": "Сима-ленд",
+      "segment": "marketplace",
+      "scope": [
+        "russia"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.sima-land.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "onliner_by",
+      "name": "Onlíner Каталог",
+      "segment": "marketplace",
+      "scope": [
+        "belarus"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://catalog.onliner.by/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "kufar_by",
+      "name": "Куфар",
+      "segment": "marketplace",
+      "scope": [
+        "belarus"
+      ],
+      "mode": "CLASSIFIED_DISCOVERY",
+      "url": "https://www.kufar.by/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "classified",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "olx_kz",
+      "name": "OLX Казахстан",
+      "segment": "marketplace",
+      "scope": [
+        "kazakhstan"
+      ],
+      "mode": "CLASSIFIED_DISCOVERY",
+      "url": "https://www.olx.kz/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "classified",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "kaspi_kz",
+      "name": "Kaspi Магазин",
+      "segment": "marketplace",
+      "scope": [
+        "kazakhstan"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://kaspi.kz/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "olx_ua",
+      "name": "OLX Украина",
+      "segment": "marketplace",
+      "scope": [
+        "ukraine"
+      ],
+      "mode": "CLASSIFIED_DISCOVERY",
+      "url": "https://www.olx.ua/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "classified",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "pttavm_tr",
+      "name": "PttAVM",
+      "segment": "marketplace",
+      "scope": [
+        "turkey"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.pttavm.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "ebay_fr",
+      "name": "eBay France",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.ebay.fr/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "ebay_it",
+      "name": "eBay Italia",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.ebay.it/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "ebay_es",
+      "name": "eBay España",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.ebay.es/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "amazon_fr",
+      "name": "Amazon France",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.amazon.fr/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "amazon_it",
+      "name": "Amazon Italia",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.amazon.it/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "amazon_es",
+      "name": "Amazon España",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.amazon.es/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "amazon_sa",
+      "name": "Amazon Saudi Arabia",
+      "segment": "marketplace",
+      "scope": [
+        "middle_east"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.amazon.sa/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "amazon_jp",
+      "name": "Amazon Japan",
+      "segment": "marketplace",
+      "scope": [
+        "japan"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.amazon.co.jp/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "willhaben_at",
+      "name": "willhaben",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIED_DISCOVERY",
+      "url": "https://www.willhaben.at/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "classified",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "tutti_ch",
+      "name": "tutti.ch",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIED_DISCOVERY",
+      "url": "https://www.tutti.ch/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "classified",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "2dehands_be",
+      "name": "2dehands",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIED_DISCOVERY",
+      "url": "https://www.2dehands.be/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "classified",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "bazos_sk",
+      "name": "Bazoš SK",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIED_DISCOVERY",
+      "url": "https://www.bazos.sk/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "classified",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "olx_pt",
+      "name": "OLX Portugal",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIED_DISCOVERY",
+      "url": "https://www.olx.pt/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "classified",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "cdiscount_fr",
+      "name": "Cdiscount",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.cdiscount.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "bol_nl",
+      "name": "bol",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.bol.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "manomano_fr",
+      "name": "ManoMano",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.manomano.fr/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "machinetools",
+      "name": "MachineTools.com",
+      "segment": "industrial",
+      "scope": [
+        "global"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://www.machinetools.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "used_equipment",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "proxibid",
+      "name": "Proxibid",
+      "segment": "marketplace",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.proxibid.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "auction",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "auctiontime",
+      "name": "AuctionTime",
+      "segment": "marketplace",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.auctiontime.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "auction",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "hgr",
+      "name": "HGR Industrial Surplus",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://hgrinc.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "used_equipment",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "hilcoglobal",
+      "name": "Hilco Global",
+      "segment": "marketplace",
+      "scope": [
+        "global"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.hilcoglobal.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "auction",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "shopee_br",
+      "name": "Shopee Brasil",
+      "segment": "marketplace",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://shopee.com.br/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "mercadolibre_pe",
+      "name": "Mercado Libre Perú",
+      "segment": "marketplace",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.mercadolibre.com.pe/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "shopee_sg",
+      "name": "Shopee Singapore",
+      "segment": "marketplace",
+      "scope": [
+        "singapore"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://shopee.sg/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "lazada_sg",
+      "name": "Lazada Singapore",
+      "segment": "marketplace",
+      "scope": [
+        "singapore"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.lazada.sg/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "shopee_th",
+      "name": "Shopee Thailand",
+      "segment": "marketplace",
+      "scope": [
+        "thailand"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://shopee.co.th/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "lazada_th",
+      "name": "Lazada Thailand",
+      "segment": "marketplace",
+      "scope": [
+        "thailand"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.lazada.co.th/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "rakuten_fr",
+      "name": "Rakuten France",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://fr.shopping.rakuten.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "naver_shopping",
+      "name": "Naver Shopping",
+      "segment": "marketplace",
+      "scope": [
+        "korea"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://shopping.naver.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "danawa_kr",
+      "name": "Danawa",
+      "segment": "electronics",
+      "scope": [
+        "korea"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.danawa.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "electronics",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "udaan_in",
+      "name": "Udaan",
+      "segment": "general_b2b",
+      "scope": [
+        "india"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://udaan.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "general_b2b",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "jiji_ug",
+      "name": "Jiji Uganda",
+      "segment": "marketplace",
+      "scope": [
+        "africa"
+      ],
+      "mode": "CLASSIFIED_DISCOVERY",
+      "url": "https://jiji.ug/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "classified",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "takealot_sa",
+      "name": "Takealot South Africa",
+      "segment": "marketplace",
+      "scope": [
+        "africa"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.takealot.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "jumia_eg",
+      "name": "Jumia Egypt",
+      "segment": "marketplace",
+      "scope": [
+        "africa"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.jumia.com.eg/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "allbids_au",
+      "name": "AllBids Australia",
+      "segment": "marketplace",
+      "scope": [
+        "oceania"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.allbids.com.au/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "auction",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
+    },
+    {
+      "id": "kogan_au",
+      "name": "Kogan Australia",
+      "segment": "marketplace",
+      "scope": [
+        "oceania"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.kogan.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "CANDIDATE: public discovery only. Seller, listing validity, auction state, export/delivery eligibility, site access and data reuse rights NOT verified. No automatic scraping or live stock claim.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "channel_type": "marketplace",
+      "listing_policy": "NOT_A_CONFIRMED_LIVE_OFFER"
     }
   ]
 }
