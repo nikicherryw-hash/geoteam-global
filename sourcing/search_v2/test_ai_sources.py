@@ -28,6 +28,12 @@ class Tests(unittest.TestCase):
     self.assertEqual(validate_output(payload(model="ROTAX 915 iS"),"rotax 916","ru")["offers"],[])
     self.assertEqual(validate_output(payload(model="Siemens 916"),"rotax 916","ru")["offers"],[])
     self.assertEqual(validate_output(payload(),"rotax 918","ru")["offers"],[])
+ def test_mismatched_manufacturer_and_part_rejected(self):
+    from sourcing.search_v2.ai_search import model_matches
+    self.assertTrue(model_matches("Siemens 6ES7315-2EH14-0AB0","Siemens 6ES7315-2EH14-0AB0"))
+    self.assertFalse(model_matches("Siemens 6ES7315-2EH14-0AB0","Siemens 6ES7315-2EH14-0AB1"))
+    self.assertFalse(model_matches("ABB DI524","Siemens DI524"))
+    self.assertTrue(model_matches("ABB DI524","ABB DI524"))
  def test_registry_only_a_hint(self):
     a=pick("Rotax 916")
     self.assertLessEqual(len(a),12)
