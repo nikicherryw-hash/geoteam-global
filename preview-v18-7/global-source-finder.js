@@ -242,18 +242,28 @@ function searchEngineUrl(provider,query,engine,withoutSite){
  const suffix=withoutSite?"":"site:"+domain(provider.provider_url)+" ";
  return ENGINES[type].base+encodeURIComponent(suffix+canonical(query));
 }
+/* Native public search links avoid stale search-indexed auction pages.
+ * Still not a live listing-state confirmation. Only documented common URL forms. */
+function nativeSearchUrl(provider,query){
+ const host=domain(provider.provider_url),q=encodeURIComponent(canonical(query));
+ if(/(^|\\.)ebay\\.(com|de|co\\.uk|com\\.au|ca)$/.test(host))return "https://"+host+"/sch/i.html?_nkw="+q;
+ if(/(^|\\.)amazon\\.(com|de|co\\.uk|com\\.tr|com\\.au|in|ae|ca)$/.test(host))return "https://"+host+"/s?k="+q;
+ if(host==="avito.ru")return "https://www.avito.ru/all?q="+q;
+ if(host==="trendyol.com")return "https://www.trendyol.com/sr?q="+q;
+ return null;
+}
 function productSearchUrl(provider,query){return searchEngineUrl(provider,query,"google",false)}
 function render(target,data,options){
  const lang=["ru","en","tr"].includes(options?.lang)?options.lang:"en";
- const words=WORDS[lang];
+ const words=WORDS[lang],extra=EXTRA_WORDS[lang];
  const engine=Object.prototype.hasOwnProperty.call(ENGINES,options?.engine)?options.engine:"google";
  const PAGE_SIZE=12;
  target.replaceChildren();target.classList.add("is-visible","gt-source-results");
  const title=document.createElement("h3");title.className="gt-source-headline";title.textContent=words.title+" · "+data.results.length+" "+words.count;
- const description=document.createElement("p");description.className="gt-source-descr";description.textContent=words.subtitle;
+ const description=document.createElement("p");description.className="gt-source-descr";description.textContent=extra.scope+". "+words.subtitle;
  target.append(title,description);
  const globalBox=document.createElement("div");globalBox.className="gt-worldwide-search";
- const head=document.createElement("strong");head.textContent=words.worldwide;
+ const head=document.createElement("strong");head.textContent=extra.global;
  const group=document.createElement("div");group.className="gt-worldwide-engines";
  for(const key of ["google","bing","yandex","baidu"]){
    const link=document.createElement("a");
@@ -264,6 +274,14 @@ function render(target,data,options){
  }
  const notice=document.createElement("small");notice.textContent=words.notice;
  globalBox.append(head,group,notice);target.append(globalBox);
+ const sourceStats={classifieds:0,used_equipment:0,auction:0,retail_marketplace:0,surplus_stock:0};
+ for(const r of data.results)if(Object.prototype.hasOwnProperty.call(sourceStats,r.source_type))sourceStats[r.source_type]++;
+ const mix=document.createElement("p");mix.className="gt-market-mix";
+ mix.textContent=extra.breakdown+": "+Object.entries(sourceStats)
+ .filter(pair=>pair[1]>0).map(pair=>(SOURCE_TYPES[pair[0]]?.[lang]||pair[0])+" "+pair[1]).join(" · ");
+ const geo=document.createElement("p");geo.className="gt-worldwide-geo";
+ geo.textContent=extra.priority;
+ target.append(mix,geo);
  if(!data.results.length){
    const empty=document.createElement("p");empty.textContent=words.noResults;target.append(empty);return;
  }
@@ -279,7 +297,7 @@ function render(target,data,options){
      const card=document.createElement("article");card.className="gt-source-card";
      const brand=document.createElement("strong");brand.textContent=item.name;
      const sector=document.createElement("span");sector.className="gt-source-sector";
-     sector.textContent=SECTORS[item.segment]?.[lang]||item.segment;
+     sector.textContent=SOURCE_TYPES[item.source_type]?.[lang]||SECTORS[item.segment]?.[lang]||item.segment;
      const scope=document.createElement("span");scope.className="gt-source-scope";
      scope.textContent=(item.scope||[]).join(" · ");
      const links=document.createElement("div");links.className="gt-source-links";
@@ -289,7 +307,15 @@ function render(target,data,options){
      const direct=document.createElement("a");direct.href=item.provider_url;direct.target="_blank";
      direct.rel="noopener noreferrer";direct.className="gt-source-direct";direct.textContent=words.view+" ↗";
      links.append(exact,direct);
-     const caption=document.createElement("small");caption.textContent=words.status;
+     const native=nativeSearchUrl(item,data.request.query);
+     if(native){
+       const nativeLink=document.createElement("a");nativeLink.href=native;nativeLink.target="_blank";
+       nativeLink.rel="noopener noreferrer";nativeLink.className="gt-source-direct";
+       nativeLink.textContent=lang==="ru"?"Поиск внутри площадки ↗":lang==="tr"?"Platform içi arama ↗":"Search on marketplace ↗";
+       links.append(nativeLink);
+     }
+     const caption=document.createElement("small");
+     caption.textContent=["auction","classifieds","used_equipment","surplus_stock","retail_marketplace"].includes(item.source_type)?extra.listing:words.status;
      card.append(brand,sector,scope,links,caption);list.append(card);
    }
    progress.textContent=words.shown+" "+shown+" / "+data.results.length;
@@ -303,6 +329,6 @@ function render(target,data,options){
 }
 return Object.freeze({
  classify,canonical,domain,validateRegistry,route,search,loadRegistry,
- productSearchUrl,searchEngineUrl,render,listingLifecycle,preferredRegion,usedIntent,REGIONS,ENGINES,SOURCE_TYPES
+ productSearchUrl,nativeSearchUrl,searchEngineUrl,render,listingLifecycle,preferredRegion,usedIntent,REGIONS,ENGINES,SOURCE_TYPES
 });
 });
