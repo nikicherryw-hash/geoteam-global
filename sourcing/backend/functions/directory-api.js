@@ -45,9 +45,9 @@ function sourceApi(req,res){
    return send(res,200,{suggestions});
  }
  try{
-   const q=getParam(req,"query"),quantity=Number(getParam(req,"quantity")),destination=getParam(req,"destination"),sector=getParam(req,"sector");
-   if(q.length>160||destination.length>100||destination.length<2)return send(res,422,{ok:false,error:"INVALID_QUERY"});
-   const result=finder.route(sources,{query:q,quantity,destination,sector});
+   const q=getParam(req,"query"),quantity=Number(getParam(req,"quantity")),destination=getParam(req,"destination"),sector=getParam(req,"sector"),region=getParam(req,"region")||"all";
+   if(q.length>160||destination.length>100||destination.length<2||!Object.prototype.hasOwnProperty.call(finder.REGIONS,region))return send(res,422,{ok:false,error:"INVALID_QUERY"});
+   const result=finder.route(sources,{query:q,quantity,destination,sector,region});
    return send(res,200,{ok:true,...result});
  }catch(e){return send(res,422,{ok:false,error:"INVALID_QUERY"})}
 }
