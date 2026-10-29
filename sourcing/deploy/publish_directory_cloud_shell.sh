@@ -3,7 +3,7 @@
 set -Eeuo pipefail
 PROJECT="geoteam-global"
 SITE="geoteam-sourcing-20261029"
-PIN="c211f80efa12195dacd14eb3b757a0d64aeeab97"
+PIN="17b0d4cfbbbf71d36464b1d02ad2c474922cdf1f"
 BRANCH="geoteam-v18-41-global-everywhere"
 REPO="https://github.com/nikicherryw-hash/geoteam-global.git"
 
@@ -24,7 +24,7 @@ WORK="$(mktemp -d)"
 SRC="$WORK/repo"
 OUT="$WORK/publish"
 mkdir -p "$OUT/public/data" "$OUT/public/en" "$OUT/public/ru" "$OUT/public/tr"
-git clone --quiet --depth 25 --single-branch --branch "$BRANCH" "$REPO" "$SRC"
+git clone --quiet --depth 150 --single-branch --branch "$BRANCH" "$REPO" "$SRC"
 git -C "$SRC" checkout --quiet --detach "$PIN" ||
   { echo "BLOCKED: pinned source commit unavailable; no deployment." >&2; exit 13; }
 [[ "$(git -C "$SRC" rev-parse HEAD)" == "$PIN" ]] ||
@@ -46,15 +46,16 @@ from pathlib import Path
 import json,sys
 p=Path(sys.argv[1]); sha=sys.argv[2]
 r=json.loads((p/"data/sources.v1.json").read_text())
-assert r["product_id"]=="GEOTEAM_GLOBAL" and len(r["sources"])==269
-assert sum(s["segment"]!="logistics" for s in r["sources"])==266
+assert r["product_id"]=="GEOTEAM_GLOBAL" and len(r["sources"])==313
+assert sum(s["segment"]!="logistics" for s in r["sources"])==310
 assert all(s["enabled"] is False and s["integration_status"]=="NOT_CONNECTED" and s["rights_status"]=="NOT_REVIEWED" for s in r["sources"])
 assert all(s["source_type"] and s["listing_status_capability"]=="UNVERIFIED_NO_API" for s in r["sources"] if s["segment"]!="logistics")
 f=p/"sourcing.html"
 html=f.read_text()
 assert 'global-source-finder.js' in html and 'id="gtSector"' in html
-assert "engine.search({...req,sector,region,condition:req.condition})" in html
-assert 'id="gtMarketRegion"' in html and 'id="gtSearchEngine"' in html
+assert "engine.search({...req,sector,region:\'all\',condition:req.condition})" in html
+assert 'id="gtMarketRegion"' not in html and 'id="gtSearchEngine"' not in html
+assert 'gt-global-auto-banner' in html
 f.write_text(html.replace('href="index.html"','href="https://geoteam-global.com/"'))
 (p/"index.html").write_text("""<!doctype html><html lang="ru"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -71,7 +72,7 @@ f.write_text(html.replace('href="index.html"','href="https://geoteam-global.com/
 (p/"release.json").write_text(json.dumps({"product_id":"GEOTEAM_GLOBAL",
     "version":"v18.41","git_sha":sha,"search_mode":"SOURCE_DISCOVERY_ONLY",
     "supplier_api_connected":False,"prices_verified":False},indent=2)+"\n")
-print("SOURCE_PREFLIGHT=PASS SOURCES=269 PRODUCT_SOURCES=266")
+print("SOURCE_PREFLIGHT=PASS SOURCES=313 PRODUCT_SOURCES=310")
 PY
 
 cat > "$OUT/firebase.json" <<'JSON'
@@ -92,6 +93,11 @@ JSON
 printf '{"projects":{"default":"%s"}}\n' "$PROJECT" > "$OUT/.firebaserc"
 
 echo "=== RUN AUTOMATED TESTS BEFORE ANY CLOUD WRITE ==="
+NODE_MAJOR="$(node -p 'Number(process.versions.node.split(".")[0])')"
+if (( NODE_MAJOR < 22 )); then
+  echo "BLOCKED: Node.js 22+ required for GeoTeam tests and future Functions compatibility." >&2
+  exit 15
+fi
 python3 "$SRC/sourcing/foundation/validate_sources.py"
 (cd "$SRC/sourcing/backend/functions" && node --test)
 echo "NODE_TESTS=PASS"
@@ -122,16 +128,17 @@ from pathlib import Path
 import json,sys
 p=Path(sys.argv[1]); pin=sys.argv[2]
 assert 'id="gtSector"' in (p/"live.html").read_text()
-assert 'id="gtMarketRegion"' in (p/"live.html").read_text()
-assert 'id="gtSearchEngine"' in (p/"live.html").read_text()
+assert 'id="gtMarketRegion"' not in (p/"live.html").read_text()
+assert 'id="gtSearchEngine"' not in (p/"live.html").read_text()
+assert "gt-global-auto-banner" in (p/"live.html").read_text()
 assert "GeoTeamSourceFinder" in (p/"live.js").read_text()
 assert "listingLifecycle" in (p/"live.js").read_text()
 assert "multilingualVariants" in (p/"live.js").read_text()
-assert len(json.loads((p/"live.json").read_text())["sources"])==269
+assert len(json.loads((p/"live.json").read_text())["sources"])==313
 assert json.loads((p/"release.json").read_text())["git_sha"]==pin
 print("LIVE_READBACK=PASS")
 PY
 echo "PUBLIC_SEARCH_URL=$BASE/sourcing.html?lang=ru"
 echo "ORIGINAL_SITE=https://geoteam-global.com/ (UNCHANGED)"
-echo "DIRECTORY_MODE=YES PRODUCT_SOURCE_CANDIDATES=266 LIVE_PROVIDER_API_CONNECTED=0"
+echo "DIRECTORY_MODE=YES PRODUCT_SOURCE_CANDIDATES=310 LIVE_PROVIDER_API_CONNECTED=0"
 echo "LOCAL_AUDIT_FILES=$WORK"
