@@ -99,7 +99,7 @@ function classify(query,requested){
  if(["electronics","aviation","industrial","general_b2b"].includes(requested))return requested;
  const q=canonical(query),scores={electronics:0,aviation:0,industrial:0,general_b2b:1};
  if(BRAND_HINTS.electronics.test(q))scores.electronics+=8;
- if(BRAND_HINTS.aviation.test(q)||/\b(?:NAS\d{3,}|MS\d{4,}|AN\d{4,}|BAC\d{4,})\b/i.test(q))scores.aviation+=10;
+ if(BRAND_HINTS.aviation.test(q)||/(?:rotax|ротакс|ротокс\s*916|rotoks\s*916)/i.test(q)||/\b(?:NAS\d{3,}|MS\d{4,}|AN\d{4,}|BAC\d{4,})\b/i.test(q))scores.aviation+=10;
  if(BRAND_HINTS.industrial.test(q))scores.industrial+=8;
  if(/\b(?:6ES7|6SL\d|3LD\d|XPSU|LC1D\d|DI52\d|FL\s*BT|[A-Z]{1,3}\d{4,}-\d{2})\b/i.test(q))scores.electronics+=4;
  if(/drawing|черт[её]ж|по\s+эскизу|manufactur|изготовлен|производств|technical drawing/i.test(q))scores.industrial+=6;
