@@ -57,6 +57,19 @@ def model_matches(query, candidate):
     nums=re.findall(r"\d{3,}",target)
     if any(not re.search(r"(?<!\d)"+re.escape(x)+r"(?!\d)",found) for x in nums):return False
     if part["manufacturer"]=="ROTAX" and "rotax" not in found:return False
+    compact=lambda x:re.sub(r"[^a-z0-9]","",x.lower())
+    codes=[t for t in re.findall(r"[a-z0-9]+",target)
+           if len(t)>=4 and any(c.isalpha() for c in t) and any(c.isdigit() for c in t)]
+    if codes and not all(code in compact(found) for code in codes):return False
+    if part["manufacturer"] is None:
+        brands=("siemens","schneider","abb","phoenix","eaton","omron","festo","grundfos","wilo","bosch","rockwell")
+        for brand in brands:
+            if re.search(r"(?<![a-z])"+brand+r"(?![a-z])",target) and brand not in found:
+                return False
+    if not nums and not codes:
+        tokens=[t for t in re.findall(r"[a-zа-яё]{4,}",target)
+                if t not in {"find","search","used","new","pump","купить","найди","насос"}]
+        if tokens and not any(t in found for t in tokens):return False
     return bool(candidate.strip())
 
 def validate_output(data,query,locale):
