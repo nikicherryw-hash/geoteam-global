@@ -9,5 +9,5 @@ module.exports={
     {name:"desktop-chromium",use:{browserName:"chromium",viewport:{width:1365,height:768}}},
     {name:"mobile-webkit",use:{browserName:"webkit",viewport:{width:390,height:844},deviceScaleFactor:3,isMobile:true,hasTouch:true}}
   ],
-  webServer:{command:"python3 -m http.server 8765 --bind 127.0.0.1 --directory preview-v18-7",port:8765,reuseExistingServer:false,timeout:30000}
+  webServer:{command:"python3 -m http.server 8765 --bind 127.0.0.1 --directory preview-v18-7",cwd:require("node:path").resolve(__dirname,"../.."),port:8765,reuseExistingServer:false,timeout:30000}
 };
