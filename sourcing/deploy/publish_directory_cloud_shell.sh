@@ -3,7 +3,7 @@
 set -Eeuo pipefail
 PROJECT="geoteam-global"
 SITE="geoteam-sourcing-20261029"
-PIN="51651a8fd9c042973f98f76c43dd902e20bd9e1d"
+PIN="455fe7da7431305ee2a89b867d4b3eaf6d183e8c"
 BRANCH="geoteam-v18-40-worldwide-discovery"
 REPO="https://github.com/nikicherryw-hash/geoteam-global.git"
 
@@ -91,6 +91,7 @@ JSON
 printf '{"projects":{"default":"%s"}}\n' "$PROJECT" > "$OUT/.firebaserc"
 
 echo "=== RUN AUTOMATED TESTS BEFORE ANY CLOUD WRITE ==="
+python3 "$SRC/sourcing/foundation/validate_sources.py"
 (cd "$SRC/sourcing/backend/functions" && node --test)
 echo "NODE_TESTS=PASS"
 
