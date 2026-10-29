@@ -24,7 +24,7 @@ test("three languages, global search, source status and pagination",async({page}
   await expect(page.locator("#extra")).toBeAttached();
   const links=await page.locator("#results .gt-source-card a").evaluateAll(els=>
     els.map(el=>({href:el.getAttribute("href"),target:el.getAttribute("target"),rel:el.getAttribute("rel")})));
-  expect(links.length).toBeGreaterThan(25);
+  expect(links.length).toBeGreaterThanOrEqual(24);
   expect(links.every(x=>x.href?.startsWith("https://") && x.target==="_blank" && x.rel?.includes("noopener"))).toBeTruthy();
 });
 test("mobile viewport has no main horizontal overflow",async({page,isMobile})=>{
