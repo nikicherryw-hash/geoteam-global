@@ -159,3 +159,25 @@ test("native marketplace search links use current platform search, not old snipp
  assert.ok(amazon.includes("/s?k="));
  assert.equal(finder.nativeSearchUrl({provider_url:"https://www.machinio.com/"},"ABB DI524"),null);
 });
+
+test("multilingual discovery preserves requested OEM identifiers and requires user click",()=>{
+ const pump=finder.multilingualVariants("Насос Иртыш ПФ2");
+ assert.ok(pump.length>=6);
+ assert.ok(pump.some(x=>x.locale==="ZH"&&x.query.includes("泵")));
+ assert.ok(pump.some(x=>x.locale==="EN"&&x.query.includes("pump")));
+ assert.ok(pump.every(x=>x.query.includes("Иртыш ПФ2")));
+ const valve=finder.multilingualVariants("Клапан Ду150 Ру10");
+ assert.ok(valve.some(x=>x.locale==="DE"&&x.query.includes("Ventil")));
+ assert.ok(valve.some(x=>x.locale==="ZH"&&x.query.includes("阀门")));
+ assert.deepEqual(finder.multilingualVariants("6ES7315-2EH14-0AB0"),[]);
+});
+test("static registry candidates are never treated as active supplier offers",()=>{
+ const sources=finder.validateRegistry(registry);
+ assert.equal(sources.length,266);
+ const r=finder.route(sources,{part:"Siemens 6ES7",qty:2,dest:"Frankfurt",condition:"any"});
+ assert.equal(r.total,266);
+ assert.ok(r.results.every(x=>x.listing_state==="UNKNOWN_NOT_CHECKED"));
+ assert.ok(r.results.every(x=>x.verified_inventory===false&&x.verified_price===false));
+ assert.equal(r.scope,"ALL_REGISTERED_PRODUCT_SOURCES");
+ assert.equal(r.directory_generated_at?.length>0,true);
+});
