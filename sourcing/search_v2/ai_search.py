@@ -46,7 +46,7 @@ def source_urls(data):
         for block in obj.get("content",[]) or []:
             for ann in block.get("annotations",[]) or []:
                 url=ann.get("url","") if isinstance(ann,dict) else ""
-                if ann.get("type")=="url_citation" and safe_url(url):refs.add(url)
+                if isinstance(ann,dict) and ann.get("type")=="url_citation" and safe_url(url):refs.add(url)
     return refs
 
 def model_matches(query, candidate):
@@ -94,7 +94,7 @@ def validate_output(data,query,locale):
         "warnings":list(report.get("warnings",[]))[:8]
                    +["Web search citations do not confirm inventory or binding prices."]}
  
-async def search_once(query,locale,hints,api_key,model,client):
+async def search_once(query,locale,hints,api_key,model,client,budget):
     if identity(query)["status"]=="MODEL_UNVERIFIED":
         return {"status":"MODEL_UNVERIFIED","query":query,"offers":[]}
     payload={
@@ -106,12 +106,19 @@ async def search_once(query,locale,hints,api_key,model,client):
         "text":{"format":JSON_FORMAT},
         "max_tool_calls":2,"max_output_tokens":1800,
     }
-    resp=await client.post("https://api.openai.com/v1/responses",
-        json=payload,headers={"Authorization":"Bearer "+api_key},timeout=65)
-    resp.raise_for_status()
-    data=resp.json()
-    if not any(i.get("type")=="web_search_call" for i in data.get("output",[])):
+    ticket=budget.reserve_call()
+    try:
+        resp=await client.post("https://api.openai.com/v1/responses",
+            json=payload,headers={"Authorization":"Bearer "+api_key},timeout=65)
+        resp.raise_for_status()
+        data=resp.json()
+        budget.mark(ticket,"SUCCESS")
+    except (httpx.HTTPError, ValueError):
+        budget.mark(ticket,"UNKNOWN_AFTER_SEND")
+        raise
+    if not any(i.get("type")=="web_search_call" for i in data.get("output",[]) if isinstance(i,dict)):
         raise ValueError("No web search performed")
     result=validate_output(data,query,locale)
     result["usage"]=data.get("usage",{})
+    result["pilot"]=budget.status()
     return result
