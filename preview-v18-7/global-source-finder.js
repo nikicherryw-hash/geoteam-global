@@ -144,7 +144,7 @@ function directRegion(src,region){
  return region!=="all"&&Array.isArray(regions)&&Array.isArray(src.scope)&&src.scope.some(x=>regions.includes(x));
 }
 function usedIntent(query,condition){
- return condition==="used"||/(?:б\\/у|бывш|подержан|восстановлен|used|second.hand|pre.owned|refurbished|gebraucht|ikinci el|二手|中古|중고|usado)/i.test(query);
+ return condition==="used"||/(?:б\/у|бывш|подержан|восстановлен|used|second.hand|pre.owned|refurbished|gebraucht|ikinci el|二手|中古|중고|usado)/i.test(query);
 }
 function score(src,category,region,isUsed){
  const matrix={
@@ -246,8 +246,8 @@ function searchEngineUrl(provider,query,engine,withoutSite){
  * Still not a live listing-state confirmation. Only documented common URL forms. */
 function nativeSearchUrl(provider,query){
  const host=domain(provider.provider_url),q=encodeURIComponent(canonical(query));
- if(/(^|\\.)ebay\\.(com|de|co\\.uk|com\\.au|ca)$/.test(host))return "https://"+host+"/sch/i.html?_nkw="+q;
- if(/(^|\\.)amazon\\.(com|de|co\\.uk|com\\.tr|com\\.au|in|ae|ca)$/.test(host))return "https://"+host+"/s?k="+q;
+ if(/(^|\.)ebay\.(com|de|co\.uk|com\.au|ca)$/.test(host))return "https://"+host+"/sch/i.html?_nkw="+q;
+ if(/(^|\.)amazon\.(com|de|co\.uk|com\.tr|com\.au|in|ae|ca)$/.test(host))return "https://"+host+"/s?k="+q;
  if(host==="avito.ru")return "https://www.avito.ru/all?q="+q;
  if(host==="trendyol.com")return "https://www.trendyol.com/sr?q="+q;
  return null;
