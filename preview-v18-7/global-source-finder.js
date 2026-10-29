@@ -11,9 +11,9 @@
 "use strict";
 const REGIONS=Object.freeze({
   all:[],
-  russia_cis:["russia","kazakhstan","belarus","ukraine","cis"],
+  russia_cis:["russia","kazakhstan","belarus","cis"],
   asia:["asia","china","korea","japan","taiwan","hong_kong","indonesia","thailand","singapore","malaysia","india"],
-  europe:["europe","dach"],
+  europe:["europe","dach","ukraine"],
   north_america:["north_america"],
   latin_america:["latin_america"],
   turkey_mena:["turkey","middle_east","africa"],
