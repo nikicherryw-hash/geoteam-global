@@ -15,14 +15,16 @@ CATEGORIES = {
 MODES = {
     "OFFICIAL_API", "PARTNER_API", "SUBSCRIPTION_RESEARCH",
     "DIRECTORY_RESEARCH", "EARLY_ACCESS_API", "APPROVAL_REQUIRED_API",
-    "SELLER_AUTH_API", "ACCOUNT_API", "MARKETPLACE_DISCOVERY"
+    "SELLER_AUTH_API", "ACCOUNT_API", "MARKETPLACE_DISCOVERY",
+    "CLASSIFIEDS_DISCOVERY", "AUCTION_DISCOVERY", "USED_EQUIPMENT_DISCOVERY",
+    "SURPLUS_DISCOVERY"
 }
 
 def validate(data):
     assert data.get("product_id") == "GEOTEAM_GLOBAL", "wrong product"
     assert data.get("integration_policy", {}).get("default_enabled") is False
     rows = data.get("sources")
-    assert isinstance(rows, list) and len(rows) == 134, "expected 134 registered sources"
+    assert isinstance(rows, list) and len(rows) == 269, "expected 134 registered sources"
     seen = set()
     for row in rows:
         name = row["id"]
@@ -40,8 +42,11 @@ def validate(data):
             if uri is not None:
                 parsed = urlparse(uri)
                 assert parsed.scheme == "https" and parsed.hostname, name
+        if row["segment"] != "logistics":
+            assert row["source_type"] in {"industrial_distributor", "aviation_sources", "manufacturer_official", "b2b_directory", "used_equipment", "retail_marketplace", "auction", "classifieds", "surplus_stock"}, name
+            assert row["listing_status_capability"] == "UNVERIFIED_NO_API", name
         assert row["requirements"], name
-    assert sum(r["segment"] != "logistics" for r in rows) == 131
+    assert sum(r["segment"] != "logistics" for r in rows) == 266
     assert len({r["url"] for r in rows}) == len(rows), "duplicate source URLs"
     return len(rows)
 
