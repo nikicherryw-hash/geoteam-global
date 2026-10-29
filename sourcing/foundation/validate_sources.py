@@ -24,7 +24,7 @@ def validate(data):
     assert data.get("product_id") == "GEOTEAM_GLOBAL", "wrong product"
     assert data.get("integration_policy", {}).get("default_enabled") is False
     rows = data.get("sources")
-    assert isinstance(rows, list) and len(rows) == 269, "expected 134 registered sources"
+    assert isinstance(rows, list) and len(rows) == 313, "expected 313 registered sources"
     seen = set()
     for row in rows:
         name = row["id"]
@@ -46,7 +46,7 @@ def validate(data):
             assert row["source_type"] in {"industrial_distributor", "aviation_sources", "manufacturer_official", "b2b_directory", "used_equipment", "retail_marketplace", "auction", "classifieds", "surplus_stock"}, name
             assert row["listing_status_capability"] == "UNVERIFIED_NO_API", name
         assert row["requirements"], name
-    assert sum(r["segment"] != "logistics" for r in rows) == 266
+    assert sum(r["segment"] != "logistics" for r in rows) == 310
     assert len({r["url"] for r in rows}) == len(rows), "duplicate source URLs"
     return len(rows)
 
