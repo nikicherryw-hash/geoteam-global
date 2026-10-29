@@ -25,8 +25,8 @@ def config_check(token):
     budget_path=os.getenv("GEOTEAM_BUDGET_DB","")
     if not ai_key or not budget_path:
         raise HTTPException(503,detail="API_KEY_OR_PERSISTENT_BUDGET_MISSING")
-    model=os.getenv("GEOTEAM_OPENAI_MODEL","gpt-6.1-sol")
-    if model not in {"gpt-6.1-sol","gpt-6-astra"}:
+    model=os.getenv("GEOTEAM_OPENAI_MODEL","gpt-6-luna")
+    if model not in {"gpt-6-luna","gpt-6.1-sol","gpt-6-astra"}:
         raise HTTPException(503,detail="MODEL_NOT_APPROVED")
     return ai_key,budget_path,model
 
