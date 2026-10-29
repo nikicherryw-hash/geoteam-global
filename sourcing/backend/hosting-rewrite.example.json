@@ -1,0 +1,13 @@
+{
+  "example_only": true,
+  "notes": "DO NOT REPLACE LIVE firebase.json; merge into verified GeoTeam Hosting configuration, preserving existing /rfq handling",
+  "rewrites": [
+    {
+      "source": "/api/sourcing/**",
+      "function": {
+        "functionId": "sourcing",
+        "region": "europe-west1"
+      }
+    }
+  ]
+}
