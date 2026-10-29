@@ -64,7 +64,7 @@ async def run_search(req: SearchRequest, client: httpx.AsyncClient, cfg: Config)
         "searched_at": started_at,
         "offers": [], "source_leads": [],
         "search_queries_attempted": 0, "candidate_pages": 0,
-        "verified_pages": 0, "warnings": [],
+        "verified_pages": 0, "pages_attempted": 0, "warnings": [],
         "supplier_apis_connected": False,
         "seller_confirmed": False,
     }
@@ -132,7 +132,8 @@ async def run_search(req: SearchRequest, client: httpx.AsyncClient, cfg: Config)
                 return []
 
     checked = await asyncio.gather(*(inspect(x) for x in approved))
-    base["verified_pages"] = len(approved)
+    base["pages_attempted"] = len(approved)
+    base["verified_pages"] = sum(bool(offers) for offers in checked)
     seen: set[tuple[str, str, str]] = set()
     for offers in checked:
         for offer in offers:
