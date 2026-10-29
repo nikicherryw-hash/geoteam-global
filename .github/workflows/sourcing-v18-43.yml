@@ -62,12 +62,19 @@ jobs:
       - name: Validate deployment script safety and syntax
         run: |
           bash -n sourcing/deploy/publish_directory_cloud_shell.sh
+          bash -n sourcing/deploy/publish_price_first_cloud_shell.sh
           python3 - <<'PY'
           from pathlib import Path
           script=Path("sourcing/deploy/publish_directory_cloud_shell.sh").read_text()
           assert 'firebase deploy --only hosting:sourcing' in script
           assert 'firebase hosting:sites:create "$SITE"' in script
           assert 'GEOTEAM_SOURCE_SHA' in script
+          price_script=Path('sourcing/deploy/publish_price_first_cloud_shell.sh').read_text()
+          assert 'geoteam-v18-43-price-first' in price_script
+          assert 'market-offers.js' in price_script
+          assert 'data/offer-references.v1.json' in price_script
+          assert 'firebase deploy --only hosting:sourcing' in price_script
+          assert 'firebase hosting:sites:create' not in price_script
           assert '--only functions' not in script
           assert 'firebase deploy --only hosting --' not in script
           print("DEPLOY_SCRIPT_STATIC_QA=PASS")
