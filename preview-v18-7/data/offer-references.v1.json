@@ -1,0 +1,91 @@
+{
+  "product_id": "GEOTEAM_GLOBAL",
+  "version": "2026-10-29-pilot",
+  "type": "MANUALLY_REVIEWED_PUBLIC_PRICE_REFERENCES",
+  "source_checked_at": "2026-10-29",
+  "disclaimer": "Public asking/list prices only, not live inventory, supplier quotations, or delivery-inclusive pricing. No provider API connected.",
+  "products": [
+    {
+      "sku": "rotax_916is",
+      "manufacturer": "ROTAX",
+      "model": "916 iS",
+      "category": "aviation",
+      "aliases": [
+        "rotax 916",
+        "rotax 916 is",
+        "rotax 916is",
+        "ротакс 916",
+        "ротокс 916",
+        "ротакс 916 ис",
+        "rotoks 916"
+      ],
+      "alias_warning": [
+        "ротокс 916",
+        "rotoks 916"
+      ],
+      "quotes": [
+        {
+          "supplier": "Rotech Motor Ltd.",
+          "country": "CA",
+          "model": "916 iS3A Type 3",
+          "amount": 57267,
+          "currency": "USD",
+          "price_type": "LIST_PRICE",
+          "status": "STOCK_NOT_CONFIRMED",
+          "price_document_date": "2026-09-11",
+          "checked_at": "2026-10-29",
+          "source_url": "https://prices.rotech.ca/repl",
+          "detail": "2026 published US list price, FCA Vernon, BC. Shipping and taxes extra."
+        },
+        {
+          "supplier": "Lockwood Aero",
+          "country": "US",
+          "model": "916 iS A with ROTAX CARE",
+          "amount": 59305,
+          "currency": "USD",
+          "price_type": "RETAIL_PRICE",
+          "status": "STOCK_NOT_CONFIRMED",
+          "checked_at": "2026-10-29",
+          "source_url": "https://lockwood.aero/engines-pricing",
+          "detail": "Public retail listing; confirm configuration, lead time and price."
+        },
+        {
+          "supplier": "Advanced Powerplant Solutions",
+          "country": "US",
+          "model": "916iS V2/V3 with ROTAX CARE",
+          "amount": 59305,
+          "currency": "USD",
+          "price_type": "LISTED_PRICE",
+          "status": "BACKORDERED",
+          "checked_at": "2026-10-29",
+          "source_url": "https://www.advancedpowerplant.com/rotax-engines-parts/rotax-916is-engine.html",
+          "detail": "Source displays Backordered. Shipping excluded."
+        },
+        {
+          "supplier": "Bert Flood Imports (Controller)",
+          "country": "AU",
+          "model": "916IS 160HP",
+          "amount": 60178.37,
+          "currency": "USD",
+          "price_type": "ASKING_PRICE",
+          "status": "STOCK_NOT_CONFIRMED",
+          "checked_at": "2026-10-29",
+          "source_url": "https://www.controller.com/listings/for-sale/rotax/916is/engines/30120?Model=916IS",
+          "detail": "Marketplace asking price converted from AUD and may fluctuate; GST and supply terms vary."
+        },
+        {
+          "supplier": "ARGO Aero",
+          "country": "EU",
+          "model": "Rotax 916 iS",
+          "amount": 41064,
+          "currency": "EUR",
+          "price_type": "PUBLISHED_REFERENCE",
+          "status": "PRICE_SCOPE_TO_CONFIRM",
+          "checked_at": "2026-10-29",
+          "source_url": "https://www.argo.aero/service.html",
+          "detail": "Published net web price; verify whether offer is for a standalone engine and exact included equipment."
+        }
+      ]
+    }
+  ]
+}
