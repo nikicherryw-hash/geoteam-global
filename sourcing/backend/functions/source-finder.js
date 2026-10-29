@@ -237,6 +237,28 @@ async function loadRegistry(url){
 async function search(input,options){
  return route(await loadRegistry(options?.indexUrl),input);
 }
+/* Safe multilingual query variants for common industrial part categories.
+ * Exact manufacturer / OEM identifiers in the original query are preserved.
+ * Suggestions are for manual click-through only, not AI matching or translations
+ * certified for engineering interchangeability. */
+function multilingualVariants(query){
+ const raw=canonical(query);
+ const vocabulary=[
+  {pattern:/(?:насос|pump|pompa|pumpe|bomba|ポンプ|펌프)/i,variants:[["EN","pump","google"],["TR","pompa","google"],["DE","Pumpe","google"],["ZH","泵","baidu"],["JA","ポンプ","google"],["KO","펌프","google"],["ES/PT","bomba","google"]]},
+  {pattern:/(?:клапан|valve|vana|ventil|válvula|阀|バルブ|밸브)/i,variants:[["EN","valve","google"],["TR","vana","google"],["DE","Ventil","google"],["ZH","阀门","baidu"],["JA","バルブ","google"],["KO","밸브","google"],["ES/PT","válvula","google"]]},
+  {pattern:/(?:шпиндел|spindle|spindel|iğ|主轴|スピンドル)/i,variants:[["EN","spindle","google"],["DE","Spindel","google"],["ZH","主轴","baidu"],["JA","スピンドル","google"],["TR","mil","google"],["ES","husillo","google"]]},
+  {pattern:/(?:подшипник|bearing|lager|rulman|轴承|ベアリング)/i,variants:[["EN","bearing","google"],["DE","Lager","google"],["TR","rulman","google"],["ZH","轴承","baidu"],["JA","ベアリング","google"]]},
+  {pattern:/(?:датчик|sensor|sensör|capteur|传感器|センサー)/i,variants:[["EN","sensor","google"],["TR","sensör","google"],["DE","Sensor","google"],["ZH","传感器","baidu"],["JA","センサー","google"]]},
+  {pattern:/(?:двигател|motor|elektromotor|电机|モーター)/i,variants:[["EN","electric motor","google"],["DE","Elektromotor","google"],["TR","elektrik motoru","google"],["ZH","电机","baidu"],["JA","モーター","google"]]}
+ ];
+ const found=vocabulary.find(item=>item.pattern.test(raw));
+ if(!found)return [];
+ const m=raw.match(found.pattern);
+ const rest=m?raw.slice(0,m.index)+raw.slice(m.index+m[0].length):raw;
+ return found.variants.map(([locale,keyword,engine])=>({
+  locale,query:canonical(keyword+" "+rest),engine
+ })).filter(item=>item.query.length>=2).slice(0,7);
+}
 function searchEngineUrl(provider,query,engine,withoutSite){
  const type=Object.prototype.hasOwnProperty.call(ENGINES,engine)?engine:"google";
  const suffix=withoutSite?"":"site:"+domain(provider.provider_url)+" ";
@@ -274,6 +296,18 @@ function render(target,data,options){
  }
  const notice=document.createElement("small");notice.textContent=words.notice;
  globalBox.append(head,group,notice);target.append(globalBox);
+ const variants=multilingualVariants(data.request.query);
+ if(variants.length){
+  const multi=document.createElement("div");multi.className="gt-multilang-search";
+  const heading=document.createElement("strong");heading.textContent=lang==="ru"?"Поиск по терминам других языков":lang==="tr"?"Diğer dillerde arama terimleri":"Search using other languages";
+  const chips=document.createElement("div");chips.className="gt-multilang-chips";
+  for(const variant of variants){
+   const a=document.createElement("a");a.href=searchEngineUrl(null,variant.query,variant.engine,true);
+   a.target="_blank";a.rel="noopener noreferrer";a.textContent=variant.locale+" · "+variant.query+" ↗";
+   chips.append(a);
+  }
+  multi.append(heading,chips);target.append(multi);
+ }
  const sourceStats={classifieds:0,used_equipment:0,auction:0,retail_marketplace:0,surplus_stock:0};
  for(const r of data.results)if(Object.prototype.hasOwnProperty.call(sourceStats,r.source_type))sourceStats[r.source_type]++;
  const mix=document.createElement("p");mix.className="gt-market-mix";
@@ -329,6 +363,6 @@ function render(target,data,options){
 }
 return Object.freeze({
  classify,canonical,domain,validateRegistry,route,search,loadRegistry,
- productSearchUrl,nativeSearchUrl,searchEngineUrl,render,listingLifecycle,preferredRegion,usedIntent,REGIONS,ENGINES,SOURCE_TYPES
+ productSearchUrl,nativeSearchUrl,searchEngineUrl,multilingualVariants,render,listingLifecycle,preferredRegion,usedIntent,REGIONS,ENGINES,SOURCE_TYPES
 });
 });
