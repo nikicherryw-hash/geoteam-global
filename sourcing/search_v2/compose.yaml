@@ -1,0 +1,29 @@
+# Separate dedicated GeoTeam-only host. No shared SKS or Timeweb resources.
+services:
+  geoteam-ai:
+    build:
+      context: ../..
+      dockerfile: sourcing/search_v2/Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:8088:8080"
+    volumes:
+      - geoteam_ai_budget:/data
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=32m
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 128
+    mem_limit: 512m
+    cpus: 0.75
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD","python","-c","import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health',timeout=5)"]
+      interval: 30s
+      timeout: 7s
+      retries: 3
+      start_period: 20s
+volumes:
+  geoteam_ai_budget:

@@ -1,0 +1,16 @@
+name: GeoTeam AI Docker QA
+on:
+  push:
+    branches: [geoteam-v18-47-openai-agent]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare disabled configuration
+        run: cp sourcing/search_v2/.env.example sourcing/search_v2/.env
+      - name: Validate compose syntax
+        run: docker compose -f sourcing/search_v2/compose.yaml config --quiet
+      - name: Build nonroot API container
+        run: docker compose -f sourcing/search_v2/compose.yaml build
