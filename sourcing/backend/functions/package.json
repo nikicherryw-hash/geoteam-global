@@ -1,0 +1,15 @@
+{
+  "name": "geoteam-global-sourcing-directory",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "engines": {
+    "node": "22"
+  },
+  "dependencies": {
+    "firebase-functions": "^6.0.0"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}
