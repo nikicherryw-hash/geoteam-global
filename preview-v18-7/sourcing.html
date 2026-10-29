@@ -494,6 +494,7 @@ footer{max-width:var(--gt-search-max)!important}
 </main>
 <footer><span>© 2026 GeoTeam</span><a class="about" href="about.html" id="about">About Us</a><a id="whatWeSource" href="en/what-we-source.html">What We Source</a><a href="privacy.html" id="privacy">Privacy Policy</a><a href="rfq-privacy.html" id="rfqPrivacy">KVKK / RFQ</a></footer>
 <script src="global-source-finder.js"></script>
+<script src="market-offers.js"></script>
 <script>
 (()=>{'use strict';
 const by=(id)=>document.getElementById(id);
@@ -693,6 +694,10 @@ by('search').addEventListener('click',async()=>{
    const data=await engine.search({...req,sector,region:'all',condition:req.condition});
    latestSearch=data;
    engine.render(by('results'),data,{lang});
+   if(window.GeoTeamPriceReferences){
+    try{await window.GeoTeamPriceReferences.render(by('results'),req.part,lang)}
+    catch(priceErr){console.warn('Price references unavailable:',priceErr)}
+   }
    by('results').scrollIntoView({behavior:'smooth',block:'nearest'});
  }catch(e){
    // Honest failure: never invent supplier offers or claim live inventory.
