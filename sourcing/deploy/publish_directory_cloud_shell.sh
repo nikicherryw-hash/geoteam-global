@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
-# GeoTeam Global, v18.41: publish SECOND Firebase Hosting site, leave main site/Functions untouched.
+# GeoTeam Global, v18.42: publish SECOND Firebase Hosting site, leave main site/Functions untouched.
 set -Eeuo pipefail
 PROJECT="geoteam-global"
-SITE="geoteam-sourcing-20261029"
-PIN="17b0d4cfbbbf71d36464b1d02ad2c474922cdf1f"
-BRANCH="geoteam-v18-41-global-everywhere"
+SITE="${GEOTEAM_SITE_ID:-geoteam-sourcing-20261029}"
+PIN="${GEOTEAM_SOURCE_SHA:-}"
+BRANCH="geoteam-v18-42-search-engine"
 REPO="https://github.com/nikicherryw-hash/geoteam-global.git"
 
 echo "=== GEOTEAM SEARCH RELEASE / PREFLIGHT ==="
+[[ "$PIN" =~ ^[0-9a-f]{40}$ ]] || { echo "BLOCKED: set explicit GEOTEAM_SOURCE_SHA (reviewed 40-char commit)." >&2; exit 9; }
+[[ "$SITE" =~ ^[a-z][a-z0-9-]{4,28}[a-z0-9]$ ]] && [[ "$SITE" != "$PROJECT" ]] || { echo "BLOCKED: unsafe Hosting site ID" >&2; exit 9; }
+echo "PROJECT=$PROJECT SEPARATE_SITE=$SITE PIN=$PIN"
 for c in firebase git python3 node curl; do
   command -v "$c" >/dev/null || { echo "BLOCKED: missing $c" >&2; exit 10; }
 done
@@ -25,6 +28,7 @@ SRC="$WORK/repo"
 OUT="$WORK/publish"
 mkdir -p "$OUT/public/data" "$OUT/public/en" "$OUT/public/ru" "$OUT/public/tr"
 git clone --quiet --depth 150 --single-branch --branch "$BRANCH" "$REPO" "$SRC"
+[[ "$(git -C "$SRC" rev-parse HEAD)" == "$PIN" ]] || { echo "BLOCKED: approved SHA differs from branch HEAD." >&2; exit 13; }
 git -C "$SRC" checkout --quiet --detach "$PIN" ||
   { echo "BLOCKED: pinned source commit unavailable; no deployment." >&2; exit 13; }
 [[ "$(git -C "$SRC" rev-parse HEAD)" == "$PIN" ]] ||
@@ -70,7 +74,7 @@ f.write_text(html.replace('href="index.html"','href="https://geoteam-global.com/
 <body><a href="https://geoteam-global.com/contact.html">Контакты</a></body></html>""")
 (p/"robots.txt").write_text("User-agent: *\nDisallow: /\n")
 (p/"release.json").write_text(json.dumps({"product_id":"GEOTEAM_GLOBAL",
-    "version":"v18.41","git_sha":sha,"search_mode":"SOURCE_DISCOVERY_ONLY",
+    "version":"v18.42","git_sha":sha,"search_mode":"SOURCE_DISCOVERY_ONLY",
     "supplier_api_connected":False,"prices_verified":False},indent=2)+"\n")
 print("SOURCE_PREFLIGHT=PASS SOURCES=313 PRODUCT_SOURCES=310")
 PY
@@ -102,6 +106,13 @@ python3 "$SRC/sourcing/foundation/validate_sources.py"
 (cd "$SRC/sourcing/backend/functions" && node --test)
 echo "NODE_TESTS=PASS"
 
+echo "=== ADDITIONAL PREFLIGHT BEFORE CLOUD WRITE ==="
+node --check "$SRC/preview-v18-7/global-source-finder.js"
+node --check "$SRC/sourcing/backend/functions/source-finder.js"
+node --check "$SRC/sourcing/backend/functions/directory-api.js"
+bash -n "$SRC/sourcing/deploy/publish_directory_cloud_shell.sh"
+MAIN_BASE="https://${PROJECT}.web.app"
+curl -fLsS --max-time 25 "$MAIN_BASE/" -o "$WORK/main-before.html" || { echo "BLOCKED: default Hosting HTTP unavailable." >&2; exit 16; }
 echo "=== CREATE ISOLATED HOSTING SITE (MAIN SITE UNCHANGED) ==="
 firebase hosting:sites:create "$SITE" --project "$PROJECT"
 cd "$OUT"
@@ -111,7 +122,7 @@ firebase hosting:channel:deploy sourcing-preflight \
   --only sourcing --expires 1d --project "$PROJECT" --non-interactive
 echo "=== PUBLISH ONLY NEW HOSTING SITE ==="
 firebase deploy --only hosting:sourcing --project "$PROJECT" \
-  --non-interactive --message "GeoTeam Global directory search v18.41 ($PIN)"
+  --non-interactive --message "GeoTeam Global directory search v18.42 ($PIN)"
 
 echo "=== LIVE READBACK ==="
 BASE="https://${SITE}.web.app"
