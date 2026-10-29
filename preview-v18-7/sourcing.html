@@ -368,6 +368,26 @@ footer{max-width:var(--gt-search-max)!important}
 @media(max-width:600px){.gt-source-grid{grid-template-columns:1fr}.gt-source-card{padding:14px 13px}.gt-sector-picker{align-items:stretch}.gt-sector-picker label{width:100%}.gt-sector-picker select{flex:1}.gt-sector-picker .gt-sector-hint{width:100%}#results.gt-source-results{padding:15px 12px!important}}
 @media(prefers-reduced-motion:reduce){.gt-source-card,.gt-source-links a{transition:none!important}}
 </style>
+<style id="gt-v18-40-worldwide-coverage">
+.gt-worldwide-controls{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:10px 14px;margin:12px 0 15px;padding:13px 0 6px;border-top:1px solid rgba(146,233,218,.14)}
+.gt-worldwide-field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.gt-worldwide-field label{font-size:11.5px;color:#cfebe5;font-weight:660}
+.gt-worldwide-field select{min-height:42px;width:100%;max-width:100%;padding:10px 13px;border:1px solid rgba(122,228,213,.27);border-radius:10px;background:#092b33;color:#effffb;font-size:12px}
+.gt-worldwide-field select:focus-visible{outline:2px solid #a0f9eb;outline-offset:2px}
+.gt-worldwide-disclaimer{grid-column:1 / -1;font-size:11px;line-height:1.55;color:#b0cac7;margin:0!important}
+.gt-worldwide-search{display:flex;flex-direction:column;gap:10px;padding:13px;border-radius:12px;background:linear-gradient(110deg,rgba(41,138,131,.13),rgba(14,75,84,.11));margin:14px 0}
+.gt-worldwide-search strong{font-size:12.5px;font-weight:680;color:#eafffa}
+.gt-worldwide-search small{font-size:10.7px;line-height:1.55;color:#a9cec6}
+.gt-worldwide-engines{display:flex;flex-wrap:wrap;gap:9px}
+.gt-worldwide-engines a{min-height:36px;display:inline-flex;align-items:center;padding:8px 12px;border-radius:9px;background:rgba(66,166,154,.17);border:1px solid rgba(131,234,217,.23);font-size:11.8px;color:#e3fff8;text-decoration:none;font-weight:690}
+.gt-worldwide-engines a:hover,.gt-worldwide-engines a:focus-visible{background:rgba(61,190,168,.27);border-color:rgba(155,251,236,.57);outline-offset:3px}
+.gt-source-scope{font-size:10.2px;color:#a3c9bf;text-transform:capitalize;overflow-wrap:anywhere}
+.gt-source-progress{margin:15px 0 9px!important;font-size:11.2px;color:#b3d4cd}
+.gt-source-more{display:block;max-width:100%;width:100%;min-height:44px;text-align:center;color:#e8fff9;font-size:12.5px;font-weight:680;border-radius:11px;background:rgba(30,133,126,.25);border:1px solid rgba(117,223,204,.24);cursor:pointer}
+.gt-source-more:hover,.gt-source-more:focus-visible{background:rgba(34,153,143,.36);border-color:rgba(143,248,229,.68)}
+.gt-source-more[hidden]{display:none!important}
+@media(max-width:600px){.gt-worldwide-controls{grid-template-columns:1fr;margin-top:12px}.gt-worldwide-field select{font-size:12px}.gt-worldwide-engines a{flex:1;justify-content:center}.gt-worldwide-search{padding:11px 10px}}
+</style>
 </head>
 <body>
 <header><a class="brand" href="index.html"><strong>GeoTeam</strong><small>GLOBAL</small></a><div class="top-nav"><a class="back" href="index.html" id="back">← Back to site</a><label class="lang-wrap" aria-label="Website language"><select class="lang-choice" id="lang" title="Website language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><optgroup label="More languages — planned"><option disabled>DE · Deutsch</option><option disabled>FR · Français</option><option disabled>ES · Español</option><option disabled>IT · Italiano</option><option disabled>PT · Português</option><option disabled>AR · العربية</option><option disabled>ZH · 中文</option></optgroup></select></label></div></header>
@@ -397,6 +417,31 @@ footer{max-width:var(--gt-search-max)!important}
   <option value="general_b2b" data-sourcing-en="Global B2B / manufacturing" data-sourcing-tr="Küresel B2B / imalat" data-sourcing-ru="Международный B2B / изготовление">Global B2B / manufacturing</option>
  </select>
  <span class="gt-sector-hint" data-sourcing-en="Filter the supplier directories before opening searches" data-sourcing-tr="Tedarikçi dizinlerini aramadan önce filtreleyin" data-sourcing-ru="Поможет подобрать подходящие площадки">Filter the supplier directories before opening searches</span>
+<div class="gt-worldwide-controls" aria-label="Search geography and engine">
+ <div class="gt-worldwide-field">
+  <label for="gtMarketRegion" data-sourcing-en="Supplier market" data-sourcing-ru="Регион поиска поставщиков" data-sourcing-tr="Tedarikçi pazarı">Supplier market</label>
+  <select id="gtMarketRegion">
+   <option value="all" data-sourcing-en="Worldwide — all markets" data-sourcing-ru="Весь мир — все регионы" data-sourcing-tr="Tüm dünya">Worldwide — all markets</option>
+   <option value="russia_cis" data-sourcing-en="Russia and CIS" data-sourcing-ru="Россия и СНГ" data-sourcing-tr="Rusya ve BDT">Russia and CIS</option>
+   <option value="asia" data-sourcing-en="Asia (China, Korea, Japan, ASEAN, India)" data-sourcing-ru="Азия: Китай, Корея, Япония, ASEAN, Индия" data-sourcing-tr="Asya: Çin, Kore, Japonya, ASEAN, Hindistan">Asia</option>
+   <option value="europe" data-sourcing-en="Europe" data-sourcing-ru="Европа" data-sourcing-tr="Avrupa">Europe</option>
+   <option value="north_america" data-sourcing-en="North America" data-sourcing-ru="Северная Америка" data-sourcing-tr="Kuzey Amerika">North America</option>
+   <option value="latin_america" data-sourcing-en="Latin America" data-sourcing-ru="Латинская Америка" data-sourcing-tr="Latin Amerika">Latin America</option>
+   <option value="turkey_mena" data-sourcing-en="Türkiye / Middle East / Africa" data-sourcing-ru="Турция, Ближний Восток и Африка" data-sourcing-tr="Türkiye, Orta Doğu ve Afrika">Türkiye / Middle East / Africa</option>
+   <option value="oceania" data-sourcing-en="Australia and Oceania" data-sourcing-ru="Австралия и Океания" data-sourcing-tr="Avustralya ve Okyanusya">Australia and Oceania</option>
+  </select>
+ </div>
+ <div class="gt-worldwide-field">
+  <label for="gtSearchEngine" data-sourcing-en="Search provider" data-sourcing-ru="Поисковая система" data-sourcing-tr="Arama motoru">Search provider</label>
+  <select id="gtSearchEngine">
+   <option value="google">Google</option>
+   <option value="bing">Bing</option>
+   <option value="yandex">Яндекс / Yandex</option>
+   <option value="baidu">Baidu / 百度</option>
+  </select>
+ </div>
+ <p class="gt-worldwide-disclaimer" data-sourcing-en="The selected search provider is opened on click; no automatic scanning of other sites." data-sourcing-ru="Поиск на стороннем сайте открывается по нажатию. Автоматического сбора цен и остатков пока нет." data-sourcing-tr="Seçilen arama motoru tıklamayla açılır. Otomatik fiyat ve stok toplama henüz yok.">The search opens on click. No background inventory scanning.</p>
+</div>
 </div>
  <details id="extra">
   <summary id="extraLabel">More details &amp; attachment</summary>
@@ -475,12 +520,13 @@ suggestPrefix:'Серия / префикс артикула · требуетс�
 }
 };
 const T=(k)=>W[lang][k]||W.en[k]||k;
+let latestSearch=null;
 const trans=['drawingCta','suggestHint','back','eyebrow','title','subtitle','searchHeading','stepHint','partLabel','qtyLabel','destLabel','extraLabel','conditionLabel','leadLabel','notesLabel','fileLabel','chooseFile','fileNotice','searchLabel','addLabel','batchTitle','helpTitle','helpSubtitle','waLabel','emailLabel','copyLabel','helpNotice','legalNote','about','privacy','rfqPrivacy'];
 function changeLang(next){lang=['en','tr','ru'].includes(next)?next:'en';document.documentElement.lang=lang;by('lang').value=lang;try{localStorage.setItem('gt_lang',lang)}catch(e){};for(const id of trans){const el=by(id);if(el)el.textContent=T(id)}
  document.querySelectorAll('[data-sourcing-en]').forEach(el=>{el.textContent=el.getAttribute('data-sourcing-'+lang)||el.getAttribute('data-sourcing-en')})
  const opts=by('condition').options;['new','unused','any'].forEach((x,i)=>opts[i].textContent=T(x));
  by('leadTime').placeholder=T('leadPlaceholder');by('notes').placeholder=T('notesPlaceholder');
- if(!by('bom').files.length)by('fileName').textContent=T('noFile');const w=by('whatWeSource');if(w){w.href=lang+'/what-we-source.html';w.textContent=lang==='ru'?'Что поставляем':lang==='tr'?'Tedarik Alanlarımız':'What We Source';}renderBatch()}
+ if(!by('bom').files.length)by('fileName').textContent=T('noFile');const w=by('whatWeSource');if(w){w.href=lang+'/what-we-source.html';w.textContent=lang==='ru'?'Что поставляем':lang==='tr'?'Tedarik Alanlarımız':'What We Source';}renderBatch();if(latestSearch&&window.GeoTeamSourceFinder)window.GeoTeamSourceFinder.render(by('results'),latestSearch,{lang,engine:by('gtSearchEngine')?.value||'google'});}
 by('lang').addEventListener('change',()=>changeLang(by('lang').value));
 by('customDrawing').addEventListener('click',()=>{
  // Manufacturing is an RFQ subtype, not a claim of a live product-search match.
@@ -622,6 +668,12 @@ by('bom').addEventListener('change',()=>{
 });
 function state(title,body){const el=by('results');el.replaceChildren();const h=document.createElement('strong'),p=document.createElement('span');h.textContent=title;p.textContent=body;el.append(h,p);el.classList.add('is-visible')}
 const isDemo=/^(?:raw|rawcdn)\.githack\.com$/.test(location.hostname)||location.hostname.endsWith('.github.io')||location.hostname==='localhost'||location.hostname==='127.0.0.1';
+for(const id of ['gtMarketRegion','gtSearchEngine','gtSector']){
+ const el=by(id);
+ if(el)el.addEventListener('change',()=>{
+   if(by('part')?.value.trim() && by('dest')?.value.trim() && latestSearch && !busy)by('search').click();
+ });
+}
 by('search').addEventListener('click',async()=>{
  const req=product();if(!req||busy)return;
  busy=true;by('search').disabled=true;state(T('searchSearching'),'');
@@ -629,8 +681,11 @@ by('search').addEventListener('click',async()=>{
    const engine=window.GeoTeamSourceFinder;
    if(!engine)throw Error('Source finder module unavailable');
    const sector=by('gtSector')?.value||'auto';
-   const data=await engine.search({...req,sector});
-   engine.render(by('results'),data,{lang});
+   const region=by('gtMarketRegion')?.value||'all';
+   const searchEngine=by('gtSearchEngine')?.value||'google';
+   const data=await engine.search({...req,sector,region});
+   latestSearch=data;
+   engine.render(by('results'),data,{lang,engine:searchEngine});
    by('results').scrollIntoView({behavior:'smooth',block:'nearest'});
  }catch(e){
    // Honest failure: never invent supplier offers or claim live inventory.
