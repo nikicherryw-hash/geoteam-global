@@ -1,0 +1,135 @@
+avito_ru|Avito|marketplace|russia|https://www.avito.ru/|classifieds
+youla_ru|Юла|marketplace|russia|https://youla.ru/|classifieds
+meshok_ru|Мешок|marketplace|russia|https://meshok.net/|auction
+irr_ru|Из рук в руки|marketplace|russia|https://irr.ru/|classifieds
+farpost_ru|FarPost|marketplace|russia|https://www.farpost.ru/|classifieds
+megamarket_ru|Мегамаркет|marketplace|russia|https://megamarket.ru/|retail_marketplace
+blizko_ru|BLIZKO|general_b2b|russia|https://www.blizko.ru/|b2b_directory
+allbiz_global|all.biz|general_b2b|global|https://www.all.biz/|b2b_directory
+exist_ru|Exist.ru|industrial|russia|https://www.exist.ru/|industrial_distributor
+emex_ru|Emex|industrial|russia|https://www.emex.ru/|industrial_distributor
+autodoc_ru|Autodoc|industrial|russia|https://www.autodoc.ru/|industrial_distributor
+machineryline_ru|Machineryline Россия|industrial|russia|https://machineryline.ru/|used_equipment
+metaprom_ru|Metaprom|industrial|russia|https://metaprom.ru/|used_equipment
+trendyol_tr|Trendyol|marketplace|turkey|https://www.trendyol.com/|retail_marketplace
+n11_tr|n11|marketplace|turkey|https://www.n11.com/|retail_marketplace
+amazon_tr|Amazon Türkiye|marketplace|turkey|https://www.amazon.com.tr/|retail_marketplace
+letgo_tr|letgo Türkiye|marketplace|turkey|https://www.letgo.com/|classifieds
+makinaal_tr|Makina Al|industrial|turkey|https://makinaal.com.tr/|used_equipment
+makinecim_tr|Makinecim|industrial|turkey|https://www.makinecim.com/|used_equipment
+makinaturkiye_tr|Makina Türkiye|industrial|turkey|https://www.makinaturkiye.com/|used_equipment
+ebay_de|eBay Deutschland|marketplace|europe|https://www.ebay.de/|retail_marketplace
+ebay_uk|eBay UK|marketplace|europe|https://www.ebay.co.uk/|retail_marketplace
+amazon_de|Amazon Deutschland|marketplace|europe|https://www.amazon.de/|retail_marketplace
+amazon_uk|Amazon UK|marketplace|europe|https://www.amazon.co.uk/|retail_marketplace
+kleinanzeigen_de|Kleinanzeigen Deutschland|marketplace|europe|https://www.kleinanzeigen.de/|classifieds
+leboncoin_fr|Leboncoin France|marketplace|europe|https://www.leboncoin.fr/|classifieds
+subito_it|Subito Italia|marketplace|europe|https://www.subito.it/|classifieds
+wallapop_es|Wallapop|marketplace|europe|https://es.wallapop.com/|classifieds
+marktplaats_nl|Marktplaats|marketplace|europe|https://www.marktplaats.nl/|classifieds
+allegro_pl|Allegro Polska|marketplace|europe|https://allegro.pl/|retail_marketplace
+olx_pl|OLX Polska|marketplace|europe|https://www.olx.pl/|classifieds
+olx_ro|OLX Romania|marketplace|europe|https://www.olx.ro/|classifieds
+ricardo_ch|Ricardo Schweiz|marketplace|europe|https://www.ricardo.ch/|auction
+bazos_cz|Bazoš Czech Republic|marketplace|europe|https://www.bazos.cz/|classifieds
+finn_no|FINN.no|marketplace|europe|https://www.finn.no/|classifieds
+blocket_se|Blocket Sverige|marketplace|europe|https://www.blocket.se/|classifieds
+tradera_se|Tradera Sverige|marketplace|europe|https://www.tradera.com/|auction
+dba_dk|DBA Denmark|marketplace|europe|https://www.dba.dk/|classifieds
+donedeal_ie|DoneDeal Ireland|marketplace|europe|https://www.donedeal.ie/|classifieds
+gumtree_uk|Gumtree UK|marketplace|europe|https://www.gumtree.com/|classifieds
+machinio|Machinio|industrial|global|https://www.machinio.com/|used_equipment
+kitmondo|Kitmondo|industrial|global|https://www.kitmondo.com/|used_equipment
+equipnet|EquipNet|industrial|global|https://www.equipnet.com/|used_equipment
+machinepoint|MachinePoint|industrial|global|https://www.machinepoint.com/|used_equipment
+surplusrecord|Surplus Record|industrial|north_america|https://surplusrecord.com/|surplus_stock
+machinerytrader|MachineryTrader|industrial|north_america|https://www.machinerytrader.com/|used_equipment
+usedline|Used-Line|industrial|north_america|https://www.used-line.com/|surplus_stock
+bidspotter|BidSpotter|industrial|global|https://www.bidspotter.com/|auction
+allsurplus|AllSurplus|industrial|global|https://www.allsurplus.com/|auction
+troostwijk|Troostwijk Auctions|industrial|europe|https://www.troostwijkauctions.com/|auction
+netbid|NetBid|industrial|europe|https://www.netbid.com/|auction
+industrialdiscount_it|Industrial Discount|industrial|europe|https://www.industrialdiscount.com/|auction
+ritchiebros|Ritchie Bros.|industrial|global|https://www.rbauction.com/|auction
+ironplanet|IronPlanet|industrial|global|https://www.ironplanet.com/|auction
+govdeals|GovDeals|industrial|north_america|https://www.govdeals.com/|auction
+publicsurplus|Public Surplus|industrial|north_america|https://www.publicsurplus.com/|auction
+liquidation_com|Liquidation.com|industrial|north_america|https://www.liquidation.com/|auction
+mascus_global|Mascus|industrial|global|https://www.mascus.com/|used_equipment
+machineryline_global|Machineryline Worldwide|industrial|global|https://machineryline.info/|used_equipment
+trademachines|TradeMachines|industrial|global|https://www.trademachines.com/|used_equipment
+assettrade|Asset-Trade|industrial|europe|https://www.asset-trade.de/|used_equipment
+industrialauctions|Industrial Auctions|industrial|europe|https://www.industrial-auctions.com/|auction
+grays_au|Grays Australia|industrial|oceania|https://www.grays.com/|auction
+pickles_au|Pickles Auctions Australia|industrial|oceania|https://www.pickles.com.au/|auction
+gumtree_au|Gumtree Australia|marketplace|oceania|https://www.gumtree.com.au/|classifieds
+ebay_au|eBay Australia|marketplace|oceania|https://www.ebay.com.au/|retail_marketplace
+amazon_au|Amazon Australia|marketplace|oceania|https://www.amazon.com.au/|retail_marketplace
+auctions_yahoo_jp|Yahoo! Auctions Japan|marketplace|japan|https://auctions.yahoo.co.jp/|auction
+mercari_jp|Mercari Japan|marketplace|japan|https://jp.mercari.com/|classifieds
+rakuten_jp|Rakuten Japan|marketplace|japan|https://www.rakuten.co.jp/|retail_marketplace
+yahoo_shop_jp|Yahoo! Shopping Japan|marketplace|japan|https://shopping.yahoo.co.jp/|retail_marketplace
+goofish_cn|Xianyu / Goofish|marketplace|china|https://www.goofish.com/|classifieds
+pinduoduo_cn|Pinduoduo|marketplace|china|https://www.pinduoduo.com/|retail_marketplace
+hc360_cn|HC360|general_b2b|china|https://www.hc360.com/|b2b_directory
+gongchang_cn|Gongchang|general_b2b|china|https://www.gongchang.com/|b2b_directory
+gmarket_kr|Gmarket Korea|marketplace|korea|https://www.gmarket.co.kr/|retail_marketplace
+auction_kr|Auction Korea|marketplace|korea|https://www.auction.co.kr/|retail_marketplace
+coupang_kr|Coupang Korea|marketplace|korea|https://www.coupang.com/|retail_marketplace
+bunjang_kr|Bunjang Korea|marketplace|korea|https://www.bunjang.co.kr/|classifieds
+joongna_kr|Joongna Korea|marketplace|korea|https://web.joongna.com/|classifieds
+daangn_kr|Danggeun Korea|marketplace|korea|https://www.daangn.com/|classifieds
+carousell_sg|Carousell Singapore|marketplace|singapore|https://www.carousell.sg/|classifieds
+carousell_my|Carousell Malaysia|marketplace|malaysia|https://www.carousell.com.my/|classifieds
+mudah_my|Mudah.my|marketplace|malaysia|https://www.mudah.my/|classifieds
+shopee_my|Shopee Malaysia|marketplace|malaysia|https://shopee.com.my/|retail_marketplace
+lazada_my|Lazada Malaysia|marketplace|malaysia|https://www.lazada.com.my/|retail_marketplace
+tokopedia_id|Tokopedia Indonesia|marketplace|indonesia|https://www.tokopedia.com/|retail_marketplace
+bukalapak_id|Bukalapak Indonesia|marketplace|indonesia|https://www.bukalapak.com/|retail_marketplace
+olx_id|OLX Indonesia|marketplace|indonesia|https://www.olx.co.id/|classifieds
+shopee_id|Shopee Indonesia|marketplace|indonesia|https://shopee.co.id/|retail_marketplace
+lazada_id|Lazada Indonesia|marketplace|indonesia|https://www.lazada.co.id/|retail_marketplace
+carousell_ph|Carousell Philippines|marketplace|asia|https://www.carousell.ph/|classifieds
+shopee_ph|Shopee Philippines|marketplace|asia|https://shopee.ph/|retail_marketplace
+lazada_ph|Lazada Philippines|marketplace|asia|https://www.lazada.com.ph/|retail_marketplace
+kaidee_th|Kaidee Thailand|marketplace|thailand|https://www.kaidee.com/|classifieds
+chotot_vn|Chợ Tốt Vietnam|marketplace|asia|https://www.chotot.com/|classifieds
+shopee_vn|Shopee Vietnam|marketplace|asia|https://shopee.vn/|retail_marketplace
+olx_in|OLX India|marketplace|india|https://www.olx.in/|classifieds
+quikr_in|Quikr India|marketplace|india|https://www.quikr.com/|classifieds
+justdial_in|Justdial|general_b2b|india|https://www.justdial.com/|b2b_directory
+moglix_in|Moglix India|industrial|india|https://www.moglix.com/|industrial_distributor
+industrybuying_in|IndustryBuying|industrial|india|https://www.industrybuying.com/|industrial_distributor
+amazon_in|Amazon India|marketplace|india|https://www.amazon.in/|retail_marketplace
+flipkart_in|Flipkart India|marketplace|india|https://www.flipkart.com/|retail_marketplace
+dubizzle_ae|Dubizzle UAE|marketplace|middle_east|https://www.dubizzle.com/|classifieds
+opensooq_me|OpenSooq|marketplace|middle_east|https://www.opensooq.com/|classifieds
+noon_me|Noon|marketplace|middle_east|https://www.noon.com/|retail_marketplace
+amazon_ae|Amazon UAE|marketplace|middle_east|https://www.amazon.ae/|retail_marketplace
+haraj_sa|Haraj Saudi Arabia|marketplace|middle_east|https://haraj.com.sa/|classifieds
+olx_eg|OLX Egypt|marketplace|africa|https://www.olx.com.eg/|classifieds
+jiji_ng|Jiji Nigeria|marketplace|africa|https://jiji.ng/|classifieds
+jiji_ke|Jiji Kenya|marketplace|africa|https://jiji.co.ke/|classifieds
+jiji_gh|Jiji Ghana|marketplace|africa|https://jiji.com.gh/|classifieds
+jumia_ng|Jumia Nigeria|marketplace|africa|https://www.jumia.com.ng/|retail_marketplace
+gumtree_za|Gumtree South Africa|marketplace|africa|https://www.gumtree.co.za/|classifieds
+bobshop_za|Bob Shop South Africa|marketplace|africa|https://www.bobshop.co.za/|retail_marketplace
+olx_br|OLX Brasil|marketplace|latin_america|https://www.olx.com.br/|classifieds
+mercadolivre_br|Mercado Livre Brasil|marketplace|latin_america|https://www.mercadolivre.com.br/|retail_marketplace
+superbid_br|Superbid Exchange Brasil|industrial|latin_america|https://exchange.superbid.net/|auction
+portaldasmaquinas_br|Portal das Máquinas Brasil|industrial|latin_america|https://www.portaldasmaquinas.com/|used_equipment
+mfrural_br|MF Rural|industrial|latin_america|https://www.mfrural.com.br/|used_equipment
+mercadolibre_mx|Mercado Libre México|marketplace|latin_america|https://www.mercadolibre.com.mx/|retail_marketplace
+mercadolibre_ar|Mercado Libre Argentina|marketplace|latin_america|https://www.mercadolibre.com.ar/|retail_marketplace
+mercadolibre_co|Mercado Libre Colombia|marketplace|latin_america|https://www.mercadolibre.com.co/|retail_marketplace
+mercadolibre_cl|Mercado Libre Chile|marketplace|latin_america|https://www.mercadolibre.cl/|retail_marketplace
+yapo_cl|Yapo Chile|marketplace|latin_america|https://www.yapo.cl/|classifieds
+encuentra24|Encuentra24|marketplace|latin_america|https://www.encuentra24.com/|classifieds
+vivaanuncios_mx|Vivanuncios México|marketplace|latin_america|https://www.vivanuncios.com.mx/|classifieds
+amazon_us|Amazon US retail marketplace|marketplace|north_america|https://www.amazon.com/|retail_marketplace
+craigslist|Craigslist|marketplace|north_america|https://www.craigslist.org/|classifieds
+offerup|OfferUp|marketplace|north_america|https://offerup.com/|classifieds
+facebook_marketplace|Facebook Marketplace|marketplace|global|https://www.facebook.com/marketplace/|classifieds
+kijiji_ca|Kijiji Canada|marketplace|north_america|https://www.kijiji.ca/|classifieds
+ebay_ca|eBay Canada|marketplace|north_america|https://www.ebay.ca/|retail_marketplace
+amazon_ca|Amazon Canada|marketplace|north_america|https://www.amazon.ca/|retail_marketplace
