@@ -48,7 +48,8 @@ p=Path(sys.argv[1]); sha=sys.argv[2]
 r=json.loads((p/"data/sources.v1.json").read_text())
 assert r["product_id"]=="GEOTEAM_GLOBAL" and len(r["sources"])==269
 assert sum(s["segment"]!="logistics" for s in r["sources"])==266
-assert all(s["enabled"] is False and s["integration_status"]=="NOT_CONNECTED" for s in r["sources"])
+assert all(s["enabled"] is False and s["integration_status"]=="NOT_CONNECTED" and s["rights_status"]=="NOT_REVIEWED" for s in r["sources"])
+assert all(s["source_type"] and s["listing_status_capability"]=="UNVERIFIED_NO_API" for s in r["sources"] if s["segment"]!="logistics")
 f=p/"sourcing.html"
 html=f.read_text()
 assert 'global-source-finder.js' in html and 'id="gtSector"' in html
@@ -124,11 +125,13 @@ assert 'id="gtSector"' in (p/"live.html").read_text()
 assert 'id="gtMarketRegion"' in (p/"live.html").read_text()
 assert 'id="gtSearchEngine"' in (p/"live.html").read_text()
 assert "GeoTeamSourceFinder" in (p/"live.js").read_text()
+assert "listingLifecycle" in (p/"live.js").read_text()
+assert "multilingualVariants" in (p/"live.js").read_text()
 assert len(json.loads((p/"live.json").read_text())["sources"])==269
 assert json.loads((p/"release.json").read_text())["git_sha"]==pin
 print("LIVE_READBACK=PASS")
 PY
 echo "PUBLIC_SEARCH_URL=$BASE/sourcing.html?lang=ru"
 echo "ORIGINAL_SITE=https://geoteam-global.com/ (UNCHANGED)"
-echo "DIRECTORY_MODE=YES PROVIDER_API_CONNECTED=NO"
+echo "DIRECTORY_MODE=YES PRODUCT_SOURCE_CANDIDATES=266 LIVE_PROVIDER_API_CONNECTED=0"
 echo "LOCAL_AUDIT_FILES=$WORK"
