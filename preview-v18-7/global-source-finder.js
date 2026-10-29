@@ -198,7 +198,7 @@ function route(sources,input){
    product_id:"GEOTEAM_GLOBAL",request:{query,quantity,destination:dest,condition},
    category,region:"all",preferred_region:priorityRegion,scope:"ALL_REGISTERED_PRODUCT_SOURCES",
    total:results.length,results,mode:"SOURCE_DISCOVERY_ONLY",
-   price_confirmed:false,stock_confirmed:false,checked_at:new Date().toISOString()
+   price_confirmed:false,stock_confirmed:false,directory_generated_at:new Date().toISOString()
  };
 }
 /* Future licensed listing connector gate. It never changes the source registry
@@ -306,13 +306,13 @@ function render(target,data,options){
      exact.textContent=words.search+" · "+engine+" ↗";
      const direct=document.createElement("a");direct.href=item.provider_url;direct.target="_blank";
      direct.rel="noopener noreferrer";direct.className="gt-source-direct";direct.textContent=words.view+" ↗";
-     links.append(exact,direct);
      const native=nativeSearchUrl(item,data.request.query);
+     links.append(exact,direct);
      if(native){
        const nativeLink=document.createElement("a");nativeLink.href=native;nativeLink.target="_blank";
        nativeLink.rel="noopener noreferrer";nativeLink.className="gt-source-direct";
        nativeLink.textContent=lang==="ru"?"Поиск внутри площадки ↗":lang==="tr"?"Platform içi arama ↗":"Search on marketplace ↗";
-       links.append(nativeLink);
+       links.prepend(nativeLink);
      }
      const caption=document.createElement("small");
      caption.textContent=["auction","classifieds","used_equipment","surplus_stock","retail_marketplace"].includes(item.source_type)?extra.listing:words.status;
