@@ -1,6 +1,6 @@
 {
   "product_id": "GEOTEAM_GLOBAL",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "as_of": "2026-10-29",
   "purpose": "Candidate worldwide sourcing and logistics provider registry. This is NOT a connected or licensed search system.",
   "integration_policy": {
@@ -13,7 +13,9 @@
     "supplier_offer_status": "NOT_VERIFIED_UNTIL_PROVIDER_EVIDENCE",
     "quote_generation": "NO_BINDING_AUTOMATED_OFFERS",
     "export_compliance": "MUST_PASS_DESTINATION_PRODUCT_END_USE_RESTRICTIONS",
-    "infrastructure": "GEOTEAM_ONLY_NO_SHARED_SKS_RESOURCES"
+    "infrastructure": "GEOTEAM_ONLY_NO_SHARED_SKS_RESOURCES",
+    "public_search_scope": "DIRECT_LINK_AND_SEARCH_ENGINE_REDIRECT_ONLY",
+    "cross_border_rule": "EXPORT_CONTROL_SANCTIONS_END_USE_AND_IMPORT_RESTRICTIONS_GATE_REQUIRED_BEFORE_QUOTES"
   },
   "sources": [
     {
@@ -30,7 +32,8 @@
       "requirements": "API access and display/storage rights review",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "mouser",
@@ -46,7 +49,8 @@
       "requirements": "API key; quotas and display/storage licensing",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "digikey",
@@ -62,7 +66,8 @@
       "requirements": "Developer registration, app approval and API credentials",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "nexar",
@@ -78,7 +83,8 @@
       "requirements": "Account, OAuth app and plan/data rights",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "element14",
@@ -94,7 +100,8 @@
       "requirements": "Registered partner API key; territory and contract price permissions",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "arrow",
@@ -110,7 +117,8 @@
       "requirements": "Partner API login/key; licensing and current endpoint qualification",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "partsbase",
@@ -126,7 +134,8 @@
       "requirements": "PartsBase account manager, credentials, subscription/usage rights",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "locatory",
@@ -142,7 +151,8 @@
       "requirements": "Commercial subscription and approved API scope",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "ilsmart",
@@ -158,7 +168,8 @@
       "requirements": "Confirm subscription and available integration interfaces directly",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "thomasnet",
@@ -174,7 +185,8 @@
       "requirements": "Supplier discovery only; automated data access unverified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "directindustry",
@@ -190,7 +202,8 @@
       "requirements": "Use approved supplier contacts/RFQ; no assumed catalog API",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "europages",
@@ -206,7 +219,8 @@
       "requirements": "Directory and RFQ; no assumed automated extraction permissions",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "wlw",
@@ -223,7 +237,8 @@
       "requirements": "Supplier directory access only; API rights unverified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "siemens_pih",
@@ -239,7 +254,8 @@
       "requirements": "Early access; confirm product/catalog scope and commercial rights",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "alibaba_open",
@@ -256,7 +272,8 @@
       "requirements": "Developer registration, approved app/scopes and supplier authorizations; not a blanket catalog API",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "made_in_china",
@@ -273,7 +290,8 @@
       "requirements": "Supplier listings/RFQ; automated feed requires provider permission",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "globalsources",
@@ -290,7 +308,8 @@
       "requirements": "Supplier discovery and RFQ; automation authorization unverified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "ebay_browse",
@@ -306,7 +325,8 @@
       "requirements": "Developer account, OAuth, marketplace/site and data-redistribution constraints",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "amazon_spapi",
@@ -322,7 +342,8 @@
       "requirements": "Seller-authorized integration; NOT a general public worldwide product search",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "dhl_express",
@@ -338,7 +359,8 @@
       "requirements": "DHL Express customer account, credentials, rating/landed-cost data rights",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "ups_rating",
@@ -354,7 +376,8 @@
       "requirements": "Developer OAuth, account/terms, allowed rate display",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "fedex_rates",
@@ -370,7 +393,8 @@
       "requirements": "FedEx developer app and account; route, dimensions, tariffs",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "rs",
@@ -388,7 +412,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "tme",
@@ -405,7 +430,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "avnet",
@@ -421,7 +447,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "future_electronics",
@@ -437,7 +464,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "tti",
@@ -453,7 +481,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "conrad",
@@ -470,7 +499,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "rutronik",
@@ -487,7 +517,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "radwell",
@@ -505,7 +536,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "euautomation",
@@ -522,7 +554,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "globalspec",
@@ -538,7 +571,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "kompass",
@@ -555,7 +589,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "industrystock",
@@ -572,7 +607,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "motion",
@@ -588,7 +624,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "mroelectric",
@@ -605,7 +642,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "indiamart",
@@ -622,7 +660,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "tradeindia",
@@ -639,7 +678,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "hktdc",
@@ -656,7 +696,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "taiwantrade",
@@ -673,7 +714,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "mfg",
@@ -689,7 +731,8 @@
       "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "satair",
@@ -705,7 +748,8 @@
       "requirements": "Partner/account access and product rights; public-site discovery only pending approval",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "boeingdistribution",
@@ -721,7 +765,8 @@
       "requirements": "Partner/account access and product rights; public-site discovery only pending approval",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     },
     {
       "id": "aeroxchange",
@@ -737,7 +782,1538 @@
       "requirements": "Partner/account access and product rights; public-site discovery only pending approval",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
-      "enabled": false
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "pulscen",
+      "name": "Пульс цен",
+      "segment": "industrial",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.pulscen.ru/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "promportal_ru",
+      "name": "ПромПортал",
+      "segment": "industrial",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.promportal.su/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "elec_ru",
+      "name": "Elec.ru",
+      "segment": "electronics",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.elec.ru/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "chipdip_ru",
+      "name": "Чип и Дип",
+      "segment": "electronics",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.chipdip.ru/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "etm_ru",
+      "name": "ЭТМ",
+      "segment": "electronics",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.etm.ru/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "vseinstrumenti_ru",
+      "name": "ВсеИнструменты.ру",
+      "segment": "industrial",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.vseinstrumenti.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "yandexmarket_ru",
+      "name": "Яндекс Маркет",
+      "segment": "marketplace",
+      "scope": [
+        "russia"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://market.yandex.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "ozon_ru",
+      "name": "Ozon",
+      "segment": "marketplace",
+      "scope": [
+        "russia"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.ozon.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "wildberries_ru",
+      "name": "Wildberries",
+      "segment": "marketplace",
+      "scope": [
+        "russia"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.wildberries.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "gisp_metals",
+      "name": "ГИСП — металлопрокат",
+      "segment": "industrial",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://gisp.gov.ru/emetall/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "b2bcenter_ru",
+      "name": "B2B-Center",
+      "segment": "general_b2b",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.b2b-center.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "flagma_ru",
+      "name": "Flagma.ru",
+      "segment": "general_b2b",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://flagma.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "iek_ru",
+      "name": "IEK",
+      "segment": "manufacturer",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.iek.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "dkc_ru",
+      "name": "ДКС",
+      "segment": "manufacturer",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.dkc.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "proelectro_ru",
+      "name": "Proelectro",
+      "segment": "electronics",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://proelectro.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "abamet_ru",
+      "name": "Абамет",
+      "segment": "industrial",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.abamet.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "rusklimat_ru",
+      "name": "Русклимат",
+      "segment": "industrial",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.rusklimat.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "elektro_ru",
+      "name": "Электро.ру",
+      "segment": "electronics",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.elektro.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "ruselprom_ru",
+      "name": "РУСЭЛПРОМ",
+      "segment": "manufacturer",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.ruselprom.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "satu_kz",
+      "name": "Satu.kz",
+      "segment": "general_b2b",
+      "scope": [
+        "kazakhstan"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://satu.kz/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "flagma_kz",
+      "name": "Flagma.kz",
+      "segment": "general_b2b",
+      "scope": [
+        "kazakhstan"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://flagma.kz/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "deal_by",
+      "name": "Deal.by",
+      "segment": "general_b2b",
+      "scope": [
+        "belarus"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://deal.by/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "prom_ua",
+      "name": "Prom.ua",
+      "segment": "general_b2b",
+      "scope": [
+        "ukraine"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://prom.ua/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "flagma_by",
+      "name": "Flagma.by",
+      "segment": "general_b2b",
+      "scope": [
+        "belarus"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://flagma.by/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "china_1688",
+      "name": "1688.com",
+      "segment": "general_b2b",
+      "scope": [
+        "china"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.1688.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "china_dhgate",
+      "name": "DHgate",
+      "segment": "general_b2b",
+      "scope": [
+        "china"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.dhgate.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "aliexpress",
+      "name": "AliExpress",
+      "segment": "marketplace",
+      "scope": [
+        "china"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.aliexpress.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "jd_china",
+      "name": "JD.com",
+      "segment": "marketplace",
+      "scope": [
+        "china"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.jd.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "taobao_china",
+      "name": "Taobao",
+      "segment": "marketplace",
+      "scope": [
+        "china"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.taobao.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "chinagoods",
+      "name": "Chinagoods",
+      "segment": "general_b2b",
+      "scope": [
+        "china"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.chinagoods.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "tradekorea",
+      "name": "tradeKorea",
+      "segment": "general_b2b",
+      "scope": [
+        "korea"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.tradekorea.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "ec21",
+      "name": "EC21",
+      "segment": "general_b2b",
+      "scope": [
+        "korea"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.ec21.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "ecplaza",
+      "name": "ECPlaza",
+      "segment": "general_b2b",
+      "scope": [
+        "korea"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.ecplaza.net/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "gobizkorea",
+      "name": "GobizKorea",
+      "segment": "general_b2b",
+      "scope": [
+        "korea"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.gobizkorea.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "komachine",
+      "name": "Komachine",
+      "segment": "industrial",
+      "scope": [
+        "korea"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.komachine.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "monotaro_jp",
+      "name": "MonotaRO",
+      "segment": "industrial",
+      "scope": [
+        "japan"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.monotaro.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "ipros_jp",
+      "name": "iPROS",
+      "segment": "industrial",
+      "scope": [
+        "japan"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.ipros.jp/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "misumi_jp",
+      "name": "MISUMI Japan",
+      "segment": "industrial",
+      "scope": [
+        "japan"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://jp.misumi-ec.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "inaexport",
+      "name": "Inaexport (Indonesia)",
+      "segment": "general_b2b",
+      "scope": [
+        "indonesia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.inaexport.id/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "indotrading",
+      "name": "Indotrading",
+      "segment": "general_b2b",
+      "scope": [
+        "indonesia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.indotrading.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "thaitrade",
+      "name": "ThaiTrade",
+      "segment": "general_b2b",
+      "scope": [
+        "thailand"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.thaitrade.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "eezee_sg",
+      "name": "Eezee",
+      "segment": "industrial",
+      "scope": [
+        "singapore"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://eezee.sg/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "misumi_my",
+      "name": "MISUMI Malaysia",
+      "segment": "industrial",
+      "scope": [
+        "malaysia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://my.misumi-ec.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "exportersindia",
+      "name": "ExportersIndia",
+      "segment": "general_b2b",
+      "scope": [
+        "india"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.exportersindia.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "go4worldbusiness",
+      "name": "Go4WorldBusiness",
+      "segment": "general_b2b",
+      "scope": [
+        "india"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.go4worldbusiness.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "turkishexporter",
+      "name": "TurkishExporter",
+      "segment": "general_b2b",
+      "scope": [
+        "turkey"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.turkishexporter.net/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "sanayiden_tr",
+      "name": "Sanayiden",
+      "segment": "industrial",
+      "scope": [
+        "turkey"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.sanayiden.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "sahibinden_tr",
+      "name": "Sahibinden",
+      "segment": "marketplace",
+      "scope": [
+        "turkey"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.sahibinden.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "direnc_tr",
+      "name": "Direnc.net",
+      "segment": "electronics",
+      "scope": [
+        "turkey"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.direnc.net/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "robotistan_tr",
+      "name": "Robotistan",
+      "segment": "electronics",
+      "scope": [
+        "turkey"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.robotistan.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "hepsiburada_tr",
+      "name": "Hepsiburada",
+      "segment": "marketplace",
+      "scope": [
+        "turkey"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.hepsiburada.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "dalil_turkey",
+      "name": "Dalil Turkey",
+      "segment": "general_b2b",
+      "scope": [
+        "turkey"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.dalil-turkey.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "automation24",
+      "name": "Automation24",
+      "segment": "industrial",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.automation24.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "reichelt",
+      "name": "Reichelt Elektronik",
+      "segment": "electronics",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.reichelt.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "unite",
+      "name": "Unite (Mercateo)",
+      "segment": "general_b2b",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.unite.eu/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "machineseeker",
+      "name": "Machineseeker",
+      "segment": "industrial",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.machineseeker.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "exapro",
+      "name": "Exapro",
+      "segment": "industrial",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.exapro.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "surplex",
+      "name": "Surplex",
+      "segment": "industrial",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.surplex.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "resaleinfo",
+      "name": "Resale.info",
+      "segment": "industrial",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.resale.info/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "festo_oem",
+      "name": "Festo",
+      "segment": "manufacturer",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.festo.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "ifm_oem",
+      "name": "ifm electronic",
+      "segment": "manufacturer",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.ifm.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "sick_oem",
+      "name": "SICK",
+      "segment": "manufacturer",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.sick.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "boschrexroth_oem",
+      "name": "Bosch Rexroth",
+      "segment": "manufacturer",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.boschrexroth.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "schneider_oem",
+      "name": "Schneider Electric",
+      "segment": "manufacturer",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.se.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "tameson",
+      "name": "Tameson",
+      "segment": "industrial",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://tameson.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "norelem",
+      "name": "norelem",
+      "segment": "industrial",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.norelem.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "haberkorn",
+      "name": "Haberkorn",
+      "segment": "industrial",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.haberkorn.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "rubix",
+      "name": "Rubix",
+      "segment": "industrial",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.rubix.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "grainger",
+      "name": "Grainger",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.grainger.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "mcmaster",
+      "name": "McMaster-Carr",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.mcmaster.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "zoro_us",
+      "name": "Zoro",
+      "segment": "marketplace",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.zoro.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "mscdirect",
+      "name": "MSC Industrial Supply",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.mscdirect.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "automationdirect",
+      "name": "AutomationDirect",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.automationdirect.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "galco",
+      "name": "Galco Industrial Electronics",
+      "segment": "electronics",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.galco.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "applied",
+      "name": "Applied Industrial Technologies",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.applied.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "globalindustrial",
+      "name": "Global Industrial",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.globalindustrial.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "omega",
+      "name": "OMEGA Engineering",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.omega.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "newark",
+      "name": "Newark Electronics",
+      "segment": "electronics",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.newark.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "tequipment",
+      "name": "Test Equipment Depot / TEquipment",
+      "segment": "electronics",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.tequipment.net/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "mercadolibre",
+      "name": "Mercado Libre",
+      "segment": "marketplace",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.mercadolibre.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "b2brazil",
+      "name": "B2Brazil",
+      "segment": "general_b2b",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://b2brazil.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "solostocks",
+      "name": "SoloStocks",
+      "segment": "general_b2b",
+      "scope": [
+        "europe"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.solostocks.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "tradeling",
+      "name": "Tradeling",
+      "segment": "general_b2b",
+      "scope": [
+        "middle_east"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.tradeling.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "tradekey",
+      "name": "TradeKey",
+      "segment": "general_b2b",
+      "scope": [
+        "middle_east"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.tradekey.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "yellowpages_uae",
+      "name": "UAE Yellow Pages",
+      "segment": "general_b2b",
+      "scope": [
+        "middle_east"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.yellowpages-uae.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "afrikta",
+      "name": "Afrikta Business",
+      "segment": "general_b2b",
+      "scope": [
+        "africa"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://afrikta.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "blackwoods_au",
+      "name": "Blackwoods",
+      "segment": "industrial",
+      "scope": [
+        "oceania"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.blackwoods.com.au/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "industrysearch_au",
+      "name": "IndustrySearch",
+      "segment": "industrial",
+      "scope": [
+        "oceania"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.industrysearch.com.au/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "machines4u_au",
+      "name": "Machines4U",
+      "segment": "industrial",
+      "scope": [
+        "oceania"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.machines4u.com.au/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "trademe_nz",
+      "name": "Trade Me",
+      "segment": "marketplace",
+      "scope": [
+        "oceania"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.trademe.co.nz/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public catalog/source discovery only. Verify site access, terms, vendor identity, shipment destination and export rules before use. No automated scraping/API assumed.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
     }
   ]
 }
