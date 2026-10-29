@@ -2,6 +2,7 @@
 from __future__ import annotations
 import secrets
 import sqlite3
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from decimal import Decimal
 from pathlib import Path
@@ -20,10 +21,14 @@ class PilotBudget:
             raise ValueError("Persistent budget directory not mounted")
         with self._connect() as db:
             db.execute("CREATE TABLE IF NOT EXISTS calls (id TEXT PRIMARY KEY, started_at TEXT NOT NULL, amount_cents INTEGER NOT NULL, state TEXT NOT NULL)")
+    @contextmanager
     def _connect(self):
         db=sqlite3.connect(self.path,timeout=15,isolation_level=None)
-        db.execute("PRAGMA busy_timeout=15000")
-        return db
+        try:
+            db.execute("PRAGMA busy_timeout=15000")
+            yield db
+        finally:
+            db.close()
     def reserve_call(self) -> str:
         ident=secrets.token_hex(16)
         with self._connect() as db:
