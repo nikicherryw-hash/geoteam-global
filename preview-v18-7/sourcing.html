@@ -388,6 +388,12 @@ footer{max-width:var(--gt-search-max)!important}
 .gt-source-more[hidden]{display:none!important}
 @media(max-width:600px){.gt-worldwide-controls{grid-template-columns:1fr;margin-top:12px}.gt-worldwide-field select{font-size:12px}.gt-worldwide-engines a{flex:1;justify-content:center}.gt-worldwide-search{padding:11px 10px}}
 </style>
+<style id="gt-v18-41-all-markets">
+.gt-worldwide-all-markets{display:flex;flex-wrap:wrap;align-items:center;gap:9px 11px;border-top:1px solid rgba(131,231,212,.16);margin-top:13px;padding:16px 2px 6px}
+.gt-worldwide-all-markets strong{color:#e9fffa;font-size:12.4px;font-weight:690}
+.gt-worldwide-all-markets p{width:100%;margin:0!important;font-size:11.2px;line-height:1.55;color:#a9cfc6}
+.gt-worldwide-dot{display:inline-block;flex:none;width:7px;height:7px;border-radius:50%;background:#84f5d8;box-shadow:0 0 9px rgba(120,248,216,.42)}
+</style>
 </head>
 <body>
 <header><a class="brand" href="index.html"><strong>GeoTeam</strong><small>GLOBAL</small></a><div class="top-nav"><a class="back" href="index.html" id="back">← Back to site</a><label class="lang-wrap" aria-label="Website language"><select class="lang-choice" id="lang" title="Website language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><optgroup label="More languages — planned"><option disabled>DE · Deutsch</option><option disabled>FR · Français</option><option disabled>ES · Español</option><option disabled>IT · Italiano</option><option disabled>PT · Português</option><option disabled>AR · العربية</option><option disabled>ZH · 中文</option></optgroup></select></label></div></header>
@@ -418,30 +424,10 @@ footer{max-width:var(--gt-search-max)!important}
  </select>
  <span class="gt-sector-hint" data-sourcing-en="Filter the supplier directories before opening searches" data-sourcing-tr="Tedarikçi dizinlerini aramadan önce filtreleyin" data-sourcing-ru="Поможет подобрать подходящие площадки">Filter the supplier directories before opening searches</span>
 </div>
-<div class="gt-worldwide-controls" aria-label="Search geography and engine">
- <div class="gt-worldwide-field">
-  <label for="gtMarketRegion" data-sourcing-en="Supplier market" data-sourcing-ru="Регион поиска поставщиков" data-sourcing-tr="Tedarikçi pazarı">Supplier market</label>
-  <select id="gtMarketRegion">
-   <option value="all" data-sourcing-en="Worldwide — all markets" data-sourcing-ru="Весь мир — все регионы" data-sourcing-tr="Tüm dünya">Worldwide — all markets</option>
-   <option value="russia_cis" data-sourcing-en="Russia and CIS" data-sourcing-ru="Россия и СНГ" data-sourcing-tr="Rusya ve BDT">Russia and CIS</option>
-   <option value="asia" data-sourcing-en="Asia (China, Korea, Japan, ASEAN, India)" data-sourcing-ru="Азия: Китай, Корея, Япония, ASEAN, Индия" data-sourcing-tr="Asya: Çin, Kore, Japonya, ASEAN, Hindistan">Asia</option>
-   <option value="europe" data-sourcing-en="Europe" data-sourcing-ru="Европа" data-sourcing-tr="Avrupa">Europe</option>
-   <option value="north_america" data-sourcing-en="North America" data-sourcing-ru="Северная Америка" data-sourcing-tr="Kuzey Amerika">North America</option>
-   <option value="latin_america" data-sourcing-en="Latin America" data-sourcing-ru="Латинская Америка" data-sourcing-tr="Latin Amerika">Latin America</option>
-   <option value="turkey_mena" data-sourcing-en="Türkiye / Middle East / Africa" data-sourcing-ru="Турция, Ближний Восток и Африка" data-sourcing-tr="Türkiye, Orta Doğu ve Afrika">Türkiye / Middle East / Africa</option>
-   <option value="oceania" data-sourcing-en="Australia and Oceania" data-sourcing-ru="Австралия и Океания" data-sourcing-tr="Avustralya ve Okyanusya">Australia and Oceania</option>
-  </select>
- </div>
- <div class="gt-worldwide-field">
-  <label for="gtSearchEngine" data-sourcing-en="Search provider" data-sourcing-ru="Поисковая система" data-sourcing-tr="Arama motoru">Search provider</label>
-  <select id="gtSearchEngine">
-   <option value="google">Google</option>
-   <option value="bing">Bing</option>
-   <option value="yandex">Яндекс / Yandex</option>
-   <option value="baidu">Baidu / 百度</option>
-  </select>
- </div>
- <p class="gt-worldwide-disclaimer" data-sourcing-en="The selected search provider is opened on click; no automatic scanning of other sites." data-sourcing-ru="Поиск на стороннем сайте открывается по нажатию. Автоматического сбора цен и остатков пока нет." data-sourcing-tr="Seçilen arama motoru tıklamayla açılır. Otomatik fiyat ve stok toplama henüz yok.">The search opens on click. No background inventory scanning.</p>
+<div class="gt-worldwide-all-markets" aria-label="Worldwide sourcing enabled">
+ <span class="gt-worldwide-dot" aria-hidden="true"></span>
+ <strong data-sourcing-en="Worldwide sourcing across every registered market" data-sourcing-ru="Глобальный поиск по всем рынкам одновременно" data-sourcing-tr="Tüm pazarlarda eş zamanlı küresel tedarik araması">Worldwide sourcing across every registered market</strong>
+ <p data-sourcing-en="Including stores, private listings, used machinery and auctions. Search providers and websites open only when clicked." data-sourcing-ru="Включая магазины, частные объявления, б/у оборудование и аукционы. Сайты открываются по нажатию — автоматическая проверка наличия будет подключена через API." data-sourcing-tr="Mağazalar, özel ilanlar, ikinci el makineler ve açık artırmalar dahil. Kaynaklar yalnızca tıklanınca açılır.">Including stores, private listings, used machinery and auctions. Search providers and websites open only when clicked.</p>
 </div>
  <details id="extra">
   <summary id="extraLabel">More details &amp; attachment</summary>
@@ -526,7 +512,7 @@ function changeLang(next){lang=['en','tr','ru'].includes(next)?next:'en';documen
  document.querySelectorAll('[data-sourcing-en]').forEach(el=>{el.textContent=el.getAttribute('data-sourcing-'+lang)||el.getAttribute('data-sourcing-en')})
  const opts=by('condition').options;['new','unused','any'].forEach((x,i)=>opts[i].textContent=T(x));
  by('leadTime').placeholder=T('leadPlaceholder');by('notes').placeholder=T('notesPlaceholder');
- if(!by('bom').files.length)by('fileName').textContent=T('noFile');const w=by('whatWeSource');if(w){w.href=lang+'/what-we-source.html';w.textContent=lang==='ru'?'Что поставляем':lang==='tr'?'Tedarik Alanlarımız':'What We Source';}renderBatch();if(latestSearch&&window.GeoTeamSourceFinder)window.GeoTeamSourceFinder.render(by('results'),latestSearch,{lang,engine:by('gtSearchEngine')?.value||'google'});}
+ if(!by('bom').files.length)by('fileName').textContent=T('noFile');const w=by('whatWeSource');if(w){w.href=lang+'/what-we-source.html';w.textContent=lang==='ru'?'Что поставляем':lang==='tr'?'Tedarik Alanlarımız':'What We Source';}renderBatch();if(latestSearch&&window.GeoTeamSourceFinder)window.GeoTeamSourceFinder.render(by('results'),latestSearch,{lang,engine:'google'});}
 by('lang').addEventListener('change',()=>changeLang(by('lang').value));
 by('customDrawing').addEventListener('click',()=>{
  // Manufacturing is an RFQ subtype, not a claim of a live product-search match.
@@ -668,7 +654,7 @@ by('bom').addEventListener('change',()=>{
 });
 function state(title,body){const el=by('results');el.replaceChildren();const h=document.createElement('strong'),p=document.createElement('span');h.textContent=title;p.textContent=body;el.append(h,p);el.classList.add('is-visible')}
 const isDemo=/^(?:raw|rawcdn)\.githack\.com$/.test(location.hostname)||location.hostname.endsWith('.github.io')||location.hostname==='localhost'||location.hostname==='127.0.0.1';
-for(const id of ['gtMarketRegion','gtSearchEngine','gtSector']){
+for(const id of ['gtSector']){
  const el=by(id);
  if(el)el.addEventListener('change',()=>{
    if(by('part')?.value.trim() && by('dest')?.value.trim() && latestSearch && !busy)by('search').click();
@@ -681,8 +667,8 @@ by('search').addEventListener('click',async()=>{
    const engine=window.GeoTeamSourceFinder;
    if(!engine)throw Error('Source finder module unavailable');
    const sector=by('gtSector')?.value||'auto';
-   const region=by('gtMarketRegion')?.value||'all';
-   const searchEngine=by('gtSearchEngine')?.value||'google';
+   const region='all'; // all worldwide markets, regardless of visitor IP
+   const searchEngine='google'; // provider-specific and multi-engine links in results
    const data=await engine.search({...req,sector,region});
    latestSearch=data;
    engine.render(by('results'),data,{lang,engine:searchEngine});
