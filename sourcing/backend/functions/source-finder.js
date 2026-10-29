@@ -36,9 +36,9 @@ const SECTORS={
 const WORDS={
   ru:{
     title:"Площадки для проверки поставщиков",
-    subtitle:"Каталоги подобраны по товарной категории и региону. Это не результаты проверки наличия, цены или срока поставки.",
+    subtitle:"Глобальный охват: производители, магазины, частные объявления, б/у техника и аукционы. Наличие, цена и актуальность лотов не подтверждены.",
     count:"источников для проверки",search:"Поиск артикула",view:"Открыть сайт",
-    status:"Данные о товаре не получены · проверьте предложение непосредственно у продавца",
+    status:"Объявление не проверено: может быть продано, снято или завершено. Уточните у продавца.",
     showMore:"Показать ещё источники",shown:"Показано",
     worldwide:"Искать во всём интернете",notice:"Откроется выбранная поисковая система. Запрос передаётся ей только после нажатия.",
     cardNotice:"Площадка указана в реестре кандидатов. Доступность сайта, права использования данных, поставка и контрагент не подтверждены.",
@@ -48,9 +48,9 @@ const WORDS={
   },
   en:{
     title:"Supplier websites to investigate",
-    subtitle:"Sources are selected by product type and region, not by confirmed stock, price or lead time.",
+    subtitle:"Worldwide search channels include manufacturers, retailers, private listings, used equipment and auctions. Live availability, prices and listing status are unverified.",
     count:"candidate sources",search:"Search part",view:"Open site",
-    status:"Product data not retrieved · confirm any offer with its seller",
+    status:"Listing not verified: may be sold, withdrawn or expired. Confirm with seller.",
     showMore:"Show more sources",shown:"Showing",
     worldwide:"Search the open web",notice:"The selected search engine opens on your click. No background queries are sent.",
     cardNotice:"Candidate registry entry. Site availability, reuse rights, trade eligibility and seller identity are not verified.",
@@ -60,9 +60,9 @@ const WORDS={
   },
   tr:{
     title:"Araştırılacak tedarikçi kaynakları",
-    subtitle:"Kaynaklar ürün türüne ve bölgeye göre seçilir; stok, fiyat ve teslim süresi doğrulanmış değildir.",
+    subtitle:"Küresel kapsam: üreticiler, mağazalar, özel ilanlar, ikinci el ekipman ve açık artırmalar. Stok, fiyat ve ilan durumu doğrulanmadı.",
     count:"aday kaynak",search:"Parçayı ara",view:"Siteyi aç",
-    status:"Ürün verileri alınmadı · satıcıdan doğrulayın",
+    status:"İlan doğrulanmadı: satılmış veya süresi dolmuş olabilir. Satıcıdan teyit edin.",
     showMore:"Diğer kaynakları göster",shown:"Gösterilen",
     worldwide:"Tüm internette ara",notice:"Seçilen arama motoru yalnızca tıklayınca açılır. Arka planda sorgu gönderilmez.",
     cardNotice:"Aday kaynak kaydı. Site erişimi, veri kullanım hakkı, ticari uygunluk ve satıcı doğrulanmamıştır.",
@@ -129,7 +129,7 @@ function score(src,category,region){
 function route(sources,input){
  const query=canonical(input?.part||input?.query);
  const quantity=Number(input?.qty??input?.quantity);
- const region=Object.prototype.hasOwnProperty.call(REGIONS,input?.region)?input.region:"all";
+ const region="all"; // Universal search: never narrow scope by IP, VPN or selected geography.
  if(query.length<2||query.length>160)throw Error("Part number required");
  if(!Number.isSafeInteger(quantity)||quantity<1||quantity>999999)throw Error("Invalid quantity");
  const category=classify(query,input?.sector);
@@ -137,6 +137,7 @@ function route(sources,input){
    id:x.id,name:x.name,segment:x.segment,scope:x.scope||[],mode:x.mode,
    provider_url:x.url,score:score(x,category,region),
    verification_status:x.verification_status||"CANDIDATE_NOT_LIVE_VERIFIED",
+   market_channel:x.market_channel||"directory",listing_status:"NOT_CHECKED",
    requires_confirmation:true,verified_inventory:false,verified_price:false
  })).filter(x=>x.score>=25)
  .sort((a,b)=>b.score-a.score||a.name.localeCompare(b.name));
@@ -149,7 +150,7 @@ function route(sources,input){
 async function loadRegistry(url){
  if(cache)return cache;
  if(loading)return loading;
- const path=url||new URL("data/sources.v1.json?v=40-worldwide",typeof location!=="undefined"?location.href:"https://geoteam-global.com/sourcing.html").href;
+ const path=url||new URL("data/sources.v1.json?v=41-universal",typeof location!=="undefined"?location.href:"https://geoteam-global.com/sourcing.html").href;
  loading=(async()=>{
    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),9000);
    try{
@@ -208,7 +209,8 @@ function render(target,data,options){
      const card=document.createElement("article");card.className="gt-source-card";
      const brand=document.createElement("strong");brand.textContent=item.name;
      const sector=document.createElement("span");sector.className="gt-source-sector";
-     sector.textContent=SECTORS[item.segment]?.[lang]||item.segment;
+     const kinds={classifieds:{ru:"Частные объявления",en:"Private listings",tr:"Özel ilanlar"},retail:{ru:"Магазин / маркетплейс",en:"Retail / marketplace",tr:"Mağaza / pazar yeri"},used_equipment:{ru:"Б/у оборудование",en:"Used machinery",tr:"İkinci el makina"},auction:{ru:"Аукцион — проверить статус",en:"Auction — check status",tr:"Açık artırma — durumu kontrol edin"}};
+     sector.textContent=kinds[item.market_channel]?.[lang]||SECTORS[item.segment]?.[lang]||item.segment;
      const scope=document.createElement("span");scope.className="gt-source-scope";
      scope.textContent=(item.scope||[]).join(" · ");
      const links=document.createElement("div");links.className="gt-source-links";
