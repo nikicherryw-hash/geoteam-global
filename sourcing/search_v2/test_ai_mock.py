@@ -32,14 +32,19 @@ class AsyncResearchTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(calls[0]["tools"],[{"type":"web_search"}])
         self.assertEqual(calls[0]["store"],False)
         self.assertEqual(result["pilot"]["calls_reserved"],1)
- async def test_unknown_model_no_api_charge(self):
-    def handler(req):self.fail("should not contact provider")
+ async def test_new_rotax_918_is_searched_but_916_price_is_rejected(self):
+    calls=[]
+    def handler(req):
+        calls.append(req)
+        return httpx.Response(200,json=response())
     with tempfile.TemporaryDirectory() as tmp:
         budget=PilotBudget(str(Path(tmp)/"pilot.db"))
         async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
-            result=await search_once("Rotax 918","ru",[],"test-key","gpt-6.1-sol",client,budget)
-        self.assertEqual(result["status"],"MODEL_UNVERIFIED")
-        self.assertEqual(budget.status()["calls_reserved"],0)
+            result=await search_once("Rotax 918","ru",[],"test-key","gpt-6-luna",client,budget)
+        self.assertEqual(len(calls),1)
+        self.assertEqual(result["status"],"NO_EVIDENCED_OFFER")
+        self.assertEqual(result["offers"],[])
+        self.assertEqual(budget.status()["calls_reserved"],1)
  async def test_no_actual_search_no_fake_result(self):
     with tempfile.TemporaryDirectory() as tmp:
         budget=PilotBudget(str(Path(tmp)/"pilot.db"))
