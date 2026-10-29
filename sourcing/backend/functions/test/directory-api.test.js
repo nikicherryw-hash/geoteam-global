@@ -183,7 +183,7 @@ test("static registry candidates are never treated as active supplier offers",()
 });
 
 test("expanded worldwide marketplaces, classifieds and used-equipment sources are never considered confirmed live listings",()=>{
- const mandatory=["avito_ru","ozon_ru","trendyol_tr","sahibinden_tr","amazon_us","ebay_browse","machinio","ironplanet","mercadolivre_br","gumtree_au","jiji_ng","xianyu_cn"];
+ const mandatory=["avito_ru","ozon_ru","trendyol_tr","sahibinden_tr","amazon_us","ebay_browse","machinio","ironplanet","mercadolivre_br","gumtree_au","jiji_ng","goofish_cn"];
  for(const id of mandatory)assert.ok(sources.some(x=>x.id===id),id+" missing");
  const r=finder.route(sources,{part:"Siemens 6ES7315",qty:2,dest:"Istanbul, Türkiye",region:"all"});
  assert.equal(r.total,310);
