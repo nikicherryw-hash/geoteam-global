@@ -1,6 +1,6 @@
 {
   "product_id": "GEOTEAM_GLOBAL",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "as_of": "2026-10-29",
   "purpose": "Candidate worldwide sourcing and logistics provider registry. This is NOT a connected or licensed search system.",
   "integration_policy": {
@@ -15,7 +15,12 @@
     "export_compliance": "MUST_PASS_DESTINATION_PRODUCT_END_USE_RESTRICTIONS",
     "infrastructure": "GEOTEAM_ONLY_NO_SHARED_SKS_RESOURCES",
     "public_search_scope": "DIRECT_LINK_AND_SEARCH_ENGINE_REDIRECT_ONLY",
-    "cross_border_rule": "EXPORT_CONTROL_SANCTIONS_END_USE_AND_IMPORT_RESTRICTIONS_GATE_REQUIRED_BEFORE_QUOTES"
+    "cross_border_rule": "EXPORT_CONTROL_SANCTIONS_END_USE_AND_IMPORT_RESTRICTIONS_GATE_REQUIRED_BEFORE_QUOTES",
+    "global_search_scope": "ALL_REGISTERED_PRODUCT_SOURCE_CANDIDATES_NO_REGIONAL_FILTER",
+    "geo_method": "USER_SUPPLIED_DELIVERY_DESTINATION_FOR_RANKING_ONLY_DO_NOT_RELY_ON_IP_OR_VPN",
+    "private_classifieds": "USER_CLICK_ONLY_NO_AUTOMATED_MESSAGING_OR_ACCOUNT_ACCESS",
+    "auction_listing_policy": "DO_NOT_LABEL_ACTIVE_WITHOUT_PROVIDER_STATUS_AND_CURRENT_END_DATE",
+    "listing_status_policy": "UNKNOWN_UNTIL_AUTHORITATIVE_PROVIDER_VERIFICATION"
   },
   "sources": [
     {
@@ -33,7 +38,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "mouser",
@@ -50,7 +59,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "digikey",
@@ -67,7 +80,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "nexar",
@@ -84,7 +101,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "element14",
@@ -101,7 +122,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "arrow",
@@ -118,7 +143,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "partsbase",
@@ -135,7 +164,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "aviation_sources",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "locatory",
@@ -152,7 +185,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "aviation_sources",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "ilsmart",
@@ -169,7 +206,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "aviation_sources",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "thomasnet",
@@ -186,7 +227,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "directindustry",
@@ -203,7 +248,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "europages",
@@ -220,7 +269,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "wlw",
@@ -238,7 +291,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "siemens_pih",
@@ -255,7 +312,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "manufacturer_official",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "alibaba_open",
@@ -273,7 +334,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "made_in_china",
@@ -291,7 +356,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "globalsources",
@@ -309,7 +378,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "ebay_browse",
@@ -326,7 +399,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "amazon_spapi",
@@ -343,7 +420,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "dhl_express",
@@ -413,7 +494,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "tme",
@@ -431,7 +516,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "avnet",
@@ -448,7 +537,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "future_electronics",
@@ -465,7 +558,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "tti",
@@ -482,7 +579,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "conrad",
@@ -500,7 +601,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "rutronik",
@@ -518,7 +623,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "radwell",
@@ -537,7 +646,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "euautomation",
@@ -555,7 +668,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "globalspec",
@@ -572,7 +689,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "kompass",
@@ -590,7 +711,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "industrystock",
@@ -608,7 +733,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "motion",
@@ -625,7 +754,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "mroelectric",
@@ -643,7 +776,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "indiamart",
@@ -661,7 +798,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "tradeindia",
@@ -679,7 +820,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "hktdc",
@@ -697,7 +842,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "taiwantrade",
@@ -715,7 +864,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "mfg",
@@ -732,7 +885,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "satair",
@@ -749,7 +906,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "aviation_sources",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "boeingdistribution",
@@ -766,7 +927,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "aviation_sources",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "aeroxchange",
@@ -783,7 +948,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "aviation_sources",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "pulscen",
@@ -800,7 +969,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "promportal_ru",
@@ -817,7 +990,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "elec_ru",
@@ -834,7 +1011,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "chipdip_ru",
@@ -851,7 +1032,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "etm_ru",
@@ -868,7 +1053,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "vseinstrumenti_ru",
@@ -885,7 +1074,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "yandexmarket_ru",
@@ -902,7 +1095,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "ozon_ru",
@@ -919,7 +1116,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "wildberries_ru",
@@ -936,7 +1137,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "gisp_metals",
@@ -953,7 +1158,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "b2bcenter_ru",
@@ -970,7 +1179,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "flagma_ru",
@@ -987,7 +1200,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "iek_ru",
@@ -1004,7 +1221,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "manufacturer_official",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "dkc_ru",
@@ -1021,7 +1242,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "manufacturer_official",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "proelectro_ru",
@@ -1038,7 +1263,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "abamet_ru",
@@ -1055,7 +1284,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "rusklimat_ru",
@@ -1072,7 +1305,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "elektro_ru",
@@ -1089,7 +1326,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "ruselprom_ru",
@@ -1106,7 +1347,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "manufacturer_official",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "satu_kz",
@@ -1123,7 +1368,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "flagma_kz",
@@ -1140,7 +1389,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "deal_by",
@@ -1157,7 +1410,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "prom_ua",
@@ -1174,7 +1431,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "flagma_by",
@@ -1191,7 +1452,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "china_1688",
@@ -1208,7 +1473,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "china_dhgate",
@@ -1225,7 +1494,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "aliexpress",
@@ -1242,7 +1515,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "jd_china",
@@ -1259,7 +1536,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "taobao_china",
@@ -1276,7 +1557,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "chinagoods",
@@ -1293,7 +1578,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "tradekorea",
@@ -1310,7 +1599,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "ec21",
@@ -1327,7 +1620,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "ecplaza",
@@ -1344,7 +1641,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "gobizkorea",
@@ -1361,7 +1662,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "komachine",
@@ -1378,7 +1683,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "monotaro_jp",
@@ -1395,7 +1704,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "ipros_jp",
@@ -1412,7 +1725,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "misumi_jp",
@@ -1429,7 +1746,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "inaexport",
@@ -1446,7 +1767,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "indotrading",
@@ -1463,7 +1788,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "thaitrade",
@@ -1480,7 +1809,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "eezee_sg",
@@ -1497,7 +1830,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "misumi_my",
@@ -1514,7 +1851,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "exportersindia",
@@ -1531,7 +1872,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "go4worldbusiness",
@@ -1548,7 +1893,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "turkishexporter",
@@ -1565,7 +1914,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "sanayiden_tr",
@@ -1582,7 +1935,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "sahibinden_tr",
@@ -1599,7 +1956,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "direnc_tr",
@@ -1616,7 +1977,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "robotistan_tr",
@@ -1633,7 +1998,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "hepsiburada_tr",
@@ -1650,7 +2019,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "dalil_turkey",
@@ -1667,7 +2040,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "automation24",
@@ -1684,7 +2061,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "reichelt",
@@ -1701,7 +2082,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "unite",
@@ -1718,7 +2103,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "machineseeker",
@@ -1735,7 +2124,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "exapro",
@@ -1752,7 +2145,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "surplex",
@@ -1769,7 +2166,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "resaleinfo",
@@ -1786,7 +2187,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "festo_oem",
@@ -1803,7 +2208,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "manufacturer_official",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "ifm_oem",
@@ -1820,7 +2229,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "manufacturer_official",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "sick_oem",
@@ -1837,7 +2250,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "manufacturer_official",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "boschrexroth_oem",
@@ -1854,7 +2271,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "manufacturer_official",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "schneider_oem",
@@ -1871,7 +2292,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "manufacturer_official",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "tameson",
@@ -1888,7 +2313,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "norelem",
@@ -1905,7 +2334,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "haberkorn",
@@ -1922,7 +2355,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "rubix",
@@ -1939,7 +2376,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "grainger",
@@ -1956,7 +2397,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "mcmaster",
@@ -1973,7 +2418,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "zoro_us",
@@ -1990,7 +2439,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "mscdirect",
@@ -2007,7 +2460,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "automationdirect",
@@ -2024,7 +2481,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "galco",
@@ -2041,7 +2502,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "applied",
@@ -2058,7 +2523,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "globalindustrial",
@@ -2075,7 +2544,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "omega",
@@ -2092,7 +2565,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "newark",
@@ -2109,7 +2586,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "tequipment",
@@ -2126,7 +2607,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "mercadolibre",
@@ -2143,7 +2628,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "b2brazil",
@@ -2160,7 +2649,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "solostocks",
@@ -2177,7 +2670,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "tradeling",
@@ -2194,7 +2691,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "tradekey",
@@ -2211,7 +2712,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "yellowpages_uae",
@@ -2228,7 +2733,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "afrikta",
@@ -2245,7 +2754,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "blackwoods_au",
@@ -2262,7 +2775,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "industrysearch_au",
@@ -2279,7 +2796,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
     },
     {
       "id": "machines4u_au",
@@ -2296,7 +2817,11 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "used_and_surplus"
     },
     {
       "id": "trademe_nz",
@@ -2313,7 +2838,2846 @@
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false,
-      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED"
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "condition_focus": "mixed"
+    },
+    {
+      "id": "avito_ru",
+      "name": "Avito",
+      "segment": "marketplace",
+      "scope": [
+        "russia"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.avito.ru/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "youla_ru",
+      "name": "Юла",
+      "segment": "marketplace",
+      "scope": [
+        "russia"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://youla.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "meshok_ru",
+      "name": "Мешок",
+      "segment": "marketplace",
+      "scope": [
+        "russia"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://meshok.net/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "irr_ru",
+      "name": "Из рук в руки",
+      "segment": "marketplace",
+      "scope": [
+        "russia"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://irr.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "farpost_ru",
+      "name": "FarPost",
+      "segment": "marketplace",
+      "scope": [
+        "russia"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.farpost.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "megamarket_ru",
+      "name": "Мегамаркет",
+      "segment": "marketplace",
+      "scope": [
+        "russia"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://megamarket.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "blizko_ru",
+      "name": "BLIZKO",
+      "segment": "general_b2b",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.blizko.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "allbiz_global",
+      "name": "all.biz",
+      "segment": "general_b2b",
+      "scope": [
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.all.biz/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "exist_ru",
+      "name": "Exist.ru",
+      "segment": "industrial",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.exist.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "emex_ru",
+      "name": "Emex",
+      "segment": "industrial",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.emex.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "autodoc_ru",
+      "name": "Autodoc",
+      "segment": "industrial",
+      "scope": [
+        "russia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.autodoc.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "machineryline_ru",
+      "name": "Machineryline Россия",
+      "segment": "industrial",
+      "scope": [
+        "russia"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://machineryline.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "metaprom_ru",
+      "name": "Metaprom",
+      "segment": "industrial",
+      "scope": [
+        "russia"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://metaprom.ru/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "trendyol_tr",
+      "name": "Trendyol",
+      "segment": "marketplace",
+      "scope": [
+        "turkey"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.trendyol.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "n11_tr",
+      "name": "n11",
+      "segment": "marketplace",
+      "scope": [
+        "turkey"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.n11.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "amazon_tr",
+      "name": "Amazon Türkiye",
+      "segment": "marketplace",
+      "scope": [
+        "turkey"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.amazon.com.tr/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "letgo_tr",
+      "name": "letgo Türkiye",
+      "segment": "marketplace",
+      "scope": [
+        "turkey"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.letgo.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "makinaal_tr",
+      "name": "Makina Al",
+      "segment": "industrial",
+      "scope": [
+        "turkey"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://makinaal.com.tr/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "makinecim_tr",
+      "name": "Makinecim",
+      "segment": "industrial",
+      "scope": [
+        "turkey"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://www.makinecim.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "makinaturkiye_tr",
+      "name": "Makina Türkiye",
+      "segment": "industrial",
+      "scope": [
+        "turkey"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://www.makinaturkiye.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "ebay_de",
+      "name": "eBay Deutschland",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.ebay.de/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "ebay_uk",
+      "name": "eBay UK",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.ebay.co.uk/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "amazon_de",
+      "name": "Amazon Deutschland",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.amazon.de/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "amazon_uk",
+      "name": "Amazon UK",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.amazon.co.uk/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "kleinanzeigen_de",
+      "name": "Kleinanzeigen Deutschland",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.kleinanzeigen.de/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "leboncoin_fr",
+      "name": "Leboncoin France",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.leboncoin.fr/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "subito_it",
+      "name": "Subito Italia",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.subito.it/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "wallapop_es",
+      "name": "Wallapop",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://es.wallapop.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "marktplaats_nl",
+      "name": "Marktplaats",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.marktplaats.nl/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "allegro_pl",
+      "name": "Allegro Polska",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://allegro.pl/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "olx_pl",
+      "name": "OLX Polska",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.olx.pl/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "olx_ro",
+      "name": "OLX Romania",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.olx.ro/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "ricardo_ch",
+      "name": "Ricardo Schweiz",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.ricardo.ch/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "bazos_cz",
+      "name": "Bazoš Czech Republic",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.bazos.cz/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "finn_no",
+      "name": "FINN.no",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.finn.no/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "blocket_se",
+      "name": "Blocket Sverige",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.blocket.se/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "tradera_se",
+      "name": "Tradera Sverige",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.tradera.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "dba_dk",
+      "name": "DBA Denmark",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.dba.dk/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "donedeal_ie",
+      "name": "DoneDeal Ireland",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.donedeal.ie/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "gumtree_uk",
+      "name": "Gumtree UK",
+      "segment": "marketplace",
+      "scope": [
+        "europe"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.gumtree.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "machinio",
+      "name": "Machinio",
+      "segment": "industrial",
+      "scope": [
+        "global"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://www.machinio.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "kitmondo",
+      "name": "Kitmondo",
+      "segment": "industrial",
+      "scope": [
+        "global"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://www.kitmondo.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "equipnet",
+      "name": "EquipNet",
+      "segment": "industrial",
+      "scope": [
+        "global"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://www.equipnet.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "machinepoint",
+      "name": "MachinePoint",
+      "segment": "industrial",
+      "scope": [
+        "global"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://www.machinepoint.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "surplusrecord",
+      "name": "Surplus Record",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "SURPLUS_DISCOVERY",
+      "url": "https://surplusrecord.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "surplus_stock",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "machinerytrader",
+      "name": "MachineryTrader",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://www.machinerytrader.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "usedline",
+      "name": "Used-Line",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "SURPLUS_DISCOVERY",
+      "url": "https://www.used-line.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "surplus_stock",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "bidspotter",
+      "name": "BidSpotter",
+      "segment": "industrial",
+      "scope": [
+        "global"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.bidspotter.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "allsurplus",
+      "name": "AllSurplus",
+      "segment": "industrial",
+      "scope": [
+        "global"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.allsurplus.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "troostwijk",
+      "name": "Troostwijk Auctions",
+      "segment": "industrial",
+      "scope": [
+        "europe"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.troostwijkauctions.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "netbid",
+      "name": "NetBid",
+      "segment": "industrial",
+      "scope": [
+        "europe"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.netbid.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "industrialdiscount_it",
+      "name": "Industrial Discount",
+      "segment": "industrial",
+      "scope": [
+        "europe"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.industrialdiscount.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "ritchiebros",
+      "name": "Ritchie Bros.",
+      "segment": "industrial",
+      "scope": [
+        "global"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.rbauction.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "ironplanet",
+      "name": "IronPlanet",
+      "segment": "industrial",
+      "scope": [
+        "global"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.ironplanet.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "govdeals",
+      "name": "GovDeals",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.govdeals.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "publicsurplus",
+      "name": "Public Surplus",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.publicsurplus.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "liquidation_com",
+      "name": "Liquidation.com",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.liquidation.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "mascus_global",
+      "name": "Mascus",
+      "segment": "industrial",
+      "scope": [
+        "global"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://www.mascus.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "machineryline_global",
+      "name": "Machineryline Worldwide",
+      "segment": "industrial",
+      "scope": [
+        "global"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://machineryline.info/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "trademachines",
+      "name": "TradeMachines",
+      "segment": "industrial",
+      "scope": [
+        "global"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://www.trademachines.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "assettrade",
+      "name": "Asset-Trade",
+      "segment": "industrial",
+      "scope": [
+        "europe"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://www.asset-trade.de/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "industrialauctions",
+      "name": "Industrial Auctions",
+      "segment": "industrial",
+      "scope": [
+        "europe"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.industrial-auctions.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "grays_au",
+      "name": "Grays Australia",
+      "segment": "industrial",
+      "scope": [
+        "oceania"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.grays.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "pickles_au",
+      "name": "Pickles Auctions Australia",
+      "segment": "industrial",
+      "scope": [
+        "oceania"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://www.pickles.com.au/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "gumtree_au",
+      "name": "Gumtree Australia",
+      "segment": "marketplace",
+      "scope": [
+        "oceania"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.gumtree.com.au/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "ebay_au",
+      "name": "eBay Australia",
+      "segment": "marketplace",
+      "scope": [
+        "oceania"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.ebay.com.au/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "amazon_au",
+      "name": "Amazon Australia",
+      "segment": "marketplace",
+      "scope": [
+        "oceania"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.amazon.com.au/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "auctions_yahoo_jp",
+      "name": "Yahoo! Auctions Japan",
+      "segment": "marketplace",
+      "scope": [
+        "japan"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://auctions.yahoo.co.jp/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "mercari_jp",
+      "name": "Mercari Japan",
+      "segment": "marketplace",
+      "scope": [
+        "japan"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://jp.mercari.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "rakuten_jp",
+      "name": "Rakuten Japan",
+      "segment": "marketplace",
+      "scope": [
+        "japan"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.rakuten.co.jp/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "yahoo_shop_jp",
+      "name": "Yahoo! Shopping Japan",
+      "segment": "marketplace",
+      "scope": [
+        "japan"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://shopping.yahoo.co.jp/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "goofish_cn",
+      "name": "Xianyu / Goofish",
+      "segment": "marketplace",
+      "scope": [
+        "china"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.goofish.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "pinduoduo_cn",
+      "name": "Pinduoduo",
+      "segment": "marketplace",
+      "scope": [
+        "china"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.pinduoduo.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "hc360_cn",
+      "name": "HC360",
+      "segment": "general_b2b",
+      "scope": [
+        "china"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.hc360.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "gongchang_cn",
+      "name": "Gongchang",
+      "segment": "general_b2b",
+      "scope": [
+        "china"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.gongchang.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "gmarket_kr",
+      "name": "Gmarket Korea",
+      "segment": "marketplace",
+      "scope": [
+        "korea"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.gmarket.co.kr/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "auction_kr",
+      "name": "Auction Korea",
+      "segment": "marketplace",
+      "scope": [
+        "korea"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.auction.co.kr/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "coupang_kr",
+      "name": "Coupang Korea",
+      "segment": "marketplace",
+      "scope": [
+        "korea"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.coupang.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "bunjang_kr",
+      "name": "Bunjang Korea",
+      "segment": "marketplace",
+      "scope": [
+        "korea"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.bunjang.co.kr/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "joongna_kr",
+      "name": "Joongna Korea",
+      "segment": "marketplace",
+      "scope": [
+        "korea"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://web.joongna.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "daangn_kr",
+      "name": "Danggeun Korea",
+      "segment": "marketplace",
+      "scope": [
+        "korea"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.daangn.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "carousell_sg",
+      "name": "Carousell Singapore",
+      "segment": "marketplace",
+      "scope": [
+        "singapore"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.carousell.sg/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "carousell_my",
+      "name": "Carousell Malaysia",
+      "segment": "marketplace",
+      "scope": [
+        "malaysia"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.carousell.com.my/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "mudah_my",
+      "name": "Mudah.my",
+      "segment": "marketplace",
+      "scope": [
+        "malaysia"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.mudah.my/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "shopee_my",
+      "name": "Shopee Malaysia",
+      "segment": "marketplace",
+      "scope": [
+        "malaysia"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://shopee.com.my/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "lazada_my",
+      "name": "Lazada Malaysia",
+      "segment": "marketplace",
+      "scope": [
+        "malaysia"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.lazada.com.my/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "tokopedia_id",
+      "name": "Tokopedia Indonesia",
+      "segment": "marketplace",
+      "scope": [
+        "indonesia"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.tokopedia.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "bukalapak_id",
+      "name": "Bukalapak Indonesia",
+      "segment": "marketplace",
+      "scope": [
+        "indonesia"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.bukalapak.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "olx_id",
+      "name": "OLX Indonesia",
+      "segment": "marketplace",
+      "scope": [
+        "indonesia"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.olx.co.id/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "shopee_id",
+      "name": "Shopee Indonesia",
+      "segment": "marketplace",
+      "scope": [
+        "indonesia"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://shopee.co.id/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "lazada_id",
+      "name": "Lazada Indonesia",
+      "segment": "marketplace",
+      "scope": [
+        "indonesia"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.lazada.co.id/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "carousell_ph",
+      "name": "Carousell Philippines",
+      "segment": "marketplace",
+      "scope": [
+        "asia"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.carousell.ph/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "shopee_ph",
+      "name": "Shopee Philippines",
+      "segment": "marketplace",
+      "scope": [
+        "asia"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://shopee.ph/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "lazada_ph",
+      "name": "Lazada Philippines",
+      "segment": "marketplace",
+      "scope": [
+        "asia"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.lazada.com.ph/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "kaidee_th",
+      "name": "Kaidee Thailand",
+      "segment": "marketplace",
+      "scope": [
+        "thailand"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.kaidee.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "chotot_vn",
+      "name": "Chợ Tốt Vietnam",
+      "segment": "marketplace",
+      "scope": [
+        "asia"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.chotot.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "shopee_vn",
+      "name": "Shopee Vietnam",
+      "segment": "marketplace",
+      "scope": [
+        "asia"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://shopee.vn/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "olx_in",
+      "name": "OLX India",
+      "segment": "marketplace",
+      "scope": [
+        "india"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.olx.in/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "quikr_in",
+      "name": "Quikr India",
+      "segment": "marketplace",
+      "scope": [
+        "india"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.quikr.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "justdial_in",
+      "name": "Justdial",
+      "segment": "general_b2b",
+      "scope": [
+        "india"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.justdial.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "b2b_directory",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "moglix_in",
+      "name": "Moglix India",
+      "segment": "industrial",
+      "scope": [
+        "india"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.moglix.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "industrybuying_in",
+      "name": "IndustryBuying",
+      "segment": "industrial",
+      "scope": [
+        "india"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.industrybuying.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "industrial_distributor",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "amazon_in",
+      "name": "Amazon India",
+      "segment": "marketplace",
+      "scope": [
+        "india"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.amazon.in/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "flipkart_in",
+      "name": "Flipkart India",
+      "segment": "marketplace",
+      "scope": [
+        "india"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.flipkart.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "dubizzle_ae",
+      "name": "Dubizzle UAE",
+      "segment": "marketplace",
+      "scope": [
+        "middle_east"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.dubizzle.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "opensooq_me",
+      "name": "OpenSooq",
+      "segment": "marketplace",
+      "scope": [
+        "middle_east"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.opensooq.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "noon_me",
+      "name": "Noon",
+      "segment": "marketplace",
+      "scope": [
+        "middle_east"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.noon.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "amazon_ae",
+      "name": "Amazon UAE",
+      "segment": "marketplace",
+      "scope": [
+        "middle_east"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.amazon.ae/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "haraj_sa",
+      "name": "Haraj Saudi Arabia",
+      "segment": "marketplace",
+      "scope": [
+        "middle_east"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://haraj.com.sa/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "olx_eg",
+      "name": "OLX Egypt",
+      "segment": "marketplace",
+      "scope": [
+        "africa"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.olx.com.eg/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "jiji_ng",
+      "name": "Jiji Nigeria",
+      "segment": "marketplace",
+      "scope": [
+        "africa"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://jiji.ng/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "jiji_ke",
+      "name": "Jiji Kenya",
+      "segment": "marketplace",
+      "scope": [
+        "africa"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://jiji.co.ke/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "jiji_gh",
+      "name": "Jiji Ghana",
+      "segment": "marketplace",
+      "scope": [
+        "africa"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://jiji.com.gh/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "jumia_ng",
+      "name": "Jumia Nigeria",
+      "segment": "marketplace",
+      "scope": [
+        "africa"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.jumia.com.ng/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "gumtree_za",
+      "name": "Gumtree South Africa",
+      "segment": "marketplace",
+      "scope": [
+        "africa"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.gumtree.co.za/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "bobshop_za",
+      "name": "Bob Shop South Africa",
+      "segment": "marketplace",
+      "scope": [
+        "africa"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.bobshop.co.za/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "olx_br",
+      "name": "OLX Brasil",
+      "segment": "marketplace",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.olx.com.br/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "mercadolivre_br",
+      "name": "Mercado Livre Brasil",
+      "segment": "marketplace",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.mercadolivre.com.br/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "superbid_br",
+      "name": "Superbid Exchange Brasil",
+      "segment": "industrial",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "AUCTION_DISCOVERY",
+      "url": "https://exchange.superbid.net/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "auction",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "portaldasmaquinas_br",
+      "name": "Portal das Máquinas Brasil",
+      "segment": "industrial",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://www.portaldasmaquinas.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "mfrural_br",
+      "name": "MF Rural",
+      "segment": "industrial",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "USED_EQUIPMENT_DISCOVERY",
+      "url": "https://www.mfrural.com.br/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "used_equipment",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "mercadolibre_mx",
+      "name": "Mercado Libre México",
+      "segment": "marketplace",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.mercadolibre.com.mx/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "mercadolibre_ar",
+      "name": "Mercado Libre Argentina",
+      "segment": "marketplace",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.mercadolibre.com.ar/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "mercadolibre_co",
+      "name": "Mercado Libre Colombia",
+      "segment": "marketplace",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.mercadolibre.com.co/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "mercadolibre_cl",
+      "name": "Mercado Libre Chile",
+      "segment": "marketplace",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.mercadolibre.cl/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "yapo_cl",
+      "name": "Yapo Chile",
+      "segment": "marketplace",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.yapo.cl/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "encuentra24",
+      "name": "Encuentra24",
+      "segment": "marketplace",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.encuentra24.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "vivaanuncios_mx",
+      "name": "Vivanuncios México",
+      "segment": "marketplace",
+      "scope": [
+        "latin_america"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.vivanuncios.com.mx/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "amazon_us",
+      "name": "Amazon US retail marketplace",
+      "segment": "marketplace",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.amazon.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "craigslist",
+      "name": "Craigslist",
+      "segment": "marketplace",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.craigslist.org/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "offerup",
+      "name": "OfferUp",
+      "segment": "marketplace",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://offerup.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "facebook_marketplace",
+      "name": "Facebook Marketplace",
+      "segment": "marketplace",
+      "scope": [
+        "global"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.facebook.com/marketplace/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "kijiji_ca",
+      "name": "Kijiji Canada",
+      "segment": "marketplace",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "CLASSIFIEDS_DISCOVERY",
+      "url": "https://www.kijiji.ca/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "classifieds",
+      "condition_focus": "used_and_surplus",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "ebay_ca",
+      "name": "eBay Canada",
+      "segment": "marketplace",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.ebay.ca/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
+    },
+    {
+      "id": "amazon_ca",
+      "name": "Amazon Canada",
+      "segment": "marketplace",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "MARKETPLACE_DISCOVERY",
+      "url": "https://www.amazon.ca/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Candidate public site for user-click search. Do not scrape, automate accounts, copy listings, solicit private sellers or assert stock without explicit rights and verified evidence.",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false,
+      "verification_status": "CANDIDATE_NOT_LIVE_VERIFIED",
+      "source_type": "retail_marketplace",
+      "condition_focus": "mixed",
+      "listing_status_capability": "UNVERIFIED_NO_API",
+      "search_access": "USER_CLICK_EXTERNAL_ONLY"
     }
   ]
 }
