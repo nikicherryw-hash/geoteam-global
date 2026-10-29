@@ -1,6 +1,6 @@
 {
   "product_id": "GEOTEAM_GLOBAL",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "as_of": "2026-10-29",
   "purpose": "Candidate worldwide sourcing and logistics provider registry. This is NOT a connected or licensed search system.",
   "integration_policy": {
@@ -368,6 +368,373 @@
       "documentation_url": "https://developer.fedex.com/api/en-us/catalog/rate.html",
       "priority": 2,
       "requirements": "FedEx developer app and account; route, dimensions, tariffs",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "rs",
+      "name": "RS",
+      "segment": "electronics",
+      "scope": [
+        "europe",
+        "north_america",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.rs-online.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "tme",
+      "name": "TME — Transfer Multisort Elektronik",
+      "segment": "electronics",
+      "scope": [
+        "europe",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.tme.eu/en/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "avnet",
+      "name": "Avnet",
+      "segment": "electronics",
+      "scope": [
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.avnet.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "future_electronics",
+      "name": "Future Electronics",
+      "segment": "electronics",
+      "scope": [
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.futureelectronics.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "tti",
+      "name": "TTI Electronics",
+      "segment": "electronics",
+      "scope": [
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.tti.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "conrad",
+      "name": "Conrad Electronic",
+      "segment": "electronics",
+      "scope": [
+        "europe",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.conrad.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "rutronik",
+      "name": "Rutronik Elektronische Bauelemente",
+      "segment": "electronics",
+      "scope": [
+        "europe",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.rutronik.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "radwell",
+      "name": "Radwell International",
+      "segment": "industrial",
+      "scope": [
+        "north_america",
+        "europe",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.radwell.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "euautomation",
+      "name": "EU Automation",
+      "segment": "industrial",
+      "scope": [
+        "europe",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.euautomation.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "globalspec",
+      "name": "GlobalSpec",
+      "segment": "industrial",
+      "scope": [
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.globalspec.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "kompass",
+      "name": "Kompass",
+      "segment": "industrial",
+      "scope": [
+        "europe",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.kompass.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "industrystock",
+      "name": "IndustryStock",
+      "segment": "industrial",
+      "scope": [
+        "europe",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.industrystock.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "motion",
+      "name": "Motion Industries",
+      "segment": "industrial",
+      "scope": [
+        "north_america"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.motion.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "mroelectric",
+      "name": "MRO Electric and Supply",
+      "segment": "industrial",
+      "scope": [
+        "north_america",
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.mroelectric.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "indiamart",
+      "name": "IndiaMART",
+      "segment": "general_b2b",
+      "scope": [
+        "india",
+        "asia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.indiamart.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "tradeindia",
+      "name": "TradeIndia",
+      "segment": "general_b2b",
+      "scope": [
+        "india",
+        "asia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.tradeindia.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "hktdc",
+      "name": "HKTDC Sourcing",
+      "segment": "general_b2b",
+      "scope": [
+        "hong_kong",
+        "asia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://sourcing.hktdc.com/en",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "taiwantrade",
+      "name": "Taiwantrade",
+      "segment": "general_b2b",
+      "scope": [
+        "taiwan",
+        "asia"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.taiwantrade.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "mfg",
+      "name": "MFG.com — Contract Manufacturing",
+      "segment": "general_b2b",
+      "scope": [
+        "global"
+      ],
+      "mode": "DIRECTORY_RESEARCH",
+      "url": "https://www.mfg.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Public directory discovery only; programmatic API/search/redistribution rights not verified",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "satair",
+      "name": "Satair Market",
+      "segment": "aviation",
+      "scope": [
+        "global"
+      ],
+      "mode": "SUBSCRIPTION_RESEARCH",
+      "url": "https://market.satair.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Partner/account access and product rights; public-site discovery only pending approval",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "boeingdistribution",
+      "name": "Boeing Distribution",
+      "segment": "aviation",
+      "scope": [
+        "global"
+      ],
+      "mode": "SUBSCRIPTION_RESEARCH",
+      "url": "https://www.boeingdistribution.com/",
+      "documentation_url": null,
+      "priority": 1,
+      "requirements": "Partner/account access and product rights; public-site discovery only pending approval",
+      "integration_status": "NOT_CONNECTED",
+      "rights_status": "NOT_REVIEWED",
+      "enabled": false
+    },
+    {
+      "id": "aeroxchange",
+      "name": "Aeroxchange",
+      "segment": "aviation",
+      "scope": [
+        "global"
+      ],
+      "mode": "SUBSCRIPTION_RESEARCH",
+      "url": "https://www.aeroxchange.com/",
+      "documentation_url": null,
+      "priority": 2,
+      "requirements": "Partner/account access and product rights; public-site discovery only pending approval",
       "integration_status": "NOT_CONNECTED",
       "rights_status": "NOT_REVIEWED",
       "enabled": false
