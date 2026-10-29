@@ -117,9 +117,21 @@ echo "=== CREATE ISOLATED HOSTING SITE (MAIN SITE UNCHANGED) ==="
 firebase hosting:sites:create "$SITE" --project "$PROJECT"
 cd "$OUT"
 firebase target:apply hosting sourcing "$SITE" --project "$PROJECT"
-echo "=== PREVIEW CHANNEL ==="
+echo "=== PREVIEW CHANNEL / HTTP READBACK (FAIL CLOSED) ==="
 firebase hosting:channel:deploy sourcing-preflight \
-  --only sourcing --expires 1d --project "$PROJECT" --non-interactive
+  --only sourcing --expires 1d --project "$PROJECT" --non-interactive 2>&1 | tee "$WORK/preview.log"
+PREVIEW_URL="$(grep -Eo "https://${SITE}--[A-Za-z0-9-]+\\.web\\.app" "$WORK/preview.log" | head -n 1 || true)"
+[[ -n "$PREVIEW_URL" ]] || { echo "BLOCKED: preview URL not confirmed; no live deploy" >&2; exit 17; }
+echo "PREVIEW_URL=$PREVIEW_URL"
+curl -fLsS --max-time 25 "$PREVIEW_URL/sourcing.html" -o "$WORK/preview.html"
+curl -fLsS --max-time 25 "$PREVIEW_URL/global-source-finder.js" -o "$WORK/preview.js"
+curl -fLsS --max-time 25 "$PREVIEW_URL/data/sources.v1.json" -o "$WORK/preview-registry.json"
+curl -fLsS --max-time 25 "$PREVIEW_URL/release.json" -o "$WORK/preview-release.json"
+cmp "$OUT/public/sourcing.html" "$WORK/preview.html"
+cmp "$OUT/public/global-source-finder.js" "$WORK/preview.js"
+cmp "$OUT/public/data/sources.v1.json" "$WORK/preview-registry.json"
+cmp "$OUT/public/release.json" "$WORK/preview-release.json"
+echo "PREVIEW_READBACK=PASS"
 echo "=== PUBLISH ONLY NEW HOSTING SITE ==="
 firebase deploy --only hosting:sourcing --project "$PROJECT" \
   --non-interactive --message "GeoTeam Global directory search v18.42 ($PIN)"
@@ -147,8 +159,13 @@ assert "listingLifecycle" in (p/"live.js").read_text()
 assert "multilingualVariants" in (p/"live.js").read_text()
 assert len(json.loads((p/"live.json").read_text())["sources"])==313
 assert json.loads((p/"release.json").read_text())["git_sha"]==pin
+for a,b in (("sourcing.html","live.html"),("global-source-finder.js","live.js"),("data/sources.v1.json","live.json"),("release.json","release.json")):
+    assert (p/"publish"/"public"/a).read_bytes()==(p/b).read_bytes(), f"content mismatch: {a}"
 print("LIVE_READBACK=PASS")
 PY
+curl -fLsS --max-time 25 "$MAIN_BASE/" -o "$WORK/main-after.html"
+cmp "$WORK/main-before.html" "$WORK/main-after.html" || { echo "DEFAULT_SITE_MISMATCH: investigate; cannot claim verified." >&2; exit 18; }
+echo "DEFAULT_SITE_HTML_UNCHANGED=PASS"
 echo "PUBLIC_SEARCH_URL=$BASE/sourcing.html?lang=ru"
 echo "ORIGINAL_SITE=https://geoteam-global.com/ (UNCHANGED)"
 echo "DIRECTORY_MODE=YES PRODUCT_SOURCE_CANDIDATES=310 LIVE_PROVIDER_API_CONNECTED=0"
