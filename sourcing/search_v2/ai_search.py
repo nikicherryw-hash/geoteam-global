@@ -51,7 +51,7 @@ def source_urls(data):
 
 def model_matches(query, candidate):
     part=identity(query)
-    if part["status"]=="MODEL_UNVERIFIED":return False
+
     target=(part.get("canonical") or query).lower()
     found=str(candidate).lower()
     nums=re.findall(r"\d{3,}",target)
@@ -108,8 +108,6 @@ def validate_output(data,query,locale):
                    +["Web search citations do not confirm inventory or binding prices."]}
  
 async def search_once(query,locale,hints,api_key,model,client,budget):
-    if identity(query)["status"]=="MODEL_UNVERIFIED":
-        return {"status":"MODEL_UNVERIFIED","query":query,"offers":[]}
     payload={
         "model":model,"store":False,"instructions":SYSTEM,
         "input":"Research globally exact item "+repr(query)+". Language: "+locale
