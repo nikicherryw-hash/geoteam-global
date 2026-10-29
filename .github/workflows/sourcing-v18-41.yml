@@ -9,7 +9,7 @@ permissions:
 jobs:
   source-registry-and-api:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
     steps:
       - name: Check out branch
         uses: actions/checkout@v4
@@ -71,3 +71,29 @@ jobs:
         run: |
           cd sourcing/backend/functions
           node --test
+
+  browser-e2e:
+    needs: source-registry-and-api
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install test runner and browsers
+        run: |
+          npm install --no-save --ignore-scripts @playwright/test@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Run desktop Chromium and mobile WebKit browser tests
+        run: npx playwright test --config=sourcing/e2e/playwright.config.cjs
+      - name: Save browser error evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: geoteam-search-browser-e2e-errors
+          path: test-results/
+          if-no-files-found: ignore
