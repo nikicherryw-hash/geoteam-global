@@ -15,14 +15,14 @@ CATEGORIES = {
 MODES = {
     "OFFICIAL_API", "PARTNER_API", "SUBSCRIPTION_RESEARCH",
     "DIRECTORY_RESEARCH", "EARLY_ACCESS_API", "APPROVAL_REQUIRED_API",
-    "SELLER_AUTH_API", "ACCOUNT_API"
+    "SELLER_AUTH_API", "ACCOUNT_API", "MARKETPLACE_DISCOVERY"
 }
 
 def validate(data):
     assert data.get("product_id") == "GEOTEAM_GLOBAL", "wrong product"
     assert data.get("integration_policy", {}).get("default_enabled") is False
     rows = data.get("sources")
-    assert isinstance(rows, list) and len(rows) >= 15, "missing sources"
+    assert isinstance(rows, list) and len(rows) == 134, "expected 134 registered sources"
     seen = set()
     for row in rows:
         name = row["id"]
@@ -41,6 +41,8 @@ def validate(data):
                 parsed = urlparse(uri)
                 assert parsed.scheme == "https" and parsed.hostname, name
         assert row["requirements"], name
+    assert sum(r["segment"] != "logistics" for r in rows) == 131
+    assert len({r["url"] for r in rows}) == len(rows), "duplicate source URLs"
     return len(rows)
 
 if __name__ == "__main__":
