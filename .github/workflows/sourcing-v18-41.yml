@@ -1,15 +1,15 @@
-name: GeoTeam sourcing v18.41 QA
+name: GeoTeam sourcing v18.42 QA
 on:
   push:
     branches:
-      - geoteam-v18-41-global-everywhere
+      - geoteam-v18-42-search-engine
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   source-registry-and-api:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
     steps:
       - name: Check out branch
         uses: actions/checkout@v4
@@ -35,18 +35,65 @@ jobs:
           src=(root/"preview-v18-7/global-source-finder.js").read_bytes()
           assert src==(root/"sourcing/backend/functions/source-finder.js").read_bytes()
           html=(root/"preview-v18-7/sourcing.html").read_text()
-          assert 'id="gtMarketRegion"' in html
-          assert 'id="gtSearchEngine"' in html
+          assert 'id="gtMarketRegion"' not in html
+          assert 'id="gtSearchEngine"' not in html
+          assert 'id="gtSector"' in html
+          assert 'gt-global-auto-banner' in html
           assert 'value="any" selected' in html
-          assert 'engine.search({...req,sector,region,condition:req.condition})' in html
-          assert json.loads(reg)["product_id"]=="GEOTEAM_GLOBAL"
+          assert "region:'all',condition:req.condition" in html
+          data=json.loads(reg)
+          assert data["product_id"]=="GEOTEAM_GLOBAL"
+          assert len(data["sources"])==313
+          assert sum(x["segment"]!="logistics" for x in data["sources"])==310
+          assert all(x["integration_status"]=="NOT_CONNECTED" for x in data["sources"])
+          assert all(x["enabled"] is False for x in data["sources"])
           print("MIRROR_AND_UI=PASS")
           PY
       - name: Check JS syntax
         run: |
           node --check preview-v18-7/global-source-finder.js
           node --check sourcing/backend/functions/directory-api.js
+          node --check sourcing/backend/functions/source-finder.js
+      - name: Validate deployment script safety and syntax
+        run: |
+          bash -n sourcing/deploy/publish_directory_cloud_shell.sh
+          python3 - <<'PY'
+          from pathlib import Path
+          script=Path("sourcing/deploy/publish_directory_cloud_shell.sh").read_text()
+          assert 'firebase deploy --only hosting:sourcing' in script
+          assert 'firebase hosting:sites:create "$SITE"' in script
+          assert 'GEOTEAM_SOURCE_SHA' in script
+          assert '--only functions' not in script
+          assert 'firebase deploy --only hosting --' not in script
+          print("DEPLOY_SCRIPT_STATIC_QA=PASS")
+          PY
       - name: Run unit and API contract tests (no network)
         run: |
           cd sourcing/backend/functions
           node --test
+
+  browser-e2e:
+    needs: source-registry-and-api
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install test runner and browsers
+        run: |
+          npm install --no-save --ignore-scripts @playwright/test@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Run desktop Chromium and mobile WebKit browser tests
+        run: npx playwright test --config=sourcing/e2e/playwright.config.cjs
+      - name: Save browser error evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: geoteam-search-browser-e2e-errors
+          path: test-results/
+          if-no-files-found: ignore
