@@ -11,8 +11,8 @@
   "use strict";
   const SEGMENT_LABELS={
     electronics:{ru:"Электроника и автоматика",en:"Electronics & automation",tr:"Elektronik ve otomasyon"},
-    aviation:/\b(airbus|boeing|cessna|embraer|bombardier|aircraft|aviation|airframe|turbine|jet engine|aerospace|helicopter|uçak|havacılık|uçak yedek)\b|(?:ми[\s-]?8|ми[\s-]?17|вертол|самол[её]т|авиаци)/i,
-    industrial:/\b(pump|valve|gearbox|actuator|spindle|compressor|motor|cnc|hermle|dmg\s*mori|grundfos|wilo|sulzer|kessler|irt[yı]sh|pompa|vana)\b|(?:иртыш|насос|клапан|шпиндел|подшипник|редуктор|станок|электродвигател)/i,
+    aviation:{ru:"Авиационные компоненты",en:"Aviation components",tr:"Havacılık bileşenleri"},
+    industrial:{ru:"Промышленное оборудование",en:"Industrial equipment",tr:"Endüstriyel ekipman"},
     manufacturer:{ru:"Каталоги производителей",en:"Manufacturer catalogs",tr:"Üretici katalogları"},
     general_b2b:{ru:"Международные B2B-площадки",en:"Global B2B directories",tr:"Küresel B2B platformları"},
     marketplace:{ru:"Торговые площадки",en:"Marketplaces",tr:"Pazar yerleri"}
@@ -24,8 +24,8 @@
   };
   const STRONG_BRANDS={
     electronics:/\b(siemens|schneider|abb|phoenix\s*contact|eaton|rockwell|allen[ -]?bradley|omron|smc|festo|bosch\s*rexroth|rexroth|mitsubishi\s*electric|danfoss|wago|ifm|beckhoff|pilz|pepperl|balluff|turck|lenze|yaskawa|fanuc|sew[ -]?eurodrive|weidmuller)\b/i,
-    aviation:/\b(airbus|boeing|cessna|embraer|bombardier|aircraft|aviation|airframe|turbine|jet engine|aerospace|helicopter|ми[\s-]?8|ми[\s-]?17|вертол|самол[её]т|авиаци|uçak|havacılık|uçak yedek)\b/i,
-    industrial:/\b(pump|valve|gearbox|actuator|spindle|compressor|motor|cnc|hermle|dmg\s*mori|grundfos|wilo|sulzer|kessler|irt[yı]sh|иртыш|насос|клапан|шпиндел|подшипник|редуктор|станок|электродвигател|pompa|vana)\b/i
+    aviation:/\b(airbus|boeing|cessna|embraer|bombardier|aircraft|aviation|airframe|turbine|jet engine|aerospace|helicopter|uçak|havacılık|uçak yedek)\b|(?:ми[\s-]?8|ми[\s-]?17|вертол|самол[её]т|авиаци)/i,
+    industrial:/\b(pump|valve|gearbox|actuator|spindle|compressor|motor|cnc|hermle|dmg\s*mori|grundfos|wilo|sulzer|kessler|irt[yı]sh|pompa|vana)\b|(?:иртыш|насос|клапан|шпиндел|подшипник|редуктор|станок|электродвигател)/i
   };
   const AVIATION_NUMBERS=/\b(?:NAS\d{3,}|MS\d{4,}|AN\d{4,}|BAC\d{4,})\b/i;
   let cached=null, loading=null;
