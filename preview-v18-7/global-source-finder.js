@@ -63,7 +63,7 @@
   async function loadRegistry(url){
     if(cached)return cached;
     if(loading)return loading;
-    const path=url||new URL("data/sources.v1.json",typeof location!=="undefined"?location.href:"https://geoteam-global.com/sourcing.html").href;
+    const path=url||new URL("data/sources.v1.json?v=39-44",typeof location!=="undefined"?location.href:"https://geoteam-global.com/sourcing.html").href;
     loading=(async()=>{
       const ctrl=new AbortController();
       const timer=setTimeout(()=>ctrl.abort(),9000);
