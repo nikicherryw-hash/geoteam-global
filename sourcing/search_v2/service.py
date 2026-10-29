@@ -68,10 +68,8 @@ async def run_search(req: SearchRequest, client: httpx.AsyncClient, cfg: Config)
         "supplier_apis_connected": False,
         "seller_confirmed": False,
     }
-    if product["status"] == "MODEL_UNVERIFIED":
-        base["status"] = "MODEL_UNVERIFIED"
-        base["warnings"].append("No automatic substitution and no prices from other models.")
-        return base
+    if product["status"] == "MODEL_NEEDS_VERIFICATION":
+        base["warnings"].append("Model not confirmed in OEM catalogue; researching exact original designation without substituting other models.")
     if not cfg.searx_url:
         base["status"] = "SEARCH_BACKEND_UNCONFIGURED"
         base["warnings"].append("Independent GeoTeam search broker not configured; no simulated results.")

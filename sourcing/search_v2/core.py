@@ -26,14 +26,15 @@ def identity(query: str) -> dict:
     if rotax:
         model = rotax.group(1)
         if model not in ROTAX_OFFICIAL_MODELS:
+            suffix = original[rotax.end():].strip()
             return {
-                "status": "MODEL_UNVERIFIED",
+                "status": "MODEL_NEEDS_VERIFICATION",
                 "manufacturer": "ROTAX",
                 "original_model": model,
-                "canonical": None,
-                "suggestions": ["ROTAX 916 iS", "ROTAX 915 iS"],
+                "canonical": "ROTAX " + model + (" " + suffix if suffix else ""),
+                "suggestions": [],
                 "evidence_url": ROTAX_PORTFOLIO,
-                "warning": "Model not found in checked official aircraft engine portfolio; do not substitute another model.",
+                "warning": "Not present in the checked official OEM portfolio; keep exact user identifier and research other/modified suppliers, never silently substitute 916 or 915.",
             }
         return {
             "status": "MODEL_IDENTIFIED",
@@ -55,8 +56,6 @@ def identity(query: str) -> dict:
 
 def search_plan(query: str, *, maximum: int = 6) -> list[str]:
     product = identity(query)
-    if product["status"] == "MODEL_UNVERIFIED":
-        return []
     term = product["canonical"] or normalized(query)
     terms = [
         f'"{term}" price',
@@ -95,8 +94,6 @@ def score_hit(hit: dict, query: str) -> int:
     title = normalized(str(hit.get("title", ""))).casefold()
     snippet = normalized(str(hit.get("content", ""))).casefold()
     product = identity(query)
-    if product["status"] == "MODEL_UNVERIFIED":
-        return 0
     q = normalized(product["canonical"] or query).casefold()
     tokens = re.findall(r"[a-z0-9а-яё]+", q)
     if not tokens:
@@ -157,8 +154,6 @@ def _is_product(node: dict) -> bool:
 
 def _match_product(node: dict, query: str) -> bool:
     wanted = identity(query)
-    if wanted["status"] == "MODEL_UNVERIFIED":
-        return False
     descriptor = " ".join(str(node.get(k) or "") for k in ("name", "model", "mpn", "sku")).casefold()
     term = normalized(wanted["canonical"] or query).casefold()
     tokens = re.findall(r"[a-z0-9а-яё]+", term)

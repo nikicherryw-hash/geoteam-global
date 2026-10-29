@@ -20,10 +20,10 @@ WRONG = LISTING.replace("916", "915")
 class SemanticsTests(unittest.TestCase):
     def test_918_not_silently_replaced_with_916(self):
         result = identity("ротакс 918")
-        self.assertEqual(result["status"], "MODEL_UNVERIFIED")
-        self.assertIsNone(result["canonical"])
-        self.assertIn("ROTAX 916 iS", result["suggestions"])
-        self.assertEqual(search_plan("rotax 918"), [])
+        self.assertEqual(result["status"], "MODEL_NEEDS_VERIFICATION")
+        self.assertEqual(result["canonical"], "ROTAX 918")
+        self.assertEqual(result["suggestions"], [])
+        self.assertTrue(any("ROTAX 918" in q for q in search_plan("rotax 918")))
         self.assertEqual(identity("ROTAX 916")["status"], "MODEL_IDENTIFIED")
 
     def test_no_false_web_leads_by_model(self):
@@ -58,7 +58,7 @@ class SemanticsTests(unittest.TestCase):
 
 
 class SearchFlowTests(unittest.IsolatedAsyncioTestCase):
-    async def test_model_not_verified_never_fetches(self):
+    async def test_unlisted_new_model_is_still_searched(self):
         count = 0
         def handler(request):
             nonlocal count
@@ -66,9 +66,9 @@ class SearchFlowTests(unittest.IsolatedAsyncioTestCase):
             return httpx.Response(500)
         async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
             out = await run_search(SearchRequest(query="ротакс 918"), client, Config("https://searx.example"))
-        self.assertEqual(out["status"], "MODEL_UNVERIFIED")
+        self.assertEqual(out["status"], "NO_MATCH_OR_ENGINE_UNAVAILABLE")
         self.assertEqual(out["offers"], [])
-        self.assertEqual(count, 0)
+        self.assertEqual(count, 6)
 
     async def test_search_without_broker_is_honest(self):
         async with httpx.AsyncClient(transport=httpx.MockTransport(lambda request: httpx.Response(500))) as client:
