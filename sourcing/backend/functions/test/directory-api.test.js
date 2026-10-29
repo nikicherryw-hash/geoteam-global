@@ -20,8 +20,8 @@ const checks=[
 ];
 test("sources are safe, unique and deliberately NOT connected",()=>{
  assert.equal(registry.product_id,"GEOTEAM_GLOBAL");
- assert.equal(registry.sources.length,44);
- assert.equal(sources.length,41);
+ assert.equal(registry.sources.length,134);
+ assert.equal(sources.length,131);
  assert.equal(new Set(registry.sources.map(x=>x.id)).size,registry.sources.length);
  for(const source of registry.sources){
    assert.equal(source.enabled,false);
@@ -46,9 +46,9 @@ function mock(path,query={},method="GET",ip="client-"+Math.random()){
  sourceApi({path,query,method,ip},res);
  return res;
 }
-test("health reports directory-only and 41 candidates",()=>{
+test("health reports directory-only and 131 candidates",()=>{
  const r=mock("/api/sourcing/health");
- assert.equal(r.statusCode,200);assert.equal(r.body.source_count,41);
+ assert.equal(r.statusCode,200);assert.equal(r.body.source_count,131);
  assert.equal(r.body.mode,"SOURCE_DISCOVERY_ONLY");
 });
 test("GET search returns honest unverified source results",()=>{
@@ -80,4 +80,39 @@ test("rate limit is bounded per client key",()=>{
 test("unsafe source URL is rejected",()=>{
  const copy=JSON.parse(JSON.stringify(registry));copy.sources[0].url="javascript:alert(1)";
  assert.equal(finder.validateRegistry(copy).length,sources.length-1);
+});
+
+
+test("region filters prioritize registered territory-specific sites",()=>{
+ const sample={part:"Насос Иртыш ПФ2",qty:1,dest:"Istanbul"};
+ const global=finder.route(sources,{...sample,region:"all"});
+ assert.ok(global.total>=100);
+ const ru=finder.route(sources,{...sample,region:"russia_cis"});
+ const asia=finder.route(sources,{...sample,region:"asia"});
+ const europe=finder.route(sources,{...sample,region:"europe"});
+ assert.ok(ru.results.some(x=>x.id==="pulscen"));
+ assert.ok(ru.results.some(x=>x.id==="etm_ru"));
+ assert.ok(asia.results.some(x=>x.id==="china_1688"));
+ assert.ok(asia.results.some(x=>x.id==="tradekorea"));
+ assert.ok(europe.results.some(x=>x.id==="automation24"));
+ assert.ok(ru.total<global.total && asia.total<global.total);
+ assert.ok(ru.results.every(x=>x.scope.includes("global")||x.scope.some(z=>finder.REGIONS.russia_cis.includes(z))));
+});
+test("country-specific catalogs require explicit click; engine URLs use HTTPS",()=>{
+ const p={provider_url:"https://www.elec.ru/"};const q="Siemens 6ES7315";
+ const outputs=["google","bing","yandex","baidu"].map(engine=>finder.searchEngineUrl(p,q,engine,false));
+ assert.ok(outputs.every(x=>x.startsWith("https://")));
+ assert.ok(outputs[2].includes("yandex.ru/search/?text="));
+ assert.ok(outputs[3].includes("baidu.com/s?wd="));
+ assert.ok(outputs.every(x=>decodeURIComponent(x).includes("site:elec.ru")));
+ const globalSearch=finder.searchEngineUrl(null,q,"google",true);
+ assert.ok(decodeURIComponent(globalSearch).endsWith(q));
+});
+test("future API honors market-region routing",()=>{
+ const req={query:"Насос Иртыш ПФ2",quantity:"2",destination:"Istanbul",region:"russia_cis"};
+ const rr=mock("/api/sourcing/search",req);
+ assert.equal(rr.statusCode,200);
+ assert.equal(rr.body.region,"russia_cis");
+ assert.ok(rr.body.results.some(x=>x.id==="pulscen"));
+ assert.equal(mock("/api/sourcing/search",{...req,region:"mars"}).statusCode,422);
 });
