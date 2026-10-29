@@ -344,6 +344,30 @@ footer{max-width:var(--gt-search-max)!important}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
 </style>
+<style id="gt-v18-39-source-finder">
+.gt-sector-picker{display:flex;flex-wrap:wrap;align-items:center;gap:10px 13px;margin:16px 0 10px}
+.gt-sector-picker label{font-size:12px;color:#d2ece8;font-weight:670}
+.gt-sector-picker select{padding:10px 14px;min-height:41px;min-width:175px;max-width:100%;border-radius:10px;background:#0a2c35;color:#e9fffb;border:1px solid rgba(130,223,212,.28);font-size:12.5px}
+.gt-sector-picker select:focus-visible{outline:2px solid #83eadd;outline-offset:2px}
+.gt-sector-picker .gt-sector-hint{font-size:11px;color:#a9d2cc}
+#results.gt-source-results{display:block!important;margin-top:18px!important;padding:17px 15px!important;background:linear-gradient(140deg,rgba(9,52,59,.48),rgba(5,31,39,.60))!important}
+.gt-source-headline{font-size:16px!important;line-height:1.45!important;color:#eafffa!important;letter-spacing:-.01em;margin:0 0 7px!important;font-weight:700}
+.gt-source-descr{margin:0 0 10px!important;font-size:12.8px!important;line-height:1.64!important;color:#d3e8e4!important}
+.gt-source-info{color:#a8cfc8!important;font-size:11.3px!important;line-height:1.6!important;margin:0 0 14px!important}
+.gt-source-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.gt-source-card{padding:15px 14px 13px;border:1px solid rgba(125,228,214,.16);background:rgba(5,44,51,.55);border-radius:12px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.gt-source-card>strong{margin:0;font-size:13px;line-height:1.4;color:#f0fffc;overflow-wrap:anywhere}
+.gt-source-sector{display:inline-flex;align-self:flex-start;padding:3px 9px;background:rgba(88,192,179,.12);color:#a4efe0;border-radius:20px;font-size:10px;font-weight:620}
+.gt-source-links{display:flex;flex-wrap:wrap;gap:10px;margin:5px 0 2px;align-items:center}
+.gt-source-links a{display:inline-flex;align-items:center;min-height:35px;padding:8px 11px;border:1px solid rgba(117,219,206,.24);border-radius:9px;text-decoration:none;font-size:11.5px;font-weight:670}
+.gt-source-find{background:rgba(41,132,131,.28);color:#dcfffa}
+.gt-source-direct{color:#a9e8df}
+.gt-source-links a:hover,.gt-source-links a:focus-visible{background:rgba(62,172,162,.31);border-color:rgba(166,251,238,.67);outline-offset:2px}
+.gt-source-card small{display:block;font-size:10.4px;line-height:1.5;color:#9cbdbb}
+.gt-source-bottom{margin:16px 0 1px!important;padding-top:12px!important;border-top:1px solid rgba(148,227,216,.16);font-size:11.5px!important;color:#c8e7e0!important}
+@media(max-width:600px){.gt-source-grid{grid-template-columns:1fr}.gt-source-card{padding:14px 13px}.gt-sector-picker{align-items:stretch}.gt-sector-picker label{width:100%}.gt-sector-picker select{flex:1}.gt-sector-picker .gt-sector-hint{width:100%}#results.gt-source-results{padding:15px 12px!important}}
+@media(prefers-reduced-motion:reduce){.gt-source-card,.gt-source-links a{transition:none!important}}
+</style>
 </head>
 <body>
 <header><a class="brand" href="index.html"><strong>GeoTeam</strong><small>GLOBAL</small></a><div class="top-nav"><a class="back" href="index.html" id="back">← Back to site</a><label class="lang-wrap" aria-label="Website language"><select class="lang-choice" id="lang" title="Website language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><optgroup label="More languages — planned"><option disabled>DE · Deutsch</option><option disabled>FR · Français</option><option disabled>ES · Español</option><option disabled>IT · Italiano</option><option disabled>PT · Português</option><option disabled>AR · العربية</option><option disabled>ZH · 中文</option></optgroup></select></label></div></header>
@@ -363,6 +387,17 @@ footer{max-width:var(--gt-search-max)!important}
   <label class="field"><span id="qtyLabel">Quantity *</span><input id="qty" type="number" min="1" max="999999" step="1" inputmode="numeric" value="1"></label>
   <label class="field destination"><span id="destLabel">Delivery destination *</span><input id="dest" type="text" maxlength="100" autocomplete="off" placeholder="Istanbul, Türkiye"></label>
  </div>
+<div class="gt-sector-picker" aria-label="Industry category">
+ <label for="gtSector" data-sourcing-en="Source category" data-sourcing-tr="Tedarik kategorisi" data-sourcing-ru="Категория поиска">Source category</label>
+ <select id="gtSector">
+  <option value="auto" data-sourcing-en="Automatic" data-sourcing-tr="Otomatik" data-sourcing-ru="Определить автоматически">Automatic</option>
+  <option value="industrial" data-sourcing-en="Industrial equipment" data-sourcing-tr="Endüstriyel ekipman" data-sourcing-ru="Промышленное оборудование">Industrial equipment</option>
+  <option value="electronics" data-sourcing-en="Electronics / automation" data-sourcing-tr="Elektronik / otomasyon" data-sourcing-ru="Электроника / автоматика">Electronics / automation</option>
+  <option value="aviation" data-sourcing-en="Aviation components" data-sourcing-tr="Havacılık bileşenleri" data-sourcing-ru="Авиационные компоненты">Aviation components</option>
+  <option value="general_b2b" data-sourcing-en="Global B2B / manufacturing" data-sourcing-tr="Küresel B2B / imalat" data-sourcing-ru="Международный B2B / изготовление">Global B2B / manufacturing</option>
+ </select>
+ <span class="gt-sector-hint" data-sourcing-en="Filter the supplier directories before opening searches" data-sourcing-tr="Tedarikçi dizinlerini aramadan önce filtreleyin" data-sourcing-ru="Поможет подобрать подходящие площадки">Filter the supplier directories before opening searches</span>
+</div>
  <details id="extra">
   <summary id="extraLabel">More details &amp; attachment</summary>
   <div class="more-fields">
@@ -404,6 +439,7 @@ footer{max-width:var(--gt-search-max)!important}
 <p class="bottom-note" id="legalNote">Search leads are not confirmed stock or prices. Orders require supplier, documentation and trade-compliance verification.</p>
 </main>
 <footer><span>© 2026 GeoTeam</span><a class="about" href="about.html" id="about">About Us</a><a id="whatWeSource" href="en/what-we-source.html">What We Source</a><a href="privacy.html" id="privacy">Privacy Policy</a><a href="rfq-privacy.html" id="rfqPrivacy">KVKK / RFQ</a></footer>
+<script src="global-source-finder.js"></script>
 <script>
 (()=>{'use strict';
 const by=(id)=>document.getElementById(id);
@@ -588,19 +624,23 @@ function state(title,body){const el=by('results');el.replaceChildren();const h=d
 const isDemo=/^(?:raw|rawcdn)\.githack\.com$/.test(location.hostname)||location.hostname.endsWith('.github.io')||location.hostname==='localhost'||location.hostname==='127.0.0.1';
 by('search').addEventListener('click',async()=>{
  const req=product();if(!req||busy)return;
- if(isDemo){state(T('searchPreviewTitle'),T('searchPreviewText'));by('rfqActions').scrollIntoView({behavior:'smooth',block:'nearest'});return}
  busy=true;by('search').disabled=true;state(T('searchSearching'),'');
- const ctrl=new AbortController();const timeout=setTimeout(()=>ctrl.abort(),20000);
  try{
- const q=new URLSearchParams({query:req.part,quantity:String(req.qty),destination:req.dest});
- const res=await fetch(ENDPOINT+'?'+q.toString(),{headers:{'Accept':'application/json'},signal:ctrl.signal,credentials:'same-origin'});
- if(!res.ok)throw new Error('Search temporarily unavailable');
- const json=await res.json();const matches=Array.isArray(json.results)?json.results:[];
- if(!matches.length){state(T('searchNoResult'),T('searchErrorText'));return}
- // Avoid pretending that search listings are verified stock or price.
- state(T('searchLeadTitle')+' · '+matches.length,T('searchLeadText'));
- }catch(e){state(T('searchErrorTitle'),T('searchErrorText'))}
- finally{clearTimeout(timeout);busy=false;by('search').disabled=false}
+   const engine=window.GeoTeamSourceFinder;
+   if(!engine)throw Error('Source finder module unavailable');
+   const sector=by('gtSector')?.value||'auto';
+   const data=await engine.search({...req,sector});
+   engine.render(by('results'),data,{lang});
+   by('results').scrollIntoView({behavior:'smooth',block:'nearest'});
+ }catch(e){
+   // Honest failure: never invent supplier offers or claim live inventory.
+   const notices={
+      ru:'Не удалось загрузить справочник. Попробуйте ещё раз или оформите RFQ.',
+      en:'Source directory unavailable. Please retry or prepare an RFQ.',
+      tr:'Kaynak dizini yüklenemedi. Tekrar deneyin veya RFQ hazırlayın.'
+   };
+   state(T('searchErrorTitle'),notices[lang]||notices.en);
+ }finally{busy=false;by('search').disabled=false}
 });
 by('copy').addEventListener('click',async()=>{
  const txt=prepare();if(!txt)return;try{await navigator.clipboard.writeText(txt);flash(T('copied'))}
