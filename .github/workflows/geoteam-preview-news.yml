@@ -1,0 +1,32 @@
+name: GeoTeam preview news auto-refresh
+on:
+  schedule:
+    - cron: '17 */4 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: geoteam-preview-news
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Checkout the isolated approved-preview branch
+        uses: actions/checkout@v4
+        with:
+          ref: geoteam-approved-original-preview-20261102
+      - name: Update verified RSS headlines
+        run: python3 preview-v18-7/scripts/update_news.py
+      - name: Commit only generated news data to isolated preview branch
+        run: |
+          git config user.name 'geoteam-news-bot'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview-v18-7/data/ticker-live-*.json
+          if git diff --cached --quiet; then
+            echo 'NEWS_UNCHANGED'
+            exit 0
+          fi
+          git commit -m 'Refresh GeoTeam preview official RSS headlines'
+          git push origin HEAD:geoteam-approved-original-preview-20261102
