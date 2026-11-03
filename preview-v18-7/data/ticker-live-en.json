@@ -1,7 +1,14 @@
 {
-  "generated_at": "2026-11-03T06:51:51.779588Z",
+  "generated_at": "2026-11-03T16:16:41.173503Z",
   "mode": "automatic_rss",
   "items": [
+    {
+      "title": "Product identifiers for e-commerce imports mandatory from 1 November 2026",
+      "source": "European Commission",
+      "country": "EU",
+      "date": "2026-11-03",
+      "url": "https://taxation-customs.ec.europa.eu/news/product-identifiers-e-commerce-imports-mandatory-1-november-2026-2026-11-03_en"
+    },
     {
       "title": "EU launches safeguard investigation on certain new hybrid vehicles",
       "source": "WTO",
@@ -45,6 +52,13 @@
       "url": "https://www.wto.org/english/news_e/news26_e/devel_29oct26_535_e.htm"
     },
     {
+      "title": "Members review 34 notifications, share experiences at Fisheries Subsidies Committee",
+      "source": "WTO",
+      "country": "UN",
+      "date": "2026-10-29",
+      "url": "https://www.wto.org/english/news_e/news26_e/fish_29oct26_539_e.htm"
+    },
+    {
       "title": "Global Review 2026 spotlights partnerships for trade and development",
       "source": "WTO",
       "country": "UN",
@@ -71,20 +85,6 @@
       "country": "UN",
       "date": "2026-10-29",
       "url": "https://www.wto.org/english/news_e/news26_e/rta_29oct26_532_e.htm"
-    },
-    {
-      "title": "Trade Policy Review: Democratic Republic of the Congo",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-10-28",
-      "url": "https://www.wto.org/english/tratop_e/tpr_e/tpr_cod_28oct26_e.htm"
-    },
-    {
-      "title": "WTO members discuss proposals on key trade and development issues",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-10-27",
-      "url": "https://www.wto.org/english/news_e/news26_e/devel_27oct26_527_e.htm"
     }
   ]
 }
