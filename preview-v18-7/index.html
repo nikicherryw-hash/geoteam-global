@@ -4054,7 +4054,7 @@ $("btnBrowse")?.addEventListener("click", (e) => {
     en:['About us','What we source','Privacy policy','KVKK / RFQ'],tr:['Hakkımızda','Tedarik alanlarımız','Gizlilik politikası','KVKK / RFQ'],ru:['О нас','Что поставляем','Конфиденциальность','KVKK / RFQ'],de:['Über uns','Beschaffung','Datenschutz','KVKK / RFQ'],fr:['À propos','Nos approvisionnements','Confidentialité','KVKK / RFQ'],es:['Sobre nosotros','Qué suministramos','Confidencialidad','KVKK / RFQ'],it:['Chi siamo','Cosa forniamo','Privacy','KVKK / RFQ'],pt:['Sobre nós','O que fornecemos','Privacidade','KVKK / RFQ'],ar:['من نحن','ما نوفره','الخصوصية','KVKK / RFQ'],zh:['关于我们','供应范围','隐私','KVKK / RFQ']
   };
   const set=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
-  let tickerSequence=0;
+  let tickerSequence=0,finalTickerText='',tickerGuardQueued=false;
   const tickerFlag=country=>{const cc=String(country||'').toUpperCase();if(!/^[A-Z]{2}$/.test(cc))return '🌐';const base=0x1F1E6;return String.fromCodePoint(base+cc.charCodeAt(0)-65,base+cc.charCodeAt(1)-65);};
   const renderTicker=async(lang)=>{
     const sequence=++tickerSequence,track=document.getElementById('tickerTrack'),t=copy[lang]||copy.en;
@@ -4074,10 +4074,10 @@ $("btnBrowse")?.addEventListener("click", (e) => {
         const meta=document.createElement('span');meta.className='tick-src';const date=/^\d{4}-\d{2}-\d{2}$/.test(item.date||'')?' · '+String(item.date).split('-').reverse().join('.'):'';meta.textContent='('+(item.source||item.publisher||'Verified source')+date+')';
         link.append(flag,title,meta);fragment.appendChild(link);
       });
-      track.replaceChildren(fragment);
+      track.replaceChildren(fragment);finalTickerText=track.textContent;
     }catch(error){
       if(sequence!==tickerSequence)return;
-      const status=document.createElement('span');status.className='tick tick--status';status.setAttribute('role','status');status.textContent=t.status;track.replaceChildren(status);
+      const status=document.createElement('span');status.className='tick tick--status';status.setAttribute('role','status');status.textContent=t.status;track.replaceChildren(status);finalTickerText=track.textContent;
     }
   };
   const apply=()=>{
@@ -4105,6 +4105,13 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   const guardTargets=['gtMainRfq','headline','gtWhatWeSource'];
   const guard=new MutationObserver(schedule);
   guardTargets.map(id=>document.getElementById(id)).filter(Boolean).forEach(el=>guard.observe(el,{childList:true,subtree:true,characterData:true}));
+  // The legacy ticker may resolve after this script. If it tries to restore
+  // stale content, render the selected source again without polling forever.
+  const tickerTrack=document.getElementById('tickerTrack');
+  if(tickerTrack)new MutationObserver(()=>{
+    if(tickerTrack.textContent===finalTickerText||tickerGuardQueued)return;
+    tickerGuardQueued=true;window.setTimeout(()=>{tickerGuardQueued=false;renderTicker(document.getElementById('gtLanguageSelect')?.value||'en');},80);
+  }).observe(tickerTrack,{childList:true,subtree:true,characterData:true});
 })();
 </script>
 </body>
