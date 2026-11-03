@@ -2418,7 +2418,6 @@ a:focus-visible,button:focus-visible,select:focus-visible{
           <a id="navAviation" href="#aviation">Aviation</a>
           <a id="navIndustry" href="#industry">Industry</a>
           <a id="navElectronics" href="#electronics">Electronics</a>
-          <span class="gt-nav-kicker" id="gtNavKicker">Beyond the catalogue</span>
         </nav>
 
         <div class="right"><div class="socials" aria-label="Social links">
@@ -3987,8 +3986,6 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   .gt-sector-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;align-items:center!important;column-gap:0!important;row-gap:5px!important;max-width:430px!important;text-align:center!important;}
   .gt-sector-nav a{display:inline-flex!important;align-items:center!important;font-family:var(--gt-display-font)!important;font-size:13px!important;font-weight:610!important;letter-spacing:-.01em!important;padding:5px 10px!important;}
   .gt-sector-nav a+a::before{content:"•";margin-right:20px;color:rgba(118,229,173,.76);font-size:11px;line-height:1;}
-  .gt-nav-kicker{flex:0 0 100%;margin:0!important;color:#bff4db;font:600 11px/1.25 var(--gt-display-font);letter-spacing:.075em;text-transform:uppercase;text-shadow:0 0 11px rgba(118,229,173,.42);white-space:nowrap;}
-  .gt-nav-kicker::before{content:none!important;}
   .gt-account-links{display:flex;align-items:center;gap:5px;color:rgba(234,247,247,.5);font:600 11px/1 var(--gt-display-font);white-space:nowrap;}
   .gt-account-links a{color:rgba(234,247,247,.82);text-decoration:none;transition:color .18s ease;}
   .gt-account-links a:hover,.gt-account-links a:focus-visible{color:#fff;}
@@ -4007,11 +4004,11 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   .gt-expertise-eyebrow{display:inline-flex!important;align-items:center!important;gap:9px!important;color:#dcf4e8!important;font:650 11px/1.2 var(--gt-display-font)!important;letter-spacing:.13em!important;}
   .gt-expertise-eyebrow::before{content:"";width:9px;height:9px;flex:0 0 9px;border-radius:50%;background:var(--gt-green);box-shadow:0 0 13px rgba(118,229,173,.58);}
   #gtExpertiseHead{display:none!important;}
-  .gt-expertise{border-top:0!important;padding:18px 0 8px!important;text-align:center!important;}
+  .gt-expertise{border-top:1px solid rgba(168,235,224,.18)!important;padding:18px 0 12px!important;text-align:center!important;}
   .gt-expertise-top{display:flex!important;align-items:center!important;justify-content:center!important;margin:0!important;}
   .gt-expertise-top>div{text-align:center!important;}
-  .gt-expertise-grid{display:none!important;}
-  .gt-expertise .gt-expertise-item{min-height:124px!important;padding:16px!important;}
+  .gt-expertise-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;margin-top:16px!important;text-align:left!important;}
+  .gt-expertise .gt-expertise-item{min-height:124px!important;padding:18px 20px!important;text-align:left!important;}
   .gt-expertise .gt-expertise-item h3{font-family:var(--gt-display-font)!important;font-size:15px!important;font-weight:620!important;letter-spacing:-.02em!important;}
   .gt-expertise .gt-expertise-item p{font-family:var(--gt-display-font)!important;font-size:12.5px!important;line-height:1.48!important;color:var(--gt-text-soft)!important;}
   .tick--status{opacity:.8;pointer-events:none;}
@@ -4021,7 +4018,6 @@ $("btnBrowse")?.addEventListener("click", (e) => {
     .gt-sector-nav{row-gap:4px!important;}
     .gt-sector-nav a{font-size:12px!important;padding:6px 7px!important;}
     .gt-sector-nav a+a::before{margin-right:14px;}
-    .gt-nav-kicker{font-size:10.5px;}
     .hero .stage{width:min(395px,82vw)!important;max-width:395px!important;}
   }
   @media (max-width:620px){
@@ -4036,6 +4032,8 @@ $("btnBrowse")?.addEventListener("click", (e) => {
     .hero .stage{width:min(342px,85vw)!important;max-width:342px!important;}
     #gtMainRfq{font-size:15px!important;min-height:42px!important;}
     .gt-expertise{padding:15px 0 8px!important;}
+    .gt-expertise-grid{grid-template-columns:1fr!important;gap:10px!important;margin-top:13px!important;}
+    .gt-expertise .gt-expertise-item{padding:17px 18px!important;}
     .gt-legal-footer{flex-wrap:wrap!important;justify-content:center!important;gap:9px 13px!important;padding-left:16px!important;padding-right:16px!important;}
   }
   @media (max-width:380px){.gt-account-links a:last-child{display:none}.gt-account-links span{display:none}.hero .stage{width:min(305px,85vw)!important;max-width:305px!important;}}
@@ -4090,7 +4088,7 @@ $("btnBrowse")?.addEventListener("click", (e) => {
     const t=copy[lang]||copy.en;
     document.documentElement.lang=lang;
     document.documentElement.dir=lang==='ar'?'rtl':'ltr';
-    set('gtNavKicker',t.kicker);set('navAviation',t.aviation);set('navIndustry',t.industry);set('navElectronics',t.electronics);set('gtLoginLink',t.login);set('gtRegisterLink',t.register);set('tickerTag',t.news);
+    set('navAviation',t.aviation);set('navIndustry',t.industry);set('navElectronics',t.electronics);set('gtLoginLink',t.login);set('gtRegisterLink',t.register);set('tickerTag',t.news);
     const h=document.getElementById('headline');if(h&&h.textContent.trim()!==t.title){h.replaceChildren();const span=document.createElement('span');span.textContent=t.title;h.appendChild(span);}if(h)h.setAttribute('aria-label',t.title);
     const cta=document.getElementById('gtMainRfq');if(cta&&cta.textContent.trim()!==t.search+' →'){cta.replaceChildren(document.createTextNode(t.search+' '));const arrow=document.createElement('span');arrow.className='gt-search-arrow';arrow.setAttribute('aria-hidden','true');arrow.textContent='→';cta.appendChild(arrow);}if(cta)cta.setAttribute('aria-label',t.search);
     document.querySelectorAll('.tick--status').forEach(el=>el.textContent=t.status);
