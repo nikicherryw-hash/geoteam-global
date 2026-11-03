@@ -2411,7 +2411,7 @@ a:focus-visible,button:focus-visible,select:focus-visible{
     <header>
       <div class="nav">
         <div class="brand-wrap" aria-label="GeoTeam Global">
-          <a class="brand gt-brand-refined gt-wordmark" href="index.html" aria-label="GeoTeam Global — home"><span class="gt-brand-text"><span class="top">GeoTeam</span><span class="bottom">GLOBAL</span></span></a>
+          <a class="brand gt-brand-refined gt-wordmark" href="index.html" aria-label="GeoTeam Global — home"><span class="gt-brand-mark" aria-hidden="true"><img src="data/geoteam-mark-source.png" alt=""></span><span class="gt-brand-text"><span class="top">GeoTeam</span><span class="bottom">GLOBAL</span></span></a>
           
         </div>
 
@@ -4029,6 +4029,12 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   .page>header .gt-lang-wrap{width:60px!important;min-width:60px!important;max-width:60px!important;height:28px!important;}
   .page>header .gt-lang-display{font-size:10px!important;gap:4px!important;}
   .page>header .gt-lang-chevron{font-size:12px!important;}
+  .brand-wrap{transform:translateX(-7px)!important;}
+  .gt-wordmark{display:inline-flex!important;min-width:0!important;padding:3px 0!important;flex-direction:row!important;align-items:center!important;gap:8px!important;}
+  .gt-wordmark .gt-brand-text{align-items:flex-start!important;text-align:left!important;min-width:auto!important;}
+  .gt-wordmark .gt-brand-text .top,.gt-wordmark .gt-brand-text .bottom{text-align:left!important;}
+  .gt-brand-mark{display:block;position:relative;flex:0 0 36px;width:36px;height:34px;overflow:hidden;isolation:isolate;}
+  .gt-brand-mark img{position:absolute;display:block;width:88px!important;max-width:none!important;height:auto!important;left:-28px;top:-19px;filter:brightness(0) invert(1);mix-blend-mode:screen;}
   .tick--status{opacity:.8;pointer-events:none;}
   .gt-legal-footer{font-family:var(--gt-display-font)!important;}
   @media (max-width:900px){
@@ -4053,6 +4059,10 @@ $("btnBrowse")?.addEventListener("click", (e) => {
     .gt-expertise-grid{grid-template-columns:1fr!important;gap:10px!important;margin-top:13px!important;}
     .gt-expertise .gt-expertise-item{padding:17px 18px!important;}
     .gt-legal-footer{flex-wrap:wrap!important;justify-content:center!important;gap:9px 13px!important;padding-left:16px!important;padding-right:16px!important;}
+    .brand-wrap{transform:translateX(-3px)!important;}
+    .gt-wordmark{gap:6px!important;}
+    .gt-brand-mark{flex-basis:31px;width:31px;height:30px;}
+    .gt-brand-mark img{width:76px!important;left:-24px;top:-17px;}
   }
   @media (max-width:380px){.gt-account-links a:last-child{display:none}.gt-account-links span{display:none}.hero .stage{width:min(305px,85vw)!important;max-width:305px!important;}}
   @media (prefers-reduced-motion:reduce){#gtMainRfq .gt-search-arrow{transition:none!important;}}
