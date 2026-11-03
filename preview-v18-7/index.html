@@ -2431,7 +2431,7 @@ a:focus-visible,button:focus-visible,select:focus-visible{
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.75 6.5a1.05 1.05 0 1 1-1.05 1.05 1.05 1.05 0 0 1 1.05-1.05z"/></svg>
             </a>
           </div>
-          <div class="lang"><button id="langToggle" type="button" class="langToggle" aria-label="Legacy language toggle" hidden>EN</button><label class="gt-lang-wrap" aria-label="Website language"><span class="gt-lang-display" aria-hidden="true"><span id="gtLangCode">EN</span><span class="gt-lang-chevron">⌄</span></span><select class="gt-lang-select" id="gtLanguageSelect" aria-label="Choose language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><optgroup label="More languages — planned"><option disabled>DE · Deutsch</option><option disabled>FR · Français</option><option disabled>ES · Español</option><option disabled>IT · Italiano</option><option disabled>PT · Português</option><option disabled>AR · العربية</option><option disabled>ZH · 中文</option></optgroup></select></label></div>
+          <div class="lang"><button id="langToggle" type="button" class="langToggle" aria-label="Legacy language toggle" hidden>EN</button><label class="gt-lang-wrap" aria-label="Website language"><span class="gt-lang-display" aria-hidden="true"><span id="gtLangCode">EN</span><span class="gt-lang-chevron">⌄</span></span><select class="gt-lang-select" id="gtLanguageSelect" aria-label="Choose language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><option value="de">DE · Deutsch</option><option value="fr">FR · Français</option><option value="es">ES · Español</option><option value="it">IT · Italiano</option><option value="pt">PT · Português</option><option value="ar">AR · العربية</option><option value="zh">ZH · 中文</option></select></label></div>
         </div>
       </div>
       <div class="tickerbar" aria-label="News ticker">
@@ -3104,7 +3104,7 @@ const loadTicker = async (lang) => {
       navAbout:"О нас",navSourcing:"Глобальный поиск",navHow:"Как мы работаем",
       navProducts:"Оборудование",navIndustries:"Отрасли",navCapabilities:"Возможности",navQuality:"Документы",
       navCases:"Примеры",navContact:"Контакты",
-      headline:"Интеллектуальный подбор|оборудования и компонентов.",
+      headline:"Интеллектуальная платформа решений",
       sub:"От технического запроса до оптимального решения.",
       heroDetail:"Поиск по артикулам и спецификациям. Анализ источников, сравнение предложений и сопровождение закупки.",
       btnRfq:"Глобальный поиск",btnBrowse:"Каталог",
@@ -3898,5 +3898,74 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   queue();
 })();
 </script>
-</body>
+
+<style id="home-language-polish">
+  /* Homepage only: clearer type and a modest glow for social links. */
+  body{font-weight:450;text-rendering:optimizeLegibility;}
+  .page>header .social{color:#d7fbff!important;border-color:rgba(84,221,235,.66)!important;filter:saturate(1.35) brightness(1.15) drop-shadow(0 0 6px rgba(31,207,225,.28));transition:transform .18s ease,filter .18s ease,box-shadow .18s ease;}
+  .page>header .social:hover,.page>header .social:focus-visible{transform:translateY(-1px);filter:saturate(1.5) brightness(1.23) drop-shadow(0 0 10px rgba(31,207,225,.48));box-shadow:0 0 14px rgba(31,207,225,.18)!important;}
+  .page>header .nav a,.headline,.ticker,.page h2,.page h3{font-weight:600;}
+</style>
+<script id="home-language-polish-script">
+(()=>{
+  const copy={
+    de:{navSourcing:'Global Sourcing',navHow:'So arbeiten wir',navAbout:'Über uns',headline:'Intelligente Lösungsplattform',ticker:'Neuigkeiten',expertise:'Artikel. Spezifikationen. Zeichnungen.',search:'Global suchen ↗'},
+    fr:{navSourcing:'Recherche mondiale',navHow:'Notre méthode',navAbout:'À propos',headline:'Plateforme intelligente de solutions',ticker:'Actualités',expertise:'Références. Spécifications. Plans.',search:'Recherche mondiale ↗'},
+    es:{navSourcing:'Búsqueda global',navHow:'Cómo trabajamos',navAbout:'Quiénes somos',headline:'Plataforma inteligente de soluciones',ticker:'Noticias',expertise:'Referencias. Especificaciones. Planos.',search:'Búsqueda global ↗'},
+    it:{navSourcing:'Ricerca globale',navHow:'Come lavoriamo',navAbout:'Chi siamo',headline:'Piattaforma intelligente di soluzioni',ticker:'Notizie',expertise:'Codici. Specifiche. Disegni.',search:'Ricerca globale ↗'},
+    pt:{navSourcing:'Pesquisa global',navHow:'Como trabalhamos',navAbout:'Sobre nós',headline:'Plataforma inteligente de soluções',ticker:'Notícias',expertise:'Códigos. Especificações. Desenhos.',search:'Pesquisa global ↗'},
+    ar:{navSourcing:'بحث عالمي',navHow:'كيف نعمل',navAbout:'من نحن',headline:'منصة حلول ذكية',ticker:'الأخبار',expertise:'أرقام القطع. المواصفات. الرسومات.',search:'بحث عالمي ↗'},
+    zh:{navSourcing:'全球搜索',navHow:'我们的工作方式',navAbout:'关于我们',headline:'智能解决方案平台',ticker:'新闻',expertise:'料号。规格。图纸。',search:'全球搜索 ↗'}
+  };
+  const select=document.getElementById('gtLanguageSelect');
+  const setText=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+  const applyExtra=(lang)=>{
+    const t=copy[lang];if(!t||!select)return;
+    document.documentElement.lang=lang;
+    document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+    select.value=lang;
+    setText('gtLangCode',lang.toUpperCase());
+    setText('navSourcing',t.navSourcing);setText('navHow',t.navHow);setText('navAbout',t.navAbout);
+    setText('headline',t.headline);setText('tickerTag',t.ticker);setText('gtExpertiseHead',t.expertise);setText('gtMainRfq',t.search);
+    ['navSourcing','gtMainRfq'].forEach(id=>{const el=document.getElementById(id);if(el){const href=el.getAttribute('href').split('?')[0];el.setAttribute('href',href+'?lang='+lang);}});
+    ['navHow'].forEach(id=>{const el=document.getElementById(id);if(el)el.setAttribute('href','#how-it-works');});
+    ['navAbout'].forEach(id=>{const el=document.getElementById(id);if(el)el.setAttribute('href','about.html?lang='+lang);});
+    try{localStorage.setItem('gt_lang',lang);}catch(e){}
+  };
+  if(!select)return;
+  select.addEventListener('change',event=>{const lang=event.target.value;if(copy[lang]){event.stopImmediatePropagation();applyExtra(lang);}},true);
+  const urlLang=new URLSearchParams(location.search).get('lang');
+  let saved=null;try{saved=localStorage.getItem('gt_lang');}catch(e){}
+  if(copy[urlLang])applyExtra(urlLang);else if(copy[saved])applyExtra(saved);
+})();
+</script>
+
+
+<style id="home-structure-polish">
+  /* Homepage hierarchy: softer typography, a restrained hero and a clear search affordance. */
+  .headline{max-width:780px!important;font-family:ui-rounded,"Segoe UI",Inter,system-ui,sans-serif!important;font-size:clamp(2.55rem,5.1vw,5.25rem)!important;line-height:.98!important;letter-spacing:-.045em!important;font-weight:650!important;}
+  #gtMainRfq{display:inline-flex!important;align-items:center!important;gap:12px!important;font-family:ui-rounded,"Segoe UI",Inter,system-ui,sans-serif!important;font-weight:650!important;letter-spacing:-.01em!important;}
+  #gtMainRfq .gt-search-arrow{display:inline-grid!important;place-items:center!important;width:32px!important;height:32px!important;border-radius:999px!important;color:#dfffea!important;background:rgba(62,218,132,.12)!important;border:1px solid rgba(83,242,154,.72)!important;box-shadow:0 0 16px rgba(70,232,140,.30)!important;font-size:20px!important;line-height:1!important;transition:transform .18s ease,box-shadow .18s ease!important;}
+  #gtMainRfq:hover .gt-search-arrow,#gtMainRfq:focus-visible .gt-search-arrow{transform:translateX(3px)!important;box-shadow:0 0 23px rgba(70,232,140,.52)!important;}
+  #capabilities{font-family:ui-rounded,"Segoe UI",Inter,system-ui,sans-serif!important;}
+  #capabilities>div:first-child{display:inline-flex!important;align-items:center!important;gap:8px!important;color:#cbffda!important;background:rgba(62,218,132,.11)!important;border:1px solid rgba(83,242,154,.58)!important;border-radius:999px!important;padding:7px 12px!important;box-shadow:0 0 15px rgba(70,232,140,.16)!important;font-weight:700!important;letter-spacing:.08em!important;font-size:.7rem!important;}
+  #capabilities>div:first-child::before{content:"✓";color:#77f6a8;font-size:.9rem;}
+  #gtExpertiseHead{display:none!important;}
+  #capabilities h3{font-family:ui-rounded,"Segoe UI",Inter,system-ui,sans-serif!important;font-weight:620!important;letter-spacing:-.02em!important;}
+</style>
+<script id="home-structure-polish-script">
+(()=>{
+  const adjust=()=>{
+    const lang=(document.getElementById('gtLanguageSelect')?.value||document.documentElement.lang||'en');
+    const how=document.getElementById('navHow');if(how)how.href='about.html?lang='+lang+'#how-we-work';
+    const search=document.getElementById('gtMainRfq');
+    if(search&&!search.querySelector('.gt-search-arrow')){const arrow=document.createElement('span');arrow.className='gt-search-arrow';arrow.setAttribute('aria-hidden','true');arrow.textContent='→';search.append(arrow);}
+    document.getElementById('how-it-works')?.remove();
+  };
+  adjust();
+  document.getElementById('gtLanguageSelect')?.addEventListener('change',adjust,true);
+})();
+</script>
+
+<script id="home-nav-anchor-fix">(()=>{let f=()=>{let n=document.getElementById("navHow"),l=document.querySelector("#gtLanguageSelect");if(n)n.href="about.html?lang="+(l?l.value:"en")+"#how-we-work"};f();addEventListener("load",f);document.addEventListener("change",f,true)})()</script></body>
 </html>
