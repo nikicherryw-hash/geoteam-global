@@ -1,7 +1,14 @@
 {
-  "generated_at": "2026-11-04T06:28:26.817233Z",
+  "generated_at": "2026-11-04T16:21:26.227793Z",
   "mode": "automatic_rss",
   "items": [
+    {
+      "title": "Trade Policy Review: Viet Nam",
+      "source": "WTO",
+      "country": "UN",
+      "date": "2026-11-04",
+      "url": "https://www.wto.org/english/tratop_e/tpr_e/tpr_vnm_04nov26_e.htm"
+    },
     {
       "title": "Product identifiers for e-commerce imports mandatory from 1 November 2026",
       "source": "European Commission",
@@ -59,6 +66,13 @@
       "url": "https://www.wto.org/english/news_e/news26_e/fish_29oct26_539_e.htm"
     },
     {
+      "title": "Cotton partners launch drive to bring textile/garment investment to West, Central Africa",
+      "source": "WTO",
+      "country": "UN",
+      "date": "2026-10-29",
+      "url": "https://www.wto.org/english/news_e/news26_e/cotpt_29oct26_540_e.htm"
+    },
+    {
       "title": "Global Review 2026 spotlights partnerships for trade and development",
       "source": "WTO",
       "country": "UN",
@@ -71,20 +85,6 @@
       "country": "UN",
       "date": "2026-10-29",
       "url": "https://www.wto.org/english/news_e/news26_e/pls_29oct26_530_e.htm"
-    },
-    {
-      "title": "WHO, WIPO and the WTO to hold 13th Joint Technical Symposium on 25 November 2026",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-10-29",
-      "url": "https://www.wto.org/english/news_e/news26_e/heal_29oct26_531_e.htm"
-    },
-    {
-      "title": "Members review regional trade agreements, confirm meeting frequency, adopt annual report",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-10-29",
-      "url": "https://www.wto.org/english/news_e/news26_e/rta_29oct26_532_e.htm"
     }
   ]
 }
