@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://www.geoteam-global.com/sitemap-aviation.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.geoteam-global.com/sitemap-industrial.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.geoteam-global.com/sitemap-electronics.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.geoteam-global.com/sitemap-marine.xml</loc>
+  </sitemap>
+</sitemapindex>
