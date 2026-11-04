@@ -46,3 +46,13 @@ body.mr-has-geoteam-shell{padding-top:72px!important;background:#073a43!importan
   .gt-sector-shell .gt-sector-shell__brand .gt-brand-text{width:96px!important;min-width:96px!important;transform:translateX(0)!important}
   .mr-has-geoteam-shell .av-hero,.mr-has-geoteam-shell .in-hero,.mr-has-geoteam-shell .ec-hero,.mr-has-geoteam-shell .mr-hero,.mr-has-geoteam-shell .av-pagehero,.mr-has-geoteam-shell .in-pagehero,.mr-has-geoteam-shell .ec-pagehero,.mr-has-geoteam-shell .mr-pagehero,.mr-has-geoteam-shell .ref-hero{margin-top:12px!important;padding:22px!important;border-radius:15px!important}
 }
+
+/* Shared sector header: the graphical mark and wordmark occupy a common
+   visual height and are centred on the same baseline at every breakpoint. */
+.gt-sector-shell .gt-sector-shell__brand{align-items:center!important}
+.gt-sector-shell .gt-sector-shell__brand .gt-brand-mark{display:flex!important;align-items:center!important;justify-content:center!important;height:42px!important}
+.gt-sector-shell .gt-sector-shell__brand .gt-brand-text{justify-content:center!important;height:42px!important}
+@media(max-width:650px){
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-mark,
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-text{height:36px!important}
+}

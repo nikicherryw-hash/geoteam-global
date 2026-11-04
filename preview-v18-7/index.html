@@ -4170,6 +4170,26 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   .page>header .gt-brand-mark{flex-basis:36px!important;}
   .page>header .gt-wordmark .gt-brand-text{width:96px!important;min-width:96px!important;transform:translateX(0)!important;}
 }
+/* Keep the original three social links available on phones. The compact
+   dimensions retain a single, non-wrapping header row. */
+@media (max-width:620px){
+  .page>header .socials{display:flex!important;gap:4px!important;flex-wrap:nowrap!important;}
+  .page>header .social{display:inline-flex!important;width:23px!important;height:23px!important;min-width:23px!important;min-height:23px!important;}
+  .page>header .social svg{width:12px!important;height:12px!important;}
+  .page>header .right{gap:5px!important;flex-wrap:nowrap!important;}
+}
+/* The mark and two-line wordmark share one vertical visual axis at every
+   desktop width; the mobile values below preserve that relationship. */
+.page>header .gt-wordmark{display:inline-flex!important;align-items:center!important;height:42px!important;}
+.page>header .gt-brand-mark{display:flex!important;align-items:center!important;justify-content:center!important;height:42px!important;}
+.page>header .gt-wordmark .gt-brand-text{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;height:42px!important;}
+@media (max-width:620px){
+  .page>header .gt-wordmark,.page>header .gt-brand-mark,.page>header .gt-wordmark .gt-brand-text{height:36px!important;}
+}
+@media (max-width:360px){
+  .page>header .gt-wordmark .gt-brand-text{width:84px!important;min-width:84px!important;}
+  .page>header .social{width:21px!important;height:21px!important;min-width:21px!important;min-height:21px!important;}
+}
 </style>
 </body>
 </html>
