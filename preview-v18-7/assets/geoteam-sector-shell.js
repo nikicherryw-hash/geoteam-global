@@ -9,7 +9,7 @@
   const shell = document.createElement('header');
   shell.className = 'gt-sector-shell';
   shell.innerHTML = `<div class="gt-sector-shell__inner">
-    <a class="gt-sector-shell__brand" href="/index.html?lang=en" aria-label="GeoTeam Global home"><img src="/data/geoteam-mark.svg" alt="" aria-hidden="true"><span>GeoTeam<small>GLOBAL</small></span></a>
+    <a class="gt-sector-shell__brand brand gt-brand-refined gt-wordmark" href="/index.html?lang=en" aria-label="GeoTeam Global home"><span class="gt-brand-mark" aria-hidden="true"><img src="/data/geoteam-mark.svg" alt=""></span><span class="gt-brand-text"><span class="top">GeoTeam</span><span class="bottom">GLOBAL</span></span></a>
     <nav class="gt-sector-shell__nav" aria-label="Sector navigation">${sectorLinks.map(([href,label]) => `<a href="${href}">${label}</a>`).join('')}<a class="gt-sector-shell__search" href="${sourcing}">Global Sourcing <span aria-hidden="true">→</span></a></nav>
     <span class="gt-sector-shell__locale" aria-label="Page language: English">EN</span>
   </div>`;
