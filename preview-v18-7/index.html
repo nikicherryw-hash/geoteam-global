@@ -2418,6 +2418,7 @@ a:focus-visible,button:focus-visible,select:focus-visible{
         <nav aria-label="Main navigation" class="gt-clean-nav gt-sector-nav">
           <a id="navAviation" href="#aviation">Aviation</a>
           <a id="navIndustry" href="#industry">Industry</a>
+          <a id="navMarine" href="#capabilities">Shipbuilding &amp; shipping</a>
           <a id="navElectronics" href="#electronics">Electronics</a>
         </nav>
 
@@ -2433,7 +2434,7 @@ a:focus-visible,button:focus-visible,select:focus-visible{
             </a>
           </div>
           <!-- Account UI is intentionally non-interactive until the homepage is wired to the existing auth contract. -->
-          <div class="gt-account-links gt-account--planned" aria-label="Customer account integration pending"><span id="gtLoginLink" aria-disabled="true">Sign in</span><span aria-hidden="true">/</span><span id="gtRegisterLink" aria-disabled="true">Register</span></div>
+          <div class="gt-account-links gt-account--planned" aria-label="Customer account integration pending"><span id="gtLoginLink" aria-disabled="true">Sign in</span></div>
           <div class="lang"><button id="langToggle" type="button" class="langToggle" aria-label="Legacy language toggle" hidden>EN</button><label class="gt-lang-wrap" aria-label="Website language"><span class="gt-lang-display" aria-hidden="true"><span id="gtLangCode">EN</span><span class="gt-lang-chevron">⌄</span></span><select class="gt-lang-select" id="gtLanguageSelect" aria-label="Choose language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><option value="de">DE · Deutsch</option><option value="fr">FR · Français</option><option value="es">ES · Español</option><option value="it">IT · Italiano</option><option value="pt">PT · Português</option><option value="ar">AR · العربية</option><option value="zh">ZH · 中文</option></select></label></div>
         </div>
       </div>
@@ -3984,13 +3985,13 @@ $("btnBrowse")?.addEventListener("click", (e) => {
 <script id="home-nav-anchor-fix">(()=>{let f=()=>{let n=document.getElementById("navHow"),l=document.querySelector("#gtLanguageSelect");if(n)n.href="about.html?lang="+(l?l.value:"en")+"#how-we-work"};f();addEventListener("load",f);document.addEventListener("change",f,true)})()</script>
 <style id="gt-v18-50-home-final">
   :root{--gt-display-font:Manrope,Inter,"Segoe UI",system-ui,sans-serif;--gt-text-soft:#d8ecea;--gt-green:#76e5ad;}
-  .gt-sector-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;align-items:center!important;column-gap:0!important;row-gap:5px!important;max-width:430px!important;text-align:center!important;}
-  .gt-sector-nav a{display:inline-flex!important;align-items:center!important;font-family:var(--gt-display-font)!important;font-size:13px!important;font-weight:610!important;letter-spacing:-.01em!important;padding:5px 10px!important;}
-  .gt-sector-nav a+a::before{content:"•";margin-right:20px;color:rgba(118,229,173,.76);font-size:11px;line-height:1;}
+  .gt-sector-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;align-items:center!important;column-gap:0!important;row-gap:5px!important;max-width:560px!important;text-align:center!important;}
+  .gt-sector-nav a{display:inline-flex!important;align-items:center!important;font-family:var(--gt-display-font)!important;font-size:12px!important;font-weight:610!important;letter-spacing:-.01em!important;padding:5px 8px!important;}
+  .gt-sector-nav a+a::before{content:"•";margin-right:12px;color:rgba(118,229,173,.76);font-size:11px;line-height:1;}
   .gt-account-links{display:flex;align-items:center;gap:5px;color:rgba(234,247,247,.5);font:600 11px/1 var(--gt-display-font);white-space:nowrap;}
   .gt-account-links a{color:rgba(234,247,247,.82);text-decoration:none;transition:color .18s ease;}
   .gt-account-links a:hover,.gt-account-links a:focus-visible{color:#fff;}
-  .right{gap:11px!important;}
+  .right{gap:8px!important;}
   /* The sector names belong in the primary navigation only. Keep the hero to one, clear proposition. */
   .hero .gt-sectors{display:none!important;}
   .hero .headline.gt-hero-title{font-family:"Aptos Display","Segoe UI Variable Display","Avenir Next","SF Pro Display",Inter,system-ui,sans-serif!important;max-width:760px!important;font-size:clamp(26px,2.95vw,38px)!important;font-weight:560!important;line-height:1.14!important;letter-spacing:-.032em!important;text-shadow:0 12px 34px rgba(0,0,0,.2)!important;}
@@ -4030,20 +4031,23 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   .page>header .gt-lang-display{font-size:10px!important;gap:4px!important;}
   .page>header .gt-lang-chevron{font-size:12px!important;}
   .brand-wrap{transform:translateX(-7px)!important;}
-  .gt-wordmark{display:inline-flex!important;min-width:0!important;padding:3px 0!important;flex-direction:row!important;align-items:center!important;gap:6px!important;}
+  .gt-wordmark{display:inline-flex!important;min-width:0!important;padding:3px 0!important;flex-direction:row!important;align-items:center!important;gap:2px!important;}
   .gt-wordmark .gt-brand-text{align-items:center!important;text-align:center!important;width:112px!important;min-width:112px!important;}
   .gt-wordmark .gt-brand-text .top,.gt-wordmark .gt-brand-text .bottom{width:100%!important;text-align:center!important;}
   .gt-wordmark .gt-brand-text .bottom{align-self:center!important;}
   .gt-wordmark .gt-brand-text .top{font-size:21px!important;line-height:1.05!important;}
   .gt-brand-mark{display:block;flex:0 0 42px;width:42px;height:42px;overflow:visible;}
   .gt-brand-mark img{display:block;width:42px!important;height:42px!important;max-width:none!important;filter:none;mix-blend-mode:normal;}
+  .socials{gap:5px!important;}
+  .social{width:29px!important;height:29px!important;min-width:29px!important;min-height:29px!important;}
+  .social svg{width:13px!important;height:13px!important;}
   .tick--status{opacity:.8;pointer-events:none;}
   .gt-legal-footer{font-family:var(--gt-display-font)!important;}
   @media (max-width:900px){
     .socials{display:none!important;}
     .gt-sector-nav{row-gap:4px!important;}
-    .gt-sector-nav a{font-size:12px!important;padding:6px 7px!important;}
-    .gt-sector-nav a+a::before{margin-right:14px;}
+    .gt-sector-nav a{font-size:11px!important;padding:6px 6px!important;}
+    .gt-sector-nav a+a::before{margin-right:10px;}
     .hero .stage{width:min(395px,82vw)!important;max-width:395px!important;}
   }
   @media (max-width:620px){
@@ -4062,7 +4066,7 @@ $("btnBrowse")?.addEventListener("click", (e) => {
     .gt-expertise .gt-expertise-item{padding:17px 18px!important;}
     .gt-legal-footer{flex-wrap:wrap!important;justify-content:center!important;gap:9px 13px!important;padding-left:16px!important;padding-right:16px!important;}
     .brand-wrap{transform:translateX(-3px)!important;}
-    .gt-wordmark{gap:6px!important;}
+    .gt-wordmark{gap:2px!important;}
     .gt-wordmark .gt-brand-text{width:96px!important;min-width:96px!important;}
     .gt-brand-mark{flex-basis:36px;width:36px;height:36px;}
     .gt-brand-mark img{width:36px!important;height:36px!important;}
@@ -4073,16 +4077,16 @@ $("btnBrowse")?.addEventListener("click", (e) => {
 <script id="gt-v18-50-home-final-script">
 (()=>{
   const copy={
-    en:{kicker:'Beyond the catalogue',title:'Intelligent solutions platform',search:'Global sourcing',aviation:'Aviation',industry:'Industry',electronics:'Electronics',login:'Sign in',register:'Register',news:'News',status:'Verified news is temporarily unavailable.'},
-    tr:{kicker:'Kataloğun ötesinde',title:'Akıllı çözüm platformu',search:'Küresel tedarik',aviation:'Havacılık',industry:'Sanayi',electronics:'Elektronik',login:'Giriş',register:'Kayıt',news:'Haberler',status:'Doğrulanmış haberler geçici olarak kullanılamıyor.'},
-    ru:{kicker:'За пределами каталога',title:'Интеллектуальная платформа решений',search:'Глобальный поиск',aviation:'Авиация',industry:'Промышленность',electronics:'Электроника',login:'Войти',register:'Регистрация',news:'Новости',status:'Проверенные новости временно недоступны.'},
-    de:{kicker:'Jenseits des Katalogs',title:'Intelligente Lösungsplattform',search:'Global suchen',aviation:'Luftfahrt',industry:'Industrie',electronics:'Elektronik',login:'Anmelden',register:'Registrieren',news:'Neuigkeiten',status:'Verifizierte Nachrichten sind vorübergehend nicht verfügbar.'},
-    fr:{kicker:'Au-delà du catalogue',title:'Plateforme intelligente de solutions',search:'Recherche mondiale',aviation:'Aviation',industry:'Industrie',electronics:'Électronique',login:'Connexion',register:'Inscription',news:'Actualités',status:'Les actualités vérifiées sont temporairement indisponibles.'},
-    es:{kicker:'Más allá del catálogo',title:'Plataforma inteligente de soluciones',search:'Búsqueda global',aviation:'Aviación',industry:'Industria',electronics:'Electrónica',login:'Entrar',register:'Registro',news:'Noticias',status:'Las noticias verificadas no están disponibles temporalmente.'},
-    it:{kicker:'Oltre il catalogo',title:'Piattaforma intelligente di soluzioni',search:'Ricerca globale',aviation:'Aviazione',industry:'Industria',electronics:'Elettronica',login:'Accedi',register:'Registrati',news:'Notizie',status:'Le notizie verificate non sono temporaneamente disponibili.'},
-    pt:{kicker:'Além do catálogo',title:'Plataforma inteligente de soluções',search:'Pesquisa global',aviation:'Aviação',industry:'Indústria',electronics:'Eletrónica',login:'Entrar',register:'Registar',news:'Notícias',status:'As notícias verificadas estão temporariamente indisponíveis.'},
-    ar:{kicker:'ما وراء الكتالوج',title:'منصة حلول ذكية',search:'بحث عالمي',aviation:'الطيران',industry:'الصناعة',electronics:'الإلكترونيات',login:'دخول',register:'تسجيل',news:'الأخبار',status:'الأخبار الموثقة غير متاحة مؤقتاً.'},
-    zh:{kicker:'超越目录',title:'智能解决方案平台',search:'全球搜索',aviation:'航空',industry:'工业',electronics:'电子',login:'登录',register:'注册',news:'新闻',status:'已验证的新闻暂时不可用。'}
+    en:{kicker:'Beyond the catalogue',title:'Intelligent solutions platform',search:'Global sourcing',aviation:'Aviation',industry:'Industry',marine:'Shipbuilding & shipping',electronics:'Electronics',login:'Sign in',news:'News',status:'Verified news is temporarily unavailable.'},
+    tr:{kicker:'Kataloğun ötesinde',title:'Akıllı çözüm platformu',search:'Küresel tedarik',aviation:'Havacılık',industry:'Sanayi',marine:'Gemi inşası ve deniz taşımacılığı',electronics:'Elektronik',login:'Giriş',news:'Haberler',status:'Doğrulanmış haberler geçici olarak kullanılamıyor.'},
+    ru:{kicker:'За пределами каталога',title:'Интеллектуальная платформа решений',search:'Глобальный поиск',aviation:'Авиация',industry:'Промышленность',marine:'Судостроение и судоходство',electronics:'Электроника',login:'Войти',news:'Новости',status:'Проверенные новости временно недоступны.'},
+    de:{kicker:'Jenseits des Katalogs',title:'Intelligente Lösungsplattform',search:'Global suchen',aviation:'Luftfahrt',industry:'Industrie',marine:'Schiffbau & Schifffahrt',electronics:'Elektronik',login:'Anmelden',news:'Neuigkeiten',status:'Verifizierte Nachrichten sind vorübergehend nicht verfügbar.'},
+    fr:{kicker:'Au-delà du catalogue',title:'Plateforme intelligente de solutions',search:'Recherche mondiale',aviation:'Aviation',industry:'Industrie',marine:'Construction navale & maritime',electronics:'Électronique',login:'Connexion',news:'Actualités',status:'Les actualités vérifiées sont temporairement indisponibles.'},
+    es:{kicker:'Más allá del catálogo',title:'Plataforma inteligente de soluciones',search:'Búsqueda global',aviation:'Aviación',industry:'Industria',marine:'Construcción naval y marítima',electronics:'Electrónica',login:'Entrar',news:'Noticias',status:'Las noticias verificadas no están disponibles temporalmente.'},
+    it:{kicker:'Oltre il catalogo',title:'Piattaforma intelligente di soluzioni',search:'Ricerca globale',aviation:'Aviazione',industry:'Industria',marine:'Cantieristica e navigazione',electronics:'Elettronica',login:'Accedi',news:'Notizie',status:'Le notizie verificate non sono temporaneamente disponibili.'},
+    pt:{kicker:'Além do catálogo',title:'Plataforma inteligente de soluções',search:'Pesquisa global',aviation:'Aviação',industry:'Indústria',marine:'Construção naval e navegação',electronics:'Eletrónica',login:'Entrar',news:'Notícias',status:'As notícias verificadas estão temporariamente indisponíveis.'},
+    ar:{kicker:'ما وراء الكتالوج',title:'منصة حلول ذكية',search:'بحث عالمي',aviation:'الطيران',industry:'الصناعة',marine:'بناء السفن والشحن',electronics:'الإلكترونيات',login:'دخول',news:'الأخبار',status:'الأخبار الموثقة غير متاحة مؤقتاً.'},
+    zh:{kicker:'超越目录',title:'智能解决方案平台',search:'全球搜索',aviation:'航空',industry:'工业',marine:'造船与航运',electronics:'电子',login:'登录',news:'新闻',status:'已验证的新闻暂时不可用。'}
   };
   const footerCopy={
     en:['About us','What we source','Privacy policy','KVKK / RFQ'],tr:['Hakkımızda','Tedarik alanlarımız','Gizlilik politikası','KVKK / RFQ'],ru:['О нас','Что поставляем','Конфиденциальность','KVKK / RFQ'],de:['Über uns','Beschaffung','Datenschutz','KVKK / RFQ'],fr:['À propos','Nos approvisionnements','Confidentialité','KVKK / RFQ'],es:['Sobre nosotros','Qué suministramos','Confidencialidad','KVKK / RFQ'],it:['Chi siamo','Cosa forniamo','Privacy','KVKK / RFQ'],pt:['Sobre nós','O que fornecemos','Privacidade','KVKK / RFQ'],ar:['من نحن','ما نوفره','الخصوصية','KVKK / RFQ'],zh:['关于我们','供应范围','隐私','KVKK / RFQ']
@@ -4119,7 +4123,7 @@ $("btnBrowse")?.addEventListener("click", (e) => {
     const t=copy[lang]||copy.en;
     document.documentElement.lang=lang;
     document.documentElement.dir=lang==='ar'?'rtl':'ltr';
-    set('navAviation',t.aviation);set('navIndustry',t.industry);set('navElectronics',t.electronics);set('gtLoginLink',t.login);set('gtRegisterLink',t.register);set('tickerTag',t.news);
+    set('navAviation',t.aviation);set('navIndustry',t.industry);set('navMarine',t.marine);set('navElectronics',t.electronics);set('gtLoginLink',t.login);set('tickerTag',t.news);
     const h=document.getElementById('headline');if(h&&h.textContent.trim()!==t.title){h.replaceChildren();const span=document.createElement('span');span.textContent=t.title;h.appendChild(span);}if(h)h.setAttribute('aria-label',t.title);
     const cta=document.getElementById('gtMainRfq');if(cta&&cta.textContent.trim()!==t.search+' →'){cta.replaceChildren(document.createTextNode(t.search+' '));const arrow=document.createElement('span');arrow.className='gt-search-arrow';arrow.setAttribute('aria-hidden','true');arrow.textContent='→';cta.appendChild(arrow);}if(cta)cta.setAttribute('aria-label',t.search);
     document.querySelectorAll('.tick--status').forEach(el=>el.textContent=t.status);
