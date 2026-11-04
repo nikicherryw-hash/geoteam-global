@@ -34,4 +34,15 @@ body.mr-has-geoteam-shell{padding-top:72px!important;background:#073a43!importan
 .mr-has-geoteam-shell .ref-shell>.ref-back,.mr-has-geoteam-shell .ref-shell>.ref-categories,.mr-has-geoteam-shell .ref-cross-sector-link,.mr-has-geoteam-shell .ref-sector-related{display:none!important}
 .mr-has-geoteam-shell .av-grid,.mr-has-geoteam-shell .in-grid,.mr-has-geoteam-shell .ec-grid,.mr-has-geoteam-shell .mr-grid{gap:14px!important}
 .mr-has-geoteam-shell .av-card,.mr-has-geoteam-shell .in-card,.mr-has-geoteam-shell .ec-card,.mr-has-geoteam-shell .mr-card{min-height:148px!important;border-radius:15px!important;padding:20px!important}
-@media(max-width:650px){.gt-sector-shell__inner{gap:9px}.gt-sector-shell__account{font-size:10px;padding:7px}.mr-has-geoteam-shell .av-hero,.mr-has-geoteam-shell .in-hero,.mr-has-geoteam-shell .ec-hero,.mr-has-geoteam-shell .mr-hero,.mr-has-geoteam-shell .av-pagehero,.mr-has-geoteam-shell .in-pagehero,.mr-has-geoteam-shell .ec-pagehero,.mr-has-geoteam-shell .mr-pagehero,.mr-has-geoteam-shell .ref-hero{margin-top:12px!important;padding:22px!important;border-radius:15px!important}}
+@media(max-width:650px){
+  .gt-sector-shell__inner{gap:9px}
+  .gt-sector-shell__account{font-size:10px;padding:7px}
+  /* The desktop wordmark is intentionally pulled towards the sign. On phones
+     that offset would overlap the 36px sign, so the two blocks meet cleanly. */
+  .gt-sector-shell .gt-sector-shell__brand{gap:4px!important;transform:translateX(-3px)!important}
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-mark,
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-mark img{width:36px!important;height:36px!important}
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-mark{flex-basis:36px!important}
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-text{width:96px!important;min-width:96px!important;transform:translateX(0)!important}
+  .mr-has-geoteam-shell .av-hero,.mr-has-geoteam-shell .in-hero,.mr-has-geoteam-shell .ec-hero,.mr-has-geoteam-shell .mr-hero,.mr-has-geoteam-shell .av-pagehero,.mr-has-geoteam-shell .in-pagehero,.mr-has-geoteam-shell .ec-pagehero,.mr-has-geoteam-shell .mr-pagehero,.mr-has-geoteam-shell .ref-hero{margin-top:12px!important;padding:22px!important;border-radius:15px!important}
+}
