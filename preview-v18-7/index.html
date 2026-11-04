@@ -4018,8 +4018,9 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   .gt-expertise .gt-expertise-item h3{font-family:var(--gt-display-font)!important;font-size:15px!important;font-weight:620!important;letter-spacing:-.02em!important;}
   .gt-expertise .gt-expertise-item p{font-family:var(--gt-display-font)!important;font-size:12.5px!important;line-height:1.48!important;color:var(--gt-text-soft)!important;}
   .gt-expertise .gt-card-copy+.gt-card-copy{margin-top:.7em!important;}
-  #electronics .gt-card-copy{font-size:12px!important;line-height:1.42!important;}
-  #electronics .gt-card-copy+.gt-card-copy{margin-top:.38em!important;}
+  /* Keep the dense rare-parts copy readable, but let it use the full card width. */
+  #electronics .gt-card-copy{max-width:none!important;font-size:11.5px!important;line-height:1.38!important;}
+  #electronics .gt-card-copy+.gt-card-copy{margin-top:.28em!important;}
   /* A brighter, CSS-only field: global rather than closed, without adding an image asset. */
   body{background:
     radial-gradient(920px 620px at 50% 31%,rgba(112,245,220,.20),transparent 68%),
