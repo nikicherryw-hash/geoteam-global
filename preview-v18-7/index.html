@@ -4160,5 +4160,16 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   }).observe(tickerTrack,{childList:true,subtree:true,characterData:true});
 })();
 </script>
+<style id="gt-mobile-logo-no-overlap">
+/* Final mobile header guard: later legacy rules must not pull the wordmark
+   under the 36px brand mark. */
+@media (max-width:620px){
+  .page>header .gt-wordmark{gap:4px!important;}
+  .page>header .gt-brand-mark,
+  .page>header .gt-brand-mark img{width:36px!important;height:36px!important;}
+  .page>header .gt-brand-mark{flex-basis:36px!important;}
+  .page>header .gt-wordmark .gt-brand-text{width:96px!important;min-width:96px!important;transform:translateX(0)!important;}
+}
+</style>
 </body>
 </html>
