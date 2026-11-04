@@ -2401,6 +2401,7 @@ a:focus-visible,button:focus-visible,select:focus-visible{
   .gt-expertise .gt-expertise-top h2{transition:none!important}
 }
 </style>
+<link rel="stylesheet" href="geoteam-surface.css">
 </head>
 
 <body>
@@ -2410,14 +2411,15 @@ a:focus-visible,button:focus-visible,select:focus-visible{
     <header>
       <div class="nav">
         <div class="brand-wrap" aria-label="GeoTeam Global">
-          <a class="brand gt-brand-refined gt-wordmark" href="index.html" aria-label="GeoTeam Global — home"><span class="gt-brand-text"><span class="top">GeoTeam</span><span class="bottom">GLOBAL</span></span></a>
+          <a class="brand gt-brand-refined gt-wordmark" href="index.html" aria-label="GeoTeam Global — home"><span class="gt-brand-mark" aria-hidden="true"><img src="data/geoteam-mark.svg" alt=""></span><span class="gt-brand-text"><span class="top">GeoTeam</span><span class="bottom">GLOBAL</span></span></a>
           
         </div>
 
-        <nav aria-label="Main navigation" class="gt-clean-nav">
-          <a id="navSourcing" href="sourcing.html">Global Sourcing</a>
-          <a id="navHow" href="#how-it-works">How It Works</a>
-          <a id="navAbout" href="about.html">About Us</a>
+        <nav aria-label="Main navigation" class="gt-clean-nav gt-sector-nav">
+          <a id="navAviation" href="#aviation">Aviation</a>
+          <a id="navIndustry" href="#industry">Industry</a>
+          <a id="navMarine" href="#capabilities">Shipbuilding &amp; shipping</a>
+          <a id="navElectronics" href="#electronics">Electronics</a>
         </nav>
 
         <div class="right"><div class="socials" aria-label="Social links">
@@ -2431,7 +2433,9 @@ a:focus-visible,button:focus-visible,select:focus-visible{
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.75 6.5a1.05 1.05 0 1 1-1.05 1.05 1.05 1.05 0 0 1 1.05-1.05z"/></svg>
             </a>
           </div>
-          <div class="lang"><button id="langToggle" type="button" class="langToggle" aria-label="Legacy language toggle" hidden>EN</button><label class="gt-lang-wrap" aria-label="Website language"><span class="gt-lang-display" aria-hidden="true"><span id="gtLangCode">EN</span><span class="gt-lang-chevron">⌄</span></span><select class="gt-lang-select" id="gtLanguageSelect" aria-label="Choose language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><optgroup label="More languages — planned"><option disabled>DE · Deutsch</option><option disabled>FR · Français</option><option disabled>ES · Español</option><option disabled>IT · Italiano</option><option disabled>PT · Português</option><option disabled>AR · العربية</option><option disabled>ZH · 中文</option></optgroup></select></label></div>
+          <!-- Account UI is intentionally non-interactive until the homepage is wired to the existing auth contract. -->
+          <div class="gt-account-links gt-account--planned" aria-label="Customer account integration pending"><span id="gtLoginLink" aria-disabled="true">Sign in</span></div>
+          <div class="lang"><button id="langToggle" type="button" class="langToggle" aria-label="Legacy language toggle" hidden>EN</button><label class="gt-lang-wrap" aria-label="Website language"><span class="gt-lang-display" aria-hidden="true"><span id="gtLangCode">EN</span><span class="gt-lang-chevron">⌄</span></span><select class="gt-lang-select" id="gtLanguageSelect" aria-label="Choose language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><option value="de">DE · Deutsch</option><option value="fr">FR · Français</option><option value="es">ES · Español</option><option value="it">IT · Italiano</option><option value="pt">PT · Português</option><option value="ar">AR · العربية</option><option value="zh">ZH · 中文</option></select></label></div>
         </div>
       </div>
       <div class="tickerbar" aria-label="News ticker">
@@ -2454,7 +2458,7 @@ a:focus-visible,button:focus-visible,select:focus-visible{
           <i aria-hidden="true"></i>
           <span data-gt-en="Electronics" data-gt-tr="Elektronik" data-gt-ru="Электроника">Electronics</span>
         </div>
-        <h1 class="headline gt-hero-title" id="headline" aria-label="Intelligent sourcing of equipment and components"><span>Intelligent sourcing</span><span>of equipment &amp; components.</span></h1>
+        <h1 class="headline gt-hero-title" id="headline" aria-label="Intelligent solutions platform"><span>Intelligent solutions platform</span></h1>
         
 
         <div class="stage" aria-label="Rotating earth">
@@ -2471,25 +2475,28 @@ a:focus-visible,button:focus-visible,select:focus-visible{
  <span class="gt-expertise-eyebrow" data-gt-en="CORE CAPABILITIES" data-gt-tr="UZMANLIK ALANLARIMIZ" data-gt-ru="НАПРАВЛЕНИЯ РАБОТЫ">CORE CAPABILITIES</span>
  <h2 id="gtExpertiseHead" data-gt-en="Part numbers. Specifications. Drawings." data-gt-tr="Parça kodları. Teknik listeler. Çizimler." data-gt-ru="Артикулы. Спецификации. Чертежи.">Part numbers. Specifications. Drawings.</h2>
  </div></div>
- <div class="gt-expertise-grid"><article class="gt-expertise-item">
+ <div class="gt-expertise-grid"><article class="gt-expertise-item" id="aviation">
   
   <h3 data-gt-en="Aviation &amp; MRO parts" data-gt-tr="Havacılık ve MRO parçaları" data-gt-ru="Авиационные компоненты">Aviation &amp; MRO parts</h3>
   <p data-gt-en="Source by P/N and condition. We request traceability documents, availability and lead time." data-gt-tr="P/N ve ürün durumuna göre kaynak araştırması; izlenebilirlik belgeleri, stok ve teslim süresi sorgusu." data-gt-ru="Поиск по P/N и состоянию. Запрашиваем документы происхождения, доступность и сроки поставки.">Source by P/N and condition. We request traceability documents, availability and lead time.</p>
  </article>
-<article class="gt-expertise-item">
+<article class="gt-expertise-item" id="industry">
   
   <h3 data-gt-en="Industrial equipment &amp; automation" data-gt-tr="Endüstriyel ekipman ve otomasyon" data-gt-ru="Промышленность и автоматизация">Industrial equipment &amp; automation</h3>
   <p data-gt-en="PLCs, HMIs, drives, sensors, pumps and spare parts — by part number, nameplate or BOM." data-gt-tr="PLC, HMI, sürücü, sensör, pompa ve yedek parçalar — ürün kodu, etiket veya BOM ile." data-gt-ru="ПЛК, HMI, приводы, датчики, насосы и запчасти — по артикулу, шильдику или спецификации.">PLCs, HMIs, drives, sensors, pumps and spare parts — by part number, nameplate or BOM.</p>
  </article>
-<article class="gt-expertise-item">
+<article class="gt-expertise-item" id="electronics">
   
-  <h3 data-gt-en="Rare and discontinued components &amp; spare parts" data-gt-tr="Nadir bulunan ve üretimi durdurulmuş bileşenler ve yedek parçalar" data-gt-ru="Редкие комплектующие и запасные части, снятые с производства">Rare and discontinued components &amp; spare parts</h3>
-  <p data-gt-en="Legacy equipment and EOL part numbers. We search remaining stock and research potential replacements." data-gt-tr="Eski sistemler ve üretimi bitmiş parça kodları: kalan stoklar ve olası muadiller araştırılır." data-gt-ru="Legacy-оборудование и EOL-артикулы. Ищем остатки и прорабатываем возможные замены.">Legacy equipment and EOL part numbers. We search remaining stock and research potential replacements.</p>
+  <h3 id="gtRareTitle" data-gt-en="Rare and discontinued components &amp; spare parts" data-gt-tr="Nadir bulunan ve üretimi durdurulmuş bileşenler ve yedek parçalar" data-gt-ru="Редкие комплектующие и запасные части, снятые с производства">Rare and discontinued components &amp; spare parts</h3>
+  <p class="gt-card-copy" id="gtRareCopyPrimary" data-gt-en="Radio equipment, electronic components, legacy assemblies and EOL part numbers. Search by P/N, markings and technical specifications." data-gt-tr="Radyo ekipmanı, elektronik bileşenler, eski nesil üniteler ve EOL parça kodları. P/N, işaretleme ve teknik şartnamelere göre arama." data-gt-ru="Радиооборудование, электронные компоненты, устаревшие узлы и EOL-артикулы. Поиск по P/N, маркировке и техническим спецификациям.">Radio equipment, electronic components, legacy assemblies and EOL part numbers. Search by P/N, markings and technical specifications.</p>
+  <p class="gt-card-copy" id="gtRareCopySecondary" data-gt-en="Manufacture of parts and assemblies from drawings, 3D models and samples, taking materials and tolerances into account." data-gt-tr="Çizim, 3D model ve numunelere göre; malzeme ve toleranslar dikkate alınarak parça ve montaj imalatı." data-gt-ru="Изготовление деталей и узлов по чертежам, 3D-моделям и образцам с учётом материалов и допусков.">Manufacture of parts and assemblies from drawings, 3D models and samples, taking materials and tolerances into account.</p>
+  <p class="gt-card-copy" id="gtRareCopyTertiary" data-gt-en="We search warehouse stock and work through possible replacements." data-gt-tr="Depo stoklarını araştırıyor, olası ikameler üzerinde çalışıyoruz." data-gt-ru="Ищем складские остатки, прорабатываем возможные замены.">We search warehouse stock and work through possible replacements.</p>
  </article>
-<article class="gt-expertise-item">
+<article class="gt-expertise-item" id="marine">
   
-  <h3 data-gt-en="Manufacturing to drawings" data-gt-tr="Teknik çizime göre imalat" data-gt-ru="Изготовление по чертежам">Manufacturing to drawings</h3>
-  <p data-gt-en="Custom parts and assemblies from drawings, 3D files or samples, with material and tolerance requirements." data-gt-tr="Çizim, 3D dosyası veya numuneye göre; malzeme ve tolerans şartlarıyla özel parça ve montajlar." data-gt-ru="Детали и узлы по чертежам, 3D-моделям и образцам, с учётом материалов и допусков.">Custom parts and assemblies from drawings, 3D files or samples, with material and tolerance requirements.</p>
+  <h3 id="gtMarineTitle" data-gt-en="Shipbuilding &amp; shipping" data-gt-tr="Gemi inşası ve deniz taşımacılığı" data-gt-ru="Судостроение и судоходство">Shipbuilding &amp; shipping</h3>
+  <p class="gt-card-copy" id="gtMarineCopyPrimary" data-gt-en="Marine, river and shipboard equipment, MRO components and spare parts." data-gt-tr="Deniz, nehir ve gemi ekipmanları, MRO bileşenleri ve yedek parçaları." data-gt-ru="Морское, речное и судовое оборудование, MRO-комплектующие и запчасти.">Marine, river and shipboard equipment, MRO components and spare parts.</p>
+  <p class="gt-card-copy" id="gtMarineCopySecondary" data-gt-en="By model, part number, serial number or specification." data-gt-tr="Model, parça numarası, seri numarası veya teknik şartnameye göre." data-gt-ru="По модели, артикулу, номеру или спецификации.">By model, part number, serial number or specification.</p>
  </article></div>
 </section>
       <section class="gt-about-home gt-about-story" id="how-it-works" aria-labelledby="gtAboutHeading">
@@ -2632,7 +2639,7 @@ const loadTickerLive = async (lang) => {
   return data.items;
 };
 
-const loadTicker = async (lang) => {
+    const loadTicker = async (lang) => {
   // Russian content is a dated, source-verified snapshot, not a claimed live service.
   if (lang === "ru") {
     try {
@@ -2644,10 +2651,14 @@ const loadTicker = async (lang) => {
         /^\d{4}-\d{2}-\d{2}$/.test(it.date || "") && it.source))
         return data;
     } catch(e) { /* Official pages below are a clearly labelled fallback. */ }
-    return defaultTicker.ru;
+    return [];
   }
   try {
-    const data = await loadTickerLive(lang);
+    // The API currently publishes source-language feeds for EN/TR/RU only.
+    // Other locales safely use the verified English source feed; titles are not
+    // machine-translated or presented as native-language editorial content.
+    const sourceLang = ["en", "tr", "ru"].includes(lang) ? lang : "en";
+    const data = await loadTickerLive(sourceLang);
     if (Array.isArray(data) && data.length) return data;
   } catch(e) {}
   try {
@@ -2656,7 +2667,7 @@ const loadTicker = async (lang) => {
     const data = await r.json();
     if (Array.isArray(data) && data.length) return data;
   } catch(e) {}
-  return defaultTicker[lang] || defaultTicker.en;
+  return [];
 };
 
     const updateTicker = async (lang) => {
@@ -2664,6 +2675,10 @@ const loadTicker = async (lang) => {
       if (!track) return;
       const items = await loadTicker(lang);
       if (lang !== currentLang) return;
+      if (!items.length) {
+        track.innerHTML = '<span class="tick tick--status" role="status">Verified news is temporarily unavailable.</span>';
+        return;
+      }
       const htmlOnce = items.map((it) => {
         const title = escapeHTML(it.title);
         let url = (it.url || it.link || it.href || '').toString().trim() || "#";
@@ -3104,7 +3119,7 @@ const loadTicker = async (lang) => {
       navAbout:"О нас",navSourcing:"Глобальный поиск",navHow:"Как мы работаем",
       navProducts:"Оборудование",navIndustries:"Отрасли",navCapabilities:"Возможности",navQuality:"Документы",
       navCases:"Примеры",navContact:"Контакты",
-      headline:"Интеллектуальный подбор|оборудования и компонентов.",
+      headline:"Интеллектуальная платформа решений",
       sub:"От технического запроса до оптимального решения.",
       heroDetail:"Поиск по артикулам и спецификациям. Анализ источников, сравнение предложений и сопровождение закупки.",
       btnRfq:"Глобальный поиск",btnBrowse:"Каталог",
@@ -3172,9 +3187,12 @@ const loadTicker = async (lang) => {
 
 
     const setLang = (lang) => {
-      currentLang = ["en","tr","ru"].includes(lang)?lang:"en";
+      currentLang = ["en","tr","ru","de","fr","es","it","pt","ar","zh"].includes(lang)?lang:"en";
       try{ localStorage.setItem("gt_lang", currentLang); }catch(e){}
-      const d = dict[currentLang];
+      // Long-form page content currently has reviewed copy only for EN/TR/RU.
+      // The selected language remains intact for language-aware UI and ticker handling;
+      // unsupported long-form copy falls back safely to English instead of throwing.
+      const d = dict[currentLang] || dict.en;
       // Compact three-page homepage translations
       document.documentElement.lang = currentLang;
       document.dispatchEvent(new Event("gt-language-changed"));
@@ -3896,6 +3914,249 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   window.addEventListener("resize",queue,{passive:true});
   document.addEventListener("gt-language-changed",queue);
   queue();
+})();
+</script>
+
+<style id="home-language-polish">
+  /* Homepage only: clearer type and a modest glow for social links. */
+  body{font-weight:450;text-rendering:optimizeLegibility;}
+  .page>header .social{color:#d7fbff!important;border-color:rgba(84,221,235,.66)!important;filter:saturate(1.35) brightness(1.15) drop-shadow(0 0 6px rgba(31,207,225,.28));transition:transform .18s ease,filter .18s ease,box-shadow .18s ease;}
+  .page>header .social:hover,.page>header .social:focus-visible{transform:translateY(-1px);filter:saturate(1.5) brightness(1.23) drop-shadow(0 0 10px rgba(31,207,225,.48));box-shadow:0 0 14px rgba(31,207,225,.18)!important;}
+  .page>header .nav a,.headline,.ticker,.page h2,.page h3{font-weight:600;}
+</style>
+<script id="home-language-polish-script">
+(()=>{
+  const copy={
+    de:{navSourcing:'Global Sourcing',navHow:'So arbeiten wir',navAbout:'Über uns',headline:'Intelligente Lösungsplattform',ticker:'Neuigkeiten',expertise:'Artikel. Spezifikationen. Zeichnungen.',search:'Global suchen ↗'},
+    fr:{navSourcing:'Recherche mondiale',navHow:'Notre méthode',navAbout:'À propos',headline:'Plateforme intelligente de solutions',ticker:'Actualités',expertise:'Références. Spécifications. Plans.',search:'Recherche mondiale ↗'},
+    es:{navSourcing:'Búsqueda global',navHow:'Cómo trabajamos',navAbout:'Quiénes somos',headline:'Plataforma inteligente de soluciones',ticker:'Noticias',expertise:'Referencias. Especificaciones. Planos.',search:'Búsqueda global ↗'},
+    it:{navSourcing:'Ricerca globale',navHow:'Come lavoriamo',navAbout:'Chi siamo',headline:'Piattaforma intelligente di soluzioni',ticker:'Notizie',expertise:'Codici. Specifiche. Disegni.',search:'Ricerca globale ↗'},
+    pt:{navSourcing:'Pesquisa global',navHow:'Como trabalhamos',navAbout:'Sobre nós',headline:'Plataforma inteligente de soluções',ticker:'Notícias',expertise:'Códigos. Especificações. Desenhos.',search:'Pesquisa global ↗'},
+    ar:{navSourcing:'بحث عالمي',navHow:'كيف نعمل',navAbout:'من نحن',headline:'منصة حلول ذكية',ticker:'الأخبار',expertise:'أرقام القطع. المواصفات. الرسومات.',search:'بحث عالمي ↗'},
+    zh:{navSourcing:'全球搜索',navHow:'我们的工作方式',navAbout:'关于我们',headline:'智能解决方案平台',ticker:'新闻',expertise:'料号。规格。图纸。',search:'全球搜索 ↗'}
+  };
+  const select=document.getElementById('gtLanguageSelect');
+  const setText=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+  const applyExtra=(lang)=>{
+    const t=copy[lang];if(!t||!select)return;
+    document.documentElement.lang=lang;
+    document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+    select.value=lang;
+    setText('gtLangCode',lang.toUpperCase());
+    setText('navSourcing',t.navSourcing);setText('navHow',t.navHow);setText('navAbout',t.navAbout);
+    setText('headline',t.headline);setText('tickerTag',t.ticker);setText('gtExpertiseHead',t.expertise);setText('gtMainRfq',t.search);
+    ['navSourcing','gtMainRfq'].forEach(id=>{const el=document.getElementById(id);if(el){const href=el.getAttribute('href').split('?')[0];el.setAttribute('href',href+'?lang='+lang);}});
+    ['navHow'].forEach(id=>{const el=document.getElementById(id);if(el)el.setAttribute('href','#how-it-works');});
+    ['navAbout'].forEach(id=>{const el=document.getElementById(id);if(el)el.setAttribute('href','about.html?lang='+lang);});
+    try{localStorage.setItem('gt_lang',lang);}catch(e){}
+  };
+  if(!select)return;
+  select.addEventListener('change',event=>{const lang=event.target.value;if(copy[lang]){event.stopImmediatePropagation();applyExtra(lang);}},true);
+  const urlLang=new URLSearchParams(location.search).get('lang');
+  let saved=null;try{saved=localStorage.getItem('gt_lang');}catch(e){}
+  if(copy[urlLang])applyExtra(urlLang);else if(copy[saved])applyExtra(saved);
+})();
+</script>
+
+
+<style id="home-structure-polish">
+  /* Homepage hierarchy: softer typography, a restrained hero and a clear search affordance. */
+  .headline{max-width:780px!important;font-family:ui-rounded,"Segoe UI",Inter,system-ui,sans-serif!important;font-size:clamp(2.55rem,5.1vw,5.25rem)!important;line-height:.98!important;letter-spacing:-.045em!important;font-weight:650!important;}
+  #gtMainRfq{display:inline-flex!important;align-items:center!important;gap:12px!important;font-family:ui-rounded,"Segoe UI",Inter,system-ui,sans-serif!important;font-weight:650!important;letter-spacing:-.01em!important;}
+  #gtMainRfq .gt-search-arrow{display:inline-grid!important;place-items:center!important;width:32px!important;height:32px!important;border-radius:999px!important;color:#dfffea!important;background:rgba(62,218,132,.12)!important;border:1px solid rgba(83,242,154,.72)!important;box-shadow:0 0 16px rgba(70,232,140,.30)!important;font-size:20px!important;line-height:1!important;transition:transform .18s ease,box-shadow .18s ease!important;}
+  #gtMainRfq:hover .gt-search-arrow,#gtMainRfq:focus-visible .gt-search-arrow{transform:translateX(3px)!important;box-shadow:0 0 23px rgba(70,232,140,.52)!important;}
+  #capabilities{font-family:ui-rounded,"Segoe UI",Inter,system-ui,sans-serif!important;}
+  #capabilities>div:first-child{display:inline-flex!important;align-items:center!important;gap:8px!important;color:#cbffda!important;background:rgba(62,218,132,.11)!important;border:1px solid rgba(83,242,154,.58)!important;border-radius:999px!important;padding:7px 12px!important;box-shadow:0 0 15px rgba(70,232,140,.16)!important;font-weight:700!important;letter-spacing:.08em!important;font-size:.7rem!important;}
+  #capabilities>div:first-child::before{content:"✓";color:#77f6a8;font-size:.9rem;}
+  #gtExpertiseHead{display:none!important;}
+  #capabilities h3{font-family:ui-rounded,"Segoe UI",Inter,system-ui,sans-serif!important;font-weight:620!important;letter-spacing:-.02em!important;}
+</style>
+<script id="home-structure-polish-script">
+(()=>{
+  const adjust=()=>{
+    const lang=(document.getElementById('gtLanguageSelect')?.value||document.documentElement.lang||'en');
+    const how=document.getElementById('navHow');if(how)how.href='about.html?lang='+lang+'#how-we-work';
+    const search=document.getElementById('gtMainRfq');
+    if(search&&!search.querySelector('.gt-search-arrow')){const arrow=document.createElement('span');arrow.className='gt-search-arrow';arrow.setAttribute('aria-hidden','true');arrow.textContent='→';search.append(arrow);}
+    document.getElementById('how-it-works')?.remove();
+  };
+  adjust();
+  document.getElementById('gtLanguageSelect')?.addEventListener('change',adjust,true);
+})();
+</script>
+
+<script id="home-nav-anchor-fix">(()=>{let f=()=>{let n=document.getElementById("navHow"),l=document.querySelector("#gtLanguageSelect");if(n)n.href="about.html?lang="+(l?l.value:"en")+"#how-we-work"};f();addEventListener("load",f);document.addEventListener("change",f,true)})()</script>
+<style id="gt-v18-50-home-final">
+  :root{--gt-display-font:Manrope,Inter,"Segoe UI",system-ui,sans-serif;--gt-text-soft:#d8ecea;--gt-green:#76e5ad;}
+  .gt-sector-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;align-items:center!important;column-gap:0!important;row-gap:5px!important;max-width:560px!important;text-align:center!important;}
+  .gt-sector-nav a{display:inline-flex!important;align-items:center!important;font-family:var(--gt-display-font)!important;font-size:12px!important;font-weight:610!important;letter-spacing:-.01em!important;padding:5px 8px!important;}
+  .gt-sector-nav a+a::before{content:"•";margin-right:12px;color:rgba(118,229,173,.76);font-size:11px;line-height:1;}
+  .gt-account-links{display:flex;align-items:center;gap:5px;color:rgba(234,247,247,.5);font:600 11px/1 var(--gt-display-font);white-space:nowrap;}
+  .gt-account-links a{color:rgba(234,247,247,.82);text-decoration:none;transition:color .18s ease;}
+  .gt-account-links a:hover,.gt-account-links a:focus-visible{color:#fff;}
+  .right{gap:8px!important;}
+  /* The sector names belong in the primary navigation only. Keep the hero to one, clear proposition. */
+  .hero .gt-sectors{display:none!important;}
+  .hero .headline.gt-hero-title{font-family:"Aptos Display","Segoe UI Variable Display","Avenir Next","SF Pro Display",Inter,system-ui,sans-serif!important;max-width:760px!important;font-size:clamp(26px,2.95vw,38px)!important;font-weight:560!important;line-height:1.14!important;letter-spacing:-.032em!important;text-shadow:0 12px 34px rgba(0,0,0,.2)!important;}
+  .hero .headline.gt-hero-title span{font:inherit!important;}
+  .hero .stage{width:min(440px,79vw)!important;max-width:440px!important;margin-top:8px!important;}
+  #gtMainRfq{font-family:var(--gt-display-font)!important;font-weight:620!important;letter-spacing:-.012em!important;gap:7px!important;box-shadow:none!important;background:transparent!important;border:0!important;padding:8px 4px!important;min-width:auto!important;color:#effff8!important;}
+  #gtMainRfq::before,#gtMainRfq::after{content:none!important;display:none!important;}
+  #gtMainRfq .gt-search-arrow{display:inline!important;width:auto!important;height:auto!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:var(--gt-green)!important;font-size:1.08em!important;line-height:1!important;transition:transform .18s ease!important;}
+  #gtMainRfq:hover .gt-search-arrow,#gtMainRfq:focus-visible .gt-search-arrow{transform:translateX(3px)!important;box-shadow:none!important;}
+  #capabilities>div:first-child{display:block!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;}
+  #capabilities>div:first-child::before{content:none!important;display:none!important;}
+  .gt-expertise-eyebrow{display:inline-flex!important;align-items:center!important;gap:9px!important;color:#dcf4e8!important;font:650 11px/1.2 var(--gt-display-font)!important;letter-spacing:.13em!important;}
+  .gt-expertise-eyebrow::before{content:"";width:9px;height:9px;flex:0 0 9px;border-radius:50%;background:var(--gt-green);box-shadow:0 0 13px rgba(118,229,173,.58);}
+  #gtExpertiseHead{display:none!important;}
+  .gt-expertise{border-top:1px solid rgba(168,235,224,.18)!important;padding:18px 0 12px!important;text-align:left!important;}
+  .gt-expertise-top{display:flex!important;align-items:center!important;justify-content:flex-start!important;margin:0!important;background:transparent!important;box-shadow:none!important;}
+  .gt-expertise-top>div{text-align:left!important;background:transparent!important;box-shadow:none!important;}
+  .gt-expertise .gt-expertise-top.gt-read-unit::after{display:none!important;}
+  .gt-expertise-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;margin-top:16px!important;text-align:left!important;}
+  .gt-expertise .gt-expertise-item{min-height:124px!important;padding:18px 20px!important;text-align:left!important;}
+  .gt-expertise .gt-expertise-item h3{font-family:var(--gt-display-font)!important;font-size:15px!important;font-weight:620!important;letter-spacing:-.02em!important;}
+  .gt-expertise .gt-expertise-item p{font-family:var(--gt-display-font)!important;font-size:12.5px!important;line-height:1.48!important;color:var(--gt-text-soft)!important;}
+  .gt-expertise .gt-card-copy+.gt-card-copy{margin-top:.7em!important;}
+  /* Match every other card's typography while allowing the rare-parts copy to use the full width. */
+  #electronics .gt-card-copy{max-width:none!important;font-size:12.5px!important;line-height:1.48!important;}
+  #electronics .gt-card-copy+.gt-card-copy{margin-top:.28em!important;}
+  /* A brighter, CSS-only field: global rather than closed, without adding an image asset. */
+  body{background:
+    radial-gradient(920px 620px at 50% 31%,rgba(112,245,220,.20),transparent 68%),
+    radial-gradient(760px 610px at 91% 9%,rgba(76,184,244,.14),transparent 70%),
+    radial-gradient(760px 590px at 7% 83%,rgba(41,195,179,.13),transparent 72%),
+    linear-gradient(145deg,#0a3b45 0%,#073a43 48%,#082d38 100%)!important;}
+  body::before{opacity:.18!important;background:radial-gradient(1100px 850px at 50% 48%,transparent 32%,rgba(0,20,28,.24) 100%)!important;}
+  .bg-overlay{opacity:1!important;mix-blend-mode:screen!important;background:radial-gradient(620px 420px at 50% 37%,rgba(138,250,223,.09),transparent 71%),radial-gradient(840px 580px at 50% 69%,rgba(34,178,180,.07),transparent 72%)!important;background-size:auto!important;mask-image:none!important;-webkit-mask-image:none!important;}
+  .hero{position:relative!important;isolation:isolate;}
+  .hero::before,.hero::after{display:none!important;}
+  .hero .stage{filter:drop-shadow(0 28px 70px rgba(0,15,25,.28)) drop-shadow(0 0 42px rgba(95,234,210,.14))!important;}
+  .gt-expertise .gt-expertise-item{background:linear-gradient(135deg,rgba(41,125,132,.32),rgba(8,65,76,.24))!important;border-color:rgba(177,244,231,.23)!important;box-shadow:inset 0 1px 0 rgba(233,255,250,.04),0 12px 30px rgba(0,21,30,.11)!important;}
+  .gt-expertise .gt-expertise-item:hover{border-color:rgba(154,240,217,.40)!important;background:linear-gradient(135deg,rgba(51,143,146,.40),rgba(11,79,88,.31))!important;}
+  .page>header .gt-lang-wrap{width:60px!important;min-width:60px!important;max-width:60px!important;height:28px!important;}
+  .page>header .gt-lang-display{font-size:10px!important;gap:4px!important;}
+  .page>header .gt-lang-chevron{font-size:12px!important;}
+  .brand-wrap{transform:translateX(-7px)!important;}
+  .gt-wordmark{display:inline-flex!important;min-width:0!important;padding:3px 0!important;flex-direction:row!important;align-items:center!important;gap:2px!important;}
+  .gt-wordmark .gt-brand-text{align-items:center!important;text-align:center!important;width:112px!important;min-width:112px!important;transform:translateX(-7px);}
+  .gt-wordmark .gt-brand-text .top,.gt-wordmark .gt-brand-text .bottom{width:100%!important;text-align:center!important;}
+  .gt-wordmark .gt-brand-text .bottom{align-self:center!important;}
+  .gt-wordmark .gt-brand-text .top{font-size:21px!important;line-height:1.05!important;}
+  .gt-brand-mark{display:block;flex:0 0 42px;width:42px;height:42px;overflow:visible;}
+  .gt-brand-mark img{display:block;width:42px!important;height:42px!important;max-width:none!important;filter:none;mix-blend-mode:normal;}
+  .socials{gap:5px!important;}
+  .social{width:29px!important;height:29px!important;min-width:29px!important;min-height:29px!important;}
+  .social svg{width:13px!important;height:13px!important;}
+  .tick--status{opacity:.8;pointer-events:none;}
+  .gt-legal-footer{font-family:var(--gt-display-font)!important;}
+  @media (max-width:900px){
+    .socials{display:none!important;}
+    .gt-sector-nav{row-gap:4px!important;}
+    .gt-sector-nav a{font-size:11px!important;padding:6px 6px!important;}
+    .gt-sector-nav a+a::before{margin-right:10px;}
+    .hero .stage{width:min(395px,82vw)!important;max-width:395px!important;}
+  }
+  @media (max-width:620px){
+    header{padding-top:12px!important;}
+    .nav{grid-template-columns:1fr auto!important;gap:8px!important;padding:0 14px!important;}
+    .gt-sector-nav{display:none!important;}
+    .right{gap:7px!important;}
+    .gt-account-links{font-size:10px;gap:4px;}
+    .gt-account-links a{padding:7px 0;}
+    .hero{gap:14px!important;padding-top:16px!important;}
+    .hero .headline.gt-hero-title{font-size:clamp(23px,6.6vw,29px)!important;line-height:1.14!important;max-width:calc(100vw - 32px)!important;}
+    .hero .stage{width:min(342px,85vw)!important;max-width:342px!important;}
+    #gtMainRfq{font-size:15px!important;min-height:42px!important;}
+    .gt-expertise{padding:15px 0 8px!important;}
+    .gt-expertise-grid{grid-template-columns:1fr!important;gap:10px!important;margin-top:13px!important;}
+    .gt-expertise .gt-expertise-item{padding:17px 18px!important;}
+    .gt-legal-footer{flex-wrap:wrap!important;justify-content:center!important;gap:9px 13px!important;padding-left:16px!important;padding-right:16px!important;}
+    .brand-wrap{transform:translateX(-3px)!important;}
+    .gt-wordmark{gap:2px!important;}
+    .gt-wordmark .gt-brand-text{width:96px!important;min-width:96px!important;}
+    .gt-brand-mark{flex-basis:36px;width:36px;height:36px;}
+    .gt-brand-mark img{width:36px!important;height:36px!important;}
+  }
+  @media (max-width:380px){.gt-account-links a:last-child{display:none}.gt-account-links span{display:none}.hero .stage{width:min(305px,85vw)!important;max-width:305px!important;}}
+  @media (prefers-reduced-motion:reduce){#gtMainRfq .gt-search-arrow{transition:none!important;}}
+</style>
+<script id="gt-v18-50-home-final-script">
+(()=>{
+  const copy={
+    en:{kicker:'Beyond the catalogue',title:'Intelligent solutions platform',search:'Global sourcing',aviation:'Aviation',industry:'Industry',marine:'Shipbuilding & shipping',electronics:'Electronics',rareTitle:'Rare and discontinued components & spare parts',rarePrimary:'Radio equipment, electronic components, legacy assemblies and EOL part numbers. Search by P/N, markings and technical specifications.',rareSecondary:'Manufacture of parts and assemblies from drawings, 3D models and samples, taking materials and tolerances into account.',rareTertiary:'We search warehouse stock and work through possible replacements.',marineTitle:'Shipbuilding & shipping',marinePrimary:'Marine, river and shipboard equipment, MRO components and spare parts.',marineSecondary:'By model, part number, serial number or specification.',login:'Sign in',news:'News',status:'Verified news is temporarily unavailable.'},
+    tr:{kicker:'Kataloğun ötesinde',title:'Akıllı çözüm platformu',search:'Küresel tedarik',aviation:'Havacılık',industry:'Sanayi',marine:'Gemi inşası ve deniz taşımacılığı',electronics:'Elektronik',rareTitle:'Nadir bulunan ve üretimi durdurulmuş bileşenler ve yedek parçalar',rarePrimary:'Radyo ekipmanı, elektronik bileşenler, eski nesil üniteler ve EOL parça kodları. P/N, işaretleme ve teknik şartnamelere göre arama.',rareSecondary:'Çizim, 3D model ve numunelere göre; malzeme ve toleranslar dikkate alınarak parça ve montaj imalatı.',rareTertiary:'Depo stoklarını araştırıyor, olası ikameler üzerinde çalışıyoruz.',marineTitle:'Gemi inşası ve deniz taşımacılığı',marinePrimary:'Deniz, nehir ve gemi ekipmanları, MRO bileşenleri ve yedek parçaları.',marineSecondary:'Model, parça numarası, seri numarası veya teknik şartnameye göre.',login:'Giriş',news:'Haberler',status:'Doğrulanmış haberler geçici olarak kullanılamıyor.'},
+    ru:{kicker:'За пределами каталога',title:'Интеллектуальная платформа решений',search:'Глобальный поиск',aviation:'Авиация',industry:'Промышленность',marine:'Судостроение и судоходство',electronics:'Электроника',rareTitle:'Редкие комплектующие и запасные части, снятые с производства',rarePrimary:'Радиооборудование, электронные компоненты, устаревшие узлы и EOL-артикулы. Поиск по P/N, маркировке и техническим спецификациям.',rareSecondary:'Изготовление деталей и узлов по чертежам, 3D-моделям и образцам с учётом материалов и допусков.',rareTertiary:'Ищем складские остатки, прорабатываем возможные замены.',marineTitle:'Судостроение и судоходство',marinePrimary:'Морское, речное и судовое оборудование, MRO-комплектующие и запчасти.',marineSecondary:'По модели, артикулу, номеру или спецификации.',login:'Войти',news:'Новости',status:'Проверенные новости временно недоступны.'},
+    de:{kicker:'Jenseits des Katalogs',title:'Intelligente Lösungsplattform',search:'Global suchen',aviation:'Luftfahrt',industry:'Industrie',marine:'Schiffbau & Schifffahrt',electronics:'Elektronik',rareTitle:'Seltene und abgekündigte Komponenten & Ersatzteile',rarePrimary:'Funkausrüstung, elektronische Komponenten, ältere Baugruppen und EOL-Artikelnummern. Suche nach P/N, Kennzeichnung und technischen Spezifikationen.',rareSecondary:'Fertigung von Teilen und Baugruppen nach Zeichnungen, 3D-Modellen und Mustern unter Berücksichtigung von Materialien und Toleranzen.',rareTertiary:'Wir suchen Lagerbestände und prüfen mögliche Ersatzlösungen.',marineTitle:'Schiffbau & Schifffahrt',marinePrimary:'See-, Fluss- und Schiffsausrüstung, MRO-Komponenten und Ersatzteile.',marineSecondary:'Nach Modell, Artikelnummer, Seriennummer oder Spezifikation.',login:'Anmelden',news:'Neuigkeiten',status:'Verifizierte Nachrichten sind vorübergehend nicht verfügbar.'},
+    fr:{kicker:'Au-delà du catalogue',title:'Plateforme intelligente de solutions',search:'Recherche mondiale',aviation:'Aviation',industry:'Industrie',marine:'Construction navale & maritime',electronics:'Électronique',rareTitle:'Composants rares et obsolètes & pièces de rechange',rarePrimary:'Équipements radio, composants électroniques, ensembles anciens et références EOL. Recherche par P/N, marquage et spécifications techniques.',rareSecondary:'Fabrication de pièces et d’ensembles selon des plans, modèles 3D et échantillons, en tenant compte des matériaux et tolérances.',rareTertiary:'Nous recherchons les stocks d’entrepôt et étudions les remplacements possibles.',marineTitle:'Construction navale & maritime',marinePrimary:'Équipements maritimes, fluviaux et embarqués, composants MRO et pièces de rechange.',marineSecondary:'Par modèle, référence, numéro de série ou spécification.',login:'Connexion',news:'Actualités',status:'Les actualités vérifiées sont temporairement indisponibles.'},
+    es:{kicker:'Más allá del catálogo',title:'Plataforma inteligente de soluciones',search:'Búsqueda global',aviation:'Aviación',industry:'Industria',marine:'Construcción naval y marítima',electronics:'Electrónica',rareTitle:'Componentes y repuestos raros y descatalogados',rarePrimary:'Equipos de radio, componentes electrónicos, conjuntos obsoletos y referencias EOL. Búsqueda por P/N, marcado y especificaciones técnicas.',rareSecondary:'Fabricación de piezas y conjuntos a partir de planos, modelos 3D y muestras, teniendo en cuenta materiales y tolerancias.',rareTertiary:'Buscamos existencias de almacén y estudiamos posibles sustituciones.',marineTitle:'Construcción naval y marítima',marinePrimary:'Equipos marinos, fluviales y de a bordo, componentes MRO y repuestos.',marineSecondary:'Por modelo, número de pieza, número de serie o especificación.',login:'Entrar',news:'Noticias',status:'Las noticias verificadas no están disponibles temporalmente.'},
+    it:{kicker:'Oltre il catalogo',title:'Piattaforma intelligente di soluzioni',search:'Ricerca globale',aviation:'Aviazione',industry:'Industria',marine:'Cantieristica e navigazione',electronics:'Elettronica',rareTitle:'Componenti e ricambi rari e fuori produzione',rarePrimary:'Apparecchiature radio, componenti elettronici, gruppi obsoleti e codici EOL. Ricerca per P/N, marcatura e specifiche tecniche.',rareSecondary:'Fabbricazione di parti e assiemi da disegni, modelli 3D e campioni, tenendo conto di materiali e tolleranze.',rareTertiary:'Cerchiamo scorte di magazzino e valutiamo possibili sostituzioni.',marineTitle:'Cantieristica e navigazione',marinePrimary:'Attrezzature marine, fluviali e di bordo, componenti MRO e ricambi.',marineSecondary:'Per modello, codice articolo, numero di serie o specifica.',login:'Accedi',news:'Notizie',status:'Le notizie verificate non sono temporaneamente disponibili.'},
+    pt:{kicker:'Além do catálogo',title:'Plataforma inteligente de soluções',search:'Pesquisa global',aviation:'Aviação',industry:'Indústria',marine:'Construção naval e navegação',electronics:'Eletrónica',rareTitle:'Componentes e peças sobressalentes raros e descontinuados',rarePrimary:'Equipamentos de rádio, componentes eletrónicos, conjuntos obsoletos e códigos EOL. Pesquisa por P/N, marcação e especificações técnicas.',rareSecondary:'Fabrico de peças e conjuntos a partir de desenhos, modelos 3D e amostras, considerando materiais e tolerâncias.',rareTertiary:'Procuramos stocks de armazém e avaliamos possíveis substituições.',marineTitle:'Construção naval e navegação',marinePrimary:'Equipamentos marítimos, fluviais e de bordo, componentes MRO e peças sobressalentes.',marineSecondary:'Por modelo, número da peça, número de série ou especificação.',login:'Entrar',news:'Notícias',status:'As notícias verificadas estão temporariamente indisponíveis.'},
+    ar:{kicker:'ما وراء الكتالوج',title:'منصة حلول ذكية',search:'بحث عالمي',aviation:'الطيران',industry:'الصناعة',marine:'بناء السفن والشحن',electronics:'الإلكترونيات',rareTitle:'مكوّنات وقطع غيار نادرة ومتوقفة الإنتاج',rarePrimary:'معدات لاسلكية ومكوّنات إلكترونية ووحدات قديمة وأرقام قطع EOL. البحث حسب P/N أو الوسم أو المواصفات التقنية.',rareSecondary:'تصنيع الأجزاء والتجميعات وفق الرسومات والنماذج ثلاثية الأبعاد والعينات، مع مراعاة المواد والتفاوتات.',rareTertiary:'نبحث عن مخزون المستودعات وندرس البدائل المحتملة.',marineTitle:'بناء السفن والشحن',marinePrimary:'معدات بحرية ونهرية ومعدات على متن السفن، ومكوّنات MRO وقطع الغيار.',marineSecondary:'حسب الطراز أو رقم القطعة أو الرقم التسلسلي أو المواصفة.',login:'دخول',news:'الأخبار',status:'الأخبار الموثقة غير متاحة مؤقتاً.'},
+    zh:{kicker:'超越目录',title:'智能解决方案平台',search:'全球搜索',aviation:'航空',industry:'工业',marine:'造船与航运',electronics:'电子',rareTitle:'稀有和停产的组件及备件',rarePrimary:'无线电设备、电子元件、老旧组件及 EOL 料号。可按 P/N、标识和技术规格查询。',rareSecondary:'可根据图纸、3D 模型和样品制造零件及组件，并考虑材料和公差。',rareTertiary:'我们寻找仓储库存，并研究可行的替代方案。',marineTitle:'造船与航运',marinePrimary:'海洋、河运及船用设备，MRO 组件和备件。',marineSecondary:'可按型号、料号、序列号或规格查询。',login:'登录',news:'新闻',status:'已验证的新闻暂时不可用。'}
+  };
+  const footerCopy={
+    en:['About us','What we source','Privacy policy','KVKK / RFQ'],tr:['Hakkımızda','Tedarik alanlarımız','Gizlilik politikası','KVKK / RFQ'],ru:['О нас','Что поставляем','Конфиденциальность','KVKK / RFQ'],de:['Über uns','Beschaffung','Datenschutz','KVKK / RFQ'],fr:['À propos','Nos approvisionnements','Confidentialité','KVKK / RFQ'],es:['Sobre nosotros','Qué suministramos','Confidencialidad','KVKK / RFQ'],it:['Chi siamo','Cosa forniamo','Privacy','KVKK / RFQ'],pt:['Sobre nós','O que fornecemos','Privacidade','KVKK / RFQ'],ar:['من نحن','ما نوفره','الخصوصية','KVKK / RFQ'],zh:['关于我们','供应范围','隐私','KVKK / RFQ']
+  };
+  const set=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+  let tickerSequence=0,finalTickerText='',tickerGuardQueued=false;
+  const tickerFlag=country=>{const cc=String(country||'').toUpperCase();if(!/^[A-Z]{2}$/.test(cc))return '🌐';const base=0x1F1E6;return String.fromCodePoint(base+cc.charCodeAt(0)-65,base+cc.charCodeAt(1)-65);};
+  const renderTicker=async(lang)=>{
+    const sequence=++tickerSequence,track=document.getElementById('tickerTrack'),t=copy[lang]||copy.en;
+    if(!track)return;
+    const sourceLang=['en','tr','ru'].includes(lang)?lang:'en';
+    try{
+      const response=await fetch('/api/ticker?lang='+encodeURIComponent(sourceLang),{cache:'no-store'});
+      const payload=await response.json();
+      if(!response.ok||!Array.isArray(payload?.items)||!payload.items.length)throw new Error('ticker unavailable');
+      if(sequence!==tickerSequence)return;
+      const fragment=document.createDocumentFragment();
+      [...payload.items,...payload.items].forEach(item=>{
+        const url=String(item.url||item.link||'').trim();if(!/^https?:\/\//i.test(url))return;
+        const link=document.createElement('a');link.className='tick';link.href=url;link.target='_blank';link.rel='noopener noreferrer';
+        const flag=document.createElement('span');flag.className='tick-flag';flag.setAttribute('aria-hidden','true');flag.textContent=tickerFlag(item.country||item.cc);
+        const title=document.createElement('span');title.textContent=String(item.title||'').trim();
+        const meta=document.createElement('span');meta.className='tick-src';const date=/^\d{4}-\d{2}-\d{2}$/.test(item.date||'')?' · '+String(item.date).split('-').reverse().join('.'):'';meta.textContent='('+(item.source||item.publisher||'Verified source')+date+')';
+        link.append(flag,title,meta);fragment.appendChild(link);
+      });
+      track.replaceChildren(fragment);finalTickerText=track.textContent;
+    }catch(error){
+      if(sequence!==tickerSequence)return;
+      const status=document.createElement('span');status.className='tick tick--status';status.setAttribute('role','status');status.textContent=t.status;track.replaceChildren(status);finalTickerText=track.textContent;
+    }
+  };
+  const apply=()=>{
+    const lang=document.getElementById('gtLanguageSelect')?.value||'en';
+    const t=copy[lang]||copy.en;
+    document.documentElement.lang=lang;
+    document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+    set('navAviation',t.aviation);set('navIndustry',t.industry);set('navMarine',t.marine);set('navElectronics',t.electronics);set('gtRareTitle',t.rareTitle);set('gtRareCopyPrimary',t.rarePrimary);set('gtRareCopySecondary',t.rareSecondary);set('gtRareCopyTertiary',t.rareTertiary);set('gtMarineTitle',t.marineTitle);set('gtMarineCopyPrimary',t.marinePrimary);set('gtMarineCopySecondary',t.marineSecondary);set('gtLoginLink',t.login);set('tickerTag',t.news);
+    const h=document.getElementById('headline');if(h&&h.textContent.trim()!==t.title){h.replaceChildren();const span=document.createElement('span');span.textContent=t.title;h.appendChild(span);}if(h)h.setAttribute('aria-label',t.title);
+    const cta=document.getElementById('gtMainRfq');if(cta&&cta.textContent.trim()!==t.search+' →'){cta.replaceChildren(document.createTextNode(t.search+' '));const arrow=document.createElement('span');arrow.className='gt-search-arrow';arrow.setAttribute('aria-hidden','true');arrow.textContent='→';cta.appendChild(arrow);}if(cta)cta.setAttribute('aria-label',t.search);
+    document.querySelectorAll('.tick--status').forEach(el=>el.textContent=t.status);
+    const ticker=document.querySelector('.ticker');if(ticker)ticker.dataset.sourceLocale=['en','tr','ru'].includes(lang)?lang:'en';
+    const footer=footerCopy[lang]||footerCopy.en;
+    const footerLinks=[document.querySelector('.gt-footer-about'),document.getElementById('gtWhatWeSource'),document.querySelector('.gt-legal-footer a[href="privacy.html"]'),document.querySelector('.gt-legal-footer a[href="rfq-privacy.html"]')];
+    footerLinks.forEach((link,index)=>{if(link&&link.textContent!==footer[index])link.textContent=footer[index];});
+    window.setTimeout(()=>renderTicker(lang),120);
+  };
+  // The legacy language enhancer also listens to this select. Reapply after it
+  // has completed so the CTA always retains the approved plain-arrow treatment.
+  const schedule=()=>{apply();window.setTimeout(apply,0);window.setTimeout(apply,90);};
+  document.getElementById('gtLanguageSelect')?.addEventListener('change',schedule);
+  window.addEventListener('load',schedule);document.addEventListener('DOMContentLoaded',schedule);
+  // Keep the final homepage contract intact when older language code mutates
+  // the same elements after the select event has completed.
+  const guardTargets=['gtMainRfq','headline','gtWhatWeSource'];
+  const guard=new MutationObserver(schedule);
+  guardTargets.map(id=>document.getElementById(id)).filter(Boolean).forEach(el=>guard.observe(el,{childList:true,subtree:true,characterData:true}));
+  // The legacy ticker may resolve after this script. If it tries to restore
+  // stale content, render the selected source again without polling forever.
+  const tickerTrack=document.getElementById('tickerTrack');
+  if(tickerTrack)new MutationObserver(()=>{
+    if(tickerTrack.textContent===finalTickerText||tickerGuardQueued)return;
+    tickerGuardQueued=true;window.setTimeout(()=>{tickerGuardQueued=false;renderTicker(document.getElementById('gtLanguageSelect')?.value||'en');},80);
+  }).observe(tickerTrack,{childList:true,subtree:true,characterData:true});
 })();
 </script>
 </body>

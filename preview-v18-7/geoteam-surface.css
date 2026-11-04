@@ -1,0 +1,15 @@
+/* GeoTeam Global shared surface — a light, open teal field used by every public page. */
+:root{color-scheme:dark;--gt-open-0:#082f39;--gt-open-1:#0b4650;--gt-open-2:#0d5860;--gt-open-ink:#ebfaf7;--gt-open-soft:rgba(229,247,243,.76);--gt-open-line:rgba(181,242,230,.20);--gt-open-mint:#84ebc0}
+html{background:var(--gt-open-0)!important}
+body{color:var(--gt-open-ink)!important;background:radial-gradient(920px 620px at 50% 22%,rgba(116,245,219,.18),transparent 68%),radial-gradient(760px 590px at 92% 12%,rgba(75,191,238,.12),transparent 72%),radial-gradient(740px 590px at 8% 87%,rgba(37,190,173,.11),transparent 72%),linear-gradient(145deg,var(--gt-open-1) 0%,var(--gt-open-0) 55%,#082b36 100%)!important;background-attachment:scroll!important}
+header,.site-header{background:linear-gradient(to bottom,rgba(8,47,57,.70),rgba(8,47,57,.20))!important;border-color:var(--gt-open-line)!important}
+.workspace,.note,.step,.cta,.cat,.policy-card,.sections section,.side-nav,.cookie-inventory{background:linear-gradient(135deg,rgba(40,125,132,.28),rgba(7,62,73,.30))!important;border-color:var(--gt-open-line)!important;box-shadow:inset 0 1px 0 rgba(241,255,250,.035),0 14px 34px rgba(0,28,37,.10)!important}
+.field input,.field textarea,.field select{background:rgba(4,40,50,.44)!important;border-color:rgba(187,243,233,.22)!important;color:var(--gt-open-ink)!important}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:rgba(132,235,192,.78)!important;box-shadow:0 0 0 3px rgba(132,235,192,.11)!important}
+.primary{background:linear-gradient(125deg,rgba(24,125,124,.94),rgba(8,78,89,.97))!important;border-color:rgba(147,241,205,.74)!important;box-shadow:0 5px 18px rgba(2,42,51,.18)!important}
+.primary:hover{box-shadow:0 0 22px rgba(112,230,202,.24)!important}
+.back,.lang,.lang-choice,.secondary,.help-btn,.file-btn{background:rgba(32,111,116,.14)!important;border-color:rgba(184,243,232,.24)!important;color:#dcf2ee!important}
+.eyebrow,.kicker,.num{color:#9ae9d6!important}.eyebrow:before{background:var(--gt-open-mint)!important;box-shadow:0 0 10px rgba(132,235,192,.48)!important}
+.subtitle,.lead,.section>p,.note p,.feature p,.step p,.cta p,.copy,.intro{color:var(--gt-open-soft)!important}
+footer{border-color:var(--gt-open-line)!important;color:var(--gt-open-soft)!important}footer a:hover{color:#b9f4d8!important}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
