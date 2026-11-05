@@ -46,7 +46,13 @@ textarea{min-height:112px!important;font-size:16px!important;padding:15px!import
 </style>
 <style id="gt-sourcing-product-card">.product img{margin:14px auto 22px}.product .facts{margin-top:0}</style>
 <link rel="stylesheet" href="/assets/geoteam-site-shell.css?v=20261106-unified" />
-<script defer src="/assets/geoteam-site-shell.js?v=20261106-unified"></script></head>
+<script defer src="/assets/geoteam-site-shell.js?v=20261106-unified"></script>
+<style id="gt-sourcing-status-foundation">
+#status{display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600}
+#status::before{content:"";width:8px;height:8px;border-radius:50%;background:#7bedb4;box-shadow:0 0 10px rgba(123,237,180,.8)}
+#status[data-state="local"]::before{background:#ffbf64;box-shadow:0 0 10px rgba(255,191,100,.78)}
+#status[data-state="offline"]::before{background:#ff7f7a;box-shadow:0 0 10px rgba(255,127,122,.78)}
+</style></head>
 <body>
 <header class="top">
   <a class="brand gt-source-brand" href="index.html" aria-label="GeoTeam Global — home">
@@ -62,7 +68,7 @@ textarea{min-height:112px!important;font-size:16px!important;padding:15px!import
     </label>
   </div>
 </header>
-<main class="shell"><div class="eyebrow">GLOBAL SOURCING</div><form id="research" aria-label="Global sourcing search"><div class="searchbox"><textarea id="query" maxlength="160" rows="4" placeholder="Артикул, P/N, серийный номер, производитель или наименование"></textarea><div class="tools"><label class="attach" title="Прикрепить файл">📎<input id="attach" type="file" accept="image/*,.pdf,.txt,.csv"></label><div class="ticker"><span id="hint">Введите артикул, P/N, серийный номер, производителя или наименование. Можно приложить фото или документ.</span></div></div><div id="files" class="filelist" aria-live="polite"></div><button id="submit" class="go" type="submit">Начать поиск</button></div><p id="status" class="status" role="status" aria-live="polite"></p></form><section id="results" class="results" aria-live="polite"></section></main><footer class="foot">
+<main class="shell"><div class="eyebrow">GLOBAL SOURCING</div><form id="research" aria-label="Global sourcing search"><div class="searchbox"><textarea id="query" maxlength="160" rows="4" placeholder="Артикул, P/N, серийный номер, производитель или наименование"></textarea><div class="tools"><label class="attach" title="Прикрепить файл">📎<input id="attach" type="file" accept="image/*,.pdf,.txt,.csv"></label><div class="ticker"><span id="hint">Введите артикул, P/N, серийный номер, производителя или наименование. Можно приложить фото или документ.</span></div></div><div id="files" class="filelist" aria-live="polite"></div><button id="submit" class="go" type="submit">Начать поиск</button></div><p id="status" class="status" data-state="global" role="status" aria-live="polite">Готово к глобальному поиску.</p></form><section id="results" class="results" aria-live="polite"></section></main><footer class="foot">
   <span>© 2026 GeoTeam</span>
   <a href="about.html">О нас</a>
   <a href="ru/what-we-source.html">Что поставляем</a>
@@ -78,6 +84,25 @@ textarea{min-height:112px!important;font-size:16px!important;padding:15px!import
   const render=code=>{document.documentElement.lang=code;back.textContent=`← ${labels[code]}`;back.href=`index.html?lang=${encodeURIComponent(code)}`;};
   if(select){select.value=language;select.addEventListener('change',()=>{const next=new URL(location.href);next.searchParams.set('lang',select.value);location.assign(next.toString());});}
   render(language);
+})();
+</script>
+<script id="gt-sourcing-status-contract">
+(() => {
+  const status = document.getElementById('status');
+  if (!status) return;
+  const copy = {
+    en: { global: 'Ready for global search.', local: 'Local search mode is active.', offline: 'Search is temporarily unavailable.' },
+    ru: { global: 'Готово к глобальному поиску.', local: 'Работает локальный поиск.', offline: 'Поиск временно недоступен.' },
+    tr: { global: 'Küresel arama hazır.', local: 'Yerel arama modu etkin.', offline: 'Arama geçici olarak kullanılamıyor.' }
+  };
+  const language = new URLSearchParams(window.location.search).get('lang') || 'ru';
+  window.GeoTeamSearchStatus = {
+    set(state = 'global', message) {
+      status.dataset.state = ['global', 'local', 'offline'].includes(state) ? state : 'offline';
+      status.textContent = message || ((copy[language] || copy.en)[status.dataset.state] || copy.en.global);
+    }
+  };
+  window.GeoTeamSearchStatus.set('global');
 })();
 </script>
 <script src="geoteam-ai-config.js"></script><script defer src="geoteam-ai-pilot.js?v=20261102T2003"></script><script defer src="geoteam-commerce.js?v=20261102T2001"></script>

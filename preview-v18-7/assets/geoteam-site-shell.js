@@ -9,9 +9,9 @@
   const language = locales.includes(query.get('lang')) ? query.get('lang') : (pathLocale || 'en');
   const year = new Date().getFullYear();
   const copy = {
-    en: { home: 'Home', back: 'Back', signIn: 'Sign in', sourcing: 'Global Sourcing', sectors: 'Sectors', company: 'Company', legal: 'Legal', about: 'About us', supplied: 'What we source', process: 'How we work', privacy: 'Privacy', rfq: 'RFQ', tagline: 'Intelligent solution platform', description: 'International sourcing for technical equipment, specifications and documented supply options.', fallback: 'Technical reference content is currently available in English.' },
-    ru: { home: 'На главную', back: 'Назад', signIn: 'Войти', sourcing: 'Глобальный поиск', sectors: 'Направления', company: 'Компания', legal: 'Документы', about: 'О нас', supplied: 'Что поставляем', process: 'Как мы работаем', privacy: 'Конфиденциальность', rfq: 'RFQ', tagline: 'Интеллектуальная платформа решений', description: 'Международный поиск технической продукции, работа со спецификациями и вариантами поставки.', fallback: 'Технические справочные материалы пока доступны на английском языке.' },
-    tr: { home: 'Ana sayfa', back: 'Geri', signIn: 'Giriş', sourcing: 'Küresel arama', sectors: 'Sektörler', company: 'Şirket', legal: 'Yasal', about: 'Hakkımızda', supplied: 'Ne tedarik ediyoruz', process: 'Nasıl çalışıyoruz', privacy: 'Gizlilik', rfq: 'RFQ', tagline: 'Akıllı çözüm platformu', description: 'Teknik ekipman, spesifikasyon ve belgeli tedarik seçenekleri için uluslararası kaynak araştırması.', fallback: 'Teknik referans içeriği şu anda İngilizce olarak sunulmaktadır.' }
+    en: { home: 'Home', back: 'Back', signIn: 'Sign in', sourcing: 'Global Sourcing', sectors: 'Sectors', company: 'Company', legal: 'Legal', about: 'About us', supplied: 'What we source', process: 'How we work', privacy: 'Privacy', rights: 'All rights reserved', rfq: 'RFQ', tagline: 'Intelligent solution platform', description: 'International sourcing for technical equipment, specifications and documented supply options.', fallback: 'Technical reference content is currently available in English.' },
+    ru: { home: 'На главную', back: 'Назад', signIn: 'Войти', sourcing: 'Глобальный поиск', sectors: 'Направления', company: 'Компания', legal: 'Документы', about: 'О нас', supplied: 'Что поставляем', process: 'Как мы работаем', privacy: 'Конфиденциальность', rights: 'Все права защищены', rfq: 'RFQ', tagline: 'Интеллектуальная платформа решений', description: 'Международный поиск технической продукции, работа со спецификациями и вариантами поставки.', fallback: 'Технические справочные материалы пока доступны на английском языке.' },
+    tr: { home: 'Ana sayfa', back: 'Geri', signIn: 'Giriş', sourcing: 'Küresel arama', sectors: 'Sektörler', company: 'Şirket', legal: 'Yasal', about: 'Hakkımızda', supplied: 'Ne tedarik ediyoruz', process: 'Nasıl çalışıyoruz', privacy: 'Gizlilik', rights: 'Tüm hakları saklıdır', rfq: 'RFQ', tagline: 'Akıllı çözüm platformu', description: 'Teknik ekipman, spesifikasyon ve belgeli tedarik seçenekleri için uluslararası kaynak araştırması.', fallback: 'Teknik referans içeriği şu anda İngilizce olarak sunulmaktadır.' }
   };
   const text = copy[language] || copy.en;
   const isSector = /\/(aviation|industrial|electronics|marine)(?:\.html|\/)/.test(window.location.pathname);
@@ -68,8 +68,8 @@
   header.innerHTML = `
     <div class="gt-site-header__inner">
       <a class="gt-site-brand" href="${pathWithLanguage('/index.html')}" aria-label="GeoTeam Global ${text.home}">
-        <img src="/data/geoteam-mark.svg" width="36" height="36" alt="" aria-hidden="true">
-        <span><b>GeoTeam</b><small>GLOBAL</small></span>
+        <span class="gt-site-brand__mark"><img src="/data/geoteam-mark.svg" width="36" height="36" alt="" aria-hidden="true"></span>
+        <span class="gt-site-brand__wordmark"><b>GeoTeam</b><small>GLOBAL</small></span>
       </a>
       ${isSourcing ? backLink : ''}
       <nav class="gt-site-nav" aria-label="${text.sectors}">
@@ -103,11 +103,11 @@
     footer.className = `gt-site-footer${isSourcing ? ' gt-site-footer--minimal' : ''}`;
     if (language === 'ar') footer.dir = 'rtl';
     footer.innerHTML = isSourcing
-      ? `<div class="gt-site-footer__minimal"><a href="${pathWithLanguage('/privacy.html')}">${text.privacy}</a></div>`
+      ? `<div class="gt-site-footer__minimal"><span>© ${year} GeoTeam Global · ${text.rights || copy.en.rights}</span><nav aria-label="${text.legal}"><a href="${pathWithLanguage('/about.html')}">${text.about}</a><a href="${pathWithLanguage('/privacy.html')}">${text.privacy}</a></nav></div>`
       : `
     <div class="gt-site-footer__inner">
       <section class="gt-site-footer__brand">
-        <a class="gt-site-brand" href="${pathWithLanguage('/index.html')}"><img src="/data/geoteam-mark.svg" width="34" height="34" alt="" aria-hidden="true"><span><b>GeoTeam</b><small>GLOBAL</small></span></a>
+        <a class="gt-site-brand" href="${pathWithLanguage('/index.html')}"><span class="gt-site-brand__mark"><img src="/data/geoteam-mark.svg" width="34" height="34" alt="" aria-hidden="true"></span><span class="gt-site-brand__wordmark"><b>GeoTeam</b><small>GLOBAL</small></span></a>
         <p><strong>${text.tagline}</strong><br>${text.description}</p>
       </section>
       <section><h2>${text.sectors}</h2>${sectorLinks.map(([href, labels]) => `<a href="${pathWithLanguage(href)}">${labels[language] || labels.en}</a>`).join('')}</section>
