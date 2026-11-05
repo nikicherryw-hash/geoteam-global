@@ -1,7 +1,21 @@
 {
-  "generated_at": "2026-11-05T12:24:49.984664Z",
+  "generated_at": "2026-11-05T22:00:31.103135Z",
   "mode": "automatic_rss",
   "items": [
+    {
+      "title": "EASA provides complete Easy Access Rules publication history in XML",
+      "source": "EASA",
+      "country": "EU",
+      "date": "2026-11-05",
+      "url": "https://www.easa.europa.eu/newsroom-and-events/news/easa-provides-complete-easy-access-rules-publication-history-xml"
+    },
+    {
+      "title": "Director-General: Leverage trade and partnerships to build a resilient ocean economy",
+      "source": "WTO",
+      "country": "UN",
+      "date": "2026-11-05",
+      "url": "https://www.wto.org/english/news_e/news26_e/envir_05nov26_541_e.htm"
+    },
     {
       "title": "Trade Policy Review: Viet Nam",
       "source": "WTO",
@@ -71,20 +85,6 @@
       "country": "UN",
       "date": "2026-10-29",
       "url": "https://www.wto.org/english/news_e/news26_e/cotpt_29oct26_540_e.htm"
-    },
-    {
-      "title": "Global Review 2026 spotlights partnerships for trade and development",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-10-29",
-      "url": "https://www.wto.org/english/news_e/news26_e/aid_29oct26_526_e.htm"
-    },
-    {
-      "title": "Côte d'Ivoire President: Re-globalization an opportunity to move beyond traditional trade",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-10-29",
-      "url": "https://www.wto.org/english/news_e/news26_e/pls_29oct26_530_e.htm"
     }
   ]
 }
