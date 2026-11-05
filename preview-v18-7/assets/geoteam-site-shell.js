@@ -51,7 +51,12 @@
     });
   }
   document.querySelectorAll('body > footer, .av-footer, .in-footer, .ec-footer, .mr-footer, .gt-legal-single, .gt-legal-footer').forEach((element) => {
-    if (!element.classList.contains('gt-site-footer')) element.hidden = true;
+    if (!element.classList.contains('gt-site-footer')) {
+      element.hidden = true;
+      // Some legacy pages set display:flex !important on their footer; the
+      // HTML hidden attribute alone cannot override that declaration.
+      element.style.setProperty('display', 'none', 'important');
+    }
   });
 
   const header = document.createElement('header');
