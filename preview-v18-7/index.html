@@ -3691,7 +3691,7 @@ $("btnBrowse")?.addEventListener("click", (e) => {
         "void main() {",
         `
         uniform float uTime;
-        float gtNoise(vec2 co){
+        float rand(vec2 co){
           return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
         }
         void main() {
@@ -3707,7 +3707,7 @@ $("btnBrowse")?.addEventListener("click", (e) => {
           c = mix(c, c * vec3(0.80, 0.96, 1.02), 0.55);
 
           // Subtle grain to break banding/moire
-          float n = gtNoise(gl_FragCoord.xy + uTime * 120.0) - 0.5;
+          float n = rand(gl_FragCoord.xy + uTime * 120.0) - 0.5;
           c += n * 0.010;
 
           gl_FragColor.rgb = c;
