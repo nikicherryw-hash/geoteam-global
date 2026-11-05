@@ -3,7 +3,10 @@
 
   const locales = ['en', 'tr', 'ru', 'de', 'fr', 'es', 'it', 'pt', 'ar', 'zh'];
   const query = new URLSearchParams(window.location.search);
-  const language = locales.includes(query.get('lang')) ? query.get('lang') : 'en';
+  const pathLocale = window.location.pathname.match(/^\/(en|tr|ru)\//)?.[1];
+  // Legacy localized documents use /ru/... style addresses, while the
+  // homepage uses ?lang=ru. Respect both contracts; explicit query wins.
+  const language = locales.includes(query.get('lang')) ? query.get('lang') : (pathLocale || 'en');
   const year = new Date().getFullYear();
   const copy = {
     en: { home: 'Home', signIn: 'Sign in', sourcing: 'Global Sourcing', sectors: 'Sectors', company: 'Company', legal: 'Legal', about: 'About us', supplied: 'What we source', process: 'How we work', privacy: 'Privacy', rfq: 'RFQ', tagline: 'Intelligent solution platform', description: 'International sourcing for technical equipment, specifications and documented supply options.', fallback: 'Technical reference content is currently available in English.' },
