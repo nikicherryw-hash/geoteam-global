@@ -11,17 +11,24 @@ def payload(model="ROTAX 916 iS",source=True,url=U):
         {"type":"message","content":[{"type":"output_text","text":json.dumps({
            "summary":"Published asking price, availability unknown",
            "resolved_product":model,
+           "product":{"manufacturer":"ROTAX","part_number":model,"product_name":model,
+                      "product_category":"aircraft engine","short_description":"Test identity",
+                      "intended_use":"Test use","technical_specifications":["Test specification"],
+                      "image_url":"https://example.com/rotax-916.jpg","identity_confidence":"strong"},
            "candidates":[{"url":url,"seller":"Test distributor",
              "model":model,"price":59305,"currency":"USD",
-             "evidence":"USD 59305","availability_claim":"unknown"}],
+             "evidence":"USD 59305","availability_claim":"unknown","country":"US","condition":"new"}],
            "warnings":[]})}]}]}
 
 class Tests(unittest.TestCase):
  def test_genuine_search_source_required(self):
     o=validate_output(payload(),"rotax 916","ru")
     self.assertEqual(len(o["offers"]),1)
-    self.assertEqual(o["offers"][0]["verification"],"SEARCH_CITATION_ONLY")
+    self.assertEqual(o["offers"][0]["status"],"SEARCH_CITATION_ONLY")
     self.assertEqual(o["offers"][0]["availability"],"NOT_CONFIRMED")
+    self.assertTrue(o["product"]["image"].startswith("https://"))
+    self.assertNotIn("source_url",str(o))
+    self.assertNotIn("Test distributor",str(o))
     self.assertEqual(validate_output(payload(source=False),"rotax 916","ru")["offers"],[])
     self.assertEqual(validate_output(payload(url="https://unlisted.example/price"),"rotax 916","ru")["offers"],[])
  def test_wrong_model_is_rejected(self):

@@ -44,6 +44,7 @@ textarea{min-height:112px!important;font-size:16px!important;padding:15px!import
    beside the language selector on phones. */
 @media(max-width:620px){.back{font-size:11px!important;min-height:30px!important;white-space:nowrap!important}.back:before{content:none!important}.top-actions{margin-left:auto!important;justify-content:flex-end!important}}
 </style>
+<style id="gt-sourcing-product-card">.product img{margin:14px auto 22px}.product .facts{margin-top:0}</style>
 </head>
 <body>
 <header class="top">
@@ -79,4 +80,17 @@ textarea{min-height:112px!important;font-size:16px!important;padding:15px!import
 })();
 </script>
 <script src="geoteam-ai-config.js"></script><script defer src="geoteam-ai-pilot.js?v=20261102T2003"></script><script defer src="geoteam-commerce.js?v=20261102T2001"></script>
+<script id="gt-sourcing-product-order">
+(() => {
+  const results=document.getElementById('results');
+  if(!results)return;
+  const arrange=()=>results.querySelectorAll('.product').forEach(product=>{
+    const image=product.querySelector('img');
+    const title=product.querySelector('h2');
+    if(image&&title&&title.nextElementSibling!==image)title.after(image);
+  });
+  new MutationObserver(arrange).observe(results,{childList:true,subtree:true});
+  arrange();
+})();
+</script>
 </body></html>

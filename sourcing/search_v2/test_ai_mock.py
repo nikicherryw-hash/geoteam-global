@@ -13,9 +13,13 @@ def response(with_search=True):
         [{"type":"web_search_call","action":{"sources":[{"url":U}]}}] if with_search else [])+
         [{"type":"message","content":[{"type":"output_text","text":json.dumps({
         "summary":"Test","resolved_product":"ROTAX 916 iS",
+        "product":{"manufacturer":"ROTAX","part_number":"916 iS","product_name":"ROTAX 916 iS",
+                   "product_category":"aircraft engine","short_description":"Test identity",
+                   "intended_use":"Test use","technical_specifications":[],"image_url":None,
+                   "identity_confidence":"strong"},
         "candidates":[{"url":U,"seller":"Demo","model":"ROTAX 916 iS",
                        "price":12345,"currency":"USD","evidence":"USD 12345",
-                       "availability_claim":"unknown"}],"warnings":[]})}]}],
+                       "availability_claim":"unknown","country":None,"condition":None}],"warnings":[]})}]}],
         "usage":{"input_tokens":100,"output_tokens":100}}
 
 class AsyncResearchTests(unittest.IsolatedAsyncioTestCase):
