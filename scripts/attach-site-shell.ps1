@@ -4,8 +4,8 @@ param(
 
 $rootPath = (Resolve-Path $Root).Path
 $assetTags = @'
-<link rel="stylesheet" href="/assets/geoteam-site-shell.css?v=20261105-unified" />
-<script defer src="/assets/geoteam-site-shell.js?v=20261105-unified"></script>
+<link rel="stylesheet" href="/assets/geoteam-site-shell.css?v=20261106-unified" />
+<script defer src="/assets/geoteam-site-shell.js?v=20261106-unified"></script>
 '@
 
 $updated = 0
