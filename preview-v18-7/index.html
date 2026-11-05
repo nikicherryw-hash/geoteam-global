@@ -2436,9 +2436,9 @@ a:focus-visible,button:focus-visible,select:focus-visible{
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.75 6.5a1.05 1.05 0 1 1-1.05 1.05 1.05 1.05 0 0 1 1.05-1.05z"/></svg>
             </a>
           </div>
+          <div class="lang"><button id="langToggle" type="button" class="langToggle" aria-label="Legacy language toggle" hidden>EN</button><label class="gt-lang-wrap" aria-label="Website language"><span class="gt-lang-display" aria-hidden="true"><span id="gtLangCode">EN</span><span class="gt-lang-chevron">⌄</span></span><select class="gt-lang-select" id="gtLanguageSelect" aria-label="Choose language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><option value="de">DE · Deutsch</option><option value="fr">FR · Français</option><option value="es">ES · Español</option><option value="it">IT · Italiano</option><option value="pt">PT · Português</option><option value="ar">AR · العربية</option><option value="zh">ZH · 中文</option></select></label></div>
           <!-- Account UI is intentionally non-interactive until the homepage is wired to the existing auth contract. -->
           <div class="gt-account-links gt-account--planned" aria-label="Customer account integration pending"><span id="gtLoginLink" aria-disabled="true">Sign in</span></div>
-          <div class="lang"><button id="langToggle" type="button" class="langToggle" aria-label="Legacy language toggle" hidden>EN</button><label class="gt-lang-wrap" aria-label="Website language"><span class="gt-lang-display" aria-hidden="true"><span id="gtLangCode">EN</span><span class="gt-lang-chevron">⌄</span></span><select class="gt-lang-select" id="gtLanguageSelect" aria-label="Choose language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><option value="de">DE · Deutsch</option><option value="fr">FR · Français</option><option value="es">ES · Español</option><option value="it">IT · Italiano</option><option value="pt">PT · Português</option><option value="ar">AR · العربية</option><option value="zh">ZH · 中文</option></select></label></div>
         </div>
       </div>
       <div class="tickerbar" aria-label="News ticker">
@@ -3994,6 +3994,7 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   .gt-sector-nav a{display:inline-flex!important;align-items:center!important;font-family:var(--gt-display-font)!important;font-size:12px!important;font-weight:610!important;letter-spacing:-.01em!important;padding:5px 8px!important;}
   .gt-sector-nav a+a::before{content:"•";margin-right:12px;color:rgba(118,229,173,.76);font-size:11px;line-height:1;}
   .gt-account-links{display:flex;align-items:center;gap:5px;color:rgba(234,247,247,.5);font:600 11px/1 var(--gt-display-font);white-space:nowrap;}
+  .gt-account--planned span{display:inline-flex;align-items:center;justify-content:center;min-height:28px;padding:0 10px;border:1px solid rgba(135,234,219,.32);border-radius:999px;background:rgba(87,208,195,.08);color:rgba(239,255,251,.88);box-shadow:inset 0 1px 0 rgba(255,255,255,.05);}
   .gt-account-links a{color:rgba(234,247,247,.82);text-decoration:none;transition:color .18s ease;}
   .gt-account-links a:hover,.gt-account-links a:focus-visible{color:#fff;}
   .right{gap:8px!important;}
