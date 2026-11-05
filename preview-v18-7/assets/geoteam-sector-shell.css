@@ -80,3 +80,22 @@ body.mr-has-geoteam-shell{padding-top:72px!important;background:#073a43!importan
   .gt-sector-shell .gt-sector-shell__brand .top{font-size:16px!important}
   .gt-sector-shell .gt-sector-shell__brand .bottom{font-size:7.5px!important}
 }
+
+/* Exact homepage brand specification for every sector. Do not introduce a
+   second GeoTeam lockup: this copies the sign, font, colour and optical
+   spacing used by index.html. */
+.gt-sector-shell .gt-sector-shell__brand{gap:2px!important;height:42px!important;padding:3px 0!important;align-items:center!important}
+.gt-sector-shell .gt-sector-shell__brand .gt-brand-mark{display:flex!important;align-items:center!important;justify-content:center!important;flex:0 0 42px!important;width:42px!important;height:42px!important}
+.gt-sector-shell .gt-sector-shell__brand .gt-brand-mark img{display:block!important;width:42px!important;height:42px!important;max-width:none!important;filter:none!important;mix-blend-mode:normal!important}
+.gt-sector-shell .gt-sector-shell__brand .gt-brand-text{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;width:112px!important;min-width:112px!important;height:42px!important;gap:4px!important;line-height:1!important;text-align:center!important;transform:translateX(-14px)!important}
+.gt-sector-shell .gt-sector-shell__brand .top{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif!important;font-size:21px!important;font-weight:730!important;line-height:1.05!important;letter-spacing:-.044em!important;color:#f9fffe!important;text-shadow:0 0 16px rgba(137,228,215,.12)!important}
+.gt-sector-shell .gt-sector-shell__brand .bottom{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif!important;font-size:10px!important;font-weight:730!important;line-height:1.17!important;letter-spacing:.235em!important;color:#d4f8f3!important;text-shadow:0 0 8px rgba(87,236,218,.32),0 0 20px rgba(57,228,213,.17)!important}
+@media(max-width:650px){
+  .gt-sector-shell .gt-sector-shell__brand{height:32px!important;padding:0!important;transform:translateX(-5px)!important}
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-mark,
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-mark img{width:32px!important;height:32px!important}
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-mark{flex-basis:32px!important;height:32px!important}
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-text{width:84px!important;min-width:84px!important;height:32px!important;gap:2px!important;transform:none!important}
+  .gt-sector-shell .gt-sector-shell__brand .top{font-size:17px!important}
+  .gt-sector-shell .gt-sector-shell__brand .bottom{font-size:8px!important;letter-spacing:.20em!important}
+}
