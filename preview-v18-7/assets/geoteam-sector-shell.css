@@ -99,3 +99,21 @@ body.mr-has-geoteam-shell{padding-top:72px!important;background:#073a43!importan
   .gt-sector-shell .gt-sector-shell__brand .top{font-size:17px!important}
   .gt-sector-shell .gt-sector-shell__brand .bottom{font-size:8px!important;letter-spacing:.20em!important}
 }
+
+/* One predictable mobile header on all sector pages: brand on the left;
+   return, account and language controls aligned on the right. */
+.gt-sector-shell__home{display:none;color:#c8e5e3;text-decoration:none;font:650 12px/1.2 var(--gt-home-font);white-space:nowrap;align-items:center;gap:5px;transition:color .18s ease}
+.gt-sector-shell__home:hover,.gt-sector-shell__home:focus-visible{color:#8deee1;outline:none}
+@media(max-width:650px){
+  .gt-sector-shell__inner{gap:8px!important}
+  .gt-sector-shell__home{display:inline-flex!important;margin-left:auto!important;min-height:30px!important;padding:6px 0!important;font-size:11px!important}
+  .gt-sector-shell__actions{margin-left:0!important;gap:7px!important;justify-content:flex-end!important}
+  .gt-sector-shell__account{font-size:10px!important;padding:7px 8px!important}
+  .gt-sector-shell__locale{padding-left:6px!important}
+}
+@media(max-width:360px){
+  .gt-sector-shell__home span:last-child{display:none!important}
+  .gt-sector-shell__home{gap:0!important;font-size:18px!important}
+  .gt-sector-shell__actions{gap:5px!important}
+  .gt-sector-shell__account{padding:6px!important}
+}

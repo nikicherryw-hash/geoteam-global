@@ -3,6 +3,14 @@
   const requestedLanguage = new URLSearchParams(window.location.search).get('lang') || 'en';
   const language = supportedLanguages.has(requestedLanguage) ? requestedLanguage : 'en';
   const withLanguage = (path) => `${path}?lang=${encodeURIComponent(language)}`;
+  const labels = {
+    en: { home: 'Home', signIn: 'Sign in' }, tr: { home: 'Ana sayfa', signIn: 'Giriş' },
+    ru: { home: 'На главную', signIn: 'Войти' }, de: { home: 'Startseite', signIn: 'Anmelden' },
+    fr: { home: 'Accueil', signIn: 'Connexion' }, es: { home: 'Inicio', signIn: 'Entrar' },
+    it: { home: 'Home', signIn: 'Accedi' }, pt: { home: 'Início', signIn: 'Entrar' },
+    ar: { home: 'الرئيسية', signIn: 'دخول' }, zh: { home: '首页', signIn: '登录' }
+  };
+  const copy = labels[language] || labels.en;
   const sectorLinks = [
     ['/aviation.html', 'Aviation'],
     ['/industrial.html', 'Industrial'],
@@ -14,8 +22,9 @@
   shell.className = 'gt-sector-shell';
   shell.innerHTML = `<div class="gt-sector-shell__inner">
     <a class="gt-sector-shell__brand brand gt-brand-refined gt-wordmark" href="${withLanguage('/index.html')}" aria-label="GeoTeam Global home"><span class="gt-brand-mark" aria-hidden="true"><img src="/data/geoteam-mark.svg" alt=""></span><span class="gt-brand-text"><span class="top">GeoTeam</span><span class="bottom">GLOBAL</span></span></a>
+    <a class="gt-sector-shell__home" href="${withLanguage('/index.html')}" aria-label="${copy.home}"><span aria-hidden="true">←</span><span>${copy.home}</span></a>
     <nav class="gt-sector-shell__nav" aria-label="Sector navigation">${sectorLinks.map(([href,label]) => `<a href="${withLanguage(href)}">${label}</a>`).join('')}</nav>
-    <div class="gt-sector-shell__actions"><a class="gt-sector-shell__account" href="${sourcing}">Sign in</a><label class="gt-sector-shell__locale" aria-label="Website language"><span class="sr-only">Website language</span><select>${[['en','EN'],['tr','TR'],['ru','RU'],['de','DE'],['fr','FR'],['es','ES'],['it','IT'],['pt','PT'],['ar','AR'],['zh','ZH']].map(([value,label]) => `<option value="${value}"${value === language ? ' selected' : ''}>${label}</option>`).join('')}</select></label></div>
+    <div class="gt-sector-shell__actions"><a class="gt-sector-shell__account" href="${sourcing}">${copy.signIn}</a><label class="gt-sector-shell__locale" aria-label="Website language"><span class="sr-only">Website language</span><select>${[['en','EN'],['tr','TR'],['ru','RU'],['de','DE'],['fr','FR'],['es','ES'],['it','IT'],['pt','PT'],['ar','AR'],['zh','ZH']].map(([value,label]) => `<option value="${value}"${value === language ? ' selected' : ''}>${label}</option>`).join('')}</select></label></div>
   </div>`;
   document.body.insertBefore(shell, document.body.firstChild);
   document.body.classList.add('mr-has-geoteam-shell');
