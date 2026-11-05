@@ -50,7 +50,7 @@
       if (!element.classList.contains('gt-site-header')) element.hidden = true;
     });
   }
-  document.querySelectorAll('body > footer, .av-footer, .in-footer, .ec-footer, .mr-footer, .gt-legal-single').forEach((element) => {
+  document.querySelectorAll('body > footer, .av-footer, .in-footer, .ec-footer, .mr-footer, .gt-legal-single, .gt-legal-footer').forEach((element) => {
     if (!element.classList.contains('gt-site-footer')) element.hidden = true;
   });
 
