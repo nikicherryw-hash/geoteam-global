@@ -56,3 +56,27 @@ body.mr-has-geoteam-shell{padding-top:72px!important;background:#073a43!importan
   .gt-sector-shell .gt-sector-shell__brand .gt-brand-mark,
   .gt-sector-shell .gt-sector-shell__brand .gt-brand-text{height:36px!important}
 }
+
+/* The same compact, left-balanced mobile lockup applies to every sector.
+   Keeping this in the shared shell prevents Aviation, Industrial, Electronics
+   and Shipbuilding from drifting apart as individual pages evolve. */
+@media(max-width:650px){
+  .gt-sector-shell .gt-sector-shell__brand{gap:2px!important;transform:translateX(-5px)!important}
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-mark,
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-mark img{width:32px!important;height:32px!important}
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-mark{flex-basis:32px!important;height:32px!important}
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-text{width:84px!important;min-width:84px!important;height:32px!important;gap:2px!important;transform:none!important}
+  .gt-sector-shell .gt-sector-shell__brand .top{font-size:17px!important}
+  .gt-sector-shell .gt-sector-shell__brand .bottom{font-size:8px!important;letter-spacing:.20em!important}
+  .gt-sector-shell__locale{padding-left:6px!important}
+  .gt-sector-shell__locale select{font-size:9px!important;padding-right:12px!important}
+}
+@media(max-width:360px){
+  .gt-sector-shell .gt-sector-shell__brand{transform:translateX(-4px)!important}
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-mark,
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-mark img{width:30px!important;height:30px!important}
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-mark{flex-basis:30px!important;height:30px!important}
+  .gt-sector-shell .gt-sector-shell__brand .gt-brand-text{width:78px!important;min-width:78px!important;height:30px!important}
+  .gt-sector-shell .gt-sector-shell__brand .top{font-size:16px!important}
+  .gt-sector-shell .gt-sector-shell__brand .bottom{font-size:7.5px!important}
+}

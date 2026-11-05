@@ -4190,6 +4190,35 @@ $("btnBrowse")?.addEventListener("click", (e) => {
   .page>header .gt-wordmark .gt-brand-text{width:84px!important;min-width:84px!important;}
   .page>header .social{width:21px!important;height:21px!important;min-width:21px!important;min-height:21px!important;}
 }
+/* Compact mobile lockup: the sign and wordmark read as one balanced mark,
+   while the social links remain clean glyphs rather than circular controls. */
+@media (max-width:620px){
+  .page>header .brand-wrap{transform:translateX(-5px)!important;}
+  .page>header .gt-wordmark{gap:2px!important;height:32px!important;}
+  .page>header .gt-brand-mark,
+  .page>header .gt-brand-mark img{width:32px!important;height:32px!important;}
+  .page>header .gt-brand-mark{flex-basis:32px!important;height:32px!important;}
+  .page>header .gt-wordmark .gt-brand-text{width:84px!important;min-width:84px!important;height:32px!important;gap:2px!important;transform:none!important;}
+  .page>header .gt-wordmark .gt-brand-text .top{font-size:17px!important;}
+  .page>header .gt-wordmark .gt-brand-text .bottom{font-size:8px!important;letter-spacing:.20em!important;}
+  .page>header .social{width:22px!important;height:22px!important;min-width:22px!important;min-height:22px!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;}
+  .page>header .social svg{width:14px!important;height:14px!important;}
+  .page>header .gt-lang-wrap{width:48px!important;min-width:48px!important;max-width:48px!important;height:26px!important;}
+  .page>header .gt-lang-display{font-size:9px!important;gap:2px!important;}
+  .page>header .gt-lang-chevron{font-size:10px!important;}
+}
+@media (max-width:360px){
+  .page>header .brand-wrap{transform:translateX(-4px)!important;}
+  .page>header .gt-brand-mark,
+  .page>header .gt-brand-mark img{width:30px!important;height:30px!important;}
+  .page>header .gt-brand-mark{flex-basis:30px!important;height:30px!important;}
+  .page>header .gt-wordmark,.page>header .gt-wordmark .gt-brand-text{height:30px!important;}
+  .page>header .gt-wordmark .gt-brand-text{width:78px!important;min-width:78px!important;}
+  .page>header .gt-wordmark .gt-brand-text .top{font-size:16px!important;}
+  .page>header .gt-wordmark .gt-brand-text .bottom{font-size:7.5px!important;}
+  .page>header .social{width:20px!important;height:20px!important;min-width:20px!important;min-height:20px!important;}
+  .page>header .gt-lang-wrap{width:46px!important;min-width:46px!important;max-width:46px!important;}
+}
 </style>
 </body>
 </html>
