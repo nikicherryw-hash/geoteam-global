@@ -227,6 +227,7 @@ def _product_card(report: dict, query: str, citations: int, image_present: bool)
     def clean(value, limit):
         value = re.sub(r'\[[^\]]*\]\(https?://[^\s)]*\)', '', str(value or ''))
         value = re.sub(r'https?://\S+', '', value)
+        value = re.sub(r'\(\s*\)', '', value)
         return ' '.join(value.split())[:limit]
     supplied = report.get("product") if isinstance(report.get("product"), dict) else {}
     detected = identity(query)
