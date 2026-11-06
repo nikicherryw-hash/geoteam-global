@@ -5,7 +5,7 @@ from .offer_evidence import offer_facts, product_image
 
 class EvidenceTests(unittest.TestCase):
     def test_matching_image_alt_and_unrelated_banner(self):
-        page = '<img src="/banner.jpg" alt="Aircraft"><img src="/engine.jpg" alt="Rotax 912 ULS engine">'
+        page = '<img src="/banner.jpg" alt="Aircraft"><img src="data:image/svg+xml,placeholder" alt="Rotax aircraft engine 912"><img src="/engine.jpg" alt="Rotax aircraft engine 912 ULS">'
         self.assertEqual(product_image(page, 'ROTAX 912'), '/engine.jpg')
         self.assertIsNone(product_image(page, 'ROTAX 915'))
     def test_banner_is_not_product_photo(self):

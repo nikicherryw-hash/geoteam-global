@@ -203,9 +203,10 @@ def product_image(page, model):
         def handle_starttag(self, tag, attrs):
             values = dict(attrs)
             label = compact(values.get('alt', ''))
-            if tag == 'img' and target and target in label:
+            tokens = [compact(t) for t in str(model).split() if compact(t)]
+            if tag == 'img' and tokens and all(t in label for t in tokens):
                 src = values.get('src') or values.get('data-src')
-                if src:
+                if src and not src.lower().startswith(('data:', 'javascript:')):
                     self.matches.append(src)
     images = Images()
     images.feed(page[:500000])
