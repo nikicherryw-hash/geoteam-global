@@ -1,9 +1,16 @@
 import json
 import unittest
-from .offer_evidence import offer_facts
+from .offer_evidence import offer_facts, product_image
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_banner_is_not_product_photo(self):
+        self.assertIsNone(product_image('<meta property="og:image" content="https://example.com/landscape.jpg">', 'ROTAX 912'))
+
+    def test_photo_requires_matching_model(self):
+        page = '<script type="application/ld+json">' + json.dumps({'@type':'Product','name':'ROTAX 912','image':'/912.jpg'}) + '</script>'
+        self.assertEqual(product_image(page,'ROTAX 912'), '/912.jpg')
+        self.assertIsNone(product_image(page,'ROTAX 915'))
     def page(self, model='TAC Xenta 421A', offers=None):
         return '<script type="application/ld+json">' + json.dumps({'@type':'Product','name':model,'offers':offers or {'@type':'Offer','itemCondition':'https://schema.org/UsedCondition','availability':'https://schema.org/InStock'}}) + '</script>'
 

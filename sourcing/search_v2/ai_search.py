@@ -163,16 +163,12 @@ async def _source_page_image(source_url: str, lead: dict | None = None) -> str |
         lead['page_facts'] = facts
         lead['page_checked_at'] = datetime.now(timezone.utc).isoformat()
         lead['page_evidence'] = {'kind':'PRODUCT_JSON_LD', 'fields':facts, 'content_sha256':hashlib.sha256(page.encode()).hexdigest()}
-    patterns = (
-        r'<meta[^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\'][^>]+content=["\']([^"\']+)',
-        r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\']',
-    )
-    for pattern in patterns:
-        match = re.search(pattern, page, re.I)
-        if match:
-            image = urljoin(page_url, html.unescape(match.group(1).strip()))
-            if _public_page_url(image):
-                return image
+    from .offer_evidence import product_image
+    candidate = product_image(page, (lead or {}).get('model', ''))
+    if candidate:
+        image = urljoin(page_url, html.unescape(candidate.strip()))
+        if _public_page_url(image):
+            return image
     return None
 
 
@@ -204,9 +200,15 @@ async def fetch_public_image(source_url: str) -> tuple[bytes, str] | None:
 
 
 async def attach_source_images(leads: list[dict], offers: list[dict] | None = None) -> list[dict]:
-    for lead in leads[:12]:
-        image = await _source_page_image(str(lead.get("source_url", "") or ""), lead)
-        if image:
+    semaphore = asyncio.Semaphore(3)
+    async def enrich(lead):
+        async with semaphore:
+            try:
+                image = await _source_page_image(str(lead.get("source_url", "") or ""), lead)
+            except (ValueError, TypeError, KeyError, RecursionError, httpx.HTTPError):
+                lead['page_check_status'] = 'UNAVAILABLE'
+                return
+        if image and not lead.get('image_url'):
             lead.update({"image_url": image, "image_status": "SOURCE_PAGE_METADATA"})
         if offers is not None:
             offer = next((x for x in offers if x.get('public_offer_id') == lead.get('public_offer_id')), None)
@@ -214,6 +216,7 @@ async def attach_source_images(leads: list[dict], offers: list[dict] | None = No
                 offer.update(lead['page_facts'])
                 offer['updated_at'] = lead['page_checked_at']
                 offer['verification'] = 'SOURCE_PAGE_CHECKED'
+    await asyncio.gather(*(enrich(lead) for lead in leads[:12]))
     return leads
 
 

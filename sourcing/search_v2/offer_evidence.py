@@ -165,3 +165,35 @@ def offer_facts(page, model):
         else:
             structured[key] = value
     return structured
+
+
+def product_image(page, model):
+    """Never use a site's generic social banner as a product photo."""
+    parser = StructuredData()
+    parser.feed(page[:500000])
+    compact = lambda value: re.sub(r'[^a-z0-9]', '', str(value).lower())
+    target = compact(model)
+    for block in parser.blocks:
+        try:
+            root = json.loads(block)
+        except ValueError:
+            continue
+        queue = root if isinstance(root, list) else [root]
+        while queue:
+            item = queue.pop(0)
+            if not isinstance(item, dict):
+                continue
+            graph = item.get('@graph', [])
+            queue.extend(graph if isinstance(graph, list) else [graph])
+            if item.get('@type') != 'Product' or not target:
+                continue
+            if target not in compact(' '.join(str(item.get(k) or '') for k in ('name','sku','mpn','model'))):
+                continue
+            image = item.get('image')
+            if isinstance(image, list):
+                image = image[0] if image else None
+            if isinstance(image, dict):
+                image = image.get('contentUrl') or image.get('url')
+            if isinstance(image, str):
+                return image
+    return None
