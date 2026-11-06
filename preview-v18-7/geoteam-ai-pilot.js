@@ -22,10 +22,16 @@
   const query = $('query'), form = $('research'), submit = $('submit'), status = $('status'), results = $('results');
   const legacyLanguage = $('lang'), hint = $('hint'), attach = $('attach'), files = $('files'), back = $('back');
   let busy = false;
+  attach.accept = 'image/jpeg,image/png,image/webp,.pdf,.txt,.csv,.docx,.xlsx';
   const t = key => (copy[lang] || copy.en)[key] || copy.en[key] || '';
   const text = (node, value) => { if (node) node.textContent = value == null ? '' : String(value); };
   const make = (tag, className) => { const node = document.createElement(tag); if (className) node.className = className; return node; };
   const hasValue = value => value !== null && value !== undefined && String(value).trim() !== '';
+  const offerWords = {
+    ru:['Страна не установлена','Новое','Б/у','Восстановленное','Состояние не установлено','Наличие не подтверждено','Цена по запросу','Цена из публичного источника; комплектация и единица продажи требуют уточнения.'],
+    en:['Country not established','New','Used','Refurbished','Condition not established','Availability not confirmed','Price on request','Public price reference; configuration and sales unit require confirmation.'],
+    tr:['Ülke belirlenmedi','Yeni','Kullanılmış','Yenilenmiş','Durum belirlenmedi','Stok doğrulanmadı','Fiyat talep üzerine','Herkese açık fiyat referansı; yapılandırma ve satış birimi teyit edilmelidir.']
+  };
 
   function setStatus(message, state = 'global') {
     status.dataset.state = ['global', 'local', 'offline'].includes(state) ? state : 'offline';
@@ -76,8 +82,12 @@
     const grid = make('div', 'offersgrid');
     offers.slice(0, 12).forEach(offer => {
       const card = make('article', 'offer'), title = make('strong'); text(title, offer.public_offer_id || 'GeoTeam offer'); card.append(title);
-      const meta = make('p', 'meta'); text(meta, [offer.country, offer.condition, offer.availability].filter(hasValue).join(' · ') || t('unknown')); card.append(meta);
-      const price = make('p', 'price'); text(price, [offer.price, offer.currency].filter(hasValue).join(' ') || 'RFQ'); card.append(price);
+      const words = offerWords[lang] || offerWords.en;
+      const meta = make('p', 'meta'); text(meta, [offer.country || words[0], words[({NEW:1,USED:2,REFURBISHED:3})[offer.condition] || 4], words[5]].join(' · ')); card.append(meta);
+      const price = make('p', 'price');
+      const numericPrice = Number(offer.price);
+      text(price, hasValue(offer.price) && Number.isFinite(numericPrice) && numericPrice > 0 && /^[A-Z]{3}$/.test(offer.currency || '') ? new Intl.NumberFormat(lang, {style:'currency',currency:offer.currency}).format(numericPrice) : words[6]); card.append(price);
+      const qualification = make('p', 'meta'); text(qualification, words[7]); card.append(qualification);
       if (hasValue(offer.lead_time)) { const lead = make('p', 'meta'); text(lead, `${t('lead')}: ${offer.lead_time}`); card.append(lead); }
       const action = make('button', 'rfq'); action.type = 'button'; text(action, t('quote')); action.addEventListener('click', () => document.dispatchEvent(new CustomEvent('geoteam:rfq-select', {detail: offer}))); card.append(action); grid.append(card);
     });
@@ -98,10 +108,18 @@
   }
   form.addEventListener('submit', async event => {
     event.preventDefault(); if (busy) return;
-    const value = query.value.trim(); if (value.length < 2 || value.length > 160) { setStatus(t('invalid'), 'offline'); query.focus(); return; }
+    const value = query.value.trim(), file = attach.files[0]; if ((!file && value.length < 2) || value.length > 160) { setStatus(t('invalid'), 'offline'); query.focus(); return; }
     busy = true; submit.disabled = true; results.replaceChildren(); setStatus(t('checking'));
     try {
-      const response = await fetch(`${api}/guest/research`, {method:'POST', credentials:'same-origin', cache:'no-store', headers:{'Content-Type':'application/json'}, body:JSON.stringify({query:value, locale:lang})});
+      let payload = {query:value, locale:lang};
+      if (file) {
+        if (file.size > 3 * 1024 * 1024) throw Error('FILE_MAX_3_MB');
+        const mime = file.type || ({pdf:'application/pdf',txt:'text/plain',csv:'text/csv',jpg:'image/jpeg',jpeg:'image/jpeg',png:'image/png',webp:'image/webp'})[file.name.split('.').pop().toLowerCase()];
+        if (!['application/pdf','text/plain','text/csv','image/jpeg','image/png','image/webp','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'].includes(mime)) throw Error('UNSUPPORTED_FILE_FORMAT');
+        const data = await new Promise((resolve,reject) => { const reader = new FileReader(); reader.onerror = () => reject(Error('FILE_READ')); reader.onload = () => resolve(String(reader.result).split(',')[1]); reader.readAsDataURL(file); });
+        payload = {...payload,mime,filename:file.name,data};
+      }
+      const response = await fetch(`${api}/guest/${file ? 'research-attachment' : 'research'}`, {method:'POST', credentials:'same-origin', cache:'no-store', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
       if (response.status === 429) { setStatus(t('budget'), 'offline'); return; }
       if (!response.ok) throw Error(`START_${response.status}`);
       const job = await response.json(); if (!/^[a-f0-9]{32}$/i.test(String(job.job_id || ''))) throw Error('JOB');
