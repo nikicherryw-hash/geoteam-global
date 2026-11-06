@@ -68,7 +68,6 @@
   header.innerHTML = `
     <div class="gt-site-header__inner">
       <a class="gt-site-brand" href="${pathWithLanguage('/index.html')}" aria-label="GeoTeam Global ${text.home}">
-        <span class="gt-site-brand__mark"><img src="/data/geoteam-mark.svg" width="36" height="36" alt="" aria-hidden="true"></span>
         <span class="gt-site-brand__wordmark"><b>GeoTeam</b><small>GLOBAL</small></span>
       </a>
       ${isSourcing ? '' : backLink}
@@ -114,7 +113,7 @@
       : `
     <div class="gt-site-footer__inner">
       <section class="gt-site-footer__brand">
-        <a class="gt-site-brand" href="${pathWithLanguage('/index.html')}"><span class="gt-site-brand__mark"><img src="/data/geoteam-mark.svg" width="34" height="34" alt="" aria-hidden="true"></span><span class="gt-site-brand__wordmark"><b>GeoTeam</b><small>GLOBAL</small></span></a>
+        <a class="gt-site-brand" href="${pathWithLanguage('/index.html')}"><span class="gt-site-brand__wordmark"><b>GeoTeam</b><small>GLOBAL</small></span></a>
         <p><strong>${text.tagline}</strong><br>${text.description}</p>
       </section>
       <section><h2>${text.sectors}</h2>${sectorLinks.map(([href, labels]) => `<a href="${pathWithLanguage(href)}">${labels[language] || labels.en}</a>`).join('')}</section>

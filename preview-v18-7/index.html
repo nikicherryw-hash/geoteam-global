@@ -1034,6 +1034,7 @@ header .right{ position: relative !important; z-index: 99999 !important; }
 <style>
 /* v18.7 design review, original GeoTeam palette */
 .gt-brand-refined {display:inline-flex!important;flex-direction:row!important;align-items:center!important;gap:8px!important;line-height:1!important;min-width:max-content!important;white-space:nowrap!important;overflow:visible!important;text-decoration:none;color:#ecfcfc;padding:5px 2px 7px!important;}
+.gt-brand-mark{display:none!important}.gt-wordmark .gt-brand-text{transform:none!important}
 .gt-brand-orb{display:grid;place-items:center;flex:0 0 38px;filter:drop-shadow(0 0 7px rgba(67,243,227,.52));transition:filter .2s ease}
 .gt-brand-refined:hover .gt-brand-orb{filter:drop-shadow(0 0 11px rgba(67,243,227,.78))}
 .gt-brand-text{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:5px;min-width:0;overflow:visible}
@@ -2403,8 +2404,8 @@ a:focus-visible,button:focus-visible,select:focus-visible{
 </style>
 <link rel="stylesheet" href="geoteam-surface.css">
   <meta name="gt-site-shell" content="footer">
-  <link rel="stylesheet" href="/assets/geoteam-site-shell.css?v=20261106-unified" />
-  <script defer src="/assets/geoteam-site-shell.js?v=20261106-unified"></script>
+  <link rel="stylesheet" href="/assets/geoteam-site-shell.css?v=text-only-20261106" />
+  <script defer src="/assets/geoteam-site-shell.js?v=text-only-20261106"></script>
 </head>
 
 <body>
@@ -2414,7 +2415,7 @@ a:focus-visible,button:focus-visible,select:focus-visible{
     <header>
       <div class="nav">
         <div class="brand-wrap" aria-label="GeoTeam Global">
-          <a class="brand gt-brand-refined gt-wordmark" href="index.html" aria-label="GeoTeam Global — home"><span class="gt-brand-mark" aria-hidden="true"><img src="data/geoteam-mark.svg" alt=""></span><span class="gt-brand-text"><span class="top">GeoTeam</span><span class="bottom">GLOBAL</span></span></a>
+          <a class="brand gt-brand-refined gt-wordmark" href="index.html" aria-label="GeoTeam Global — home"><span class="gt-brand-text"><span class="top">GeoTeam</span><span class="bottom">GLOBAL</span></span></a>
           
         </div>
 

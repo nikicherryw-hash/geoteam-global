@@ -18,10 +18,10 @@ body.gt-site-shell>header:not(.gt-site-header),body.gt-site-shell>footer:not(.gt
 
 /* Global Sourcing uses the approved homepage wordmark geometry exactly. */
 .gt-site-shell--sourcing .gt-site-header__inner{width:calc(100% - 40px);max-width:none;gap:18px}
-.gt-site-shell--sourcing .gt-site-brand{height:42px;padding:3px 0;gap:2px;align-items:center}
+.gt-site-shell--sourcing .gt-site-brand{height:42px;padding:3px 0;gap:0;align-items:center}
 .gt-site-shell--sourcing .gt-site-brand__mark{flex:0 0 42px;width:42px;height:42px}
 .gt-site-shell--sourcing .gt-site-brand img{width:42px;height:42px}
-.gt-site-shell--sourcing .gt-site-brand__wordmark{width:112px;min-width:112px;height:42px;gap:4px;transform:translateX(-14px)}
+.gt-site-shell--sourcing .gt-site-brand__wordmark{width:112px;min-width:112px;height:42px;gap:4px;transform:none}
 .gt-site-shell--sourcing .gt-site-brand b{font:730 21px/1.05 var(--gt-font);letter-spacing:-.044em}
 .gt-site-shell--sourcing .gt-site-brand small{font:730 10px/1.17 var(--gt-font);letter-spacing:.235em}
 .gt-site-shell--sourcing .gt-site-header{background:linear-gradient(to bottom,rgba(4,16,24,.82),rgba(3,27,29,.58))!important}
@@ -30,7 +30,7 @@ body.gt-site-shell>header:not(.gt-site-header),body.gt-site-shell>footer:not(.gt
 .gt-site-shell--sourcing .gt-site-actions{margin-left:auto}
 @media(max-width:650px){
   .gt-site-shell--sourcing .gt-site-header__inner{width:calc(100% - 28px);gap:7px}
-  .gt-site-shell--sourcing .gt-site-brand{height:32px;padding:0;gap:2px}
+  .gt-site-shell--sourcing .gt-site-brand{height:32px;padding:0;gap:0}
   .gt-site-shell--sourcing .gt-site-brand__mark{flex-basis:32px;width:32px;height:32px}
   .gt-site-shell--sourcing .gt-site-brand img{width:32px;height:32px}
   .gt-site-shell--sourcing .gt-site-brand__wordmark{width:84px;min-width:84px;height:32px;gap:2px;transform:none}
