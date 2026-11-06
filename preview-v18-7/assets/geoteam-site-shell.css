@@ -15,3 +15,25 @@ body.gt-site-shell>header:not(.gt-site-header),body.gt-site-shell>footer:not(.gt
 @media(max-width:650px){.gt-site-header__inner{gap:7px!important}.gt-site-brand__mark{flex-basis:32px}.gt-site-brand img{width:32px;height:32px}.gt-site-brand__wordmark{gap:2px}.gt-site-brand b{font-size:17px}.gt-site-brand small{font-size:8px;letter-spacing:.20em}.gt-site-nav{display:none}.gt-site-home{display:inline-flex;margin-left:auto;font-size:11px!important;min-height:30px}.gt-site-shell--sourcing .gt-site-brand+.gt-site-home{margin-left:0;padding:6px 8px}.gt-site-actions{gap:7px}.gt-site-signin{font-size:10px!important;padding:7px 8px}.gt-site-locale{padding-left:6px}.gt-site-locale select{font-size:9px;padding-right:12px}.gt-site-footer{margin-top:40px!important;padding-top:35px!important}.gt-site-footer__inner{width:calc(100% - 28px);grid-template-columns:1fr 1fr;gap:26px 18px}.gt-site-footer__brand{grid-column:1/-1}.gt-site-footer__bottom{width:calc(100% - 28px);margin-top:28px;flex-direction:column}.gt-site-footer__minimal{width:calc(100% - 28px);flex-direction:column;gap:8px;text-align:center}.gt-site-footer__minimal nav{gap:16px}.gt-site-locale-note{width:calc(100% - 28px);font-size:11px}}
 @media(max-width:375px){.gt-site-home span:last-child{display:none}.gt-site-home{font-size:18px!important;gap:0}.gt-site-signin{padding:6px}.gt-site-actions{gap:5px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Global Sourcing uses the approved homepage wordmark geometry exactly. */
+.gt-site-shell--sourcing .gt-site-header__inner{width:calc(100% - 40px);max-width:none;gap:18px}
+.gt-site-shell--sourcing .gt-site-brand{height:42px;padding:3px 0;gap:2px;align-items:center}
+.gt-site-shell--sourcing .gt-site-brand__mark{flex:0 0 42px;width:42px;height:42px}
+.gt-site-shell--sourcing .gt-site-brand img{width:42px;height:42px}
+.gt-site-shell--sourcing .gt-site-brand__wordmark{width:112px;min-width:112px;height:42px;gap:4px;transform:translateX(-14px)}
+.gt-site-shell--sourcing .gt-site-brand b{font:730 21px/1.05 var(--gt-font);letter-spacing:-.044em}
+.gt-site-shell--sourcing .gt-site-brand small{font:730 10px/1.17 var(--gt-font);letter-spacing:.235em}
+.gt-site-shell--sourcing .gt-site-home{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(82px,calc(env(safe-area-inset-bottom) + 68px));z-index:10001;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--gt-soft)!important;font-size:12px!important;text-shadow:0 0 12px rgba(91,230,195,.18)}
+.gt-site-shell--sourcing .gt-site-home:hover,.gt-site-shell--sourcing .gt-site-home:focus-visible{border:0;background:transparent;box-shadow:none;color:var(--gt-mint)!important}
+.gt-site-shell--sourcing .gt-site-actions{margin-left:0}
+@media(max-width:650px){
+  .gt-site-shell--sourcing .gt-site-header__inner{width:calc(100% - 28px);gap:7px}
+  .gt-site-shell--sourcing .gt-site-brand{height:32px;padding:0;gap:2px}
+  .gt-site-shell--sourcing .gt-site-brand__mark{flex-basis:32px;width:32px;height:32px}
+  .gt-site-shell--sourcing .gt-site-brand img{width:32px;height:32px}
+  .gt-site-shell--sourcing .gt-site-brand__wordmark{width:84px;min-width:84px;height:32px;gap:2px;transform:none}
+  .gt-site-shell--sourcing .gt-site-brand b{font-size:17px}
+  .gt-site-shell--sourcing .gt-site-brand small{font-size:8px;letter-spacing:.20em}
+  .gt-site-shell--sourcing .gt-site-home{left:max(14px,env(safe-area-inset-left));bottom:max(86px,calc(env(safe-area-inset-bottom) + 72px));font-size:11px!important}
+}
