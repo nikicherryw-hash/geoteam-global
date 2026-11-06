@@ -19,5 +19,9 @@ replacement = """        role = o.get('source_role', 'PRODUCT_OFFER')
             q['status'] = 'PROCUREMENT_CHANNEL'
         offers.append({k:v for k,v in q.items() if v and k != 'item'})"""
 text = text.replace(marker, replacement, 1)
+model_marker = "model != 'gpt-6-luna'"
+if text.count(model_marker) != 1:
+    raise SystemExit('REFUSED_MODEL_GUARD')
+text = text.replace(model_marker, "model not in {'gpt-6-luna', 'gpt-6.1-sol'}", 1)
 path.with_name(path.name + '.source-roles.new').write_text(text, encoding='utf-8')
 print('CANDIDATE_READY')
