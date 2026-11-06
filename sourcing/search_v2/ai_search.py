@@ -127,7 +127,7 @@ def _public_page_url(url: str) -> bool:
         return False
 
 
-async def _source_page_image(source_url: str) -> str | None:
+async def _source_page_image(source_url: str, lead: dict | None = None) -> str | None:
     if not _public_page_url(source_url):
         return None
     try:
@@ -143,6 +143,12 @@ async def _source_page_image(source_url: str) -> str | None:
             page_url, page = str(response.url), response.text[:500000]
     except (httpx.HTTPError, UnicodeError):
         return None
+    if lead is not None:
+        from .offer_evidence import offer_facts
+        facts = offer_facts(page, lead.get('model', ''))
+        lead['page_facts'] = facts
+        lead['page_checked_at'] = datetime.now(timezone.utc).isoformat()
+        lead['page_evidence'] = {'kind':'PRODUCT_JSON_LD', 'fields':facts, 'content_sha256':hashlib.sha256(page.encode()).hexdigest()}
     patterns = (
         r'<meta[^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\'][^>]+content=["\']([^"\']+)',
         r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\']',
@@ -183,13 +189,17 @@ async def fetch_public_image(source_url: str) -> tuple[bytes, str] | None:
     return None
 
 
-async def attach_source_images(leads: list[dict]) -> list[dict]:
+async def attach_source_images(leads: list[dict], offers: list[dict] | None = None) -> list[dict]:
     for lead in leads[:12]:
-        if lead.get("image_url"):
-            continue
-        image = await _source_page_image(str(lead.get("source_url", "") or ""))
+        image = await _source_page_image(str(lead.get("source_url", "") or ""), lead)
         if image:
             lead.update({"image_url": image, "image_status": "SOURCE_PAGE_METADATA"})
+        if offers is not None:
+            offer = next((x for x in offers if x.get('public_offer_id') == lead.get('public_offer_id')), None)
+            if offer is not None and lead.get('page_facts'):
+                offer.update(lead['page_facts'])
+                offer['updated_at'] = lead['page_checked_at']
+                offer['verification'] = 'SOURCE_PAGE_CHECKED'
     return leads
 
 
@@ -244,7 +254,7 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
         declared_image = str(item.get("image_url") or "")
         image_source = str(item.get("image_source_url") or "")
         image_url = declared_image if _public_page_url(declared_image) and image_source == source_url else None
-        internal_leads.append({"source_url": source_url, "seller": str(item.get("seller") or "")[:120], "evidence": str(item.get("evidence") or "")[:280], "image_url": image_url, "condition": condition})
+        internal_leads.append({"source_url": source_url, "model": str(item.get('model') or ''), "public_offer_id":public_offer_id(source_url, len(public_offers) + 1), "seller": str(item.get("seller") or "")[:120], "evidence": str(item.get("evidence") or "")[:280], "image_url": image_url, "condition": condition})
         public_offers.append({"public_offer_id": public_offer_id(source_url, len(public_offers) + 1), "country": str(item.get("country") or "")[:80] or None, "condition": condition, "price": raw_price if price_ok else None, "currency": currency if price_ok else None, "availability": "NOT_CONFIRMED", "lead_time": None, "updated_at": datetime.now(timezone.utc).isoformat(), "status": "SEARCH_CITATION_ONLY"})
     return {"product_id": "GEOTEAM_GLOBAL", "query": query, "locale": locale, "_report": report, "_internal_sources": internal_leads, "offers": public_offers, "warnings": list(report.get("warnings", []))[:8] + ["Web search citations do not confirm inventory or binding prices."], "citations_returned": len(refs)}
 
@@ -265,7 +275,7 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
     if not any(item.get("type") == "web_search_call" for item in data.get("output", []) if isinstance(item, dict)):
         raise ValueError("No web search performed")
     result = validate_output(data, query, locale)
-    await attach_source_images(result["_internal_sources"])
+    await attach_source_images(result["_internal_sources"], result['offers'])
     image_url = next((lead.get("image_url") for lead in result["_internal_sources"] if lead.get("image_url")), None)
     product = _product_card(result.pop("_report"), query, result["citations_returned"], bool(image_url))
     result["product"] = product

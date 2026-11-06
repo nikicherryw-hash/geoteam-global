@@ -83,7 +83,9 @@
     offers.slice(0, 12).forEach(offer => {
       const card = make('article', 'offer'), title = make('strong'); text(title, offer.public_offer_id || 'GeoTeam offer'); card.append(title);
       const words = offerWords[lang] || offerWords.en;
-      const meta = make('p', 'meta'); text(meta, [offer.country || words[0], words[({NEW:1,USED:2,REFURBISHED:3})[offer.condition] || 4], words[5]].join(' · ')); card.append(meta);
+      const stockWords = {ru:['По данным источника: в наличии','По данным источника: нет в наличии','Предзаказ','Поставка под заказ','Снято с производства'],en:['Source reports in stock','Source reports out of stock','Pre-order','Back order','Discontinued'],tr:['Kaynağa göre stokta','Kaynağa göre stokta yok','Ön sipariş','Sipariş üzerine','Üretimden kaldırılmış']}[lang] || ['Source reports in stock','Source reports out of stock','Pre-order','Back order','Discontinued'];
+      const availabilityIndex = {SOURCE_IN_STOCK:0,SOURCE_OUT_OF_STOCK:1,SOURCE_PREORDER:2,SOURCE_BACKORDER:3,SOURCE_DISCONTINUED:4}[offer.availability];
+      const meta = make('p', 'meta'); text(meta, [offer.country || words[0], words[({NEW:1,USED:2,REFURBISHED:3})[offer.condition] || 4], availabilityIndex === undefined ? words[5] : stockWords[availabilityIndex]].join(' · ')); card.append(meta);
       const price = make('p', 'price');
       const numericPrice = Number(offer.price);
       text(price, hasValue(offer.price) && Number.isFinite(numericPrice) && numericPrice > 0 && /^[A-Z]{3}$/.test(offer.currency || '') ? new Intl.NumberFormat(lang, {style:'currency',currency:offer.currency}).format(numericPrice) : words[6]); card.append(price);
