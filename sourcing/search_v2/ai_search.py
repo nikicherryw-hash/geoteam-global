@@ -224,7 +224,9 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
                 for block in item.get("content", []) if block.get("type") == "output_text"]
     if not messages:
         raise ValueError("Missing structured output")
-    report = json.loads(messages[0]["text"])
+    if data.get("status") == "incomplete":
+        raise ValueError("AI_RESPONSE_INCOMPLETE")
+    report = json.loads("".join(block["text"] for block in messages))
     internal_leads: list[dict] = []
     public_offers: list[dict] = []
     for item in report.get("candidates", [])[:25]:
@@ -250,7 +252,7 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
 async def search_once(query, locale, hints, api_key, model, client, budget):
     payload = {"model": model, "store": False, "instructions": SYSTEM,
         "input": "Research globally the exact item " + repr(query) + ". Language: " + locale + ". Return a source-grounded product identity card and 5-12 distinct direct public item pages when available. Keep valid offers even without an image; one representative product photo is enough. Optional source hints, not offers: " + json.dumps(hints[:12]),
-        "tools": [{"type": "web_search"}], "tool_choice": "required", "include": ["web_search_call.action.sources"], "text": {"format": JSON_FORMAT}, "max_tool_calls": 5, "max_output_tokens": 5000}
+        "tools": [{"type": "web_search"}], "tool_choice": "required", "include": ["web_search_call.action.sources"], "text": {"format": JSON_FORMAT}, "max_tool_calls": 5, "max_output_tokens": 12000}
     ticket = budget.reserve_call()
     try:
         response = await client.post("https://api.openai.com/v1/responses", json=payload, headers={"Authorization": "Bearer " + api_key}, timeout=65)
