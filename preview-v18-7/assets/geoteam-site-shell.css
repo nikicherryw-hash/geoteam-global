@@ -26,7 +26,7 @@ body.gt-site-shell>header:not(.gt-site-header),body.gt-site-shell>footer:not(.gt
 .gt-site-shell--sourcing .gt-site-brand small{font:730 10px/1.17 var(--gt-font);letter-spacing:.235em}
 .gt-site-shell--sourcing .gt-site-home{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(82px,calc(env(safe-area-inset-bottom) + 68px));z-index:10001;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--gt-soft)!important;font-size:12px!important;text-shadow:0 0 12px rgba(91,230,195,.18)}
 .gt-site-shell--sourcing .gt-site-home:hover,.gt-site-shell--sourcing .gt-site-home:focus-visible{border:0;background:transparent;box-shadow:none;color:var(--gt-mint)!important}
-.gt-site-shell--sourcing .gt-site-actions{margin-left:0}
+.gt-site-shell--sourcing .gt-site-actions{margin-left:auto}
 @media(max-width:650px){
   .gt-site-shell--sourcing .gt-site-header__inner{width:calc(100% - 28px);gap:7px}
   .gt-site-shell--sourcing .gt-site-brand{height:32px;padding:0;gap:2px}
