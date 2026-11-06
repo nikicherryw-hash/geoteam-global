@@ -71,7 +71,7 @@
         <span class="gt-site-brand__mark"><img src="/data/geoteam-mark.svg" width="36" height="36" alt="" aria-hidden="true"></span>
         <span class="gt-site-brand__wordmark"><b>GeoTeam</b><small>GLOBAL</small></span>
       </a>
-      ${isSourcing ? backLink : ''}
+      ${isSourcing ? '' : backLink}
       <nav class="gt-site-nav" aria-label="${text.sectors}">
         ${sectorLinks.map(([href, labels]) => `<a href="${pathWithLanguage(href)}">${labels[language] || labels.en}</a>`).join('')}
       </nav>
@@ -84,6 +84,13 @@
   if (!footerOnly) {
     body.insertBefore(header, body.firstChild);
     header.querySelector('select').addEventListener('change', (event) => window.location.assign(localizedPath(event.target.value)));
+    if (isSourcing) {
+      const sourcingBack = document.createElement('a');
+      sourcingBack.className = 'gt-site-home gt-site-sourcing-back';
+      sourcingBack.href = pathWithLanguage('/index.html');
+      sourcingBack.innerHTML = `<span aria-hidden="true">←</span><span>${text.back || 'Back'}</span>`;
+      body.appendChild(sourcingBack);
+    }
   }
 
   if (!footerOnly && language !== 'en' && language !== 'ru' && language !== 'tr') {
