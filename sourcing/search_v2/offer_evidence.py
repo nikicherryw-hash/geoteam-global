@@ -87,6 +87,17 @@ def table_facts(page, model):
         matches.append(facts)
     facts = {k:v for k,v in matches[0].items() if all(x.get(k) == v for x in matches)} if matches else {}
     visible = ' '.join(parser.visible)
+    # Labelled product details before any related-product catalogue.
+    label = re.search(r'Part Number\s*:\s*' + re.escape(target) + r'(?![A-Z0-9-])', visible, re.I)
+    if label:
+        details = visible[label.start():label.start() + 1800]
+        details = re.split(r'Other aircraft parts|Related products|You may also like', details, flags=re.I)[0]
+        condition = re.search(r'\bCondition\s*:\s*(Factory New|New Surplus|New|Used|Refurbished|Overhauled|Serviceable|As Removed)\b', details, re.I)
+        if condition:
+            facts.setdefault('condition', {'factory new':'FACTORY_NEW','new surplus':'NEW_SURPLUS','new':'NEW','used':'USED','refurbished':'REFURBISHED','overhauled':'OVERHAULED','serviceable':'SERVICEABLE','as removed':'AS_REMOVED'}[condition.group(1).lower()])
+        unit = re.search(r'Unit of Measure\s*:\s*(EA|EACH|SET|KG)\b', details, re.I)
+        if unit:
+            facts['price_unit'] = {'EA':'C62','EACH':'C62','SET':'SET','KG':'KGM'}[unit.group(1).upper()]
     if matches and re.search(r'\b(?:no longer available|listing (?:has )?ended|auction closed|this item has been sold)\b', visible, re.I):
         facts['availability'] = 'SOURCE_OUT_OF_STOCK'
     return facts
