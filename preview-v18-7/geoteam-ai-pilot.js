@@ -96,7 +96,7 @@
     section.append(grid); results.append(section);
   }
   async function poll(jobId) {
-    for (let attempt = 0; attempt < 90; attempt += 1) {
+    for (let attempt = 0; attempt < 150; attempt += 1) {
       await new Promise(resolve => setTimeout(resolve, 2000));
       const response = await fetch(`${api}/guest/research/${encodeURIComponent(jobId)}`, {credentials:'same-origin', cache:'no-store'});
       if (!response.ok) throw Error(`POLL_${response.status}`);

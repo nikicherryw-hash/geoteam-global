@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import asyncio
 import html
 import ipaddress
 import json
@@ -265,7 +266,7 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
         "tools": [{"type": "web_search"}], "tool_choice": "required", "include": ["web_search_call.action.sources"], "text": {"format": JSON_FORMAT}, "max_tool_calls": 5, "max_output_tokens": 12000}
     ticket = budget.reserve_call()
     try:
-        response = await client.post("https://api.openai.com/v1/responses", json=payload, headers={"Authorization": "Bearer " + api_key}, timeout=65)
+        response = await client.post("https://api.openai.com/v1/responses", json=payload, headers={"Authorization": "Bearer " + api_key}, timeout=httpx.Timeout(150.0, connect=10.0))
         response.raise_for_status()
         data = response.json()
         budget.mark(ticket, "SUCCESS")
@@ -275,7 +276,10 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
     if not any(item.get("type") == "web_search_call" for item in data.get("output", []) if isinstance(item, dict)):
         raise ValueError("No web search performed")
     result = validate_output(data, query, locale)
-    await attach_source_images(result["_internal_sources"], result['offers'])
+    try:
+        await asyncio.wait_for(attach_source_images(result["_internal_sources"], result['offers']), timeout=20.0)
+    except asyncio.TimeoutError:
+        result['warnings'].append('SOURCE_PAGE_CHECK_PARTIAL')
     image_url = next((lead.get("image_url") for lead in result["_internal_sources"] if lead.get("image_url")), None)
     product = _product_card(result.pop("_report"), query, result["citations_returned"], bool(image_url))
     result["product"] = product
