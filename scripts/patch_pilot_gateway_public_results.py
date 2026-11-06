@@ -19,7 +19,9 @@ def main() -> int:
     if len(sys.argv) != 2:
         raise SystemExit("usage: patch_pilot_gateway_public_results.py /path/to/pilot_gateway.py")
     source = Path(sys.argv[1])
-    text = source.read_text(encoding="utf-8")
+    # Server-side files can have been edited from Windows; normalize before
+    # guarded source matching and always write the candidate with LF.
+    text = source.read_text(encoding="utf-8").replace("\r\n", "\n")
     text = replace_once(
         text,
         "from fastapi import Cookie, Depends, FastAPI, Header, HTTPException, Request, Response\n",
