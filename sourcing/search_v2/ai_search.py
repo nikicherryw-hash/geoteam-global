@@ -26,6 +26,9 @@ SYSTEM = (
     "a candidate must be a direct public item page returned by web search. Do not log in, bypass controls, "
     "solve CAPTCHAs, message sellers, purchase, send RFQs or use private groups. "
     "A representative image may be supplied only when it is visibly present on that cited item page. "
+    "It must show the requested product itself: never a landscape, aircraft in flight, website banner, logo or unrelated illustration. "
+    "Research several independent sellers; for a product family identify variant-specific listings without presenting them as the same configuration. "
+    "Keep citations in the research evidence, not inside product description or specification strings. "
     "Search internationally regardless of response language: Europe, Asia, Americas, Middle East and Oceania where relevant. "
     "Keep manufacturer and P/N unchanged. Separate exact product offers from manufacturer branches and possible suppliers. "
     "An official branch or authorized dealer is not proof of stock. Authorization requires a manufacturer-published citation. "
@@ -221,6 +224,10 @@ async def attach_source_images(leads: list[dict], offers: list[dict] | None = No
 
 
 def _product_card(report: dict, query: str, citations: int, image_present: bool) -> dict:
+    def clean(value, limit):
+        value = re.sub(r'\[[^\]]*\]\(https?://[^\s)]*\)', '', str(value or ''))
+        value = re.sub(r'https?://\S+', '', value)
+        return ' '.join(value.split())[:limit]
     supplied = report.get("product") if isinstance(report.get("product"), dict) else {}
     detected = identity(query)
     resolved = str(report.get("resolved_product") or detected.get("canonical") or query)[:160]
@@ -234,9 +241,9 @@ def _product_card(report: dict, query: str, citations: int, image_present: bool)
         "part_number": str(supplied.get("part_number") or resolved)[:160] or None,
         "product_name": str(supplied.get("product_name") or resolved)[:200] or None,
         "product_category": str(supplied.get("product_category") or "")[:160] or None,
-        "short_description": str(supplied.get("short_description") or report.get("summary") or "")[:600] or None,
-        "intended_use": str(supplied.get("intended_use") or "")[:420] or None,
-        "technical_specifications": [str(value)[:240] for value in specifications[:12] if str(value).strip()],
+        "short_description": clean(supplied.get("short_description") or report.get("summary"), 900) or None,
+        "intended_use": clean(supplied.get("intended_use"), 500) or None,
+        "technical_specifications": [clean(value, 240) for value in specifications[:12] if clean(value, 240)],
         "image": None,
         "image_available": image_present,
         "identity_confidence": confidence,
