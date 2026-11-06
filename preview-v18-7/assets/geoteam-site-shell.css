@@ -24,8 +24,9 @@ body.gt-site-shell>header:not(.gt-site-header),body.gt-site-shell>footer:not(.gt
 .gt-site-shell--sourcing .gt-site-brand__wordmark{width:112px;min-width:112px;height:42px;gap:4px;transform:translateX(-14px)}
 .gt-site-shell--sourcing .gt-site-brand b{font:730 21px/1.05 var(--gt-font);letter-spacing:-.044em}
 .gt-site-shell--sourcing .gt-site-brand small{font:730 10px/1.17 var(--gt-font);letter-spacing:.235em}
-.gt-site-shell--sourcing .gt-site-home{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(82px,calc(env(safe-area-inset-bottom) + 68px));z-index:10001;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--gt-soft)!important;font-size:12px!important;text-shadow:0 0 12px rgba(91,230,195,.18)}
-.gt-site-shell--sourcing .gt-site-home:hover,.gt-site-shell--sourcing .gt-site-home:focus-visible{border:0;background:transparent;box-shadow:none;color:var(--gt-mint)!important}
+.gt-site-shell--sourcing .gt-site-header{background:linear-gradient(to bottom,rgba(4,16,24,.82),rgba(3,27,29,.58))!important}
+.gt-site-shell--sourcing .gt-site-sourcing-back{position:static;align-self:flex-start;z-index:auto;margin:12px 0 0 max(20px,env(safe-area-inset-left));padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--gt-soft)!important;font-size:12px!important;text-shadow:0 0 12px rgba(91,230,195,.18)}
+.gt-site-shell--sourcing .gt-site-sourcing-back:hover,.gt-site-shell--sourcing .gt-site-sourcing-back:focus-visible{border:0;background:transparent;box-shadow:none;color:var(--gt-mint)!important}
 .gt-site-shell--sourcing .gt-site-actions{margin-left:auto}
 @media(max-width:650px){
   .gt-site-shell--sourcing .gt-site-header__inner{width:calc(100% - 28px);gap:7px}
@@ -35,5 +36,5 @@ body.gt-site-shell>header:not(.gt-site-header),body.gt-site-shell>footer:not(.gt
   .gt-site-shell--sourcing .gt-site-brand__wordmark{width:84px;min-width:84px;height:32px;gap:2px;transform:none}
   .gt-site-shell--sourcing .gt-site-brand b{font-size:17px}
   .gt-site-shell--sourcing .gt-site-brand small{font-size:8px;letter-spacing:.20em}
-  .gt-site-shell--sourcing .gt-site-home{left:max(14px,env(safe-area-inset-left));bottom:max(86px,calc(env(safe-area-inset-bottom) + 72px));font-size:11px!important}
+  .gt-site-shell--sourcing .gt-site-sourcing-back{margin:10px 0 0 max(14px,env(safe-area-inset-left));font-size:11px!important}
 }

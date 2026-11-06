@@ -89,7 +89,7 @@
       sourcingBack.className = 'gt-site-home gt-site-sourcing-back';
       sourcingBack.href = pathWithLanguage('/index.html');
       sourcingBack.innerHTML = `<span aria-hidden="true">←</span><span>${text.back || 'Back'}</span>`;
-      body.appendChild(sourcingBack);
+      header.insertAdjacentElement('afterend', sourcingBack);
     }
   }
 
