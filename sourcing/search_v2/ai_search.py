@@ -26,6 +26,11 @@ SYSTEM = (
     "a candidate must be a direct public item page returned by web search. Do not log in, bypass controls, "
     "solve CAPTCHAs, message sellers, purchase, send RFQs or use private groups. "
     "A representative image may be supplied only when it is visibly present on that cited item page. "
+    "Search internationally regardless of response language: Europe, Asia, Americas, Middle East and Oceania where relevant. "
+    "Keep manufacturer and P/N unchanged. Separate exact product offers from manufacturer branches and possible suppliers. "
+    "An official branch or authorized dealer is not proof of stock. Authorization requires a manufacturer-published citation. "
+    "Never put manufacturing country in seller_country or dispatch_country. Never infer country from language, currency or domain. "
+    "A quotation-only catalogue page has no published price. Identify manufacturer and regional procurement channels even when no priced listings exist. "
     "Return zero offers rather than an unsupported offer."
 )
 
@@ -61,6 +66,14 @@ JSON_FORMAT = {
         "required": ["summary", "resolved_product", "product", "candidates", "warnings"]
     }
 }
+
+# Additive source-role contract shared by text and attachment research.
+_candidate = JSON_FORMAT['schema']['properties']['candidates']['items']
+for _field in ('seller_country', 'dispatch_country', 'manufacturing_country', 'authorization_url'):
+    _candidate['properties'][_field] = {'type':['string','null']}
+    _candidate['required'].append(_field)
+_candidate['properties']['source_role'] = {'type':'string','enum':['PRODUCT_OFFER','MANUFACTURER','OFFICIAL_REPRESENTATIVE','POTENTIAL_SUPPLIER']}
+_candidate['required'].append('source_role')
 
 
 def source_urls(data: dict) -> set[str]:
@@ -257,6 +270,25 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
         image_url = declared_image if _public_page_url(declared_image) and image_source == source_url else None
         internal_leads.append({"source_url": source_url, "model": str(item.get('model') or ''), "public_offer_id":public_offer_id(source_url, len(public_offers) + 1), "seller": str(item.get("seller") or "")[:120], "evidence": str(item.get("evidence") or "")[:280], "image_url": image_url, "condition": condition})
         public_offers.append({"public_offer_id": public_offer_id(source_url, len(public_offers) + 1), "country": str(item.get("country") or "")[:80] or None, "condition": condition, "price": raw_price if price_ok else None, "currency": currency if price_ok else None, "availability": "NOT_CONFIRMED", "lead_time": None, "updated_at": datetime.now(timezone.utc).isoformat(), "status": "SEARCH_CITATION_ONLY"})
+        role = item.get('source_role', 'PRODUCT_OFFER')
+        authorization = item.get('authorization_url')
+        # Citation alone does not prove that its publisher is the manufacturer.
+        # Keep the claim internal until publisher/authorization validation exists.
+        claimed_role = role
+        if role == 'OFFICIAL_REPRESENTATIVE':
+            role = 'POTENTIAL_SUPPLIER'
+        public_offers[-1].update({
+            'source_role':role,
+            'country':str(item.get('seller_country') or '')[:80] or None,
+            'seller_country':str(item.get('seller_country') or '')[:80] or None,
+            'dispatch_country':str(item.get('dispatch_country') or '')[:80] or None,
+            'manufacturing_country':str(item.get('manufacturing_country') or '')[:80] or None,
+        })
+        internal_leads[-1]['authorization_url'] = authorization
+        internal_leads[-1]['claimed_role'] = claimed_role
+        internal_leads[-1]['source_role'] = role
+        if role != 'PRODUCT_OFFER':
+            public_offers[-1].update(price=None, currency=None, status='PROCUREMENT_CHANNEL', availability='NOT_CONFIRMED')
     return {"product_id": "GEOTEAM_GLOBAL", "query": query, "locale": locale, "_report": report, "_internal_sources": internal_leads, "offers": public_offers, "warnings": list(report.get("warnings", []))[:8] + ["Web search citations do not confirm inventory or binding prices."], "citations_returned": len(refs)}
 
 

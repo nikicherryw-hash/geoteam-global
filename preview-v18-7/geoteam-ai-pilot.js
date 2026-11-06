@@ -83,6 +83,8 @@
     offers.slice(0, 12).forEach(offer => {
       const card = make('article', 'offer'), title = make('strong'); text(title, offer.public_offer_id || 'GeoTeam offer'); card.append(title);
       const words = offerWords[lang] || offerWords.en;
+      const roles = {ru:{PRODUCT_OFFER:'Предложение изделия',MANUFACTURER:'Производитель — запрос поставки',OFFICIAL_REPRESENTATIVE:'Представительство — запрос поставки',POTENTIAL_SUPPLIER:'Потенциальный поставщик'},en:{PRODUCT_OFFER:'Product offer',MANUFACTURER:'Manufacturer — supply enquiry',OFFICIAL_REPRESENTATIVE:'Representative — supply enquiry',POTENTIAL_SUPPLIER:'Potential supplier'}};
+      const role = make('p','meta'); text(role,(roles[lang] || roles.en)[offer.source_role || 'PRODUCT_OFFER']); card.append(role);
       const stockWords = {ru:['По данным источника: в наличии','По данным источника: нет в наличии','Предзаказ','Поставка под заказ','Снято с производства'],en:['Source reports in stock','Source reports out of stock','Pre-order','Back order','Discontinued'],tr:['Kaynağa göre stokta','Kaynağa göre stokta yok','Ön sipariş','Sipariş üzerine','Üretimden kaldırılmış']}[lang] || ['Source reports in stock','Source reports out of stock','Pre-order','Back order','Discontinued'];
       const availabilityIndex = {SOURCE_IN_STOCK:0,SOURCE_OUT_OF_STOCK:1,SOURCE_PREORDER:2,SOURCE_BACKORDER:3,SOURCE_DISCONTINUED:4}[offer.availability];
       const aviationStates = {ru:{FACTORY_NEW:'Новое с завода (FN)',NEW_SURPLUS:'Новое из складских остатков (NS)',OVERHAULED:'После капитального ремонта (OH)',SERVICEABLE:'Исправное по данным продавца (SV)',AS_REMOVED:'Снято с эксплуатации, состояние требует проверки (AR)',REPAIRED:'После ремонта (RP)',UNSERVICEABLE:'Неисправное (US)',FOR_PARTS:'На запчасти'},en:{FACTORY_NEW:'Factory new (FN)',NEW_SURPLUS:'New surplus (NS)',OVERHAULED:'Overhauled (OH)',SERVICEABLE:'Seller reports serviceable (SV)',AS_REMOVED:'As removed; inspection required (AR)',REPAIRED:'Repaired (RP)',UNSERVICEABLE:'Unserviceable (US)',FOR_PARTS:'For parts'}};
@@ -91,7 +93,7 @@
       const price = make('p', 'price');
       const numericPrice = Number(offer.price);
       text(price, hasValue(offer.price) && Number.isFinite(numericPrice) && numericPrice > 0 && /^[A-Z]{3}$/.test(offer.currency || '') ? new Intl.NumberFormat(lang, {style:'currency',currency:offer.currency}).format(numericPrice) : words[6]); card.append(price);
-      const qualification = make('p', 'meta'); text(qualification, words[7]); card.append(qualification);
+      const qualification = make('p', 'meta'); text(qualification, hasValue(offer.price) ? words[7] : (lang === 'ru' ? 'Публичная цена не указана. Возможность поставки, исполнение и срок согласуются по запросу.' : lang === 'tr' ? 'Açık fiyat belirtilmemiş. Tedarik, yapılandırma ve termin talep üzerine teyit edilir.' : 'No public price stated. Supply, configuration and lead time require an enquiry.')); card.append(qualification);
       if (hasValue(offer.lead_time)) { const lead = make('p', 'meta'); text(lead, `${t('lead')}: ${offer.lead_time}`); card.append(lead); }
       const action = make('button', 'rfq'); action.type = 'button'; text(action, t('quote')); action.addEventListener('click', () => document.dispatchEvent(new CustomEvent('geoteam:rfq-select', {detail: offer}))); card.append(action); grid.append(card);
     });
