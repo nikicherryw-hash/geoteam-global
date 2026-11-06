@@ -21,6 +21,14 @@ class EvidenceTests(unittest.TestCase):
         facts = offer_facts(self.page(offers={'shippingDetails':{'shippingDestination':{'addressCountry':'DE'}}}), 'Xenta 421A')
         self.assertNotIn('country', facts)
 
+    def test_exact_aviation_row(self):
+        page = '<table><tr><th>Part Number</th><th>Condition</th><th>Country</th></tr><tr><td>601R42452-3</td><td>AR</td><td>Germany</td></tr><tr><td>601R42452-3AAR</td><td>NE</td><td>USA</td></tr></table>'
+        self.assertEqual(offer_facts(page, 'VISOR-SUN 601R42452-3'), {'condition':'AS_REMOVED','country':'Germany'})
+
+    def test_closed_listing(self):
+        page = '<p>No longer available.</p><table><tr><th>Part Number</th><th>Condition</th></tr><tr><td>601R42452-3</td><td>SV</td></tr></table>'
+        self.assertEqual(offer_facts(page, '601R42452-3')['availability'], 'SOURCE_OUT_OF_STOCK')
+
 
 if __name__ == '__main__':
     unittest.main()
