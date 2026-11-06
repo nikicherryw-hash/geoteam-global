@@ -1,7 +1,21 @@
 {
-  "generated_at": "2026-11-06T06:51:18.659739Z",
+  "generated_at": "2026-11-06T15:56:48.428920Z",
   "mode": "automatic_rss",
   "items": [
+    {
+      "title": "New guidance on electricity imports under Centralised Clearance for Import (CCI)",
+      "source": "European Commission",
+      "country": "EU",
+      "date": "2026-11-06",
+      "url": "https://taxation-customs.ec.europa.eu/news/new-guidance-electricity-imports-under-centralised-clearance-import-cci-2026-11-06_en"
+    },
+    {
+      "title": "EU launches safeguard investigation on certain PET resin chemicals",
+      "source": "WTO",
+      "country": "UN",
+      "date": "2026-11-06",
+      "url": "https://www.wto.org/english/news_e/news26_e/safe_eec_06nov26_542_e.htm"
+    },
     {
       "title": "EASA provides complete Easy Access Rules publication history in XML",
       "source": "EASA",
@@ -71,20 +85,6 @@
       "country": "UN",
       "date": "2026-10-29",
       "url": "https://www.wto.org/english/news_e/news26_e/devel_29oct26_535_e.htm"
-    },
-    {
-      "title": "Members review 34 notifications, share experiences at Fisheries Subsidies Committee",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-10-29",
-      "url": "https://www.wto.org/english/news_e/news26_e/fish_29oct26_539_e.htm"
-    },
-    {
-      "title": "Cotton partners launch drive to bring textile/garment investment to West, Central Africa",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-10-29",
-      "url": "https://www.wto.org/english/news_e/news26_e/cotpt_29oct26_540_e.htm"
     }
   ]
 }
