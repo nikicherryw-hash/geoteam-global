@@ -196,4 +196,17 @@ def product_image(page, model):
                 image = image.get('contentUrl') or image.get('url')
             if isinstance(image, str):
                 return image
-    return None
+    class Images(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.matches = []
+        def handle_starttag(self, tag, attrs):
+            values = dict(attrs)
+            label = compact(values.get('alt', ''))
+            if tag == 'img' and target and target in label:
+                src = values.get('src') or values.get('data-src')
+                if src:
+                    self.matches.append(src)
+    images = Images()
+    images.feed(page[:500000])
+    return images.matches[0] if images.matches else None

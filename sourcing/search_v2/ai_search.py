@@ -319,6 +319,12 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
     if not any(item.get("type") == "web_search_call" for item in data.get("output", []) if isinstance(item, dict)):
         raise ValueError("No web search performed")
     result = validate_output(data, query, locale)
+    # Identity references can supply a photo without becoming commercial offers.
+    model_tokens = [t.lower() for t in re.findall(r'[A-Za-z0-9-]*\d[A-Za-z0-9-]*', query)]
+    known = {lead['source_url'] for lead in result['_internal_sources']}
+    image_refs = [url for url in sorted(source_urls(data)) if url not in known and model_tokens and all(t in url.lower() for t in model_tokens)]
+    for url in image_refs[:6]:
+        result['_internal_sources'].append({'source_url': url, 'model': query, 'source_role': 'IMAGE_REFERENCE'})
     try:
         await asyncio.wait_for(attach_source_images(result["_internal_sources"], result['offers']), timeout=20.0)
     except asyncio.TimeoutError:
