@@ -2,6 +2,7 @@
 import json
 import re
 from html.parser import HTMLParser
+from .matching import model_matches
 
 
 class StructuredData(HTMLParser):
@@ -129,7 +130,7 @@ def offer_facts(page, model):
             if 'Product' not in types:
                 continue
             identity = ' '.join(str(product.get(k) or '') for k in ('name', 'sku', 'mpn', 'model'))
-            if not target or target not in compact(identity):
+            if not model_matches(model, identity):
                 continue
             offers = product.get('offers', [])
             if isinstance(offers, dict):
@@ -185,9 +186,11 @@ def product_image(page, model):
                 continue
             graph = item.get('@graph', [])
             queue.extend(graph if isinstance(graph, list) else [graph])
-            if item.get('@type') != 'Product' or not target:
+            types = item.get('@type', [])
+            types = [types] if isinstance(types, str) else types
+            if not isinstance(types, list) or not any(str(t).rsplit('/', 1)[-1] == 'Product' for t in types):
                 continue
-            if target not in compact(' '.join(str(item.get(k) or '') for k in ('name','sku','mpn','model'))):
+            if not model_matches(model, ' '.join(str(item.get(k) or '') for k in ('name','sku','mpn','model'))):
                 continue
             image = item.get('image')
             if isinstance(image, list):
@@ -202,9 +205,7 @@ def product_image(page, model):
             self.matches = []
         def handle_starttag(self, tag, attrs):
             values = dict(attrs)
-            label = compact(values.get('alt', ''))
-            tokens = [compact(t) for t in str(model).split() if compact(t)]
-            if tag == 'img' and tokens and all(t in label for t in tokens):
+            if tag == 'img' and model_matches(model, values.get('alt', '')):
                 src = values.get('src') or values.get('data-src')
                 if src and not src.lower().startswith(('data:', 'javascript:')):
                     self.matches.append(src)

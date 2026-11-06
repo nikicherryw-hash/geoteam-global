@@ -9,13 +9,15 @@ import json
 import re
 import socket
 from datetime import datetime, timezone
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import parse_qsl, urljoin, urlsplit
 
 import httpx
 
 from .core import identity, safe_url
+from .matching import model_matches
 
 MAX_IMAGE_BYTES = 5 * 1024 * 1024
+MAX_SOURCE_BYTES = 500000
 IMAGE_TYPES = {"image/jpeg", "image/png", "image/webp", "image/avif"}
 
 SYSTEM = (
@@ -97,35 +99,20 @@ def source_urls(data: dict) -> set[str]:
 
 
 def cited_item(url: str, refs: set[str]) -> bool:
-    """Allow harmless query-string/trailing-slash differences, never a different item page."""
-    if url in refs:
-        return True
+    """Ignore known tracking parameters, never a product-identifying query."""
+    def key(value):
+        if not safe_url(value):
+            return None
+        parts = urlsplit(value)
+        query = tuple(sorted((k, v) for k, v in parse_qsl(parts.query, keep_blank_values=True)
+                             if not k.lower().startswith('utm_')
+                             and k.lower() not in {'gclid', 'fbclid', 'msclkid', 'yclid'}))
+        return parts.scheme.lower(), parts.hostname.lower(), parts.port or 443, parts.path.rstrip('/'), query
     try:
-        candidate = urlsplit(url)
-        for ref in refs:
-            cited = urlsplit(ref)
-            if (candidate.hostname or '').lower() == (cited.hostname or '').lower() and candidate.path.rstrip('/') == cited.path.rstrip('/'):
-                return True
+        candidate = key(url)
+        return candidate is not None and any(key(ref) == candidate for ref in refs)
     except (TypeError, ValueError):
         return False
-    return False
-
-
-def model_matches(query: str, candidate: str) -> bool:
-    part = identity(query)
-    target = (part.get("canonical") or query).lower()
-    found = str(candidate).lower()
-    numbers = re.findall(r"\d{3,}", target)
-    if any(not re.search(r"(?<!\d)" + re.escape(value) + r"(?!\d)", found) for value in numbers):
-        return False
-    if part["manufacturer"] == "ROTAX" and "rotax" not in found:
-        return False
-    compact = lambda value: re.sub(r"[^a-z0-9]", "", value.lower())
-    codes = [token for token in re.findall(r"[a-z0-9]+", target)
-             if len(token) >= 4 and any(c.isalpha() for c in token) and any(c.isdigit() for c in token)]
-    if codes and not all(code in compact(found) for code in codes):
-        return False
-    return bool(str(candidate).strip())
 
 
 def public_offer_id(source_url: str, ordinal: int) -> str:
@@ -149,16 +136,30 @@ async def _source_page_image(source_url: str, lead: dict | None = None) -> str |
         return None
     try:
         async with httpx.AsyncClient(headers={"User-Agent": "GeoTeamGlobal/1.0", "Accept": "text/html"}, timeout=8.0, follow_redirects=False) as client:
-            response = await client.get(source_url)
-            if 300 <= response.status_code < 400 and response.headers.get("location"):
-                target = urljoin(source_url, response.headers["location"])
-                if not _public_page_url(target):
-                    return None
-                response = await client.get(target)
-            if response.status_code != 200 or "html" not in response.headers.get("content-type", "").lower():
+            target = source_url
+            for attempt in range(2):
+                async with client.stream('GET', target) as response:
+                    if 300 <= response.status_code < 400 and response.headers.get('location'):
+                        target = urljoin(target, response.headers['location'])
+                        if attempt or not _public_page_url(target):
+                            return None
+                        continue
+                    if response.status_code != 200 or 'html' not in response.headers.get('content-type', '').lower():
+                        return None
+                    declared = response.headers.get('content-length')
+                    if declared and int(declared) > MAX_SOURCE_BYTES:
+                        return None
+                    content = bytearray()
+                    async for chunk in response.aiter_bytes():
+                        if len(content) + len(chunk) > MAX_SOURCE_BYTES:
+                            return None
+                        content.extend(chunk)
+                    page_url = str(response.url)
+                    page = bytes(content).decode(response.encoding or 'utf-8', errors='replace')
+                    break
+            else:
                 return None
-            page_url, page = str(response.url), response.text[:500000]
-    except (httpx.HTTPError, UnicodeError):
+    except (httpx.HTTPError, UnicodeError, LookupError, ValueError):
         return None
     if lead is not None:
         from .offer_evidence import offer_facts

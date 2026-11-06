@@ -40,7 +40,7 @@ def identity(query: str) -> dict:
             "status": "MODEL_IDENTIFIED",
             "manufacturer": "ROTAX",
             "original_model": model,
-            "canonical": "ROTAX " + model,
+            "canonical": "ROTAX " + model + (" " + original[rotax.end():].strip() if original[rotax.end():].strip() else ""),
             "suggestions": [],
             "evidence_url": ROTAX_PORTFOLIO,
         }

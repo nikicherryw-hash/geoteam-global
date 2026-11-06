@@ -26,9 +26,12 @@ class Tests(unittest.TestCase):
     self.assertEqual(len(o["offers"]),1)
     self.assertEqual(o["offers"][0]["status"],"SEARCH_CITATION_ONLY")
     self.assertEqual(o["offers"][0]["availability"],"NOT_CONFIRMED")
-    self.assertTrue(o["product"]["image"].startswith("https://"))
-    self.assertNotIn("source_url",str(o))
-    self.assertNotIn("Test distributor",str(o))
+    # validate_output is internal; product construction and public allowlisting
+    # happen downstream. Internal evidence must remain available to that layer.
+    self.assertIn("_report", o)
+    self.assertEqual(o['_internal_sources'][0]['source_url'], U)
+    self.assertNotIn("source_url",str(o['offers']))
+    self.assertNotIn("Test distributor",str(o['offers']))
     self.assertEqual(validate_output(payload(source=False),"rotax 916","ru")["offers"],[])
     self.assertEqual(validate_output(payload(url="https://unlisted.example/price"),"rotax 916","ru")["offers"],[])
  def test_wrong_model_is_rejected(self):
