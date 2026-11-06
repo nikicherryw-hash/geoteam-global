@@ -48,7 +48,7 @@
     if (!hasValue(value)) return;
     const fact = make('div', 'fact'), caption = make('b'); text(caption, label); fact.append(caption, document.createTextNode(String(value))); box.append(fact);
   }
-  function safeImage(value) { try { const url = new URL(String(value)); return url.protocol === 'https:' ? url.href : ''; } catch (_) { return ''; } }
+  function safeImage(value) { try { const url = new URL(String(value), location.origin); return url.protocol === 'https:' && (url.origin === location.origin || /^https:/.test(String(value))) ? url.href : ''; } catch (_) { return ''; } }
   function render(report) {
     results.replaceChildren();
     const product = report && typeof report.product === 'object' && report.product ? report.product : {};
