@@ -92,6 +92,19 @@ class CommerceSourcingTests(unittest.TestCase):
                                   query_text="batch", locale="en", items=[{"requested_text": "different"}])["id"])
         self.assertEqual(self.db.execute("SELECT count(*) FROM sourcing_work_items").fetchone()[0], 100)
 
+    def test_100_item_draft_is_visible_without_spending_or_queueing(self):
+        items = [{"requested_text": f"PN-{n}", "part_number": f"PN-{n}"} for n in range(100)]
+        created = create_request(self.db, user_id="u", organization_id="o", idempotency_key="draft-key-100",
+                                 query_text="uploaded list", locale="ru", items=items, queue_research=False)
+        self.assertEqual(created["status"], "AWAITING_SEARCH")
+        self.assertEqual(self.db.execute("SELECT count(*) FROM sourcing_work_items WHERE request_id=?",
+                                         (created["id"],)).fetchone()[0], 0)
+        page = public_request(self.db, request_id=created["id"], organization_id="o", user_id="u", page=10)
+        self.assertEqual([item["requested_text"] for item in page["items"]], [f"PN-{n}" for n in range(90, 100)])
+        self.assertTrue(create_request(self.db, user_id="u", organization_id="o", idempotency_key="draft-key-100",
+                                       query_text="uploaded list", locale="ru", items=items,
+                                       queue_research=False)["idempotent_replay"])
+
     def test_invalid_item_does_not_leave_partial_request(self):
         with self.assertRaises(ValueError):
             create_request(self.db, user_id="u", organization_id="o", idempotency_key="request-key-invalid",
@@ -127,3 +140,4 @@ class CommerceSourcingTests(unittest.TestCase):
         self.assertNotIn("country", offer)
         self.assertNotIn("public_price", offer)
         self.assertEqual(result["items"][0]["identity_status"], "EXACT")
+
