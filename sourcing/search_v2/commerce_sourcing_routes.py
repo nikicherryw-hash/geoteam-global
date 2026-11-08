@@ -82,6 +82,20 @@ def install(router: Any, connect: Callable, current: Callable, write_guard: Call
             except (ValueError, PermissionError) as exc:
                 raise HTTPException(422 if isinstance(exc, ValueError) else 403, str(exc)) from exc
 
+    @router.post("/sourcing/drafts", status_code=201)
+    def save_draft(payload: SourcingRequestInput, session: sqlite3.Row = Depends(write_guard)) -> dict:
+        """Keep up to 100 identified positions in the existing account without AI spend."""
+        with closing(connect()) as db:
+            try:
+                return create_request(
+                    db, user_id=session["user_id"], organization_id=session["organization_id"],
+                    idempotency_key=payload.idempotency_key, query_text=payload.query_text,
+                    locale=payload.locale, items=[item.dict() for item in payload.items],
+                    queue_research=False,
+                )
+            except (ValueError, PermissionError) as exc:
+                raise HTTPException(422 if isinstance(exc, ValueError) else 403, str(exc)) from exc
+
     @router.get("/sourcing/requests")
     def list_requests(session: sqlite3.Row = Depends(current), page: int = Query(1, ge=1),
                       page_size: int = Query(20, ge=1, le=50)) -> dict:
