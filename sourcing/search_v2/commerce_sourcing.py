@@ -169,10 +169,14 @@ def record_result(
     db.execute(
         """UPDATE sourcing_requests
            SET positions_completed=(SELECT count(*) FROM sourcing_items WHERE request_id=? AND status='COMPLETED'),
-               status=CASE WHEN (SELECT count(*) FROM sourcing_items WHERE request_id=? AND status='COMPLETED') >= positions_total
-                           THEN 'COMPLETED' ELSE 'RUNNING' END,
+               status=CASE
+                 WHEN (SELECT count(*) FROM sourcing_items WHERE request_id=? AND status='COMPLETED') >= positions_total
+                   THEN 'COMPLETED'
+                 WHEN (SELECT count(*) FROM sourcing_items WHERE request_id=? AND status IN ('COMPLETED','FAILED','PAUSED_BUDGET')) >= positions_total
+                   THEN 'PARTIAL_FAILED'
+                 ELSE 'RUNNING' END,
                updated_at=? WHERE id=?""",
-        (request_id, request_id, now, request_id),
+        (request_id, request_id, request_id, now, request_id),
     )
 
 

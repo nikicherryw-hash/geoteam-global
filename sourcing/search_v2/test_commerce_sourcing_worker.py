@@ -1,0 +1,69 @@
+import importlib.util
+import os
+import tempfile
+import unittest
+from contextlib import closing
+from pathlib import Path
+
+from .commerce_sourcing import create_request, public_request
+from .commerce_sourcing_worker import claim, complete, connect, fail
+
+
+ROOT = Path(__file__).resolve().parents[2]
+SPEC = importlib.util.spec_from_file_location("commerce_migration", ROOT / "scripts" / "migrate_commerce_sourcing_foundation.py")
+MIGRATION = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(MIGRATION)
+
+
+class SourcingWorkerTests(unittest.TestCase):
+    def setUp(self):
+        handle, name = tempfile.mkstemp(prefix="geoteam-worker-", suffix=".sqlite", dir=ROOT)
+        os.close(handle)
+        self.path = Path(name)
+        with closing(connect(self.path)) as db:
+            db.executescript("""
+                CREATE TABLE users (id TEXT PRIMARY KEY);
+                CREATE TABLE organizations (id TEXT PRIMARY KEY);
+                CREATE TABLE organization_memberships (organization_id TEXT, user_id TEXT);
+                CREATE TABLE commercial_jobs (id TEXT PRIMARY KEY);
+                CREATE TABLE rfqs (id TEXT PRIMARY KEY, organization_id TEXT, user_id TEXT);
+            """)
+            db.executescript(MIGRATION.DDL)
+            db.executescript("INSERT INTO users VALUES ('u'); INSERT INTO organizations VALUES ('o'); INSERT INTO organization_memberships VALUES ('o','u');")
+            self.request = create_request(db, user_id="u", organization_id="o", idempotency_key="worker-key-1",
+                                          query_text="two", locale="en", items=[{"requested_text": "PN-1"}, {"requested_text": "PN-2"}])
+
+    def tearDown(self):
+        self.path.unlink(missing_ok=True)
+
+    def test_two_positions_are_processed_separately_without_ai_calls(self):
+        seen = []
+        with closing(connect(self.path)) as db:
+            for _ in range(2):
+                job = claim(db)
+                seen.append((job["requested_text"], job["locale"]))
+                self.assertTrue(complete(db, job, {"product": {"part_number": job["requested_text"],
+                                                               "identity_confidence": "exact"},
+                                                    "offers": [], "_internal_sources": []}))
+            self.assertIsNone(claim(db))
+        self.assertEqual(seen, [("PN-1", "en"), ("PN-2", "en")])
+        with closing(connect(self.path)) as db:
+            result = public_request(db, request_id=self.request["id"], organization_id="o", user_id="u")
+            self.assertEqual(result["status"], "COMPLETED")
+            self.assertEqual([i["part_number"] for i in result["items"]], ["PN-1", "PN-2"])
+
+    def test_lost_lease_cannot_overwrite_new_result(self):
+        with closing(connect(self.path)) as db:
+            first = claim(db)
+            self.assertIsNotNone(first)
+            db.execute("UPDATE sourcing_work_items SET lease_token='new-owner' WHERE id=?", (first["id"],))
+            self.assertFalse(complete(db, first, {"product": {}, "offers": [], "_internal_sources": []}))
+            self.assertEqual(db.execute("SELECT count(*) FROM sourcing_evidence").fetchone()[0], 0)
+
+    def test_budget_exhaustion_pauses_without_external_retry(self):
+        with closing(connect(self.path)) as db:
+            job = claim(db)
+            fail(db, job, "BUDGET_EXHAUSTED")
+            row = db.execute("SELECT status,error_code FROM sourcing_work_items WHERE id=?", (job["id"],)).fetchone()
+            self.assertEqual((row["status"], row["error_code"]), ("PAUSED_BUDGET", "BUDGET_EXHAUSTED"))
+            self.assertEqual(db.execute("SELECT status FROM sourcing_requests WHERE id=?", (self.request["id"],)).fetchone()[0], "PAUSED_BUDGET")

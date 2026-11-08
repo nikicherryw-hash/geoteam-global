@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import sqlite3
 import os
+from contextlib import closing
 from typing import Any, Callable
 
 from fastapi import Depends, HTTPException, Query
@@ -42,7 +43,7 @@ def install(router: Any, connect: Callable, current: Callable, write_guard: Call
     def submit(payload: SourcingRequestInput, session: sqlite3.Row = Depends(write_guard)) -> dict:
         if os.getenv("GEOTEAM_BATCH_WORKER_ENABLED") != "1":
             raise HTTPException(503, "BATCH_PROCESSING_NOT_ENABLED")
-        with connect() as db:
+        with closing(connect()) as db:
             try:
                 return create_request(
                     db, user_id=session["user_id"], organization_id=session["organization_id"],
@@ -55,7 +56,7 @@ def install(router: Any, connect: Callable, current: Callable, write_guard: Call
     @router.get("/sourcing/requests")
     def list_requests(session: sqlite3.Row = Depends(current), page: int = Query(1, ge=1),
                       page_size: int = Query(20, ge=1, le=50)) -> dict:
-        with connect() as db:
+        with closing(connect()) as db:
             rows = db.execute(
                 """SELECT id,status,query_text,locale,positions_total,positions_completed,file_count,created_at,updated_at
                    FROM sourcing_requests WHERE organization_id=? AND user_id=?
@@ -67,7 +68,7 @@ def install(router: Any, connect: Callable, current: Callable, write_guard: Call
     @router.get("/sourcing/requests/{request_id}")
     def detail(request_id: str, session: sqlite3.Row = Depends(current),
                page: int = Query(1, ge=1), page_size: int = Query(10, ge=1, le=20)) -> dict:
-        with connect() as db:
+        with closing(connect()) as db:
             try:
                 return public_request(db, request_id=request_id, organization_id=session["organization_id"],
                                       user_id=session["user_id"], page=page, page_size=page_size)
@@ -77,7 +78,7 @@ def install(router: Any, connect: Callable, current: Callable, write_guard: Call
     @router.post("/sourcing/requests/{request_id}/rfq-links")
     def connect_rfq(request_id: str, payload: RfqLinkInput,
                     session: sqlite3.Row = Depends(write_guard)) -> dict:
-        with connect() as db:
+        with closing(connect()) as db:
             rfq = db.execute("SELECT id FROM rfqs WHERE number=? AND organization_id=? AND user_id=?",
                              (payload.rfq_number, session["organization_id"], session["user_id"])).fetchone()
             if not rfq:
