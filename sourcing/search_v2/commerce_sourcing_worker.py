@@ -113,6 +113,36 @@ def fail(db: sqlite3.Connection, job: dict, code: str) -> None:
         raise
 
 
+def pause_queued_for_budget(db: sqlite3.Connection) -> int:
+    """Expose exhausted allocation on every waiting item without using AI."""
+    now = int(time.time())
+    db.execute("BEGIN IMMEDIATE")
+    try:
+        rows = db.execute(
+            "SELECT DISTINCT request_id FROM sourcing_work_items WHERE work_kind='RESEARCH' AND status='QUEUED'"
+        ).fetchall()
+        if not rows:
+            db.execute("COMMIT")
+            return 0
+        db.execute(
+            """UPDATE sourcing_items SET status='PAUSED_BUDGET',updated_at=? WHERE id IN
+               (SELECT item_id FROM sourcing_work_items WHERE work_kind='RESEARCH' AND status='QUEUED')""", (now,)
+        )
+        db.execute(
+            """UPDATE sourcing_work_items SET status='PAUSED_BUDGET',error_code='BUDGET_EXHAUSTED',
+               next_attempt_at=NULL,updated_at=? WHERE work_kind='RESEARCH' AND status='QUEUED'""", (now,)
+        )
+        db.executemany(
+            "UPDATE sourcing_requests SET status='PAUSED_BUDGET',error_code='BUDGET_EXHAUSTED',updated_at=? WHERE id=?",
+            ((now, row[0]) for row in rows),
+        )
+        db.execute("COMMIT")
+        return len(rows)
+    except BaseException:
+        db.execute("ROLLBACK")
+        raise
+
+
 async def process_one(path: Path, research: Callable[[str, str], Awaitable[dict]]) -> str:
     with closing(connect(path)) as db:
         job = claim(db)
@@ -160,6 +190,8 @@ def main() -> int:
         raise SystemExit("BUDGET_CONFIG_REQUIRED")
     for _ in range(args.max_jobs):
         if Decimal(PilotBudget(budget_path).status()["remaining_allocation_usd"]) < Decimal("1.00"):
+            with closing(connect(args.database)) as db:
+                pause_queued_for_budget(db)
             print("BUDGET_EXHAUSTED")
             break
         status = asyncio.run(process_one(args.database, research_real))
@@ -171,3 +203,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
