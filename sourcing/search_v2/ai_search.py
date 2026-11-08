@@ -15,6 +15,7 @@ import httpx
 
 from .core import identity, safe_url
 from .matching import model_matches
+from .usage_cost import estimated_cents
 
 MAX_IMAGE_BYTES = 5 * 1024 * 1024
 MAX_SOURCE_BYTES = 500000
@@ -337,7 +338,8 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
         response = await client.post("https://api.openai.com/v1/responses", json=payload, headers={"Authorization": "Bearer " + api_key}, timeout=httpx.Timeout(150.0, connect=10.0))
         response.raise_for_status()
         data = response.json()
-        budget.mark(ticket, "SUCCESS")
+        web_calls = sum(item.get("type") == "web_search_call" for item in data.get("output", []) if isinstance(item, dict))
+        budget.mark(ticket, "SUCCESS", estimated_cents(data.get("usage"), model, web_calls))
     except (httpx.HTTPError, ValueError):
         budget.mark(ticket, "UNKNOWN_AFTER_SEND")
         raise
@@ -363,3 +365,4 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
     result["usage"] = data.get("usage", {})
     result["pilot"] = budget.status()
     return result
+
