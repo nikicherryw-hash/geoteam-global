@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Кабинет клиента · GeoTeam Global</title>
+  <link rel="stylesheet" href="assets/geoteam-account.css?v=20261108">
+</head>
+<body>
+  <header class="top"><a class="brand" href="index.html">GeoTeam <small>GLOBAL</small></a><nav><a id="search-link" href="sourcing.html">← Global Sourcing</a><select id="language" aria-label="Language"><option value="ru">RU</option><option value="en">EN</option><option value="tr">TR</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option><option value="it">IT</option><option value="pt">PT</option><option value="ar">AR</option><option value="zh">ZH</option></select></nav></header>
+  <main class="container">
+    <div class="intro"><p class="eyebrow">GEOTEAM GLOBAL</p><h1 id="page-title">Кабинет клиента</h1><p id="page-intro">Ваши заявки и позиции в одном месте.</p></div>
+    <p id="notice" role="status" aria-live="polite"></p>
+    <section id="auth" class="panel" hidden>
+      <div class="auth-grid">
+        <form id="login"><h2 data-i18n="login">Войти</h2><label>Email<input name="email" type="email" autocomplete="email" required></label><label data-i18n="password">Пароль<input name="password" type="password" autocomplete="current-password" required></label><button type="submit" data-i18n="login">Войти</button></form>
+        <form id="register"><h2 data-i18n="register">Регистрация</h2><label>Email<input name="email" type="email" autocomplete="email" required></label><label data-i18n="password">Пароль<input name="password" type="password" autocomplete="new-password" minlength="12" required></label><label data-i18n="organization">Организация<input name="organization" maxlength="200" required></label><label class="consent"><input name="consent" type="checkbox" required><span data-i18n="consent">Согласен с условиями обработки данных</span></label><button type="submit" data-i18n="register">Зарегистрироваться</button></form>
+      </div>
+    </section>
+    <section id="account" hidden>
+      <div class="account-bar"><p id="identity"></p><button id="logout" type="button" class="secondary" data-i18n="logout">Выйти</button></div>
+      <section class="panel"><h2 data-i18n="newRequest">Новая заявка</h2><p data-i18n="newHelp">Укажите один P/N в строке или приложите CSV/XLSX с колонкой P/N. До 100 позиций. Сохранение не запускает платный AI-поиск.</p>
+        <label data-i18n="positions">Артикулы по одному в строке<textarea id="positions" rows="5" placeholder="5SY6106-7&#10;XPSUDN13AP"></textarea></label>
+        <div class="form-row"><label class="file-label"><span data-i18n="file">CSV или XLSX</span><input id="file" type="file" accept=".csv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></label><button id="preview" type="button" data-i18n="preview">Проверить позиции</button></div>
+        <p id="preview-count" class="muted"></p><ol id="preview-list" class="positions"></ol><button id="save" type="button" hidden data-i18n="save">Сохранить заявку</button>
+      </section>
+      <section class="panel"><h2 data-i18n="requests">Мои заявки</h2><div id="requests"></div><button id="more" type="button" class="secondary" hidden data-i18n="more">Показать ещё</button></section>
+      <section id="detail-panel" class="panel" hidden><h2 data-i18n="details">Позиции заявки</h2><div id="detail"></div><button id="more-items" type="button" class="secondary" hidden data-i18n="more">Показать ещё</button></section>
+      <section class="panel"><h2>RFQ</h2><div id="rfqs"></div></section>
+    </section>
+  </main>
+  <footer>© 2026 GeoTeam Global · <a href="privacy.html">Privacy</a></footer>
+  <script defer src="geoteam-account.js?v=20261108"></script>
+</body>
+</html>
+
