@@ -19,6 +19,9 @@
   let csrf = sessionStorage.getItem('geoteam_commerce_csrf') || '';
   let items = [], requestPage = 1, detailPage = 1, selectedRequest = null, requestKey = crypto.randomUUID();
   const t = key => copy[language][key] || copy.en[key] || key;
+  const startLabels = {ru:'Начать пакетный поиск',en:'Start batch search',tr:'Toplu aramayı başlat',de:'Stapelsuche starten',fr:'Lancer la recherche groupée',es:'Iniciar búsqueda por lotes',it:'Avvia ricerca multipla',pt:'Iniciar pesquisa em lote',ar:'بدء البحث الجماعي',zh:'开始批量搜索'};
+  const queuedLabels = {ru:'Позиции поставлены в очередь.',en:'Positions added to the search queue.',tr:'Kalemler arama kuyruğuna eklendi.',de:'Positionen zur Suchwarteschlange hinzugefügt.',fr:'Références ajoutées à la file de recherche.',es:'Artículos añadidos a la cola de búsqueda.',it:'Articoli aggiunti alla coda di ricerca.',pt:'Itens adicionados à fila de pesquisa.',ar:'أُضيفت البنود إلى قائمة انتظار البحث.',zh:'物料已加入搜索队列。'};
+  const budgetLabels = {ru:'Пакетный AI-поиск остановлен бюджетным лимитом. Заявка сохранена.',en:'The AI budget limit blocks batch search. Your request remains saved.',tr:'Yapay zekâ bütçe sınırı toplu aramayı durduruyor. Talebiniz kayıtlı.',de:'Das KI-Budgetlimit blockiert die Stapelsuche. Ihre Anfrage bleibt gespeichert.',fr:'Le budget IA bloque la recherche groupée. Votre demande reste enregistrée.',es:'El límite de presupuesto de IA bloquea la búsqueda. Su solicitud sigue guardada.',it:'Il limite del budget AI blocca la ricerca. La richiesta resta salvata.',pt:'O limite do orçamento de IA bloqueia a pesquisa. O pedido continua salvo.',ar:'حد ميزانية الذكاء الاصطناعي يمنع البحث الجماعي. طلبك محفوظ.',zh:'AI 预算限制阻止批量搜索。您的请求仍已保存。'};
   function localize() {
     document.documentElement.lang = language;
     document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
@@ -88,6 +91,21 @@
       const button = document.createElement('button'); button.type = 'button';
       button.textContent = row.query_text + ' · ' + t('count') + row.positions_total;
       button.addEventListener('click', () => openRequest(row.id)); box.append(button);
+      if (row.status === 'AWAITING_SEARCH') {
+        const start = document.createElement('button'); start.type = 'button'; start.className = 'secondary start-search';
+        start.textContent = startLabels[language] || startLabels.en;
+        start.addEventListener('click', async () => {
+          start.disabled = true;
+          try {
+            await api('/sourcing/requests/' + encodeURIComponent(row.id) + '/start','POST',{});
+            notice(queuedLabels[language] || queuedLabels.en); await loadRequests(true); await openRequest(row.id);
+          } catch (error) {
+            notice(/BATCH_BUDGET_(EXHAUSTED|UNAVAILABLE)|BATCH_PROCESSING_NOT_ENABLED/.test(error.message) ?
+              (budgetLabels[language] || budgetLabels.en) : (error.message || t('error')), true);
+          } finally { start.disabled = false; }
+        });
+        box.append(start);
+      }
       p(box, row.status === 'AWAITING_SEARCH' ? t('pending') : row.status, 'status'); $('requests').append(box);
     });
     $('more').hidden = data.items.length < 20; requestPage++;

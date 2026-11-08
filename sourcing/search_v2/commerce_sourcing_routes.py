@@ -16,7 +16,7 @@ from typing import Any, Callable
 from fastapi import Depends, HTTPException, Query
 from pydantic import BaseModel, Field
 
-from .commerce_sourcing import create_request, link_rfq, public_request
+from .commerce_sourcing import create_request, link_rfq, public_request, queue_draft
 from .batch_budget import can_accept_batch
 from .batch_document import extract_list_items
 
@@ -107,6 +107,20 @@ def install(router: Any, connect: Callable, current: Callable, write_guard: Call
                 (session["organization_id"], session["user_id"], page_size, (page - 1) * page_size),
             ).fetchall()
             return {"items": [dict(row) for row in rows], "page": page, "page_size": page_size}
+
+    @router.post("/sourcing/requests/{request_id}/start", status_code=202)
+    def start_draft(request_id: str, session: sqlite3.Row = Depends(write_guard)) -> dict:
+        if os.getenv("GEOTEAM_BATCH_WORKER_ENABLED") != "1":
+            raise HTTPException(503, "BATCH_PROCESSING_NOT_ENABLED")
+        require_batch_budget()
+        with closing(connect()) as db:
+            try:
+                return queue_draft(db, request_id=request_id, user_id=session["user_id"],
+                                   organization_id=session["organization_id"])
+            except LookupError as exc:
+                raise HTTPException(404, str(exc)) from exc
+            except ValueError as exc:
+                raise HTTPException(409, str(exc)) from exc
 
     @router.get("/sourcing/requests/{request_id}")
     def detail(request_id: str, session: sqlite3.Row = Depends(current),

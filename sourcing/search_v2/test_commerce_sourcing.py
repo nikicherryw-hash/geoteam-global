@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from .commerce_sourcing import create_request, link_rfq, persist_ai_result, public_request, record_result
+from .commerce_sourcing import create_request, link_rfq, persist_ai_result, public_request, queue_draft, record_result
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -104,6 +104,21 @@ class CommerceSourcingTests(unittest.TestCase):
         self.assertTrue(create_request(self.db, user_id="u", organization_id="o", idempotency_key="draft-key-100",
                                        query_text="uploaded list", locale="ru", items=items,
                                        queue_research=False)["idempotent_replay"])
+
+    def test_draft_queues_once_and_respects_owner(self):
+        created = create_request(self.db, user_id="u", organization_id="o", idempotency_key="draft-start-100",
+                                 query_text="list", locale="ru",
+                                 items=[{"requested_text": f"PN-{n}"} for n in range(100)], queue_research=False)
+        with self.assertRaises(PermissionError):
+            queue_draft(self.db, request_id=created["id"], user_id="other", organization_id="o")
+        started = queue_draft(self.db, request_id=created["id"], user_id="u", organization_id="o")
+        self.assertEqual(started["positions_total"], 100)
+        self.assertEqual(self.db.execute("SELECT count(*) FROM sourcing_work_items WHERE request_id=?",
+                                         (created["id"],)).fetchone()[0], 100)
+        self.assertTrue(queue_draft(self.db, request_id=created["id"], user_id="u",
+                                    organization_id="o")["idempotent_replay"])
+        self.assertEqual(self.db.execute("SELECT count(*) FROM sourcing_work_items WHERE request_id=?",
+                                         (created["id"],)).fetchone()[0], 100)
 
     def test_invalid_item_does_not_leave_partial_request(self):
         with self.assertRaises(ValueError):
