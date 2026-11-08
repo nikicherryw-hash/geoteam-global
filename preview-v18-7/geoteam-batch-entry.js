@@ -12,6 +12,8 @@
     account.textContent = labels[language] || labels.en;
     account.href = 'account.html?lang=' + encodeURIComponent(language);
   }
+  const shellSignIn = document.querySelector('.gt-site-signin');
+  if (shellSignIn) shellSignIn.href = 'account.html?lang=' + encodeURIComponent(language);
   form.addEventListener('submit', event => {
     const listFile = [...attach.files].some(file => /\.(csv|xlsx)$/i.test(file.name));
     const lines = query.value.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
