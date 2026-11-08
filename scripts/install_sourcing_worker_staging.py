@@ -17,6 +17,7 @@ from pathlib import Path
 
 FILES = {
     "batch_budget.py": Path("/opt/geoteam-global-ai/sourcing/search_v2/batch_budget.py"),
+    "batch_document.py": Path("/opt/geoteam-global-ai/sourcing/search_v2/batch_document.py"),
     "commerce_sourcing.py": Path("/opt/geoteam-global-ai/sourcing/search_v2/commerce_sourcing.py"),
     "commerce_sourcing_routes.py": Path("/opt/geoteam-global-ai/sourcing/search_v2/commerce_sourcing_routes.py"),
     "commerce_sourcing_worker.py": Path("/opt/geoteam-global-ai/sourcing/search_v2/commerce_sourcing_worker.py"),
