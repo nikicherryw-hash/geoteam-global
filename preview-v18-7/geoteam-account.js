@@ -119,7 +119,10 @@
       data.items.forEach(item => {
         const box = document.createElement('div'); box.className = 'item';
         const title = document.createElement('strong'); title.textContent = item.ordinal + '. ' + (item.part_number || item.requested_text); box.append(title);
+        if (item.image) { const image = document.createElement('img'); image.src = item.image; image.alt = item.product_name || item.part_number || item.requested_text; image.loading = 'lazy'; image.style.cssText = 'display:block;max-width:min(100%,320px);max-height:220px;object-fit:contain;margin:12px auto;border-radius:12px'; image.onerror = () => image.remove(); box.append(image); }
         if (item.product_name) p(box, item.product_name);
+        if (item.short_description) p(box, item.short_description);
+        if (item.intended_use) p(box, item.intended_use);
         p(box, item.status === 'AWAITING_SEARCH' ? t('pending') : item.status, 'status');
         item.offers.forEach(offer => p(box, [offer.public_offer_id,offer.country,offer.condition,offer.public_price,offer.currency].filter(Boolean).join(' · ')));
         $('detail').append(box);
