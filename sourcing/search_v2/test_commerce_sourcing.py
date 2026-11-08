@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from .commerce_sourcing import create_request, link_rfq, persist_ai_result, public_request, record_result
+from .commerce_sourcing import create_request, link_rfq, persist_ai_result, public_request, queue_draft, record_result
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -105,6 +105,21 @@ class CommerceSourcingTests(unittest.TestCase):
                                        query_text="uploaded list", locale="ru", items=items,
                                        queue_research=False)["idempotent_replay"])
 
+    def test_draft_queues_once_and_respects_owner(self):
+        created = create_request(self.db, user_id="u", organization_id="o", idempotency_key="draft-start-100",
+                                 query_text="list", locale="ru",
+                                 items=[{"requested_text": f"PN-{n}"} for n in range(100)], queue_research=False)
+        with self.assertRaises(PermissionError):
+            queue_draft(self.db, request_id=created["id"], user_id="other", organization_id="o")
+        started = queue_draft(self.db, request_id=created["id"], user_id="u", organization_id="o")
+        self.assertEqual(started["positions_total"], 100)
+        self.assertEqual(self.db.execute("SELECT count(*) FROM sourcing_work_items WHERE request_id=?",
+                                         (created["id"],)).fetchone()[0], 100)
+        self.assertTrue(queue_draft(self.db, request_id=created["id"], user_id="u",
+                                    organization_id="o")["idempotent_replay"])
+        self.assertEqual(self.db.execute("SELECT count(*) FROM sourcing_work_items WHERE request_id=?",
+                                         (created["id"],)).fetchone()[0], 100)
+
     def test_invalid_item_does_not_leave_partial_request(self):
         with self.assertRaises(ValueError):
             create_request(self.db, user_id="u", organization_id="o", idempotency_key="request-key-invalid",
@@ -140,4 +155,17 @@ class CommerceSourcingTests(unittest.TestCase):
         self.assertNotIn("country", offer)
         self.assertNotIn("public_price", offer)
         self.assertEqual(result["items"][0]["identity_status"], "EXACT")
+
+    def test_item_image_is_an_internal_route_without_supplier_url(self):
+        created = create_request(self.db, user_id="u", organization_id="o", idempotency_key="request-key-image",
+                                 query_text="PN-1", locale="en", items=[{"requested_text": "PN-1"}])
+        item_id = self.db.execute("SELECT id FROM sourcing_items WHERE request_id=?", (created["id"],)).fetchone()[0]
+        persist_ai_result(self.db, request_id=created["id"], item_id=item_id, result={
+            "product": {"part_number": "PN-1"}, "offers": [],
+            "_internal_sources": [{"source_url": "https://supplier.example/part",
+                                   "image_url": "https://supplier.example/part.jpg"}],
+        })
+        item = public_request(self.db, request_id=created["id"], organization_id="o", user_id="u")["items"][0]
+        self.assertEqual(item["image"], f"/api/v1/commerce/sourcing/requests/{created['id']}/items/1/image")
+        self.assertNotIn("supplier.example", str(item))
 
