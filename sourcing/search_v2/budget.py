@@ -1,5 +1,6 @@
-"""Single-host conservative $20 PILOT reservations, not an OpenAI billing cap."""
+"""Single-host conservative pilot reservations, not an OpenAI billing cap."""
 from __future__ import annotations
+import os
 import secrets
 import sqlite3
 from contextlib import contextmanager
@@ -11,12 +12,12 @@ class BudgetExhausted(RuntimeError):
     pass
 
 class PilotBudget:
-    def __init__(self, path: str, *, pilot_usd: str="20.00", reserve_usd: str="1.00"):
+    def __init__(self, path: str, *, pilot_usd: str | None=None, reserve_usd: str="1.00"):
         self.path=path
-        self.pilot=Decimal(pilot_usd)
+        self.pilot=Decimal(pilot_usd if pilot_usd is not None else os.getenv("GEOTEAM_PILOT_BUDGET_USD", "20.00"))
         self.reserve=Decimal(reserve_usd)
-        if self.pilot != Decimal("20.00") or self.reserve != Decimal("1.00"):
-            raise ValueError("GeoTeam initial pilot is fixed at $20 with $1 per-call reservation")
+        if self.pilot not in (Decimal("20.00"), Decimal("60.00")) or self.reserve != Decimal("1.00"):
+            raise ValueError("GeoTeam pilot requires an approved $20 or $60 ceiling with $1 per-call reservation")
         if not Path(path).parent.exists():
             raise ValueError("Persistent budget directory not mounted")
         with self._connect() as db:
@@ -37,7 +38,7 @@ class PilotBudget:
             cost=int(self.reserve*100)
             if taken+cost > int(self.pilot*100):
                 db.execute("ROLLBACK")
-                raise BudgetExhausted("GeoTeam pilot $20 allocation exhausted")
+                raise BudgetExhausted("GeoTeam pilot allocation exhausted")
             db.execute("INSERT INTO calls VALUES (?,?,?,?)",(ident,datetime.now(timezone.utc).isoformat(),cost,"ATTEMPTED"))
             db.execute("COMMIT")
         return ident
@@ -50,8 +51,9 @@ class PilotBudget:
         with self._connect() as db:
             cents,count=db.execute("SELECT COALESCE(SUM(amount_cents),0),COUNT(*) FROM calls").fetchone()
         return {
-            "approved_pilot_usd":"20.00",
+            "approved_pilot_usd":str(self.pilot),
             "calls_reserved":count,
-            "remaining_allocation_usd":str(Decimal("20.00")-Decimal(cents)/100),
+            "remaining_allocation_usd":str(self.pilot-Decimal(cents)/100),
             "note":"$1 allocation per API attempt, not actual cost. OpenAI project billing is separate and must be monitored."
         }
+
