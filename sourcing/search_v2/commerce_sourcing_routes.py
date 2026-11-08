@@ -7,6 +7,7 @@ No new authentication service or database is created.
 from __future__ import annotations
 
 import sqlite3
+import os
 from typing import Any, Callable
 
 from fastapi import Depends, HTTPException, Query
@@ -39,6 +40,8 @@ def install(router: Any, connect: Callable, current: Callable, write_guard: Call
 
     @router.post("/sourcing/requests", status_code=202)
     def submit(payload: SourcingRequestInput, session: sqlite3.Row = Depends(write_guard)) -> dict:
+        if os.getenv("GEOTEAM_BATCH_WORKER_ENABLED") != "1":
+            raise HTTPException(503, "BATCH_PROCESSING_NOT_ENABLED")
         with connect() as db:
             try:
                 return create_request(
