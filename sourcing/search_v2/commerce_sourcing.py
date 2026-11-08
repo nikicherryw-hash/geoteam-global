@@ -168,6 +168,7 @@ def record_result(
     if not item:
         raise LookupError("SOURCING_ITEM_NOT_FOUND")
     evidence_by_offer: dict[str, tuple[str, set[str]]] = {}
+    image_evidence_id: str | None = None
     for source in internal_sources:
         if not isinstance(source, dict) or not str(source.get("source_url") or "").startswith("https://"):
             continue
@@ -181,20 +182,22 @@ def record_result(
              json.dumps(source, ensure_ascii=False, separators=(",", ":")),
              _nullable(source.get("content_hash")), now),
         )
+        if image_evidence_id is None and str(source.get("image_url") or "").startswith("https://"):
+            image_evidence_id = evidence_id
         if public_id:
             allowed = {str(field) for field in source.get("verified_fields", []) if isinstance(field, str)}
             evidence_by_offer[public_id] = (evidence_id, allowed)
     db.execute(
         """UPDATE sourcing_items SET manufacturer=?,part_number=?,product_name=?,product_category=?,
            short_description=?,intended_use=?,technical_specifications_json=?,identity_status=?,
-           identity_confidence=?,status='COMPLETED',updated_at=? WHERE id=?""",
+           identity_confidence=?,representative_image_evidence_id=?,status='COMPLETED',updated_at=? WHERE id=?""",
         (_nullable(product.get("manufacturer")), _nullable(product.get("part_number")),
          _nullable(product.get("product_name")), _nullable(product.get("product_category")),
          _nullable(product.get("short_description")), _nullable(product.get("intended_use")),
          json.dumps(product.get("technical_specifications") or [], ensure_ascii=False),
          _nullable(product.get("identity_status")) or "UNCONFIRMED",
          product.get("identity_confidence") if isinstance(product.get("identity_confidence"), (int, float)) else None,
-         now, item_id),
+         image_evidence_id, now, item_id),
     )
     for offer in report.get("offers") or []:
         if not isinstance(offer, dict) or not str(offer.get("public_offer_id") or ""):
@@ -277,12 +280,16 @@ def public_request(db: sqlite3.Connection, *, request_id: str, organization_id: 
     result["items"] = []
     rows = db.execute(
         """SELECT id,ordinal,requested_text,manufacturer,part_number,product_name,product_category,
-                  short_description,intended_use,technical_specifications_json,identity_status,identity_confidence,status
+                  short_description,intended_use,technical_specifications_json,identity_status,identity_confidence,
+                  representative_image_evidence_id,status
            FROM sourcing_items WHERE request_id=? ORDER BY ordinal LIMIT ? OFFSET ?""",
         (request_id, page_size, (page - 1) * page_size),
     ).fetchall()
     for row in rows:
         item = dict(row)
+        image_evidence_id = item.pop("representative_image_evidence_id")
+        if image_evidence_id:
+            item["image"] = f"/api/v1/commerce/sourcing/requests/{request_id}/items/{item['ordinal']}/image"
         item["technical_specifications"] = json.loads(item.pop("technical_specifications_json") or "[]")
         offers = db.execute(
             """SELECT public_offer_id,seller_display_name,country,condition,availability,public_price,currency,
