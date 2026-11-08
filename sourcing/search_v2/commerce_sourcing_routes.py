@@ -15,6 +15,17 @@ from fastapi import Depends, HTTPException, Query
 from pydantic import BaseModel, Field
 
 from .commerce_sourcing import create_request, link_rfq, public_request
+from .batch_budget import can_accept_batch
+
+
+def require_batch_budget() -> None:
+    path = os.getenv("GEOTEAM_BUDGET_DB", "")
+    try:
+        available = can_accept_batch(path)
+    except (OSError, sqlite3.Error, ValueError) as exc:
+        raise HTTPException(503, "BATCH_BUDGET_UNAVAILABLE") from exc
+    if not available:
+        raise HTTPException(503, "BATCH_BUDGET_EXHAUSTED")
 
 
 class SourcingItemInput(BaseModel):
@@ -43,6 +54,7 @@ def install(router: Any, connect: Callable, current: Callable, write_guard: Call
     def submit(payload: SourcingRequestInput, session: sqlite3.Row = Depends(write_guard)) -> dict:
         if os.getenv("GEOTEAM_BATCH_WORKER_ENABLED") != "1":
             raise HTTPException(503, "BATCH_PROCESSING_NOT_ENABLED")
+        require_batch_budget()
         with closing(connect()) as db:
             try:
                 return create_request(
@@ -90,3 +102,4 @@ def install(router: Any, connect: Callable, current: Callable, write_guard: Call
                 return {"linked": True}
             except LookupError as exc:
                 raise HTTPException(404, str(exc)) from exc
+
