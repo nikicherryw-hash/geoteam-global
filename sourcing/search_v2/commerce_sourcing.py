@@ -111,6 +111,50 @@ def _create_request_in_transaction(db, user_id, organization_id, key, query, loc
             "positions_total": len(normalized), "idempotent_replay": False}
 
 
+def queue_draft(db: sqlite3.Connection, *, request_id: str, user_id: str,
+                organization_id: str) -> dict[str, Any]:
+    """Queue an existing draft once, under the same user and organization."""
+    _require_membership(db, user_id, organization_id)
+    now = _now()
+    db.execute("BEGIN IMMEDIATE")
+    try:
+        request = db.execute(
+            "SELECT status,positions_total FROM sourcing_requests WHERE id=? AND user_id=? AND organization_id=?",
+            (request_id, user_id, organization_id),
+        ).fetchone()
+        if not request:
+            raise LookupError("SOURCING_REQUEST_NOT_FOUND")
+        if request["status"] == "QUEUED":
+            db.execute("COMMIT")
+            return {"id": request_id, "status": "QUEUED", "idempotent_replay": True}
+        if request["status"] != "AWAITING_SEARCH":
+            raise ValueError("REQUEST_NOT_A_DRAFT")
+        items = db.execute(
+            "SELECT id FROM sourcing_items WHERE request_id=? AND status='AWAITING_SEARCH' ORDER BY ordinal",
+            (request_id,),
+        ).fetchall()
+        existing_work = db.execute(
+            "SELECT 1 FROM sourcing_work_items WHERE request_id=? LIMIT 1", (request_id,)
+        ).fetchone()
+        if len(items) != request["positions_total"] or existing_work:
+            raise ValueError("DRAFT_STATE_INVALID")
+        for item in items:
+            db.execute(
+                """INSERT INTO sourcing_work_items
+                   (id,request_id,item_id,work_kind,status,attempt_count,next_attempt_at,created_at,updated_at)
+                   VALUES (?,?,?,'RESEARCH','QUEUED',0,?,?,?)""",
+                (uuid.uuid4().hex, request_id, item["id"], now, now, now),
+            )
+        db.execute("UPDATE sourcing_items SET status='QUEUED',updated_at=? WHERE request_id=?", (now, request_id))
+        db.execute("UPDATE sourcing_requests SET status='QUEUED',updated_at=? WHERE id=?", (now, request_id))
+        db.execute("COMMIT")
+        return {"id": request_id, "status": "QUEUED", "positions_total": len(items),
+                "idempotent_replay": False}
+    except BaseException:
+        db.execute("ROLLBACK")
+        raise
+
+
 def record_result(
     db: sqlite3.Connection, *, request_id: str, item_id: str,
     report: dict[str, Any], internal_sources: list[dict[str, Any]],
