@@ -42,6 +42,11 @@ class DocumentOfferTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             document_parts(parts,maximum=10)
 
+    def test_filename_style_excel_cells_keep_part_numbers(self):
+        text = 'Автоматический выключатель_5SY6106-7_Siemens\t5 шт\n' \
+               'Автоматический выключатель_5SL6106-6_Siemens\t2 шт'
+        self.assertEqual(document_parts(text), ['5SY6106-7', '5SL6106-6'])
+
     def test_conflicting_declared_part_is_rejected(self):
         data=self.envelope();report=json.loads(data['output'][1]['content'][0]['text']);report['candidates'][0]['part_number']='5SY6106-8'
         data['output'][1]['content'][0]['text']=json.dumps(report)

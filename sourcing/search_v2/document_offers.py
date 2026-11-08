@@ -8,7 +8,13 @@ from .matching import model_matches
 
 def document_parts(text, maximum=50):
     # Part codes only, not quantities, voltages or descriptive document titles.
-    tokens = re.findall(r'(?<!\w)[A-Za-z0-9]+(?:[-/][A-Za-z0-9]+)+(?!\w)', str(text or ''))
+    # Office exports commonly embed a P/N in a filename-style cell such as
+    # ``item_5SY6106-7_Siemens``.  An underscore is a ``\w`` character in
+    # Python regexes, so normalise it to a boundary before extracting codes.
+    # This does not relax matching: each resulting P/N is still checked against
+    # the cited candidate's model and optional declared part number.
+    normalized = str(text or '').replace('_', ' ')
+    tokens = re.findall(r'(?<!\w)[A-Za-z0-9]+(?:[-/][A-Za-z0-9]+)+(?!\w)', normalized)
     result = []
     for token in tokens:
         if len(token) < 5 or not any(c.isalpha() for c in token) or not any(c.isdigit() for c in token):
