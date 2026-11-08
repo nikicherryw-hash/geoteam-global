@@ -6,7 +6,7 @@ from .ai_search import public_offer_id, validate_output
 from .matching import model_matches
 
 
-def document_parts(text, maximum=50):
+def document_parts(text, maximum=100):
     # Part codes only, not quantities, voltages or descriptive document titles.
     # Office exports commonly embed a P/N in a filename-style cell such as
     # ``item_5SY6106-7_Siemens``.  An underscore is a ``\w`` character in

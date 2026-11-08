@@ -204,7 +204,29 @@ async def fetch_public_image(source_url: str) -> tuple[bytes, str] | None:
 
 
 async def attach_source_images(leads: list[dict], offers: list[dict] | None = None) -> list[dict]:
-    semaphore = asyncio.Semaphore(3)
+    """Check cited product pages without allowing one P/N to starve a batch.
+
+    A document can contain many positions.  We intentionally do not crawl every
+    public listing synchronously: that would make a 100-line request slow and
+    unnecessarily load third-party sites.  Instead, the first pass checks one
+    cited page for each exact requested P/N, then fills the remaining bounded
+    capacity with independent offers.  The fields copied to public offers still
+    require evidence on that exact source page.
+    """
+    semaphore = asyncio.Semaphore(4)
+    limit = 30
+    seen_models: set[str] = set()
+    selected: list[dict] = []
+    remainder: list[dict] = []
+    for lead in leads:
+        model = str(lead.get('requested_part_number') or lead.get('model') or '').upper()
+        if model and model not in seen_models:
+            seen_models.add(model)
+            selected.append(lead)
+        else:
+            remainder.append(lead)
+    selected = (selected + remainder)[:limit]
+    offers_by_id = {str(offer.get('public_offer_id')): offer for offer in offers or []}
     async def enrich(lead):
         async with semaphore:
             try:
@@ -215,12 +237,12 @@ async def attach_source_images(leads: list[dict], offers: list[dict] | None = No
         if image and not lead.get('image_url'):
             lead.update({"image_url": image, "image_status": "SOURCE_PAGE_METADATA"})
         if offers is not None:
-            offer = next((x for x in offers if x.get('public_offer_id') == lead.get('public_offer_id')), None)
+            offer = offers_by_id.get(str(lead.get('public_offer_id')))
             if offer is not None and lead.get('page_facts'):
                 offer.update(lead['page_facts'])
                 offer['updated_at'] = lead['page_checked_at']
                 offer['verification'] = 'SOURCE_PAGE_CHECKED'
-    await asyncio.gather(*(enrich(lead) for lead in leads[:12]))
+    await asyncio.gather(*(enrich(lead) for lead in selected))
     return leads
 
 
@@ -265,7 +287,7 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
     report = json.loads("".join(block["text"] for block in messages))
     internal_leads: list[dict] = []
     public_offers: list[dict] = []
-    for item in report.get("candidates", [])[:25]:
+    for item in report.get("candidates", [])[:100]:
         if not isinstance(item, dict):
             continue
         source_url = str(item.get("url") or "")
@@ -273,15 +295,17 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
             continue
         if re.search(r"\b(sold|ended|expired|out of stock|продан|заверш)\b", str(item.get("availability_claim", "")).lower()):
             continue
-        condition = str(item.get("condition") or "UNKNOWN").upper()
-        condition = condition if condition in {"NEW", "USED", "REFURBISHED", "UNKNOWN"} else "UNKNOWN"
+        # A model's citation summary is not sufficient to publish a condition.
+        # It is overwritten only after the matching public product page yields
+        # structured/table evidence in ``attach_source_images``.
+        condition = "UNKNOWN"
         raw_price, currency = item.get("price"), item.get("currency")
         price_ok = type(raw_price) in (float, int) and 0 < raw_price < 1e9 and isinstance(currency, str) and re.fullmatch("[A-Z]{3}", currency)
         declared_image = str(item.get("image_url") or "")
         image_source = str(item.get("image_source_url") or "")
         image_url = declared_image if _public_page_url(declared_image) and image_source == source_url else None
         internal_leads.append({"source_url": source_url, "model": str(item.get('model') or ''), "public_offer_id":public_offer_id(source_url, len(public_offers) + 1), "seller": str(item.get("seller") or "")[:120], "evidence": str(item.get("evidence") or "")[:280], "image_url": image_url, "condition": condition})
-        public_offers.append({"public_offer_id": public_offer_id(source_url, len(public_offers) + 1), "country": str(item.get("country") or "")[:80] or None, "condition": condition, "price": raw_price if price_ok else None, "currency": currency if price_ok else None, "availability": "NOT_CONFIRMED", "lead_time": None, "updated_at": datetime.now(timezone.utc).isoformat(), "status": "SEARCH_CITATION_ONLY"})
+        public_offers.append({"public_offer_id": public_offer_id(source_url, len(public_offers) + 1), "country": None, "condition": condition, "price": raw_price if price_ok else None, "currency": currency if price_ok else None, "availability": "NOT_CONFIRMED", "lead_time": None, "updated_at": datetime.now(timezone.utc).isoformat(), "status": "SEARCH_CITATION_ONLY"})
         role = item.get('source_role', 'PRODUCT_OFFER')
         authorization = item.get('authorization_url')
         # Citation alone does not prove that its publisher is the manufacturer.
@@ -306,8 +330,8 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
 
 async def search_once(query, locale, hints, api_key, model, client, budget):
     payload = {"model": model, "store": False, "instructions": SYSTEM,
-        "input": "Research globally the exact item " + repr(query) + ". Language: " + locale + ". Return a source-grounded product identity card and 5-12 distinct direct public item pages when available. Keep valid offers even without an image; one representative product photo is enough. Optional source hints, not offers: " + json.dumps(hints[:12]),
-        "tools": [{"type": "web_search"}], "tool_choice": "required", "include": ["web_search_call.action.sources"], "text": {"format": JSON_FORMAT}, "max_tool_calls": 5, "max_output_tokens": 12000}
+        "input": "Research globally the exact item " + repr(query) + ". Language: " + locale + ". Return a source-grounded product identity card and distinct direct public item pages when available. For an attached multi-item list, keep every candidate tied to its exact requested P/N; seek at least one direct citation per P/N where public results exist and never merge adjacent variants. Keep valid offers even without an image; one representative product photo is enough. Optional source hints, not offers: " + json.dumps(hints[:12]),
+        "tools": [{"type": "web_search"}], "tool_choice": "required", "include": ["web_search_call.action.sources"], "text": {"format": JSON_FORMAT}, "max_tool_calls": 8, "max_output_tokens": 24000}
     ticket = budget.reserve_call()
     try:
         response = await client.post("https://api.openai.com/v1/responses", json=payload, headers={"Authorization": "Bearer " + api_key}, timeout=httpx.Timeout(150.0, connect=10.0))
@@ -327,7 +351,7 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
     for url in image_refs[:6]:
         result['_internal_sources'].append({'source_url': url, 'model': query, 'source_role': 'IMAGE_REFERENCE'})
     try:
-        await asyncio.wait_for(attach_source_images(result["_internal_sources"], result['offers']), timeout=20.0)
+        await asyncio.wait_for(attach_source_images(result["_internal_sources"], result['offers']), timeout=35.0)
     except asyncio.TimeoutError:
         result['warnings'].append('SOURCE_PAGE_CHECK_PARTIAL')
     image_url = next((lead.get("image_url") for lead in result["_internal_sources"] if lead.get("image_url")), None)

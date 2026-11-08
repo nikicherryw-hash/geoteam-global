@@ -11,6 +11,10 @@ class EvidenceTests(unittest.TestCase):
     def test_banner_is_not_product_photo(self):
         self.assertIsNone(product_image('<meta property="og:image" content="https://example.com/landscape.jpg">', 'ROTAX 912'))
 
+    def test_matching_product_can_use_own_page_social_image_as_last_resort(self):
+        page = '<script type="application/ld+json">' + json.dumps({'@type':'Product','name':'ROTAX 912'}) + '</script><meta property="og:image" content="/rotax-912.jpg">'
+        self.assertEqual(product_image(page, 'ROTAX 912'), '/rotax-912.jpg')
+
     def test_photo_requires_matching_model(self):
         page = '<script type="application/ld+json">' + json.dumps({'@type':'Product','name':'ROTAX 912','image':'/912.jpg'}) + '</script>'
         self.assertEqual(product_image(page,'ROTAX 912'), '/912.jpg')
@@ -31,6 +35,10 @@ class EvidenceTests(unittest.TestCase):
     def test_shipping_destination_is_not_origin(self):
         facts = offer_facts(self.page(offers={'shippingDetails':{'shippingDestination':{'addressCountry':'DE'}}}), 'Xenta 421A')
         self.assertNotIn('country', facts)
+
+    def test_nested_shipping_origin_is_evidence(self):
+        facts = offer_facts(self.page(offers={'shippingDetails':{'shippingOrigin':{'address':{'addressCountry':'Germany'}}}}), 'Xenta 421A')
+        self.assertEqual(facts['country'], 'Germany')
 
     def test_exact_aviation_row(self):
         page = '<table><tr><th>Part Number</th><th>Condition</th><th>Country</th></tr><tr><td>601R42452-3</td><td>AR</td><td>Germany</td></tr><tr><td>601R42452-3AAR</td><td>NE</td><td>USA</td></tr></table>'

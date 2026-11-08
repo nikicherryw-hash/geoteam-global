@@ -42,6 +42,12 @@ class DocumentOfferTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             document_parts(parts,maximum=10)
 
+    def test_document_accepts_one_hundred_positions_and_rejects_one_more(self):
+        parts=' '.join('5SY61%03d-7'%i for i in range(100))
+        self.assertEqual(len(document_parts(parts)),100)
+        with self.assertRaises(ValueError):
+            document_parts(parts + ' 5SY61999-7')
+
     def test_filename_style_excel_cells_keep_part_numbers(self):
         text = 'Автоматический выключатель_5SY6106-7_Siemens\t5 шт\n' \
                'Автоматический выключатель_5SL6106-6_Siemens\t2 шт'

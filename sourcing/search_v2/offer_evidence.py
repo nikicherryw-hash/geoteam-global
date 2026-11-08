@@ -149,8 +149,9 @@ def offer_facts(page, model):
                 if isinstance(shipping, list):
                     shipping = shipping[0] if len(shipping) == 1 else {}
                 origin = shipping.get('shippingOrigin', {}) if isinstance(shipping, dict) else {}
-                country = origin.get('addressCountry') if isinstance(origin, dict) else None
-                if isinstance(country, str) and re.fullmatch('[A-Z]{2}', country):
+                address = origin.get('address') if isinstance(origin, dict) else None
+                country = (address.get('addressCountry') if isinstance(address, dict) else None) or (origin.get('addressCountry') if isinstance(origin, dict) else None)
+                if isinstance(country, str) and re.fullmatch(r'(?:[A-Z]{2}|[A-Za-z][A-Za-z .-]{1,58})', country.strip()):
                     facts['country'] = country
                 spec = offer.get('priceSpecification', {})
                 unit = spec.get('referenceQuantity', {}) if isinstance(spec, dict) else {}
@@ -174,6 +175,7 @@ def product_image(page, model):
     parser.feed(page[:500000])
     compact = lambda value: re.sub(r'[^a-z0-9]', '', str(value).lower())
     target = compact(model)
+    matching_product_seen = False
     for block in parser.blocks:
         try:
             root = json.loads(block)
@@ -192,6 +194,7 @@ def product_image(page, model):
                 continue
             if not model_matches(model, ' '.join(str(item.get(k) or '') for k in ('name','sku','mpn','model'))):
                 continue
+            matching_product_seen = True
             image = item.get('image')
             if isinstance(image, list):
                 image = image[0] if image else None
@@ -211,4 +214,26 @@ def product_image(page, model):
                     self.matches.append(src)
     images = Images()
     images.feed(page[:500000])
-    return images.matches[0] if images.matches else None
+    if images.matches:
+        return images.matches[0]
+    # Some legitimate product pages provide identity in JSON-LD but expose the
+    # image only through their social metadata.  It is safe to use that fallback
+    # only after matching the requested P/N to a Product object above; otherwise
+    # site-wide banners could be misrepresented as product photographs.
+    if matching_product_seen:
+        class Metadata(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.image = None
+            def handle_starttag(self, tag, attrs):
+                if tag != 'meta' or self.image:
+                    return
+                values = {str(k).lower(): str(v) for k, v in attrs}
+                if values.get('property', '').lower() in {'og:image', 'twitter:image'} or values.get('name', '').lower() in {'twitter:image'}:
+                    candidate = values.get('content', '').strip()
+                    if candidate and not candidate.lower().startswith(('data:', 'javascript:')):
+                        self.image = candidate
+        metadata = Metadata()
+        metadata.feed(page[:500000])
+        return metadata.image
+    return None

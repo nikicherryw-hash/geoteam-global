@@ -28,9 +28,9 @@
   const make = (tag, className) => { const node = document.createElement(tag); if (className) node.className = className; return node; };
   const hasValue = value => value !== null && value !== undefined && String(value).trim() !== '';
   const offerWords = {
-    ru:['Страна не установлена','Новое','Б/у','Восстановленное','Состояние не установлено','Наличие не подтверждено','Цена по запросу','Цена из публичного источника; комплектация и единица продажи требуют уточнения.'],
-    en:['Country not established','New','Used','Refurbished','Condition not established','Availability not confirmed','Price on request','Public price reference; configuration and sales unit require confirmation.'],
-    tr:['Ülke belirlenmedi','Yeni','Kullanılmış','Yenilenmiş','Durum belirlenmedi','Stok doğrulanmadı','Fiyat talep üzerine','Herkese açık fiyat referansı; yapılandırma ve satış birimi teyit edilmelidir.']
+    ru:['','Новое','Б/у','Восстановленное','','','Цена по запросу','Цена из публичного источника; комплектация и единица продажи требуют уточнения.','Детали предложения на странице источника не подтверждены; уточняются по RFQ.'],
+    en:['','New','Used','Refurbished','','','Price on request','Public price reference; configuration and sales unit require confirmation.','Offer details are not confirmed from the source page and require an RFQ.'],
+    tr:['','Yeni','Kullanılmış','Yenilenmiş','','','Fiyat talep üzerine','Herkese açık fiyat referansı; yapılandırma ve satış birimi teyit edilmelidir.','Teklif ayrıntıları kaynak sayfasında doğrulanmadı; RFQ ile teyit edilir.']
   };
 
   function setStatus(message, state = 'global') {
@@ -80,7 +80,7 @@
     const section = make('section', 'offers'), heading = make('h2'); text(heading, t('offers')); section.append(heading);
     if (!offers.length) { const none = make('p'); text(none, t('none')); section.append(none); results.append(section); return; }
     const grid = make('div', 'offersgrid');
-    offers.slice(0, 30).forEach(offer => {
+    offers.slice(0, 100).forEach(offer => {
       const card = make('article', 'offer'), title = make('strong'); text(title, offer.public_offer_id || 'GeoTeam offer'); card.append(title);
       if (hasValue(offer.part_number)) { const part = make('p', 'meta'); text(part, offer.part_number); card.append(part); }
       const words = offerWords[lang] || offerWords.en;
@@ -90,7 +90,8 @@
       const availabilityIndex = {SOURCE_IN_STOCK:0,SOURCE_OUT_OF_STOCK:1,SOURCE_PREORDER:2,SOURCE_BACKORDER:3,SOURCE_DISCONTINUED:4}[offer.availability];
       const aviationStates = {ru:{FACTORY_NEW:'Новое с завода (FN)',NEW_SURPLUS:'Новое из складских остатков (NS)',OVERHAULED:'После капитального ремонта (OH)',SERVICEABLE:'Исправное по данным продавца (SV)',AS_REMOVED:'Снято с эксплуатации, состояние требует проверки (AR)',REPAIRED:'После ремонта (RP)',UNSERVICEABLE:'Неисправное (US)',FOR_PARTS:'На запчасти'},en:{FACTORY_NEW:'Factory new (FN)',NEW_SURPLUS:'New surplus (NS)',OVERHAULED:'Overhauled (OH)',SERVICEABLE:'Seller reports serviceable (SV)',AS_REMOVED:'As removed; inspection required (AR)',REPAIRED:'Repaired (RP)',UNSERVICEABLE:'Unserviceable (US)',FOR_PARTS:'For parts'}};
       const conditionText = (aviationStates[lang] || aviationStates.en)[offer.condition] || words[({NEW:1,USED:2,REFURBISHED:3})[offer.condition] || 4];
-      const meta = make('p', 'meta'); text(meta, [offer.country || words[0], conditionText, availabilityIndex === undefined ? words[5] : stockWords[availabilityIndex]].join(' · ')); card.append(meta);
+      const verifiedFacts = [offer.country, conditionText, availabilityIndex === undefined ? '' : stockWords[availabilityIndex]].filter(hasValue);
+      const meta = make('p', 'meta'); text(meta, verifiedFacts.length ? verifiedFacts.join(' · ') : words[8]); card.append(meta);
       const price = make('p', 'price');
       const numericPrice = Number(offer.price);
       text(price, hasValue(offer.price) && Number.isFinite(numericPrice) && numericPrice > 0 && /^[A-Z]{3}$/.test(offer.currency || '') ? new Intl.NumberFormat(lang, {style:'currency',currency:offer.currency}).format(numericPrice) : words[6]); card.append(price);
