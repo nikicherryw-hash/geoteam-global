@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 from sourcing.search_v2.budget import PilotBudget,BudgetExhausted
+from sourcing.search_v2.usage_cost import estimated_cents
 
 ROOT=Path(__file__).resolve().parents[2]
 
@@ -34,4 +35,20 @@ class BudgetTests(unittest.TestCase):
         with self.assertRaises(BudgetExhausted):
           PilotBudget(file).reserve_call()
         self.assertEqual(PilotBudget(file).status()["remaining_allocation_usd"],"0.00")
+ def test_completed_call_releases_unused_reservation_without_rewriting_legacy(self):
+    with tempfile.TemporaryDirectory(dir=ROOT) as path:
+      file=str(Path(path)/"pilot.db")
+      budget=PilotBudget(file,pilot_usd="60.00")
+      legacy=budget.reserve_call()
+      budget.mark(legacy,"SUCCESS")
+      current=budget.reserve_call()
+      self.assertEqual(budget.status()["remaining_allocation_usd"],"58.00")
+      budget.mark(current,"SUCCESS",estimated_cost_cents=13)
+      self.assertEqual(budget.status()["remaining_allocation_usd"],"58.87")
+      with budget._connect() as db:
+        self.assertEqual(db.execute("SELECT amount_cents FROM calls WHERE id=?",(legacy,)).fetchone()[0],100)
+ def test_cost_estimate_requires_usage_and_counts_web_calls(self):
+    self.assertEqual(estimated_cents({"input_tokens":10000,"output_tokens":1000},"gpt-6.1-sol",3),6)
+    self.assertIsNone(estimated_cents({},"gpt-6.1-sol",3))
+    self.assertIsNone(estimated_cents({"input_tokens":100,"output_tokens":100},"other",1))
 
