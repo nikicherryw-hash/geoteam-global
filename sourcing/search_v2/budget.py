@@ -42,11 +42,17 @@ class PilotBudget:
             db.execute("INSERT INTO calls VALUES (?,?,?,?)",(ident,datetime.now(timezone.utc).isoformat(),cost,"ATTEMPTED"))
             db.execute("COMMIT")
         return ident
-    def mark(self,ident: str,status: str):
+    def mark(self,ident: str,status: str,estimated_cost_cents: int | None=None):
         if status not in ("SUCCESS","UNKNOWN_AFTER_SEND","ERROR_AFTER_SEND"):
             raise ValueError("Invalid transaction state")
+        if estimated_cost_cents is not None and (status != "SUCCESS" or not 1 <= estimated_cost_cents <= 10000):
+            raise ValueError("Invalid cost estimate")
         with self._connect() as db:
-            db.execute("UPDATE calls SET state=? WHERE id=?",(status,ident))
+            if estimated_cost_cents is None:
+                db.execute("UPDATE calls SET state=? WHERE id=?",(status,ident))
+            else:
+                db.execute("UPDATE calls SET state=?,amount_cents=? WHERE id=?",
+                           (status,estimated_cost_cents,ident))
     def status(self) -> dict:
         with self._connect() as db:
             cents,count=db.execute("SELECT COALESCE(SUM(amount_cents),0),COUNT(*) FROM calls").fetchone()
@@ -54,6 +60,6 @@ class PilotBudget:
             "approved_pilot_usd":str(self.pilot),
             "calls_reserved":count,
             "remaining_allocation_usd":str(self.pilot-Decimal(cents)/100),
-            "note":"$1 allocation per API attempt, not actual cost. OpenAI project billing is separate and must be monitored."
+            "note":"In-flight and legacy calls retain conservative $1 reservations; completed calls with usage use estimated token and web-search cost. This is not provider billing."
         }
 
