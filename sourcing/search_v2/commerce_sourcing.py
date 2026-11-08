@@ -42,6 +42,7 @@ def create_request(
     db: sqlite3.Connection, *, user_id: str, organization_id: str,
     idempotency_key: str, query_text: str, locale: str,
     items: list[dict[str, Any]], source_job_id: str | None = None,
+    queue_research: bool = True,
 ) -> dict[str, Any]:
     """Create a bounded, organization-scoped request without source disclosure."""
     _require_membership(db, user_id, organization_id)
@@ -63,7 +64,7 @@ def create_request(
     now = _now()
     db.execute("SAVEPOINT sourcing_create")
     try:
-        result = _create_request_in_transaction(db, user_id, organization_id, key, query, locale, normalized, source_job_id, now)
+        result = _create_request_in_transaction(db, user_id, organization_id, key, query, locale, normalized, source_job_id, now, queue_research)
         db.execute("RELEASE SAVEPOINT sourcing_create")
         return result
     except BaseException:
@@ -72,7 +73,7 @@ def create_request(
         raise
 
 
-def _create_request_in_transaction(db, user_id, organization_id, key, query, locale, normalized, source_job_id, now):
+def _create_request_in_transaction(db, user_id, organization_id, key, query, locale, normalized, source_job_id, now, queue_research):
     existing = db.execute(
         "SELECT id,status,positions_total,created_at FROM sourcing_requests WHERE user_id=? AND idempotency_key=?",
         (user_id, key),
@@ -85,8 +86,9 @@ def _create_request_in_transaction(db, user_id, organization_id, key, query, loc
         """INSERT INTO sourcing_requests
            (id,organization_id,user_id,idempotency_key,source_job_id,query_text,locale,status,
             positions_total,positions_completed,file_count,created_at,updated_at)
-           VALUES (?,?,?,?,?,?,?,'QUEUED',?,0,0,?,?)""",
-        (request_id, organization_id, user_id, key, source_job_id, query, locale, len(normalized), now, now),
+           VALUES (?,?,?,?,?,?,?,?,?,0,0,?,?)""",
+        (request_id, organization_id, user_id, key, source_job_id, query, locale,
+         "QUEUED" if queue_research else "AWAITING_SEARCH", len(normalized), now, now),
     )
     for ordinal, (requested, manufacturer, part_number) in enumerate(normalized, 1):
         item_id = uuid.uuid4().hex
@@ -94,16 +96,19 @@ def _create_request_in_transaction(db, user_id, organization_id, key, query, loc
             """INSERT INTO sourcing_items
                (id,request_id,ordinal,requested_text,requested_manufacturer,requested_part_number,
                 identity_status,status,created_at,updated_at)
-               VALUES (?,?,?,?,?,?,?,'QUEUED',?,?)""",
-            (item_id, request_id, ordinal, requested, manufacturer, part_number, "UNRESOLVED", now, now),
+               VALUES (?,?,?,?,?,?,?,?,?,?)""",
+            (item_id, request_id, ordinal, requested, manufacturer, part_number, "UNRESOLVED",
+             "QUEUED" if queue_research else "AWAITING_SEARCH", now, now),
         )
-        db.execute(
-            """INSERT INTO sourcing_work_items
-               (id,request_id,item_id,work_kind,status,attempt_count,next_attempt_at,created_at,updated_at)
-               VALUES (?,?,?,'RESEARCH','QUEUED',0,?,?,?)""",
-            (uuid.uuid4().hex, request_id, item_id, now, now, now),
-        )
-    return {"id": request_id, "status": "QUEUED", "positions_total": len(normalized), "idempotent_replay": False}
+        if queue_research:
+            db.execute(
+                """INSERT INTO sourcing_work_items
+                   (id,request_id,item_id,work_kind,status,attempt_count,next_attempt_at,created_at,updated_at)
+                   VALUES (?,?,?,'RESEARCH','QUEUED',0,?,?,?)""",
+                (uuid.uuid4().hex, request_id, item_id, now, now, now),
+            )
+    return {"id": request_id, "status": "QUEUED" if queue_research else "AWAITING_SEARCH",
+            "positions_total": len(normalized), "idempotent_replay": False}
 
 
 def record_result(
@@ -282,3 +287,4 @@ def link_rfq(db: sqlite3.Connection, *, request_id: str, ordinal: int, public_of
     db.execute("INSERT INTO sourcing_rfq_links(id,request_id,item_id,offer_id,rfq_id,created_at) VALUES (?,?,?,?,?,?)",
                (link_id, request_id, item[0], offer_id, rfq_id, _now()))
     return link_id
+
