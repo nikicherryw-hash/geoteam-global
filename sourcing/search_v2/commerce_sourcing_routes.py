@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import sqlite3
 import os
+import base64
+import binascii
 from contextlib import closing
 from typing import Any, Callable
 
@@ -16,6 +18,7 @@ from pydantic import BaseModel, Field
 
 from .commerce_sourcing import create_request, link_rfq, public_request
 from .batch_budget import can_accept_batch
+from .batch_document import extract_list_items
 
 
 def require_batch_budget() -> None:
@@ -47,8 +50,22 @@ class RfqLinkInput(BaseModel):
     rfq_number: str = Field(min_length=1, max_length=80)
 
 
+class DocumentPreviewInput(BaseModel):
+    mime: str = Field(min_length=1, max_length=100)
+    data_base64: str = Field(min_length=1, max_length=4 * 1024 * 1024)
+
+
 def install(router: Any, connect: Callable, current: Callable, write_guard: Callable) -> None:
     """Called once by commerce_gateway after its existing dependencies exist."""
+
+    @router.post("/sourcing/preview")
+    def preview(payload: DocumentPreviewInput, session: sqlite3.Row = Depends(write_guard)) -> dict:
+        try:
+            raw = base64.b64decode(payload.data_base64, validate=True)
+            items = extract_list_items(raw, payload.mime)
+        except (binascii.Error, ValueError) as exc:
+            raise HTTPException(422, str(exc)) from exc
+        return {"positions_total": len(items), "items": items, "persisted": False}
 
     @router.post("/sourcing/requests", status_code=202)
     def submit(payload: SourcingRequestInput, session: sqlite3.Row = Depends(write_guard)) -> dict:
