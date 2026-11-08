@@ -80,8 +80,9 @@
     const section = make('section', 'offers'), heading = make('h2'); text(heading, t('offers')); section.append(heading);
     if (!offers.length) { const none = make('p'); text(none, t('none')); section.append(none); results.append(section); return; }
     const grid = make('div', 'offersgrid');
-    offers.slice(0, 12).forEach(offer => {
+    offers.slice(0, 30).forEach(offer => {
       const card = make('article', 'offer'), title = make('strong'); text(title, offer.public_offer_id || 'GeoTeam offer'); card.append(title);
+      if (hasValue(offer.part_number)) { const part = make('p', 'meta'); text(part, offer.part_number); card.append(part); }
       const words = offerWords[lang] || offerWords.en;
       const roles = {ru:{PRODUCT_OFFER:'Предложение изделия',MANUFACTURER:'Производитель — запрос поставки',OFFICIAL_REPRESENTATIVE:'Представительство — запрос поставки',POTENTIAL_SUPPLIER:'Потенциальный поставщик'},en:{PRODUCT_OFFER:'Product offer',MANUFACTURER:'Manufacturer — supply enquiry',OFFICIAL_REPRESENTATIVE:'Representative — supply enquiry',POTENTIAL_SUPPLIER:'Potential supplier'}};
       const role = make('p','meta'); text(role,(roles[lang] || roles.en)[offer.source_role || 'PRODUCT_OFFER']); card.append(role);
