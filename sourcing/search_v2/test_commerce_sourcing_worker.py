@@ -6,7 +6,7 @@ from contextlib import closing
 from pathlib import Path
 
 from .commerce_sourcing import create_request, public_request
-from .commerce_sourcing_worker import claim, complete, connect, fail
+from .commerce_sourcing_worker import claim, complete, connect, fail, pause_queued_for_budget
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -67,3 +67,16 @@ class SourcingWorkerTests(unittest.TestCase):
             row = db.execute("SELECT status,error_code FROM sourcing_work_items WHERE id=?", (job["id"],)).fetchone()
             self.assertEqual((row["status"], row["error_code"]), ("PAUSED_BUDGET", "BUDGET_EXHAUSTED"))
             self.assertEqual(db.execute("SELECT status FROM sourcing_requests WHERE id=?", (self.request["id"],)).fetchone()[0], "PAUSED_BUDGET")
+
+    def test_budget_cap_pauses_remaining_positions_and_keeps_completed_result(self):
+        with closing(connect(self.path)) as db:
+            first = claim(db)
+            self.assertTrue(complete(db, first, {"product": {"part_number": "PN-1"}, "offers": [], "_internal_sources": []}))
+            self.assertEqual(pause_queued_for_budget(db), 1)
+            self.assertIsNone(claim(db))
+            result = public_request(db, request_id=self.request["id"], organization_id="o", user_id="u")
+            self.assertEqual(result["status"], "PAUSED_BUDGET")
+            self.assertEqual(result["positions_completed"], 1)
+            self.assertEqual(result["items"][0]["part_number"], "PN-1")
+            self.assertEqual(result["items"][1]["status"], "PAUSED_BUDGET")
+
