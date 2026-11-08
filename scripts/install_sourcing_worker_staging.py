@@ -16,13 +16,14 @@ from pathlib import Path
 
 
 FILES = {
+    "batch_budget.py": Path("/opt/geoteam-global-ai/sourcing/search_v2/batch_budget.py"),
     "commerce_sourcing.py": Path("/opt/geoteam-global-ai/sourcing/search_v2/commerce_sourcing.py"),
     "commerce_sourcing_routes.py": Path("/opt/geoteam-global-ai/sourcing/search_v2/commerce_sourcing_routes.py"),
     "commerce_sourcing_worker.py": Path("/opt/geoteam-global-ai/sourcing/search_v2/commerce_sourcing_worker.py"),
     "geoteam-sourcing-worker.service": Path("/etc/systemd/system/geoteam-sourcing-worker.service"),
     "geoteam-sourcing-worker.timer": Path("/etc/systemd/system/geoteam-sourcing-worker.timer"),
-    "40-geoteam-sourcing-staging.conf": Path("/etc/systemd/system/geoteam-ai-pilot.service.d/40-geoteam-sourcing-staging.conf"),
 }
+ACTIVATION_FILE = "40-geoteam-sourcing-staging.conf"
 
 
 def sha(path: Path) -> str:
@@ -36,7 +37,7 @@ def main() -> int:
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
     staged = args.staged_dir.resolve()
-    for name in FILES:
+    for name in (*FILES, ACTIVATION_FILE):
         file = staged / name
         if not file.is_file():
             raise SystemExit("REFUSED: missing staged file " + name)
@@ -45,13 +46,14 @@ def main() -> int:
     for name in ("geoteam-sourcing-worker.service", "geoteam-sourcing-worker.timer"):
         if "GEOTEAM_BATCH_WORKER_ENABLED" not in (staged / name).read_text(encoding="utf-8") and name.endswith(".service"):
             raise SystemExit("REFUSED: worker unit missing enable guard")
-    if "GEOTEAM_BATCH_WORKER_ENABLED=1" not in (staged / "40-geoteam-sourcing-staging.conf").read_text(encoding="utf-8"):
+    if "GEOTEAM_BATCH_WORKER_ENABLED=1" not in (staged / ACTIVATION_FILE).read_text(encoding="utf-8"):
         raise SystemExit("REFUSED: pilot flag missing")
-    print("PREFLIGHT_OK files=" + str(len(FILES)))
+    print("PREFLIGHT_OK files=" + str(len(FILES) + 1))
     if not args.apply:
         return 0
     backup = args.backup_root.resolve() / datetime.now(timezone.utc).strftime("sourcing-worker-%Y%m%dT%H%M%SZ")
     backup.mkdir(parents=True, exist_ok=False)
+    shutil.copy2(staged / ACTIVATION_FILE, backup / "inactive-pilot-dropin.conf")
     for name, target in FILES.items():
         if target.exists():
             shutil.copy2(target, backup / name)
@@ -76,3 +78,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
