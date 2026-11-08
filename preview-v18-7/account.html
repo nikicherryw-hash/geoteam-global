@@ -14,14 +14,14 @@
     <p id="notice" role="status" aria-live="polite"></p>
     <section id="auth" class="panel" hidden>
       <div class="auth-grid">
-        <form id="login"><h2 data-i18n="login">Войти</h2><label>Email<input name="email" type="email" autocomplete="email" required></label><label data-i18n="password">Пароль<input name="password" type="password" autocomplete="current-password" required></label><button type="submit" data-i18n="login">Войти</button></form>
-        <form id="register"><h2 data-i18n="register">Регистрация</h2><label>Email<input name="email" type="email" autocomplete="email" required></label><label data-i18n="password">Пароль<input name="password" type="password" autocomplete="new-password" minlength="12" required></label><label data-i18n="organization">Организация<input name="organization" maxlength="200" required></label><label class="consent"><input name="consent" type="checkbox" required><span data-i18n="consent">Согласен с условиями обработки данных</span></label><button type="submit" data-i18n="register">Зарегистрироваться</button></form>
+        <form id="login"><h2 data-i18n="login">Войти</h2><label>Email<input name="email" type="email" autocomplete="email" required></label><label><span data-i18n="password">Пароль</span><input name="password" type="password" autocomplete="current-password" required></label><button type="submit" data-i18n="login">Войти</button></form>
+        <form id="register"><h2 data-i18n="register">Регистрация</h2><label>Email<input name="email" type="email" autocomplete="email" required></label><label><span data-i18n="password">Пароль</span><input name="password" type="password" autocomplete="new-password" minlength="12" required></label><label><span data-i18n="organization">Организация</span><input name="organization" maxlength="200" required></label><label class="consent"><input name="consent" type="checkbox" required><span data-i18n="consent">Согласен с условиями обработки данных</span></label><button type="submit" data-i18n="register">Зарегистрироваться</button></form>
       </div>
     </section>
     <section id="account" hidden>
       <div class="account-bar"><p id="identity"></p><button id="logout" type="button" class="secondary" data-i18n="logout">Выйти</button></div>
       <section class="panel"><h2 data-i18n="newRequest">Новая заявка</h2><p data-i18n="newHelp">Укажите один P/N в строке или приложите CSV/XLSX с колонкой P/N. До 100 позиций. Сохранение не запускает платный AI-поиск.</p>
-        <label data-i18n="positions">Артикулы по одному в строке<textarea id="positions" rows="5" placeholder="5SY6106-7&#10;XPSUDN13AP"></textarea></label>
+        <label><span data-i18n="positions">Артикулы по одному в строке</span><textarea id="positions" rows="5" placeholder="5SY6106-7&#10;XPSUDN13AP"></textarea></label>
         <div class="form-row"><label class="file-label"><span data-i18n="file">CSV или XLSX</span><input id="file" type="file" accept=".csv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></label><button id="preview" type="button" data-i18n="preview">Проверить позиции</button></div>
         <p id="preview-count" class="muted"></p><ol id="preview-list" class="positions"></ol><button id="save" type="button" hidden data-i18n="save">Сохранить заявку</button>
       </section>
