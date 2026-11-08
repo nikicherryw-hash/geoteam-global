@@ -1,0 +1,11 @@
+[Unit]
+Description=Poll GeoTeam Global Sourcing staging queue
+
+[Timer]
+OnBootSec=1min
+OnUnitInactiveSec=1min
+AccuracySec=10s
+Unit=geoteam-sourcing-worker.service
+
+[Install]
+WantedBy=timers.target

@@ -14,6 +14,7 @@ import os
 import sqlite3
 import time
 import uuid
+from decimal import Decimal
 from pathlib import Path
 from typing import Awaitable, Callable
 
@@ -153,7 +154,14 @@ def main() -> int:
         raise SystemExit("BATCH_PROCESSING_NOT_ENABLED")
     if not args.database.is_file() or not 1 <= args.max_jobs <= 3:
         raise SystemExit("INVALID_WORKER_CONFIG")
+    from .budget import PilotBudget
+    budget_path = os.environ.get("GEOTEAM_BUDGET_DB", "")
+    if not budget_path:
+        raise SystemExit("BUDGET_CONFIG_REQUIRED")
     for _ in range(args.max_jobs):
+        if Decimal(PilotBudget(budget_path).status()["remaining_allocation_usd"]) < Decimal("1.00"):
+            print("BUDGET_EXHAUSTED")
+            break
         status = asyncio.run(process_one(args.database, research_real))
         print(status)
         if status in {"EMPTY", "BUDGET_EXHAUSTED"}:

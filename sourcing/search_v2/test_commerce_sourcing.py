@@ -65,6 +65,14 @@ class CommerceSourcingTests(unittest.TestCase):
         self.assertNotIn("condition", offer)
         self.assertNotIn("public_price", offer)
 
+    def test_offer_without_a_source_is_not_published(self):
+        created = create_request(self.db, user_id="u", organization_id="o", idempotency_key="request-key-no-source",
+                                 query_text="PN", locale="en", items=[{"requested_text": "PN"}])
+        item_id = self.db.execute("SELECT id FROM sourcing_items WHERE request_id=?", (created["id"],)).fetchone()[0]
+        record_result(self.db, request_id=created["id"], item_id=item_id,
+                      report={"offers": [{"public_offer_id": "GTO-X", "price": "100"}]}, internal_sources=[])
+        self.assertEqual(public_request(self.db, request_id=created["id"], organization_id="o", user_id="u")["items"][0]["offers"], [])
+
     def test_idempotency_and_organization_isolation(self):
         first = create_request(self.db, user_id="u", organization_id="o", idempotency_key="request-key-2", query_text="5SY", locale="en", items=[{"requested_text": "5SY"}])
         replay = create_request(self.db, user_id="u", organization_id="o", idempotency_key="request-key-2", query_text="5SY", locale="en", items=[{"requested_text": "5SY"}])

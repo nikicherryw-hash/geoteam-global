@@ -1,0 +1,16 @@
+[Unit]
+Description=GeoTeam Global Sourcing bounded staging worker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/geoteam-global-ai
+EnvironmentFile=/etc/geoteam-ai/agent.env
+EnvironmentFile=-/etc/systemd/system/geoteam-ai-pilot.service.d/geoteam-staging-model.env
+Environment=GEOTEAM_BATCH_WORKER_ENABLED=1
+ExecStart=/opt/geoteam-global-ai/.venv/bin/python -m sourcing.search_v2.commerce_sourcing_worker --database /var/lib/geoteam-ai/commerce-staging.sqlite --max-jobs 1
+TimeoutStartSec=240
+NoNewPrivileges=true
+PrivateTmp=true
+

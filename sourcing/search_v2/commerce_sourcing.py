@@ -152,7 +152,9 @@ def record_result(
             continue
         public_id = str(offer["public_offer_id"])[:128]
         evidence = evidence_by_offer.get(public_id)
-        verified = evidence[1] if evidence else set()
+        if not evidence:
+            continue
+        verified = evidence[1]
         def fact(field: str, key: str | None = None) -> str | None:
             return _nullable(offer.get(key or field)) if field in verified else None
         db.execute(
@@ -160,11 +162,10 @@ def record_result(
                (id,request_id,item_id,evidence_id,public_offer_id,seller_display_name,country,condition,
                 availability,public_price,currency,lead_time,status,verified_at,created_at,updated_at)
                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
-            (uuid.uuid4().hex, request_id, item_id, evidence[0] if evidence else None, public_id,
+            (uuid.uuid4().hex, request_id, item_id, evidence[0], public_id,
              fact("seller_display_name"), fact("country"), fact("condition"), fact("availability"),
              fact("public_price", "price"), fact("currency"), fact("lead_time"),
-             "SOURCE_PAGE_CHECKED" if evidence else "UNCONFIRMED",
-             now if evidence else None, now, now),
+             "SOURCE_PAGE_CHECKED", now, now, now),
         )
     db.execute(
         """UPDATE sourcing_requests
