@@ -6,7 +6,7 @@ from contextlib import closing
 from pathlib import Path
 
 from .commerce_sourcing import create_request, public_request
-from .commerce_sourcing_worker import claim, complete, connect, fail, pause_queued_for_budget
+from .commerce_sourcing_worker import claim, claim_wave, complete, connect, fail, pause_queued_for_budget, process_wave
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -32,6 +32,7 @@ class SourcingWorkerTests(unittest.TestCase):
             db.executescript("INSERT INTO users VALUES ('u'); INSERT INTO organizations VALUES ('o'); INSERT INTO organization_memberships VALUES ('o','u');")
             self.request = create_request(db, user_id="u", organization_id="o", idempotency_key="worker-key-1",
                                           query_text="two", locale="en", items=[{"requested_text": "PN-1"}, {"requested_text": "PN-2"}])
+            db.commit()
 
     def tearDown(self):
         self.path.unlink(missing_ok=True)
@@ -79,4 +80,27 @@ class SourcingWorkerTests(unittest.TestCase):
             self.assertEqual(result["positions_completed"], 1)
             self.assertEqual(result["items"][0]["part_number"], "PN-1")
             self.assertEqual(result["items"][1]["status"], "PAUSED_BUDGET")
+
+    def test_wave_claims_both_positions_of_one_request(self):
+        with closing(connect(self.path)) as db:
+            jobs = claim_wave(db)
+            self.assertEqual([job["requested_text"] for job in jobs], ["PN-1", "PN-2"])
+            self.assertEqual(len({job["request_id"] for job in jobs}), 1)
+            self.assertEqual(db.execute("SELECT count(*) FROM sourcing_work_items WHERE status='RUNNING'").fetchone()[0], 2)
+
+    def test_wave_uses_one_research_call_and_persists_independent_results(self):
+        seen = []
+        async def research(queries, locale):
+            seen.append((queries, locale))
+            return [{"product": {"part_number": query, "identity_confidence": "exact"},
+                     "offers": [], "_internal_sources": []} for query in queries]
+        # The injected research coroutine completes synchronously; no event loop is needed.
+        with self.assertRaises(StopIteration) as completed:
+            process_wave(self.path, research).send(None)
+        self.assertEqual(completed.exception.value, "COMPLETED")
+        self.assertEqual(seen, [(["PN-1", "PN-2"], "en")])
+        with closing(connect(self.path)) as db:
+            result = public_request(db, request_id=self.request["id"], organization_id="o", user_id="u")
+            self.assertEqual(result["status"], "COMPLETED")
+            self.assertEqual([item["part_number"] for item in result["items"]], ["PN-1", "PN-2"])
 
