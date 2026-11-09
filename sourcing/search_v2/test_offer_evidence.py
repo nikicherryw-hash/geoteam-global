@@ -26,6 +26,10 @@ class EvidenceTests(unittest.TestCase):
         facts = offer_facts(self.page(), 'Xenta 421A')
         self.assertEqual(facts, {'condition':'USED','availability':'SOURCE_IN_STOCK'})
 
+    def test_exact_product_public_price(self):
+        facts = offer_facts(self.page(offers={'@type':'Offer','price':'37.20','priceCurrency':'EUR'}), 'Xenta 421A')
+        self.assertEqual((facts['price'],facts['currency']),(37.2,'EUR'))
+
     def test_other_variant_and_global_footer_are_not_evidence(self):
         self.assertEqual(offer_facts(self.page('TAC Xenta 422A') + '<footer>New · Germany · in stock</footer>', 'Xenta 421A'), {})
 

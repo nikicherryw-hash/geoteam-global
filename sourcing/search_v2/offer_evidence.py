@@ -153,6 +153,15 @@ def offer_facts(page, model):
                 country = (address.get('addressCountry') if isinstance(address, dict) else None) or (origin.get('addressCountry') if isinstance(origin, dict) else None)
                 if isinstance(country, str) and re.fullmatch(r'(?:[A-Z]{2}|[A-Za-z][A-Za-z .-]{1,58})', country.strip()):
                     facts['country'] = country
+                raw_price = offer.get('price')
+                currency = offer.get('priceCurrency')
+                try:
+                    price = float(raw_price)
+                except (TypeError, ValueError):
+                    price = 0
+                if 0 < price < 1e9 and isinstance(currency, str) and re.fullmatch(r'[A-Z]{3}', currency):
+                    facts['price'] = price
+                    facts['currency'] = currency
                 spec = offer.get('priceSpecification', {})
                 unit = spec.get('referenceQuantity', {}) if isinstance(spec, dict) else {}
                 if isinstance(unit, dict) and unit.get('unitCode') in {'C62','H87','SET','KGM','MTR'} and unit.get('value') == 1:
