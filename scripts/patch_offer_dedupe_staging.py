@@ -59,6 +59,9 @@ def main() -> None:
     with tempfile.TemporaryDirectory(prefix="geoteam-offer-check-") as tmp:
         tree = Path(tmp) / "sourcing/search_v2"
         shutil.copytree(ROOT / "sourcing/search_v2", tree)
+        registry = Path(tmp) / "sourcing/backend/functions/source_registry.json"
+        registry.parent.mkdir(parents=True)
+        shutil.copy2(ROOT / "sourcing/backend/functions/source_registry.json", registry)
         (tree / "ai_search.py").write_bytes(after)
         (tree / "test_ai_sources.py").write_bytes(test)
         py_compile.compile(str(tree / "ai_search.py"), doraise=True)
