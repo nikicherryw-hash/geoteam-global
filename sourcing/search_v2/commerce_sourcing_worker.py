@@ -147,8 +147,17 @@ def fail(db: sqlite3.Connection, job: dict, code: str) -> None:
         )
         db.execute("UPDATE sourcing_items SET status=?,updated_at=? WHERE id=?", (item_status, now, job["item_id"]))
         if terminal:
-            db.execute("UPDATE sourcing_requests SET status=?,error_code=?,updated_at=? WHERE id=?",
-                       ("PAUSED_BUDGET" if code == "BUDGET_EXHAUSTED" else "PARTIAL_FAILED", code, now, job["request_id"]))
+            db.execute(
+                """UPDATE sourcing_requests SET
+                   status=CASE
+                     WHEN ?='BUDGET_EXHAUSTED' THEN 'PAUSED_BUDGET'
+                     WHEN (SELECT count(*) FROM sourcing_items
+                           WHERE request_id=? AND status IN ('QUEUED','RUNNING'))=0
+                       THEN 'PARTIAL_FAILED'
+                     ELSE 'RUNNING' END,
+                   error_code=?,updated_at=? WHERE id=?""",
+                (code, job["request_id"], code, now, job["request_id"]),
+            )
         db.execute("COMMIT")
     except BaseException:
         db.execute("ROLLBACK")
@@ -284,3 +293,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
