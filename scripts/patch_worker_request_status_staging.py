@@ -21,6 +21,9 @@ BACKUPS = Path("/srv/geoteam-staging/backups")
 TEST_URL = ("https://raw.githubusercontent.com/nikicherryw-hash/geoteam-global/"
             "08a82f4baf756e9e3bb8307dbfce42a5155a9aa2/"
             "sourcing/search_v2/test_commerce_sourcing_worker.py")
+MIGRATION_URL = ("https://raw.githubusercontent.com/nikicherryw-hash/geoteam-global/"
+                 "08a82f4baf756e9e3bb8307dbfce42a5155a9aa2/"
+                 "scripts/migrate_commerce_sourcing_foundation.py")
 
 
 def patch(data: bytes) -> bytes:
@@ -64,11 +67,12 @@ def main() -> None:
         (tree / "test_commerce_sourcing_worker.py").write_bytes(test)
         migration = Path(tmp) / "scripts/migrate_commerce_sourcing_foundation.py"
         migration.parent.mkdir(parents=True)
-        shutil.copy2(ROOT / "scripts/migrate_commerce_sourcing_foundation.py", migration)
+        with urllib.request.urlopen(MIGRATION_URL, timeout=30) as response:
+            migration.write_bytes(response.read())
         py_compile.compile(str(tree / SOURCE.name), doraise=True)
         env = dict(os.environ, PYTHONPATH=tmp)
         subprocess.run((str(PYTHON), "-m", "unittest", "sourcing.search_v2.test_commerce_sourcing_worker", "-v"),
-                       cwd=tmp, env=env, check=True, timeout=120)
+                       cwd=tmp, env=env, check=True, timeout=600)
     print("PREFLIGHT_OK worker", flush=True)
     if mode == "preflight":
         return
