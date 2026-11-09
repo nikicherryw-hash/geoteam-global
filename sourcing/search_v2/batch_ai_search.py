@@ -48,7 +48,7 @@ async def search_wave_once(queries: list[str], locale: str, hints: list[str],
                  json.dumps(hints[:20], ensure_ascii=False),
         "tools": [{"type": "web_search"}], "tool_choice": "required",
         "include": ["web_search_call.action.sources"], "text": {"format": WAVE_FORMAT},
-        "max_tool_calls": 12, "max_output_tokens": 18000,
+        "max_tool_calls": min(24, 8 * len(queries)), "max_output_tokens": 24000,
     }
     ticket = budget.reserve_call()
     try:
@@ -79,17 +79,33 @@ async def search_wave_once(queries: list[str], locale: str, hints: list[str],
     for ordinal, query in enumerate(queries, 1):
         item = reported.get(ordinal) or _empty_report(query)
         item = dict(item)
-        item["candidates"] = (item.get("candidates") or [])[:8]
+        item["candidates"] = (item.get("candidates") or [])[:20]
         item_data = {"status": data.get("status"), "output": [*tool_output,
             {"type": "message", "content": [{"type": "output_text", "text": json.dumps(item)}]}]}
         result = validate_output(item_data, query, locale)
+        # A cited identity page can provide the representative image without
+        # being presented as a commercial offer. Keep each P/N isolated.
+        model_tokens = [token.lower() for token in re.findall(r"[A-Za-z0-9-]*\d[A-Za-z0-9-]*", query)]
+        known = {lead["source_url"] for lead in result["_internal_sources"]}
+        image_refs = [url for url in sorted(source_urls(data))
+                      if url not in known and model_tokens
+                      and all(token in url.lower() for token in model_tokens)]
+        for url in image_refs[:6]:
+            result["_internal_sources"].append(
+                {"source_url": url, "model": query, "source_role": "IMAGE_REFERENCE"})
         results.append(result)
 
-    # Check exact product pages for images and offer facts under one shared timeout.
-    limiter = asyncio.Semaphore(1)
+    # Give each item a fair chance to verify its own source pages. Serial
+    # enrichment used to exhaust the shared deadline on the first item.
+    limiter = asyncio.Semaphore(3)
     async def enrich(result: dict) -> None:
         async with limiter:
-            await attach_source_images(result["_internal_sources"], result["offers"])
+            try:
+                await asyncio.wait_for(
+                    attach_source_images(result["_internal_sources"], result["offers"]),
+                    timeout=35.0)
+            except asyncio.TimeoutError:
+                result["warnings"].append("SOURCE_PAGE_CHECK_PARTIAL")
     try:
         await asyncio.wait_for(asyncio.gather(*(enrich(result) for result in results)), timeout=40.0)
     except asyncio.TimeoutError:
