@@ -36,7 +36,7 @@ class PilotBudget:
             db.execute("BEGIN IMMEDIATE")
             taken=db.execute("SELECT COALESCE(SUM(amount_cents),0) FROM calls").fetchone()[0]
             cost=int(self.reserve*100)
-            if taken+cost > int(self.pilot*100):
+            if os.getenv("GEOTEAM_STAGING_UNLIMITED_SEARCH") != "1" and taken+cost > int(self.pilot*100):
                 db.execute("ROLLBACK")
                 raise BudgetExhausted("GeoTeam pilot allocation exhausted")
             db.execute("INSERT INTO calls VALUES (?,?,?,?)",(ident,datetime.now(timezone.utc).isoformat(),cost,"ATTEMPTED"))
@@ -62,4 +62,3 @@ class PilotBudget:
             "remaining_allocation_usd":str(self.pilot-Decimal(cents)/100),
             "note":"In-flight and legacy calls retain conservative $1 reservations; completed calls with usage use estimated token and web-search cost. This is not provider billing."
         }
-

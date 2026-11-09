@@ -14,16 +14,4 @@
   }
   const shellSignIn = document.querySelector('.gt-site-signin');
   if (shellSignIn) shellSignIn.href = 'account.html?lang=' + encodeURIComponent(language);
-  form.addEventListener('submit', event => {
-    const listFile = [...attach.files].some(file => /\.(csv|xlsx)$/i.test(file.name));
-    const lines = query.value.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
-    if (!listFile && lines.length < 2) return;
-    event.preventDefault(); event.stopImmediatePropagation();
-    if (!listFile) sessionStorage.setItem('geoteam_pending_positions',lines.join('\n'));
-    const url = new URL('account.html',location.href);
-    url.searchParams.set('lang',language);
-    if (listFile) url.searchParams.set('upload','1');
-    location.assign(url.href);
-  },true);
 })();
-

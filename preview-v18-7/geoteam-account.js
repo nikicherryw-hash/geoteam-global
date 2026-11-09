@@ -91,21 +91,6 @@
       const button = document.createElement('button'); button.type = 'button';
       button.textContent = row.query_text + ' · ' + t('count') + row.positions_total;
       button.addEventListener('click', () => openRequest(row.id)); box.append(button);
-      if (row.status === 'AWAITING_SEARCH') {
-        const start = document.createElement('button'); start.type = 'button'; start.className = 'secondary start-search';
-        start.textContent = startLabels[language] || startLabels.en;
-        start.addEventListener('click', async () => {
-          start.disabled = true;
-          try {
-            await api('/sourcing/requests/' + encodeURIComponent(row.id) + '/start','POST',{});
-            notice(queuedLabels[language] || queuedLabels.en); await loadRequests(true); await openRequest(row.id);
-          } catch (error) {
-            notice(/BATCH_BUDGET_(EXHAUSTED|UNAVAILABLE)|BATCH_PROCESSING_NOT_ENABLED/.test(error.message) ?
-              (budgetLabels[language] || budgetLabels.en) : (error.message || t('error')), true);
-          } finally { start.disabled = false; }
-        });
-        box.append(start);
-      }
       p(box, row.status === 'AWAITING_SEARCH' ? t('pending') : row.status, 'status'); $('requests').append(box);
     });
     $('more').hidden = data.items.length < 20; requestPage++;
@@ -141,9 +126,6 @@
     try {
       const me = await api('/me'); $('auth').hidden = true; $('account').hidden = false;
       $('identity').textContent = [me.organization_name,me.email].filter(Boolean).join(' · ');
-      const pending = sessionStorage.getItem('geoteam_pending_positions');
-      if (pending && !$('positions').value) $('positions').value = pending;
-      if (params.get('upload') === '1') { notice(t('select')); $('file').focus(); }
       await Promise.all([loadRequests(true),loadRfqs()]);
     } catch (error) { $('auth').hidden = false; $('account').hidden = true; notice(t('signIn')); }
   }
@@ -161,9 +143,7 @@
     } catch (error) { notice(error.message || t('error'),true); }
   });
   $('logout').addEventListener('click', async () => { try { await api('/auth/logout','POST',{}); } finally { csrf=''; sessionStorage.removeItem('geoteam_commerce_csrf'); await load(); } });
-  $('preview').addEventListener('click',preview); $('save').addEventListener('click',save);
   $('more').addEventListener('click',() => loadRequests().catch(error => notice(error.message,true)));
   $('more-items').addEventListener('click',() => openRequest(selectedRequest,true));
   localize(); load();
 })();
-

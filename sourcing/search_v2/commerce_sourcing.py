@@ -246,12 +246,13 @@ def persist_ai_result(db: sqlite3.Connection, *, request_id: str, item_id: str,
         evidence = lead.get("page_evidence") if isinstance(lead.get("page_evidence"), dict) else {}
         offer = offers_by_id.get(str(lead.get("public_offer_id") or ""))
         if offer is not None:
-            for field in ("country", "condition", "availability"):
+            for field in ("country", "condition", "availability", "price", "currency"):
                 if field in facts:
                     offer[field] = facts[field]
         internal.append({
             **lead,
-            "verified_fields": [field for field in ("country", "condition", "availability") if field in facts],
+            "verified_fields": [field for field in ("country", "condition", "availability") if field in facts]
+                + (["public_price", "currency"] if "price" in facts and "currency" in facts else []),
             "content_hash": evidence.get("content_sha256"),
         })
     product = dict(result.get("product") or {})
@@ -338,4 +339,3 @@ def link_rfq(db: sqlite3.Connection, *, request_id: str, ordinal: int, public_of
     db.execute("INSERT INTO sourcing_rfq_links(id,request_id,item_id,offer_id,rfq_id,created_at) VALUES (?,?,?,?,?,?)",
                (link_id, request_id, item[0], offer_id, rfq_id, _now()))
     return link_id
-

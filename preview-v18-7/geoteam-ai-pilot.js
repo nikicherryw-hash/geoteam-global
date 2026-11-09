@@ -55,8 +55,8 @@
     const fact = make('div', 'fact'), caption = make('b'); text(caption, label); fact.append(caption, document.createTextNode(String(value))); box.append(fact);
   }
   function safeImage(value) { try { const url = new URL(String(value), location.origin); return url.protocol === 'https:' && (url.origin === location.origin || /^https:/.test(String(value))) ? url.href : ''; } catch (_) { return ''; } }
-  function render(report) {
-    results.replaceChildren();
+  function render(report, target = results) {
+    target.replaceChildren();
     const product = report && typeof report.product === 'object' && report.product ? report.product : {};
     const offers = Array.isArray(report && report.offers) ? report.offers : [];
     if (Object.keys(product).length) {
@@ -75,12 +75,12 @@
       if (facts.childNodes.length) card.append(facts);
       const specifications = Array.isArray(product.technical_specifications) ? product.technical_specifications.filter(hasValue).slice(0, 12) : [];
       if (specifications.length) { const specTitle = make('h3'); text(specTitle, t('specs')); const list = make('ul', 'product-specifications'); specifications.forEach(item => { const row = make('li'); text(row, item); list.append(row); }); card.append(specTitle, list); }
-      results.append(card);
+      target.append(card);
     }
     const section = make('section', 'offers'), heading = make('h2'); text(heading, t('offers')); section.append(heading);
-    if (!offers.length) { const none = make('p'); text(none, t('none')); section.append(none); results.append(section); return; }
+    if (!offers.length) { const none = make('p'); text(none, t('none')); section.append(none); target.append(section); return; }
     const grid = make('div', 'offersgrid');
-    offers.slice(0, 100).forEach(offer => {
+    offers.forEach(offer => {
       const card = make('article', 'offer'), title = make('strong'); text(title, offer.public_offer_id || 'GeoTeam offer'); card.append(title);
       if (hasValue(offer.part_number)) { const part = make('p', 'meta'); text(part, offer.part_number); card.append(part); }
       const words = offerWords[lang] || offerWords.en;
@@ -100,7 +100,7 @@
       if (hasValue(offer.lead_time)) { const lead = make('p', 'meta'); text(lead, `${t('lead')}: ${offer.lead_time}`); card.append(lead); }
       const action = make('button', 'rfq'); action.type = 'button'; text(action, t('quote')); action.addEventListener('click', () => document.dispatchEvent(new CustomEvent('geoteam:rfq-select', {detail: offer}))); card.append(action); grid.append(card);
     });
-    section.append(grid); results.append(section);
+    section.append(grid); target.append(section);
   }
   async function poll(jobId) {
     for (let attempt = 0; attempt < 150; attempt += 1) {
@@ -115,11 +115,124 @@
     }
     throw Error('TIMEOUT');
   }
+  async function guestSearch(payload) {
+    const file = Boolean(payload.data);
+    const response = await fetch(`${api}/guest/${file ? 'research-attachment' : 'research'}`, {
+      method:'POST', credentials:'same-origin', cache:'no-store',
+      headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
+    });
+    if (!response.ok) throw Error(`START_${response.status}`);
+    const job = await response.json();
+    if (!/^[a-f0-9]{32}$/i.test(String(job.job_id || ''))) throw Error('JOB');
+    return poll(job.job_id);
+  }
+  async function commerce(path, method = 'GET', payload) {
+    const headers = {};
+    if (payload !== undefined) headers['Content-Type'] = 'application/json';
+    const csrf = sessionStorage.getItem('geoteam_commerce_csrf');
+    if (csrf) headers['X-CSRF-Token'] = csrf;
+    const response = await fetch(`${api}/commerce${path}`, {
+      method, headers, credentials:'same-origin', cache:'no-store',
+      body:payload === undefined ? undefined : JSON.stringify(payload)
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw Error(data.detail || `COMMERCE_${response.status}`);
+    return data;
+  }
+  function itemView(item, ordinal, root = results) {
+    const panel = make('details','sourcing-item');
+    panel.open = ordinal === 1;
+    const summary = make('summary');
+    text(summary,`${ordinal}. ${item.part_number || item.requested_text || item.product_name || ''}`);
+    panel.append(summary);
+    const body = make('div'); panel.append(body); root.append(panel);
+    return body;
+  }
+  function renderSavedItem(item, target) {
+    render({
+      query:item.requested_text,
+      product:{manufacturer:item.manufacturer,part_number:item.part_number,
+        product_name:item.product_name,product_category:item.product_category,
+        short_description:item.short_description,intended_use:item.intended_use,
+        technical_specifications:item.technical_specifications,image:item.image},
+      offers:(item.offers || []).map(offer => ({...offer,price:offer.public_price}))
+    },target);
+  }
+  async function showSavedRequest(id, root = results, offset = 0) {
+    let lastDone = -1;
+    for (let attempt = 0; attempt < 900; attempt++) {
+      const head = await commerce(`/sourcing/requests/${encodeURIComponent(id)}?page=1&page_size=20`);
+      if (head.positions_completed !== lastDone || attempt === 0) {
+        root.replaceChildren();
+        for (let page = 1; page <= Math.ceil(head.positions_total / 20); page++) {
+          const data = page === 1 ? head : await commerce(`/sourcing/requests/${encodeURIComponent(id)}?page=${page}&page_size=20`);
+          for (const item of data.items) renderSavedItem(item,itemView(item,item.ordinal + offset,root));
+        }
+        lastDone = head.positions_completed;
+      }
+      setStatus(`${t('searching')} ${head.positions_completed}/${head.positions_total}`,'local');
+      if (['COMPLETED','PARTIAL_FAILED','FAILED'].includes(head.status)) {
+        setStatus(head.status === 'COMPLETED' ? t('ready') : `${t('error')} [${head.status}]`,head.status === 'COMPLETED' ? 'global' : 'offline');
+        return;
+      }
+      await new Promise(resolve => setTimeout(resolve,2000));
+    }
+    throw Error('TIMEOUT');
+  }
+  async function csvPositions(file) {
+    const body = await file.text();
+    const rows = body.replace(/^\uFEFF/,'').split(/\r?\n/).map(row => row.trim()).filter(Boolean);
+    const first = rows[0]?.split(/[;,\t]/).map(value => value.trim().toLowerCase()) || [];
+    const pnColumn = first.findIndex(value => ['p/n','pn','part_number','part number','артикул'].includes(value));
+    return rows.slice(pnColumn >= 0 ? 1 : 0).map(row => (row.split(/[;,\t]/)[Math.max(0,pnColumn)] || '').replace(/^"|"$/g,'').trim()).filter(Boolean);
+  }
   form.addEventListener('submit', async event => {
     event.preventDefault(); if (busy) return;
-    const value = query.value.trim(), file = attach.files[0]; if ((!file && value.length < 2) || value.length > 160) { setStatus(t('invalid'), 'offline'); query.focus(); return; }
+    const value = query.value.trim(), file = attach.files[0];
+    if (!file && value.length < 2) { setStatus(t('invalid'), 'offline'); query.focus(); return; }
     busy = true; submit.disabled = true; results.replaceChildren(); setStatus(t('checking'));
     try {
+      const isListFile = file && /\.(csv|xlsx)$/i.test(file.name);
+      const lines = isListFile ? [] : value.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+      let signedIn = false;
+      try { await commerce('/me'); signedIn = true; } catch (_) { /* Guest search stays on this page. */ }
+      if (signedIn && ((!file && lines.length) || isListFile)) {
+        let positions = lines;
+        if (isListFile) {
+          if (file.size > 3 * 1024 * 1024) throw Error('FILE_MAX_3_MB');
+          const data = await new Promise((resolve,reject) => { const reader = new FileReader(); reader.onerror = () => reject(Error('FILE_READ')); reader.onload = () => resolve(String(reader.result).split(',')[1]); reader.readAsDataURL(file); });
+          const mime = /\.xlsx$/i.test(file.name) ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' : 'text/csv';
+          positions = (await commerce('/sourcing/preview','POST',{mime,data_base64:data})).items;
+        } else positions = positions.map(line => ({requested_text:line,part_number:line}));
+        const started = [];
+        for (let offset = 0; offset < positions.length; offset += 100) {
+          const chunk = positions.slice(offset,offset + 100);
+          started.push({offset,id:(await commerce('/sourcing/requests','POST',{
+            idempotency_key:crypto.randomUUID(), query_text:(value.slice(0,3900) || file.name) + (positions.length > 100 ? ` [${offset + 1}–${offset + chunk.length}]` : ''),
+            locale:lang,items:chunk
+          })).id});
+        }
+        for (const part of started) {
+          const root = make('section','sourcing-batch'); results.append(root);
+          await showSavedRequest(part.id,root,part.offset);
+        }
+        return;
+      }
+      if (lines.length > 1 || (file && /\.csv$/i.test(file.name))) {
+        const positions = file ? await csvPositions(file) : lines;
+        if (!positions.length) throw Error('NO_POSITIONS');
+        for (let index = 0; index < positions.length; index++) {
+          const position = positions[index];
+          if (position.length < 2 || position.length > 160) throw Error(`INVALID_POSITION_${index + 1}`);
+          const target = itemView({requested_text:position},index + 1);
+          try { render(await guestSearch({query:position,locale:lang}),target); }
+          catch (error) { text(target,`${t('error')} [${error.message}]`); }
+          setStatus(`${t('searching')} ${index + 1}/${positions.length}`,'local');
+        }
+        setStatus(t('ready'));
+        return;
+      }
+      if (value.length > 160) throw Error('QUERY_MAX_160');
       let payload = {query:value, locale:lang};
       if (file) {
         if (file.size > 3 * 1024 * 1024) throw Error('FILE_MAX_3_MB');
@@ -128,11 +241,7 @@
         const data = await new Promise((resolve,reject) => { const reader = new FileReader(); reader.onerror = () => reject(Error('FILE_READ')); reader.onload = () => resolve(String(reader.result).split(',')[1]); reader.readAsDataURL(file); });
         payload = {...payload,mime,filename:file.name,data};
       }
-      const response = await fetch(`${api}/guest/${file ? 'research-attachment' : 'research'}`, {method:'POST', credentials:'same-origin', cache:'no-store', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
-      if (response.status === 429) { setStatus(t('budget'), 'offline'); return; }
-      if (!response.ok) throw Error(`START_${response.status}`);
-      const job = await response.json(); if (!/^[a-f0-9]{32}$/i.test(String(job.job_id || ''))) throw Error('JOB');
-      setStatus(t('searching'), 'local'); render(await poll(job.job_id)); setStatus(t('ready'));
+      setStatus(t('searching'), 'local'); render(await guestSearch(payload)); setStatus(t('ready'));
     } catch (error) { setStatus(`${t('error')} [${String(error.message || 'ERR')}]`, 'offline'); }
     finally { busy = false; submit.disabled = false; }
   });

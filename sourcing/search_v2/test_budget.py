@@ -35,6 +35,16 @@ class BudgetTests(unittest.TestCase):
         with self.assertRaises(BudgetExhausted):
           PilotBudget(file).reserve_call()
         self.assertEqual(PilotBudget(file).status()["remaining_allocation_usd"],"0.00")
+ def test_staging_unlimited_search_keeps_usage_ledger(self):
+    with tempfile.TemporaryDirectory(dir=ROOT) as path:
+      file=str(Path(path)/"pilot.db")
+      with patch.dict(os.environ, {"GEOTEAM_PILOT_BUDGET_USD":"20.00", "GEOTEAM_STAGING_UNLIMITED_SEARCH":"1"}):
+        budget=PilotBudget(file)
+        for _ in range(25):
+          budget.mark(budget.reserve_call(),"SUCCESS",estimated_cost_cents=10)
+        self.assertEqual(budget.status()["calls_reserved"],25)
+      with self.assertRaises(BudgetExhausted):
+        for _ in range(18): PilotBudget(file).reserve_call()
  def test_completed_call_releases_unused_reservation_without_rewriting_legacy(self):
     with tempfile.TemporaryDirectory(dir=ROOT) as path:
       file=str(Path(path)/"pilot.db")
@@ -51,4 +61,3 @@ class BudgetTests(unittest.TestCase):
     self.assertEqual(estimated_cents({"input_tokens":10000,"output_tokens":1000},"gpt-6.1-sol",3),6)
     self.assertIsNone(estimated_cents({},"gpt-6.1-sol",3))
     self.assertIsNone(estimated_cents({"input_tokens":100,"output_tokens":100},"other",1))
-
