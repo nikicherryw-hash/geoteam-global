@@ -127,14 +127,29 @@
     return poll(job.job_id);
   }
   async function commerce(path, method = 'GET', payload) {
+    async function refreshCsrf() {
+      const response = await fetch(`${api}/commerce/auth/csrf`, {method:'POST',credentials:'same-origin',cache:'no-store'});
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.csrf_token) throw Error(data.detail || `CSRF_${response.status}`);
+      sessionStorage.setItem('geoteam_commerce_csrf', data.csrf_token);
+      return data.csrf_token;
+    }
+    if (method !== 'GET' && !sessionStorage.getItem('geoteam_commerce_csrf')) await refreshCsrf();
     const headers = {};
     if (payload !== undefined) headers['Content-Type'] = 'application/json';
     const csrf = sessionStorage.getItem('geoteam_commerce_csrf');
     if (csrf) headers['X-CSRF-Token'] = csrf;
-    const response = await fetch(`${api}/commerce${path}`, {
+    let response = await fetch(`${api}/commerce${path}`, {
       method, headers, credentials:'same-origin', cache:'no-store',
       body:payload === undefined ? undefined : JSON.stringify(payload)
     });
+    if (method !== 'GET' && response.status === 403) {
+      const error = await response.clone().json().catch(() => ({}));
+      if (error.detail === 'CSRF_REJECTED') {
+        headers['X-CSRF-Token'] = await refreshCsrf();
+        response = await fetch(`${api}/commerce${path}`, {method,headers,credentials:'same-origin',cache:'no-store',body:payload === undefined ? undefined : JSON.stringify(payload)});
+      }
+    }
     const data = await response.json().catch(() => ({}));
     if (!response.ok) throw Error(data.detail || `COMMERCE_${response.status}`);
     return data;
@@ -249,3 +264,4 @@
   attach.addEventListener('change', () => { const names = [...attach.files].map(file => file.name).join(', '); text(files, names ? t('files') + names : ''); });
   applyLanguage();
 })();
+
