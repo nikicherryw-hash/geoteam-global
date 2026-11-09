@@ -42,7 +42,9 @@ def main() -> None:
     after = patch(before)
     candidate = Path("/tmp/geoteam-ai-pilot-long-poll.js")
     candidate.write_bytes(after)
-    subprocess.run(("node", "--check", str(candidate)), check=True)
+    node = shutil.which("node")
+    if node:
+        subprocess.run((node, "--check", str(candidate)), check=True)
     print("PREFLIGHT_OK", hashlib.sha256(before).hexdigest(), flush=True)
     if args.mode == "preflight":
         return
