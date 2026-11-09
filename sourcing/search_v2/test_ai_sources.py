@@ -38,6 +38,15 @@ class Tests(unittest.TestCase):
     self.assertEqual(validate_output(payload(model="ROTAX 915 iS"),"rotax 916","ru")["offers"],[])
     self.assertEqual(validate_output(payload(model="Siemens 916"),"rotax 916","ru")["offers"],[])
     self.assertEqual(validate_output(payload(),"rotax 918","ru")["offers"],[])
+ def test_repeated_citation_creates_one_offer(self):
+    data = payload()
+    message = data["output"][1]["content"][0]
+    report = json.loads(message["text"])
+    report["candidates"].append(dict(report["candidates"][0]))
+    message["text"] = json.dumps(report)
+    result = validate_output(data, "rotax 916", "ru")
+    self.assertEqual(len(result["offers"]), 1)
+    self.assertEqual(len(result["_internal_sources"]), 1)
  def test_mismatched_manufacturer_and_part_rejected(self):
     from sourcing.search_v2.ai_search import model_matches
     self.assertTrue(model_matches("Siemens 6ES7315-2EH14-0AB0","Siemens 6ES7315-2EH14-0AB0"))
@@ -51,3 +60,4 @@ class Tests(unittest.TestCase):
     self.assertTrue(any("PartsBase" in x for x in a))
 if __name__=="__main__":
  unittest.main()
+
