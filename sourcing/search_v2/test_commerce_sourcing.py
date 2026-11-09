@@ -155,3 +155,16 @@ class CommerceSourcingTests(unittest.TestCase):
         self.assertNotIn("country", offer)
         self.assertNotIn("public_price", offer)
         self.assertEqual(result["items"][0]["identity_status"], "EXACT")
+
+    def test_item_image_is_an_internal_route_without_supplier_url(self):
+        created = create_request(self.db, user_id="u", organization_id="o", idempotency_key="request-key-image",
+                                 query_text="PN-1", locale="en", items=[{"requested_text": "PN-1"}])
+        item_id = self.db.execute("SELECT id FROM sourcing_items WHERE request_id=?", (created["id"],)).fetchone()[0]
+        persist_ai_result(self.db, request_id=created["id"], item_id=item_id, result={
+            "product": {"part_number": "PN-1"}, "offers": [],
+            "_internal_sources": [{"source_url": "https://supplier.example/part",
+                                   "image_url": "https://supplier.example/part.jpg"}],
+        })
+        item = public_request(self.db, request_id=created["id"], organization_id="o", user_id="u")["items"][0]
+        self.assertEqual(item["image"], f"/api/v1/commerce/sourcing/requests/{created['id']}/items/1/image")
+        self.assertNotIn("supplier.example", str(item))

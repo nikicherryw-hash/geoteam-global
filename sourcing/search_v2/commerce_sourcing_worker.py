@@ -62,6 +62,48 @@ def claim(db: sqlite3.Connection, *, now: int | None = None) -> dict | None:
         raise
 
 
+def claim_wave(db: sqlite3.Connection, *, limit: int = 5, now: int | None = None) -> list[dict]:
+    """Claim consecutive positions of one request as one bounded AI research wave."""
+    if not 1 <= limit <= 5:
+        raise ValueError("INVALID_WAVE_SIZE")
+    now = int(time.time()) if now is None else now
+    db.execute("BEGIN IMMEDIATE")
+    try:
+        first = db.execute(
+            """SELECT w.request_id FROM sourcing_work_items w
+               WHERE w.work_kind='RESEARCH' AND w.status='QUEUED'
+                 AND COALESCE(w.next_attempt_at,0)<=? AND w.attempt_count<3
+               ORDER BY w.created_at,w.id LIMIT 1""", (now,)
+        ).fetchone()
+        if not first:
+            db.execute("COMMIT")
+            return []
+        rows = db.execute(
+            """SELECT w.id,w.request_id,w.item_id,w.attempt_count,i.requested_text,r.locale
+               FROM sourcing_work_items w JOIN sourcing_items i ON i.id=w.item_id
+               JOIN sourcing_requests r ON r.id=w.request_id
+               WHERE w.request_id=? AND w.work_kind='RESEARCH' AND w.status='QUEUED'
+                 AND COALESCE(w.next_attempt_at,0)<=? AND w.attempt_count<3
+               ORDER BY i.ordinal LIMIT ?""", (first[0], now, limit),
+        ).fetchall()
+        jobs = []
+        for row in rows:
+            token = uuid.uuid4().hex
+            db.execute(
+                """UPDATE sourcing_work_items SET status='RUNNING',attempt_count=attempt_count+1,
+                   lease_token=?,lease_expires_at=?,started_at=?,updated_at=? WHERE id=?""",
+                (token, now + 240, now, now, row["id"]),
+            )
+            db.execute("UPDATE sourcing_items SET status='RUNNING',updated_at=? WHERE id=?", (now, row["item_id"]))
+            jobs.append({**dict(row), "lease_token": token})
+        db.execute("UPDATE sourcing_requests SET status='RUNNING',updated_at=? WHERE id=?", (now, first[0]))
+        db.execute("COMMIT")
+        return jobs
+    except BaseException:
+        db.execute("ROLLBACK")
+        raise
+
+
 def complete(db: sqlite3.Connection, job: dict, result: dict) -> bool:
     db.execute("BEGIN IMMEDIATE")
     try:
@@ -160,6 +202,29 @@ async def process_one(path: Path, research: Callable[[str, str], Awaitable[dict]
         return code
 
 
+async def process_wave(path: Path, research: Callable[[list[str], str], Awaitable[list[dict]]]) -> str:
+    with closing(connect(path)) as db:
+        jobs = claim_wave(db)
+    if not jobs:
+        return "EMPTY"
+    try:
+        results = await research([job["requested_text"] for job in jobs], jobs[0]["locale"])
+        if len(results) != len(jobs):
+            raise ValueError("WAVE_RESULT_COUNT_MISMATCH")
+        with closing(connect(path)) as db:
+            for job, result in zip(jobs, results):
+                if not complete(db, job, result):
+                    return "LEASE_LOST"
+        return "COMPLETED"
+    except Exception as exc:
+        from .budget import BudgetExhausted
+        code = "BUDGET_EXHAUSTED" if isinstance(exc, BudgetExhausted) else "AI_RESEARCH_FAILED"
+        with closing(connect(path)) as db:
+            for job in jobs:
+                fail(db, job, code)
+        return code
+
+
 async def research_real(query: str, locale: str) -> dict:
     import httpx
     from .ai_search import search_once
@@ -173,6 +238,22 @@ async def research_real(query: str, locale: str) -> dict:
         raise RuntimeError("AI_CONFIG_UNAVAILABLE")
     async with httpx.AsyncClient(trust_env=False, follow_redirects=False) as client:
         return await search_once(query, locale, pick(query), key, model, client, PilotBudget(budget_path))
+
+
+async def research_wave_real(queries: list[str], locale: str) -> list[dict]:
+    import httpx
+    from .batch_ai_search import search_wave_once
+    from .budget import PilotBudget
+    from .registry_hints import pick
+
+    key = os.environ.get("OPENAI_API_KEY", "")
+    budget_path = os.environ.get("GEOTEAM_BUDGET_DB", "")
+    model = os.environ.get("GEOTEAM_OPENAI_MODEL", "gpt-6-luna")
+    if not key or not budget_path or model not in {"gpt-6-luna", "gpt-6.1-sol", "gpt-6-astra"}:
+        raise RuntimeError("AI_CONFIG_UNAVAILABLE")
+    hints = list(dict.fromkeys(hint for query in queries for hint in pick(query, max_items=4)))[:20]
+    async with httpx.AsyncClient(trust_env=False, follow_redirects=False) as client:
+        return await search_wave_once(queries, locale, hints, key, model, client, PilotBudget(budget_path))
 
 
 def main() -> int:
@@ -194,7 +275,7 @@ def main() -> int:
                 pause_queued_for_budget(db)
             print("BUDGET_EXHAUSTED")
             break
-        status = asyncio.run(process_one(args.database, research_real))
+        status = asyncio.run(process_wave(args.database, research_wave_real))
         print(status)
         if status in {"EMPTY", "BUDGET_EXHAUSTED"}:
             break

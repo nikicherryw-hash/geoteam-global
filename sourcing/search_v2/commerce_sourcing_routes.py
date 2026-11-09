@@ -13,7 +13,7 @@ import binascii
 from contextlib import closing
 from typing import Any, Callable
 
-from fastapi import Depends, HTTPException, Query
+from fastapi import Depends, HTTPException, Query, Response
 from pydantic import BaseModel, Field
 
 from .commerce_sourcing import create_request, link_rfq, public_request, queue_draft
@@ -131,6 +131,26 @@ def install(router: Any, connect: Callable, current: Callable, write_guard: Call
                                       user_id=session["user_id"], page=page, page_size=page_size)
             except LookupError as exc:
                 raise HTTPException(404, str(exc)) from exc
+
+    @router.get("/sourcing/requests/{request_id}/items/{ordinal}/image")
+    async def item_image(request_id: str, ordinal: int, session: sqlite3.Row = Depends(current)) -> Response:
+        from .ai_search import fetch_public_image
+        with closing(connect()) as db:
+            row = db.execute(
+                """SELECT e.payload_json FROM sourcing_requests r
+                   JOIN sourcing_items i ON i.request_id=r.id
+                   JOIN sourcing_evidence e ON e.id=i.representative_image_evidence_id AND e.item_id=i.id
+                   WHERE r.id=? AND r.organization_id=? AND r.user_id=? AND i.ordinal=?""",
+                (request_id, session["organization_id"], session["user_id"], ordinal),
+            ).fetchone()
+        if not row:
+            raise HTTPException(404, "IMAGE_NOT_FOUND")
+        import json
+        image_url = str(json.loads(row["payload_json"]).get("image_url") or "")
+        image = await fetch_public_image(image_url) if image_url else None
+        if not image:
+            raise HTTPException(404, "IMAGE_UNAVAILABLE")
+        return Response(content=image[0], media_type=image[1], headers={"Cache-Control": "private, max-age=300"})
 
     @router.post("/sourcing/requests/{request_id}/rfq-links")
     def connect_rfq(request_id: str, payload: RfqLinkInput,
