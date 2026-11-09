@@ -288,6 +288,7 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
     report = json.loads("".join(block["text"] for block in messages))
     internal_leads: list[dict] = []
     public_offers: list[dict] = []
+    seen_offer_urls: set[str] = set()
     for item in report.get("candidates", [])[:100]:
         if not isinstance(item, dict):
             continue
@@ -296,6 +297,11 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
             continue
         if re.search(r"\b(sold|ended|expired|out of stock|продан|заверш)\b", str(item.get("availability_claim", "")).lower()):
             continue
+        # One cited listing is one offer, even when research repeats it.
+        normalized_url = source_url.rstrip("/").lower()
+        if normalized_url in seen_offer_urls:
+            continue
+        seen_offer_urls.add(normalized_url)
         # A model's citation summary is not sufficient to publish a condition.
         # It is overwritten only after the matching public product page yields
         # structured/table evidence in ``attach_source_images``.
