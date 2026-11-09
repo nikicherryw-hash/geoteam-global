@@ -5,12 +5,7 @@ import json
 import unittest
 from unittest.mock import patch
 
-try:
-    from .batch_ai_search import search_wave_once
-except ModuleNotFoundError as exc:
-    if exc.name != "httpx":
-        raise
-    raise unittest.SkipTest("httpx is unavailable in this local interpreter") from exc
+from .batch_ai_search import search_wave_once
 
 
 class _Response:
