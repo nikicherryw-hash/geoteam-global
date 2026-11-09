@@ -235,10 +235,16 @@
       if (lines.length > 1 || (file && /\.csv$/i.test(file.name))) {
         const positions = file ? await csvPositions(file) : lines;
         if (!positions.length) throw Error('NO_POSITIONS');
+        if (positions.length > 100) throw Error('ITEM_COUNT_MAX_100');
+        const targets = positions.map((position,index) => itemView({requested_text:position},index + 1));
+        setStatus(`${t('searching')} 0/${positions.length}`,'local');
         for (let index = 0; index < positions.length; index++) {
           const position = positions[index];
-          if (position.length < 2 || position.length > 160) throw Error(`INVALID_POSITION_${index + 1}`);
-          const target = itemView({requested_text:position},index + 1);
+          const target = targets[index];
+          if (position.length < 2 || position.length > 160) {
+            text(target,`${t('error')} [INVALID_POSITION_${index + 1}]`);
+            continue;
+          }
           try { render(await guestSearch({query:position,locale:lang}),target); }
           catch (error) { text(target,`${t('error')} [${error.message}]`); }
           setStatus(`${t('searching')} ${index + 1}/${positions.length}`,'local');
