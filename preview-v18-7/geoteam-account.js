@@ -34,10 +34,27 @@
   }
   function notice(message, error = false) { $('notice').textContent = message; $('notice').classList.toggle('error', error); }
   async function api(path, method = 'GET', payload) {
+    async function refreshCsrf() {
+      const response = await fetch(API + '/auth/csrf', {method:'POST',credentials:'same-origin',cache:'no-store'});
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.csrf_token) throw new Error(data.detail || 'CSRF_REFRESH_FAILED');
+      csrf = data.csrf_token;
+      sessionStorage.setItem('geoteam_commerce_csrf', csrf);
+    }
+    const protectedWrite = method !== 'GET' && !/^\/auth\/(login|register|verify)$/.test(path);
+    if (protectedWrite && !csrf) await refreshCsrf();
     const headers = {};
     if (payload !== undefined) headers['Content-Type'] = 'application/json';
     if (csrf) headers['X-CSRF-Token'] = csrf;
-    const response = await fetch(API + path, {method, headers, body: payload === undefined ? undefined : JSON.stringify(payload), credentials:'same-origin', cache:'no-store'});
+    let response = await fetch(API + path, {method, headers, body: payload === undefined ? undefined : JSON.stringify(payload), credentials:'same-origin', cache:'no-store'});
+    if (protectedWrite && response.status === 403) {
+      const error = await response.clone().json().catch(() => ({}));
+      if (error.detail === 'CSRF_REJECTED') {
+        await refreshCsrf();
+        headers['X-CSRF-Token'] = csrf;
+        response = await fetch(API + path, {method, headers, body: payload === undefined ? undefined : JSON.stringify(payload), credentials:'same-origin', cache:'no-store'});
+      }
+    }
     const data = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(data.detail || data.message || 'HTTP ' + response.status);
     return data;
@@ -147,3 +164,4 @@
   $('more-items').addEventListener('click',() => openRequest(selectedRequest,true));
   localize(); load();
 })();
+
