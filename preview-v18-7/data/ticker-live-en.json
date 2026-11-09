@@ -1,7 +1,21 @@
 {
-  "generated_at": "2026-11-09T06:37:29.625631Z",
+  "generated_at": "2026-11-09T18:50:08.582329Z",
   "mode": "automatic_rss",
   "items": [
+    {
+      "title": "Commission welcomes Council agreement on removing the €150 threshold for the VAT Import One-Stop Shop",
+      "source": "European Commission",
+      "country": "EU",
+      "date": "2026-11-09",
+      "url": "https://taxation-customs.ec.europa.eu/news/commission-welcomes-council-agreement-removing-eur150-threshold-vat-import-one-stop-shop-2026-11-09_en"
+    },
+    {
+      "title": "Germany contributes EUR 500,000 to strengthen developing economies' trade capacity",
+      "source": "WTO",
+      "country": "UN",
+      "date": "2026-11-09",
+      "url": "https://www.wto.org/english/news_e/news26_e/tech_09nov26_543_e.htm"
+    },
     {
       "title": "New guidance on electricity imports under Centralised Clearance for Import (CCI)",
       "source": "European Commission",
@@ -71,20 +85,6 @@
       "country": "UN",
       "date": "2026-10-30",
       "url": "https://www.wto.org/english/news_e/news26_e/scm_30oct26_537_e.htm"
-    },
-    {
-      "title": "Global Review concludes with a declaration on partnerships for trade and development",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-10-30",
-      "url": "https://www.wto.org/english/news_e/news26_e/gr26_30oct26_534_e.htm"
-    },
-    {
-      "title": "New report looks at role of South-South and triangular cooperation for trade development",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-10-29",
-      "url": "https://www.wto.org/english/news_e/news26_e/devel_29oct26_535_e.htm"
     }
   ]
 }
