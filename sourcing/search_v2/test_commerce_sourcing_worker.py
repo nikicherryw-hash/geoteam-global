@@ -1,4 +1,5 @@
 import importlib.util
+import asyncio
 import os
 import tempfile
 import unittest
@@ -81,6 +82,30 @@ class SourcingWorkerTests(unittest.TestCase):
             self.assertEqual(result["items"][0]["part_number"], "PN-1")
             self.assertEqual(result["items"][1]["status"], "PAUSED_BUDGET")
 
+    def test_one_terminal_failure_does_not_stop_remaining_positions(self):
+        with closing(connect(self.path)) as db:
+            db.execute("""UPDATE sourcing_work_items SET next_attempt_at=9999999999
+                          WHERE item_id=(SELECT id FROM sourcing_items WHERE request_id=? AND ordinal=2)""",
+                       (self.request["id"],))
+            for attempt in range(3):
+                job = claim(db)
+                self.assertEqual(job["requested_text"], "PN-1")
+                fail(db, job, "AI_RESEARCH_FAILED")
+                if attempt < 2:
+                    db.execute("UPDATE sourcing_work_items SET next_attempt_at=0 WHERE id=?", (job["id"],))
+            self.assertEqual(db.execute("SELECT status FROM sourcing_requests WHERE id=?",
+                                        (self.request["id"],)).fetchone()[0], "RUNNING")
+            db.execute("""UPDATE sourcing_work_items SET next_attempt_at=0
+                          WHERE item_id=(SELECT id FROM sourcing_items WHERE request_id=? AND ordinal=2)""",
+                       (self.request["id"],))
+            remaining = claim(db)
+            self.assertEqual(remaining["requested_text"], "PN-2")
+            self.assertTrue(complete(db, remaining, {"product": {"part_number": "PN-2"},
+                                                     "offers": [], "_internal_sources": []}))
+            result = public_request(db, request_id=self.request["id"], organization_id="o", user_id="u")
+            self.assertEqual(result["status"], "PARTIAL_FAILED")
+            self.assertEqual(result["positions_completed"], 1)
+
     def test_wave_claims_both_positions_of_one_request(self):
         with closing(connect(self.path)) as db:
             jobs = claim_wave(db)
@@ -103,4 +128,33 @@ class SourcingWorkerTests(unittest.TestCase):
             result = public_request(db, request_id=self.request["id"], organization_id="o", user_id="u")
             self.assertEqual(result["status"], "COMPLETED")
             self.assertEqual([item["part_number"] for item in result["items"]], ["PN-1", "PN-2"])
+
+    def test_ninety_seven_positions_complete_in_successive_waves(self):
+        with closing(connect(self.path)) as db:
+            large = create_request(db, user_id="u", organization_id="o", idempotency_key="worker-key-97",
+                                   query_text="97 parts", locale="en",
+                                   items=[{"requested_text": f"SIEMENS-{i:03d}"} for i in range(97)])
+            db.commit()
+
+        async def research(queries, _locale):
+            return [{"product": {"part_number": query}, "offers": [], "_internal_sources": []}
+                    for query in queries]
+
+        async def drain():
+            for _ in range(25):
+                if await process_wave(self.path, research) == "EMPTY":
+                    return
+            self.fail("queue did not drain")
+
+        asyncio.run(drain())
+        with closing(connect(self.path)) as db:
+            head = public_request(db, request_id=large["id"], organization_id="o", user_id="u")
+            self.assertEqual((head["status"], head["positions_completed"], head["positions_total"]),
+                             ("COMPLETED", 97, 97))
+            all_items = []
+            for page in range(1, 6):
+                all_items.extend(public_request(db, request_id=large["id"], organization_id="o", user_id="u",
+                                                page=page, page_size=20)["items"])
+            self.assertEqual([item["part_number"] for item in all_items],
+                             [f"SIEMENS-{i:03d}" for i in range(97)])
 
