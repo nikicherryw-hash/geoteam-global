@@ -175,9 +175,9 @@
   }
   async function showSavedRequest(id, root = results, offset = 0) {
     let lastDone = -1;
-    for (let attempt = 0; attempt < 900; attempt++) {
+    while (true) {
       const head = await commerce(`/sourcing/requests/${encodeURIComponent(id)}?page=1&page_size=20`);
-      if (head.positions_completed !== lastDone || attempt === 0) {
+      if (head.positions_completed !== lastDone) {
         root.replaceChildren();
         for (let page = 1; page <= Math.ceil(head.positions_total / 20); page++) {
           const data = page === 1 ? head : await commerce(`/sourcing/requests/${encodeURIComponent(id)}?page=${page}&page_size=20`);
@@ -186,13 +186,12 @@
         lastDone = head.positions_completed;
       }
       setStatus(`${t('searching')} ${head.positions_completed}/${head.positions_total}`,'local');
-      if (['COMPLETED','PARTIAL_FAILED','FAILED'].includes(head.status)) {
+      if (['COMPLETED','PARTIAL_FAILED','FAILED','PAUSED_BUDGET'].includes(head.status)) {
         setStatus(head.status === 'COMPLETED' ? t('ready') : `${t('error')} [${head.status}]`,head.status === 'COMPLETED' ? 'global' : 'offline');
         return;
       }
       await new Promise(resolve => setTimeout(resolve,2000));
     }
-    throw Error('TIMEOUT');
   }
   async function csvPositions(file) {
     const body = await file.text();
