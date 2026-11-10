@@ -18,6 +18,23 @@
   let language = copy[params.get('lang')] ? params.get('lang') : 'ru';
   let csrf = sessionStorage.getItem('geoteam_commerce_csrf') || '';
   let items = [], requestPage = 1, detailPage = 1, selectedRequest = null, requestKey = crypto.randomUUID();
+  const selectedOffers = new Map();
+  let quoteKey = crypto.randomUUID();
+  const quoteCopy = {
+    ru:['Запрос на расчёт коммерческого предложения','Выберите предложения в сохранённой заявке. GeoTeam проверит товар, пошлины и доставку до выпуска КП.','Страна получения (код ISO, например TR)','Отправить на расчёт','Выбрано предложений: ','Выбрать','Количество','Заявка на расчёт сохранена','Предварительные расчёты','Нужно выбрать хотя бы одно предложение.'],
+    en:['Request a commercial calculation','Select offers from a saved search. GeoTeam will verify the item, duties and delivery before issuing a quote.','Destination country (ISO code, e.g. TR)','Submit for calculation','Offers selected: ','Select','Quantity','Calculation request saved','Preliminary calculations','Select at least one offer.'],
+    tr:['Ticari hesaplama talebi','Kayıtlı aramadan teklifleri seçin. GeoTeam teklif vermeden önce ürünü, vergileri ve teslimatı doğrular.','Varış ülkesi (ISO kodu, ör. TR)','Hesaplama talep et','Seçilen teklifler: ','Seç','Miktar','Hesaplama talebi kaydedildi','Ön hesaplamalar','En az bir teklif seçin.'],
+    de:['Kalkulation anfragen','Wählen Sie Angebote aus einer gespeicherten Suche. GeoTeam prüft Ware, Abgaben und Lieferung vor einem Angebot.','Zielland (ISO-Code, z. B. TR)','Kalkulation anfragen','Ausgewählte Angebote: ','Auswählen','Menge','Kalkulationsanfrage gespeichert','Vorläufige Kalkulationen','Wählen Sie mindestens ein Angebot.'],
+    fr:['Demander un calcul commercial','Sélectionnez des offres enregistrées. GeoTeam vérifiera le produit, les droits et la livraison avant tout devis.','Pays de destination (code ISO, ex. TR)','Demander le calcul','Offres sélectionnées : ','Sélectionner','Quantité','Demande de calcul enregistrée','Calculs préliminaires','Sélectionnez au moins une offre.'],
+    es:['Solicitar cálculo comercial','Seleccione ofertas guardadas. GeoTeam verificará el producto, los aranceles y la entrega antes de emitir una oferta.','País de destino (código ISO, p. ej. TR)','Solicitar cálculo','Ofertas seleccionadas: ','Seleccionar','Cantidad','Solicitud de cálculo guardada','Cálculos preliminares','Seleccione al menos una oferta.'],
+    it:['Richiedi un calcolo commerciale','Seleziona offerte salvate. GeoTeam verificherà prodotto, dazi e consegna prima di emettere un preventivo.','Paese di destinazione (codice ISO, es. TR)','Richiedi il calcolo','Offerte selezionate: ','Seleziona','Quantità','Richiesta di calcolo salvata','Calcoli preliminari','Seleziona almeno un’offerta.'],
+    pt:['Solicitar cálculo comercial','Selecione ofertas salvas. A GeoTeam verificará o produto, os direitos e a entrega antes de emitir uma cotação.','País de destino (código ISO, ex. TR)','Solicitar cálculo','Ofertas selecionadas: ','Selecionar','Quantidade','Pedido de cálculo salvo','Cálculos preliminares','Selecione pelo menos uma oferta.'],
+    ar:['طلب حساب عرض تجاري','اختر العروض من بحث محفوظ. ستتحقق GeoTeam من المنتج والرسوم والتسليم قبل إصدار عرض السعر.','بلد الوجهة (رمز ISO مثل TR)','إرسال طلب الحساب','العروض المختارة: ','اختيار','الكمية','تم حفظ طلب الحساب','الحسابات الأولية','اختر عرضًا واحدًا على الأقل.'],
+    zh:['申请商业报价计算','从已保存的搜索中选择报价。GeoTeam 将在出具报价前核实产品、关税和交付。','目的地国家（ISO 代码，例如 TR）','提交计算申请','已选报价：','选择','数量','计算申请已保存','初步计算','请至少选择一项报价。']
+  };
+  const q = index => (quoteCopy[language] || quoteCopy.en)[index];
+  const dateText = seconds => seconds ? new Intl.DateTimeFormat(language, {dateStyle:'medium',timeStyle:'short'}).format(new Date(Number(seconds) * 1000)) : '';
+  const updateSelectionCount = () => { $('selection-count').textContent = q(4) + selectedOffers.size; };
   const t = key => copy[language][key] || copy.en[key] || key;
   const startLabels = {ru:'Начать пакетный поиск',en:'Start batch search',tr:'Toplu aramayı başlat',de:'Stapelsuche starten',fr:'Lancer la recherche groupée',es:'Iniciar búsqueda por lotes',it:'Avvia ricerca multipla',pt:'Iniciar pesquisa em lote',ar:'بدء البحث الجماعي',zh:'开始批量搜索'};
   const queuedLabels = {ru:'Позиции поставлены в очередь.',en:'Positions added to the search queue.',tr:'Kalemler arama kuyruğuna eklendi.',de:'Positionen zur Suchwarteschlange hinzugefügt.',fr:'Références ajoutées à la file de recherche.',es:'Artículos añadidos a la cola de búsqueda.',it:'Articoli aggiunti alla coda di ricerca.',pt:'Itens adicionados à fila de pesquisa.',ar:'أُضيفت البنود إلى قائمة انتظار البحث.',zh:'物料已加入搜索队列。'};
@@ -31,6 +48,9 @@
     $('search-link').href = 'sourcing.html?lang=' + encodeURIComponent(language);
     document.querySelector('.brand').href = 'index.html?lang=' + encodeURIComponent(language);
     document.title = t('title') + ' · GeoTeam Global';
+    $('quote-title').textContent = q(0); $('quote-help').textContent = q(1);
+    $('destination-label').firstChild.textContent = q(2);
+    $('quote-submit').textContent = q(3); updateSelectionCount();
   }
   function notice(message, error = false) { $('notice').textContent = message; $('notice').classList.toggle('error', error); }
   async function api(path, method = 'GET', payload) {
@@ -108,7 +128,7 @@
       const button = document.createElement('button'); button.type = 'button';
       button.textContent = row.query_text + ' · ' + t('count') + row.positions_total;
       button.addEventListener('click', () => openRequest(row.id)); box.append(button);
-      p(box, row.status === 'AWAITING_SEARCH' ? t('pending') : row.status, 'status'); $('requests').append(box);
+      p(box, [dateText(row.created_at),row.status === 'AWAITING_SEARCH' ? t('pending') : row.status].filter(Boolean).join(' · '), 'status'); $('requests').append(box);
     });
     $('more').hidden = data.items.length < 20; requestPage++;
   }
@@ -126,7 +146,23 @@
         if (item.short_description) p(box, item.short_description);
         if (item.intended_use) p(box, item.intended_use);
         p(box, item.status === 'AWAITING_SEARCH' ? t('pending') : item.status, 'status');
-        item.offers.forEach(offer => p(box, [offer.public_offer_id,offer.country,offer.condition,offer.public_price,offer.currency].filter(Boolean).join(' · ')));
+        item.offers.forEach(offer => {
+          const row = document.createElement('div'); row.className = 'offer-choice';
+          p(row,[offer.public_offer_id,offer.country,offer.condition,offer.public_price,offer.currency].filter(Boolean).join(' · '));
+          const key = [id,item.ordinal,offer.public_offer_id].join(':');
+          const label = document.createElement('label'); label.className = 'offer-select';
+          const check = document.createElement('input'); check.type = 'checkbox'; check.checked = selectedOffers.has(key);
+          const caption = document.createElement('span'); caption.textContent = q(5);
+          const qty = document.createElement('input'); qty.type = 'number'; qty.min = '1'; qty.max = '1000000'; qty.step = '1';
+          qty.value = selectedOffers.get(key)?.quantity || '1'; qty.setAttribute('aria-label',q(6));
+          check.addEventListener('change', () => {
+            if (check.checked) selectedOffers.set(key,{request_id:id,ordinal:item.ordinal,public_offer_id:offer.public_offer_id,quantity:qty.value});
+            else selectedOffers.delete(key);
+            updateSelectionCount();
+          });
+          qty.addEventListener('change', () => { if (selectedOffers.has(key)) selectedOffers.get(key).quantity = qty.value; });
+          label.append(check,caption,qty); row.append(label); box.append(row);
+        });
         $('detail').append(box);
       });
       $('more-items').hidden = detailPage * 10 >= data.positions_total; detailPage++;
@@ -139,12 +175,21 @@
       rows.forEach(row => p($('rfqs'),[row.number,row.status].filter(Boolean).join(' · ')));
     } catch (error) { p($('rfqs'),t('error'),'muted'); }
   }
+  async function loadQuoteDrafts() {
+    const data = await api('/sourcing/quote-drafts'); $('quote-drafts').replaceChildren();
+    const heading = document.createElement('h3'); heading.textContent = q(8); $('quote-drafts').append(heading);
+    data.items.forEach(row => p($('quote-drafts'), [dateText(row.created_at),row.destination_country,
+      row.lines_total,row.status,row.id.slice(0,8)].join(' · '), 'status'));
+  }
   async function load() {
+    let me;
     try {
-      const me = await api('/me'); $('auth').hidden = true; $('account').hidden = false;
-      $('identity').textContent = [me.organization_name,me.email].filter(Boolean).join(' · ');
-      await Promise.all([loadRequests(true),loadRfqs()]);
-    } catch (error) { $('auth').hidden = false; $('account').hidden = true; notice(t('signIn')); }
+      me = await api('/me');
+    } catch (error) { $('auth').hidden = false; $('account').hidden = true; notice(t('signIn')); return; }
+    $('auth').hidden = true; $('account').hidden = false;
+    $('identity').textContent = [me.organization_name,me.email].filter(Boolean).join(' · ');
+    const sections = await Promise.allSettled([loadRequests(true),loadRfqs(),loadQuoteDrafts()]);
+    if (sections.some(section => section.status === 'rejected')) notice(t('error'),true);
   }
   $('language').addEventListener('change', () => { language = $('language').value; const url = new URL(location.href); url.searchParams.set('lang',language); history.replaceState(null,'',url); localize(); });
   $('login').addEventListener('submit', async event => { event.preventDefault(); const form = new FormData(event.currentTarget); notice(t('working'));
@@ -160,6 +205,19 @@
     } catch (error) { notice(error.message || t('error'),true); }
   });
   $('logout').addEventListener('click', async () => { try { await api('/auth/logout','POST',{}); } finally { csrf=''; sessionStorage.removeItem('geoteam_commerce_csrf'); await load(); } });
+  $('quote-form').addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!selectedOffers.size) { notice(q(9),true); return; }
+    const button = $('quote-submit'); button.disabled = true;
+    try {
+      await api('/sourcing/quote-drafts','POST',{idempotency_key:quoteKey,
+        destination_country:$('destination').value.trim().toUpperCase(),locale:language,
+        lines:[...selectedOffers.values()]});
+      quoteKey = crypto.randomUUID(); selectedOffers.clear(); updateSelectionCount();
+      notice(q(7)); await loadQuoteDrafts();
+    } catch (error) { notice(error.message || t('error'),true); }
+    finally { button.disabled = false; }
+  });
   $('more').addEventListener('click',() => loadRequests().catch(error => notice(error.message,true)));
   $('more-items').addEventListener('click',() => openRequest(selectedRequest,true));
   localize(); load();

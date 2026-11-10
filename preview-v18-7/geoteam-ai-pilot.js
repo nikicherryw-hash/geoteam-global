@@ -21,6 +21,8 @@
   const $ = id => document.getElementById(id);
   const query = $('query'), form = $('research'), submit = $('submit'), status = $('status'), results = $('results');
   const legacyLanguage = $('lang'), hint = $('hint'), attach = $('attach'), files = $('files'), back = $('back');
+  const accountLink = $('account-link');
+  const accountLabels = {ru:'Кабинет',en:'Account',tr:'Hesabım',de:'Konto',fr:'Compte',es:'Cuenta',it:'Account',pt:'Conta',ar:'الحساب',zh:'账户'};
   let busy = false;
   attach.accept = 'image/jpeg,image/png,image/webp,.pdf,.txt,.csv,.docx,.xlsx';
   const t = key => (copy[lang] || copy.en)[key] || copy.en[key] || '';
@@ -47,6 +49,7 @@
     attach.parentElement.setAttribute('aria-label', t('attach'));
     text(hint, t('hint')); text(submit, t('go'));
     if (back) back.textContent = lang === 'ar' ? 'الرئيسية ←' : `← ${lang === 'ru' ? 'На главную' : lang === 'tr' ? 'Ana sayfa' : lang === 'de' ? 'Startseite' : lang === 'fr' ? 'Accueil' : lang === 'es' ? 'Inicio' : lang === 'pt' ? 'Início' : lang === 'zh' ? '首页' : 'Home'}`;
+    if (accountLink) { accountLink.href = `account.html?lang=${encodeURIComponent(lang)}`; accountLink.textContent = accountLabels[lang] || accountLabels.en; }
     if (!busy) setStatus(t('ready'));
     localStorage.setItem('geoteam_sourcing_lang', lang);
   }
@@ -154,6 +157,16 @@
     if (!response.ok) throw Error(data.detail || `COMMERCE_${response.status}`);
     return data;
   }
+  async function showSignedInAccount() {
+    try {
+      const me = await commerce('/me');
+      if (accountLink) {
+        accountLink.textContent = `${me.organization_name || me.email || ''} · ${accountLabels[lang] || accountLabels.en}`;
+        accountLink.title = accountLink.textContent;
+      }
+      return true;
+    } catch (_) { return false; }
+  }
   function itemView(item, ordinal, root = results) {
     const panel = make('details','sourcing-item');
     panel.open = ordinal === 1;
@@ -209,7 +222,7 @@
       const isListFile = file && /\.(csv|xlsx)$/i.test(file.name);
       const lines = isListFile ? [] : value.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
       let signedIn = false;
-      try { await commerce('/me'); signedIn = true; } catch (_) { /* Guest search stays on this page. */ }
+      signedIn = await showSignedInAccount();
       if (signedIn && ((!file && lines.length) || isListFile)) {
         let positions = lines;
         if (isListFile) {
@@ -267,5 +280,5 @@
   });
   legacyLanguage?.addEventListener('change', () => { lang = supported.includes(legacyLanguage.value) ? legacyLanguage.value : 'en'; const next = new URL(location.href); next.searchParams.set('lang', lang); location.assign(next); });
   attach.addEventListener('change', () => { const names = [...attach.files].map(file => file.name).join(', '); text(files, names ? t('files') + names : ''); });
-  applyLanguage();
+  applyLanguage(); showSignedInAccount();
 })();
