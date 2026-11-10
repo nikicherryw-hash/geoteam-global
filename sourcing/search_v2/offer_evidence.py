@@ -2,7 +2,7 @@
 import json
 import re
 from html.parser import HTMLParser
-from .matching import model_matches
+from .matching import model_matches, normalized_identity
 
 
 class StructuredData(HTMLParser):
@@ -245,4 +245,43 @@ def product_image(page, model):
         metadata = Metadata()
         metadata.feed(page[:500000])
         return metadata.image
+    # Some shops omit JSON-LD while exposing a product-specific social image.
+    # Require matching page identity and a numbered identifier in the image
+    # filename; a site-wide banner cannot satisfy both checks.
+    class PageImage(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.title_parts, self.heading_parts = [], []
+            self.in_title = self.in_heading = False
+            self.social_images = []
+        def handle_starttag(self, tag, attrs):
+            values = {str(k).lower(): str(v) for k, v in attrs}
+            self.in_title = tag == 'title' or self.in_title
+            self.in_heading = tag == 'h1' or self.in_heading
+            if tag == 'meta' and (values.get('property', '').lower() == 'og:image'
+                                  or values.get('name', '').lower() == 'twitter:image'):
+                self.social_images.append(values.get('content', ''))
+        def handle_data(self, data):
+            if self.in_title:
+                self.title_parts.append(data)
+            if self.in_heading:
+                self.heading_parts.append(data)
+        def handle_endtag(self, tag):
+            if tag == 'title':
+                self.in_title = False
+            if tag == 'h1':
+                self.in_heading = False
+    page_image = PageImage()
+    page_image.feed(page[:500000])
+    identity_text = ' '.join(page_image.title_parts + page_image.heading_parts)
+    if not model_matches(model, identity_text):
+        return None
+    numbered = [token for token in re.findall(r'[^\W_]+(?:[-/][^\W_]+)*', normalized_identity(model))
+                if any(char.isdigit() for char in token)]
+    for image in page_image.social_images:
+        filename = image.split('?', 1)[0].rsplit('/', 1)[-1]
+        if (image and not image.lower().startswith(('data:', 'javascript:'))
+                and not re.search(r'logo|banner|placeholder|default', filename, re.I)
+                and numbered and all(model_matches(token, filename) for token in numbered)):
+            return image
     return None
