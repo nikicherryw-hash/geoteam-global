@@ -1,0 +1,297 @@
+(() => {
+  'use strict';
+
+  const api = String((window.GeoTeamAIPilotConfig || {}).apiBase || '/api/v1').replace(/\/$/, '');
+  const supported = ['en', 'tr', 'ru', 'de', 'fr', 'es', 'it', 'pt', 'ar', 'zh'];
+  const copy = {
+    en:{ph:'Part number, P/N, serial number, manufacturer or product name',hint:'Enter a part number, P/N, serial number, manufacturer or product name. You may attach a photo or document.',attach:'Attach a file or photo',go:'Start search',ready:'Ready for global search.',checking:'Checking search access…',searching:'Searching global markets…',invalid:'Enter at least two characters.',budget:'AI search is temporarily unavailable because the approved budget limit was reached. Please try later.',error:'Search could not be completed. Please try later.',files:'Attached: ',product:'Identified product',offers:'Commercial offers',quote:'Request a quote',none:'No public offers found yet for this request.',manufacturer:'Manufacturer',part:'Part Number',name:'Product name',category:'Category',description:'Description',use:'Intended use',specs:'Verified specifications',condition:'Condition',availability:'Availability',lead:'Lead time',unknown:'Not confirmed'},
+    ru:{ph:'Артикул, P/N, серийный номер, производитель или наименование',hint:'Введите артикул, P/N, серийный номер, производителя или наименование. Можно приложить фото или документ.',attach:'Прикрепить файл или фотографию',go:'Начать поиск',ready:'Готово к глобальному поиску.',checking:'Проверяем доступ к поиску…',searching:'Ищем предложения по мировому рынку…',invalid:'Введите не менее двух символов.',budget:'AI-поиск временно недоступен: достигнут лимит бюджета. Повторите позже.',error:'Не удалось выполнить поиск. Повторите позже.',files:'Прикреплено: ',product:'Найденное изделие',offers:'Коммерческие предложения',quote:'Запросить цену',none:'По вашему запросу публичных предложений пока не найдено.',manufacturer:'Производитель',part:'Part Number',name:'Наименование',category:'Категория',description:'Описание',use:'Назначение',specs:'Подтверждённые характеристики',condition:'Состояние',availability:'Наличие',lead:'Срок',unknown:'Не подтверждено'},
+    tr:{ph:'Parça numarası, P/N, seri numarası, üretici veya ürün adı',hint:'Parça numarası, P/N, seri numarası, üretici veya ürün adını girin. Fotoğraf veya belge ekleyebilirsiniz.',attach:'Dosya veya fotoğraf ekle',go:'Aramayı başlat',ready:'Küresel arama için hazır.',checking:'Arama erişimi kontrol ediliyor…',searching:'Küresel pazarlarda aranıyor…',invalid:'En az iki karakter girin.',budget:'Onaylı bütçe limiti aşıldığı için AI araması geçici olarak kullanılamıyor. Lütfen sonra tekrar deneyin.',error:'Arama tamamlanamadı. Lütfen tekrar deneyin.',files:'Eklenen: ',product:'Tanımlanan ürün',offers:'Ticari teklifler',quote:'Fiyat iste',none:'Bu istek için henüz herkese açık teklif bulunamadı.',manufacturer:'Üretici',part:'Parça numarası',name:'Ürün adı',category:'Kategori',description:'Açıklama',use:'Kullanım amacı',specs:'Doğrulanmış özellikler',condition:'Durum',availability:'Stok durumu',lead:'Termin',unknown:'Doğrulanmadı'},
+    de:{ph:'Teilenummer, P/N, Seriennummer, Hersteller oder Produktname',hint:'Geben Sie Teilenummer, P/N, Seriennummer, Hersteller oder Produktname ein. Foto oder Dokument kann angehängt werden.',attach:'Datei oder Foto anhängen',go:'Suche starten',ready:'Bereit für die globale Suche.',checking:'Suchzugang wird geprüft…',searching:'Weltweite Märkte werden durchsucht…',invalid:'Geben Sie mindestens zwei Zeichen ein.',budget:'Die KI-Suche ist vorübergehend wegen des freigegebenen Budgetlimits nicht verfügbar. Bitte später erneut versuchen.',error:'Suche konnte nicht abgeschlossen werden. Bitte erneut versuchen.',files:'Angehängt: ',product:'Identifiziertes Produkt',offers:'Kommerzielle Angebote',quote:'Preis anfragen',none:'Für diese Anfrage wurden noch keine öffentlichen Angebote gefunden.',manufacturer:'Hersteller',part:'Teilenummer',name:'Produktname',category:'Kategorie',description:'Beschreibung',use:'Verwendungszweck',specs:'Bestätigte Spezifikationen',condition:'Zustand',availability:'Verfügbarkeit',lead:'Lieferzeit',unknown:'Nicht bestätigt'},
+    fr:{ph:'Référence, P/N, numéro de série, fabricant ou nom du produit',hint:'Saisissez une référence, P/N, numéro de série, fabricant ou nom du produit. Vous pouvez joindre une photo ou un document.',attach:'Joindre un fichier ou une photo',go:'Lancer la recherche',ready:'Prêt pour la recherche mondiale.',checking:'Vérification de l’accès à la recherche…',searching:'Recherche sur les marchés mondiaux…',invalid:'Saisissez au moins deux caractères.',budget:'La recherche IA est temporairement indisponible car la limite de budget approuvée est atteinte. Réessayez plus tard.',error:'La recherche n’a pas pu être terminée. Réessayez plus tard.',files:'Joint : ',product:'Produit identifié',offers:'Offres commerciales',quote:'Demander un prix',none:'Aucune offre publique trouvée pour le moment.',manufacturer:'Fabricant',part:'Référence',name:'Nom du produit',category:'Catégorie',description:'Description',use:'Usage prévu',specs:'Caractéristiques confirmées',condition:'État',availability:'Disponibilité',lead:'Délai',unknown:'Non confirmé'},
+    es:{ph:'Número de pieza, P/N, número de serie, fabricante o nombre del producto',hint:'Introduzca número de pieza, P/N, número de serie, fabricante o nombre. Puede adjuntar una foto o documento.',attach:'Adjuntar archivo o foto',go:'Iniciar búsqueda',ready:'Listo para la búsqueda global.',checking:'Comprobando acceso de búsqueda…',searching:'Buscando en mercados mundiales…',invalid:'Introduzca al menos dos caracteres.',budget:'La búsqueda con IA no está disponible temporalmente porque se alcanzó el límite de presupuesto aprobado. Inténtelo más tarde.',error:'No se pudo completar la búsqueda. Inténtelo de nuevo.',files:'Adjunto: ',product:'Producto identificado',offers:'Ofertas comerciales',quote:'Solicitar precio',none:'Aún no se encontraron ofertas públicas para esta solicitud.',manufacturer:'Fabricante',part:'Número de pieza',name:'Nombre del producto',category:'Categoría',description:'Descripción',use:'Uso previsto',specs:'Especificaciones confirmadas',condition:'Estado',availability:'Disponibilidad',lead:'Plazo',unknown:'Sin confirmar'},
+    it:{ph:'Codice articolo, P/N, numero di serie, produttore o nome prodotto',hint:'Inserisci codice articolo, P/N, numero di serie, produttore o nome prodotto. Puoi allegare una foto o un documento.',attach:'Allega file o foto',go:'Avvia ricerca',ready:'Pronto per la ricerca globale.',checking:'Verifica accesso alla ricerca…',searching:'Ricerca nei mercati globali…',invalid:'Inserisci almeno due caratteri.',budget:'La ricerca AI è temporaneamente non disponibile perché è stato raggiunto il limite di budget approvato. Riprova più tardi.',error:'Impossibile completare la ricerca. Riprova.',files:'Allegato: ',product:'Prodotto identificato',offers:'Offerte commerciali',quote:'Richiedi prezzo',none:'Nessuna offerta pubblica trovata per ora.',manufacturer:'Produttore',part:'Codice articolo',name:'Nome prodotto',category:'Categoria',description:'Descrizione',use:'Uso previsto',specs:'Specifiche confermate',condition:'Condizione',availability:'Disponibilità',lead:'Tempi',unknown:'Non confermato'},
+    pt:{ph:'Número da peça, P/N, número de série, fabricante ou nome do produto',hint:'Informe número da peça, P/N, número de série, fabricante ou nome do produto. Você pode anexar foto ou documento.',attach:'Anexar arquivo ou foto',go:'Iniciar busca',ready:'Pronto para busca global.',checking:'Verificando acesso à busca…',searching:'Buscando nos mercados globais…',invalid:'Informe pelo menos dois caracteres.',budget:'A busca por IA está temporariamente indisponível porque o limite de orçamento aprovado foi atingido. Tente mais tarde.',error:'Não foi possível concluir a busca. Tente novamente.',files:'Anexado: ',product:'Produto identificado',offers:'Ofertas comerciais',quote:'Solicitar preço',none:'Ainda não foram encontradas ofertas públicas.',manufacturer:'Fabricante',part:'Número da peça',name:'Nome do produto',category:'Categoria',description:'Descrição',use:'Uso previsto',specs:'Especificações confirmadas',condition:'Condição',availability:'Disponibilidade',lead:'Prazo',unknown:'Não confirmado'},
+    ar:{ph:'رقم القطعة أو P/N أو الرقم التسلسلي أو الشركة المصنعة أو اسم المنتج',hint:'أدخل رقم القطعة أو P/N أو الرقم التسلسلي أو الشركة المصنعة أو اسم المنتج. يمكنك إرفاق صورة أو مستند.',attach:'إرفاق ملف أو صورة',go:'بدء البحث',ready:'جاهز للبحث العالمي.',checking:'جارٍ التحقق من الوصول إلى البحث…',searching:'جارٍ البحث في الأسواق العالمية…',invalid:'أدخل حرفين على الأقل.',budget:'البحث بالذكاء الاصطناعي غير متاح مؤقتًا بسبب بلوغ حد الميزانية المعتمد. حاول لاحقًا.',error:'تعذر إكمال البحث. حاول لاحقًا.',files:'المرفق: ',product:'المنتج المحدد',offers:'العروض التجارية',quote:'طلب السعر',none:'لم يتم العثور على عروض عامة لهذا الطلب بعد.',manufacturer:'الشركة المصنعة',part:'رقم القطعة',name:'اسم المنتج',category:'الفئة',description:'الوصف',use:'الغرض من الاستخدام',specs:'مواصفات مؤكدة',condition:'الحالة',availability:'التوفر',lead:'المهلة',unknown:'غير مؤكد'},
+    zh:{ph:'零件号、P/N、序列号、制造商或产品名称',hint:'请输入零件号、P/N、序列号、制造商或产品名称。您可以附加照片或文件。',attach:'附加文件或照片',go:'开始搜索',ready:'已准备好全球搜索。',checking:'正在检查搜索访问权限…',searching:'正在搜索全球市场…',invalid:'请至少输入两个字符。',budget:'由于达到批准的预算上限，AI 搜索暂时不可用。请稍后再试。',error:'无法完成搜索，请重试。',files:'已附加：',product:'已识别产品',offers:'商业报价',quote:'询价',none:'尚未找到该请求的公开报价。',manufacturer:'制造商',part:'零件号',name:'产品名称',category:'类别',description:'说明',use:'用途',specs:'已确认规格',condition:'状态',availability:'库存',lead:'交期',unknown:'未确认'}
+  };
+
+  const queryLanguage = new URLSearchParams(location.search).get('lang');
+  let lang = supported.includes(queryLanguage) ? queryLanguage : (supported.includes(localStorage.getItem('geoteam_sourcing_lang')) ? localStorage.getItem('geoteam_sourcing_lang') : 'ru');
+  const $ = id => document.getElementById(id);
+  const query = $('query'), form = $('research'), submit = $('submit'), status = $('status'), results = $('results');
+  const legacyLanguage = $('lang'), hint = $('hint'), attach = $('attach'), files = $('files'), back = $('back');
+  const accountLink = $('account-link');
+  const accountLabels = {ru:'Кабинет',en:'Account',tr:'Hesabım',de:'Konto',fr:'Compte',es:'Cuenta',it:'Account',pt:'Conta',ar:'الحساب',zh:'账户'};
+  const historyErrors = {ru:'Поиск завершён, но результат не сохранился в кабинете. Повторите сохранение позже.',en:'Search completed, but the result was not saved to your account. Please try again later.',tr:'Arama tamamlandı ancak sonuç hesabınıza kaydedilemedi. Daha sonra tekrar deneyin.',de:'Suche abgeschlossen, aber das Ergebnis wurde nicht im Konto gespeichert.',fr:'Recherche terminée, mais le résultat n’a pas été enregistré dans votre compte.',es:'Búsqueda completada, pero el resultado no se guardó en su cuenta.',it:'Ricerca completata, ma il risultato non è stato salvato nel tuo account.',pt:'Busca concluída, mas o resultado não foi salvo em sua conta.',ar:'اكتمل البحث، لكن لم تُحفظ النتيجة في حسابك.',zh:'搜索已完成，但结果未保存到您的账户。'};
+  let busy = false;
+  attach.accept = 'image/jpeg,image/png,image/webp,.pdf,.txt,.csv,.docx,.xlsx';
+  const t = key => (copy[lang] || copy.en)[key] || copy.en[key] || '';
+  const text = (node, value) => { if (node) node.textContent = value == null ? '' : String(value); };
+  const make = (tag, className) => { const node = document.createElement(tag); if (className) node.className = className; return node; };
+  const hasValue = value => value !== null && value !== undefined && String(value).trim() !== '';
+  const offerWords = {
+    ru:['','Новое','Б/у','Восстановленное','','','Цена по запросу','Цена из публичного источника; комплектация и единица продажи требуют уточнения.','Детали предложения на странице источника не подтверждены; уточняются по RFQ.'],
+    en:['','New','Used','Refurbished','','','Price on request','Public price reference; configuration and sales unit require confirmation.','Offer details are not confirmed from the source page and require an RFQ.'],
+    tr:['','Yeni','Kullanılmış','Yenilenmiş','','','Fiyat talep üzerine','Herkese açık fiyat referansı; yapılandırma ve satış birimi teyit edilmelidir.','Teklif ayrıntıları kaynak sayfasında doğrulanmadı; RFQ ile teyit edilir.']
+  };
+
+  function setStatus(message, state = 'global') {
+    status.dataset.state = ['global', 'local', 'offline'].includes(state) ? state : 'offline';
+    status.className = `status${state === 'offline' ? ' bad' : ''}`;
+    text(status, message);
+  }
+  function applyLanguage() {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    if (legacyLanguage) legacyLanguage.value = lang;
+    query.placeholder = t('ph');
+    attach.parentElement.title = t('attach');
+    attach.parentElement.setAttribute('aria-label', t('attach'));
+    text(hint, t('hint')); text(submit, t('go'));
+    if (back) back.textContent = lang === 'ar' ? 'الرئيسية ←' : `← ${lang === 'ru' ? 'На главную' : lang === 'tr' ? 'Ana sayfa' : lang === 'de' ? 'Startseite' : lang === 'fr' ? 'Accueil' : lang === 'es' ? 'Inicio' : lang === 'pt' ? 'Início' : lang === 'zh' ? '首页' : 'Home'}`;
+    if (accountLink) { accountLink.href = `account.html?lang=${encodeURIComponent(lang)}`; accountLink.textContent = accountLabels[lang] || accountLabels.en; }
+    if (!busy) setStatus(t('ready'));
+    localStorage.setItem('geoteam_sourcing_lang', lang);
+  }
+  function appendFact(box, label, value) {
+    if (!hasValue(value)) return;
+    const fact = make('div', 'fact'), caption = make('b'); text(caption, label); fact.append(caption, document.createTextNode(String(value))); box.append(fact);
+  }
+  function safeImage(value) { try { const url = new URL(String(value), location.origin); return url.protocol === 'https:' && (url.origin === location.origin || /^https:/.test(String(value))) ? url.href : ''; } catch (_) { return ''; } }
+  function render(report, target = results) {
+    target.replaceChildren();
+    const product = report && typeof report.product === 'object' && report.product ? report.product : {};
+    const offers = Array.isArray(report && report.offers) ? report.offers : [];
+    if (Object.keys(product).length) {
+      const card = make('section', 'product');
+      const heading = make('h2'); text(heading, t('product')); card.append(heading);
+      const name = product.product_name || product.part_number || report.query || '';
+      const imageUrl = safeImage(report.image || product.image);
+      if (imageUrl) { const image = make('img'); image.src = imageUrl; image.alt = name || t('product'); image.loading = 'lazy'; image.referrerPolicy = 'no-referrer'; image.onerror = () => image.remove(); card.append(image); }
+      if (name) { const title = make('h3'); text(title, name); card.append(title); }
+      const facts = make('div', 'facts');
+      appendFact(facts, t('manufacturer'), product.manufacturer);
+      appendFact(facts, t('part'), product.part_number);
+      appendFact(facts, t('category'), product.product_category);
+      appendFact(facts, t('description'), product.short_description);
+      appendFact(facts, t('use'), product.intended_use);
+      if (facts.childNodes.length) card.append(facts);
+      const specifications = Array.isArray(product.technical_specifications) ? product.technical_specifications.filter(hasValue).slice(0, 12) : [];
+      if (specifications.length) { const specTitle = make('h3'); text(specTitle, t('specs')); const list = make('ul', 'product-specifications'); specifications.forEach(item => { const row = make('li'); text(row, item); list.append(row); }); card.append(specTitle, list); }
+      target.append(card);
+    }
+    const section = make('section', 'offers'), heading = make('h2'); text(heading, t('offers')); section.append(heading);
+    if (!offers.length) { const none = make('p'); text(none, t('none')); section.append(none); target.append(section); return; }
+    const grid = make('div', 'offersgrid');
+    offers.forEach(offer => {
+      const card = make('article', 'offer'), title = make('strong'); text(title, offer.public_offer_id || 'GeoTeam offer'); card.append(title);
+      if (hasValue(offer.part_number)) { const part = make('p', 'meta'); text(part, offer.part_number); card.append(part); }
+      const words = offerWords[lang] || offerWords.en;
+      const roles = {ru:{PRODUCT_OFFER:'Предложение изделия',MANUFACTURER:'Производитель — запрос поставки',OFFICIAL_REPRESENTATIVE:'Представительство — запрос поставки',POTENTIAL_SUPPLIER:'Потенциальный поставщик'},en:{PRODUCT_OFFER:'Product offer',MANUFACTURER:'Manufacturer — supply enquiry',OFFICIAL_REPRESENTATIVE:'Representative — supply enquiry',POTENTIAL_SUPPLIER:'Potential supplier'}};
+      const role = make('p','meta'); text(role,(roles[lang] || roles.en)[offer.source_role || 'PRODUCT_OFFER']); card.append(role);
+      const stockWords = {ru:['По данным источника: в наличии','По данным источника: нет в наличии','Предзаказ','Поставка под заказ','Снято с производства'],en:['Source reports in stock','Source reports out of stock','Pre-order','Back order','Discontinued'],tr:['Kaynağa göre stokta','Kaynağa göre stokta yok','Ön sipariş','Sipariş üzerine','Üretimden kaldırılmış']}[lang] || ['Source reports in stock','Source reports out of stock','Pre-order','Back order','Discontinued'];
+      const availabilityIndex = {SOURCE_IN_STOCK:0,SOURCE_OUT_OF_STOCK:1,SOURCE_PREORDER:2,SOURCE_BACKORDER:3,SOURCE_DISCONTINUED:4}[offer.availability];
+      const aviationStates = {ru:{FACTORY_NEW:'Новое с завода (FN)',NEW_SURPLUS:'Новое из складских остатков (NS)',OVERHAULED:'После капитального ремонта (OH)',SERVICEABLE:'Исправное по данным продавца (SV)',AS_REMOVED:'Снято с эксплуатации, состояние требует проверки (AR)',REPAIRED:'После ремонта (RP)',UNSERVICEABLE:'Неисправное (US)',FOR_PARTS:'На запчасти'},en:{FACTORY_NEW:'Factory new (FN)',NEW_SURPLUS:'New surplus (NS)',OVERHAULED:'Overhauled (OH)',SERVICEABLE:'Seller reports serviceable (SV)',AS_REMOVED:'As removed; inspection required (AR)',REPAIRED:'Repaired (RP)',UNSERVICEABLE:'Unserviceable (US)',FOR_PARTS:'For parts'}};
+      const simpleCondition = ({NEW:1,USED:2,REFURBISHED:3})[offer.condition];
+      const conditionText = (aviationStates[lang] || aviationStates.en)[offer.condition] || (simpleCondition ? words[simpleCondition] : '');
+      const verifiedFacts = [offer.country, conditionText, availabilityIndex === undefined ? '' : stockWords[availabilityIndex]].filter(hasValue);
+      const meta = make('p', 'meta'); text(meta, verifiedFacts.length ? verifiedFacts.join(' · ') : words[8]); card.append(meta);
+      const price = make('p', 'price');
+      const numericPrice = Number(offer.price);
+      text(price, hasValue(offer.price) && Number.isFinite(numericPrice) && numericPrice > 0 && /^[A-Z]{3}$/.test(offer.currency || '') ? new Intl.NumberFormat(lang, {style:'currency',currency:offer.currency}).format(numericPrice) : words[6]); card.append(price);
+      const qualification = make('p', 'meta'); text(qualification, hasValue(offer.price) ? words[7] : (lang === 'ru' ? 'Публичная цена не указана. Возможность поставки, исполнение и срок согласуются по запросу.' : lang === 'tr' ? 'Açık fiyat belirtilmemiş. Tedarik, yapılandırma ve termin talep üzerine teyit edilir.' : 'No public price stated. Supply, configuration and lead time require an enquiry.')); card.append(qualification);
+      if (hasValue(offer.lead_time)) { const lead = make('p', 'meta'); text(lead, `${t('lead')}: ${offer.lead_time}`); card.append(lead); }
+      const action = make('button', 'rfq'); action.type = 'button'; text(action, t('quote')); action.addEventListener('click', () => document.dispatchEvent(new CustomEvent('geoteam:rfq-select', {detail: offer}))); card.append(action); grid.append(card);
+    });
+    section.append(grid); target.append(section);
+  }
+  async function poll(jobId) {
+    for (let attempt = 0; attempt < 150; attempt += 1) {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      const response = await fetch(`${api}/guest/research/${encodeURIComponent(jobId)}`, {credentials:'same-origin', cache:'no-store'});
+      if (!response.ok) throw Error(`POLL_${response.status}`);
+      const data = await response.json();
+      if (['SUCCEEDED', 'FAILED', 'INTERRUPTED'].includes(data.status)) {
+        if (data.status !== 'SUCCEEDED' || !data.result) throw Error(data.status);
+        return data.result;
+      }
+    }
+    throw Error('TIMEOUT');
+  }
+  async function guestSearch(payload) {
+    const file = Boolean(payload.data);
+    const response = await fetch(`${api}/guest/${file ? 'research-attachment' : 'research'}`, {
+      method:'POST', credentials:'same-origin', cache:'no-store',
+      headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
+    });
+    if (!response.ok) throw Error(`START_${response.status}`);
+    const job = await response.json();
+    if (!/^[a-f0-9]{32}$/i.test(String(job.job_id || ''))) throw Error('JOB');
+    return {report:await poll(job.job_id),jobId:job.job_id};
+  }
+  async function commerce(path, method = 'GET', payload) {
+    async function refreshCsrf() {
+      const response = await fetch(`${api}/commerce/auth/csrf`, {method:'POST',credentials:'same-origin',cache:'no-store'});
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.csrf_token) throw Error(data.detail || `CSRF_${response.status}`);
+      sessionStorage.setItem('geoteam_commerce_csrf', data.csrf_token);
+      return data.csrf_token;
+    }
+    if (method !== 'GET' && !sessionStorage.getItem('geoteam_commerce_csrf')) await refreshCsrf();
+    const headers = {};
+    if (payload !== undefined) headers['Content-Type'] = 'application/json';
+    const csrf = sessionStorage.getItem('geoteam_commerce_csrf');
+    if (csrf) headers['X-CSRF-Token'] = csrf;
+    let response = await fetch(`${api}/commerce${path}`, {
+      method, headers, credentials:'same-origin', cache:'no-store',
+      body:payload === undefined ? undefined : JSON.stringify(payload)
+    });
+    if (method !== 'GET' && response.status === 403) {
+      const error = await response.clone().json().catch(() => ({}));
+      if (error.detail === 'CSRF_REJECTED') {
+        headers['X-CSRF-Token'] = await refreshCsrf();
+        response = await fetch(`${api}/commerce${path}`, {method,headers,credentials:'same-origin',cache:'no-store',body:payload === undefined ? undefined : JSON.stringify(payload)});
+      }
+    }
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw Error(data.detail || `COMMERCE_${response.status}`);
+    return data;
+  }
+  async function showSignedInAccount() {
+    try {
+      const me = await commerce('/me');
+      if (accountLink) {
+        accountLink.textContent = `${me.organization_name || me.email || ''} · ${accountLabels[lang] || accountLabels.en}`;
+        accountLink.title = accountLink.textContent;
+      }
+      return true;
+    } catch (_) { return false; }
+  }
+  function itemView(item, ordinal, root = results) {
+    const panel = make('details','sourcing-item');
+    panel.open = ordinal === 1;
+    const summary = make('summary');
+    text(summary,`${ordinal}. ${item.part_number || item.requested_text || item.product_name || ''}`);
+    panel.append(summary);
+    const body = make('div'); panel.append(body); root.append(panel);
+    return body;
+  }
+  function renderSavedItem(item, target) {
+    render({
+      query:item.requested_text,
+      product:{manufacturer:item.manufacturer,part_number:item.part_number,
+        product_name:item.product_name,product_category:item.product_category,
+        short_description:item.short_description,intended_use:item.intended_use,
+        technical_specifications:item.technical_specifications,image:item.image},
+      offers:(item.offers || []).map(offer => ({...offer,price:offer.public_price}))
+    },target);
+  }
+  async function showSavedRequest(id, root = results, offset = 0) {
+    let lastDone = -1;
+    while (true) {
+      const head = await commerce(`/sourcing/requests/${encodeURIComponent(id)}?page=1&page_size=20`);
+      if (head.positions_completed !== lastDone) {
+        root.replaceChildren();
+        for (let page = 1; page <= Math.ceil(head.positions_total / 20); page++) {
+          const data = page === 1 ? head : await commerce(`/sourcing/requests/${encodeURIComponent(id)}?page=${page}&page_size=20`);
+          for (const item of data.items) renderSavedItem(item,itemView(item,item.ordinal + offset,root));
+        }
+        lastDone = head.positions_completed;
+      }
+      setStatus(`${t('searching')} ${head.positions_completed}/${head.positions_total}`,'local');
+      if (['COMPLETED','PARTIAL_FAILED','FAILED','PAUSED_BUDGET'].includes(head.status)) {
+        setStatus(head.status === 'COMPLETED' ? t('ready') : `${t('error')} [${head.status}]`,head.status === 'COMPLETED' ? 'global' : 'offline');
+        return;
+      }
+      await new Promise(resolve => setTimeout(resolve,2000));
+    }
+  }
+  async function csvPositions(file) {
+    const body = await file.text();
+    const rows = body.replace(/^\uFEFF/,'').split(/\r?\n/).map(row => row.trim()).filter(Boolean);
+    const first = rows[0]?.split(/[;,\t]/).map(value => value.trim().toLowerCase()) || [];
+    const pnColumn = first.findIndex(value => ['p/n','pn','part_number','part number','артикул'].includes(value));
+    return rows.slice(pnColumn >= 0 ? 1 : 0).map(row => (row.split(/[;,\t]/)[Math.max(0,pnColumn)] || '').replace(/^"|"$/g,'').trim()).filter(Boolean);
+  }
+  form.addEventListener('submit', async event => {
+    event.preventDefault(); if (busy) return;
+    const value = query.value.trim(), file = attach.files[0];
+    if (!file && value.length < 2) { setStatus(t('invalid'), 'offline'); query.focus(); return; }
+    busy = true; submit.disabled = true; results.replaceChildren(); setStatus(t('checking'));
+    try {
+      const isListFile = file && /\.(csv|xlsx)$/i.test(file.name);
+      const lines = isListFile ? [] : value.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+      let signedIn = false;
+      signedIn = await showSignedInAccount();
+      if (signedIn && ((!file && lines.length) || isListFile)) {
+        let positions = lines;
+        if (isListFile) {
+          if (file.size > 3 * 1024 * 1024) throw Error('FILE_MAX_3_MB');
+          const data = await new Promise((resolve,reject) => { const reader = new FileReader(); reader.onerror = () => reject(Error('FILE_READ')); reader.onload = () => resolve(String(reader.result).split(',')[1]); reader.readAsDataURL(file); });
+          const mime = /\.xlsx$/i.test(file.name) ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' : 'text/csv';
+          positions = (await commerce('/sourcing/preview','POST',{mime,data_base64:data})).items;
+        } else positions = positions.map(line => ({requested_text:line,part_number:line}));
+        const started = [];
+        for (let offset = 0; offset < positions.length; offset += 100) {
+          const chunk = positions.slice(offset,offset + 100);
+          started.push({offset,id:(await commerce('/sourcing/requests','POST',{
+            idempotency_key:crypto.randomUUID(), query_text:(value.slice(0,3900) || file.name) + (positions.length > 100 ? ` [${offset + 1}–${offset + chunk.length}]` : ''),
+            locale:lang,items:chunk
+          })).id});
+        }
+        for (const part of started) {
+          const root = make('section','sourcing-batch'); results.append(root);
+          await showSavedRequest(part.id,root,part.offset);
+        }
+        return;
+      }
+      if (lines.length > 1 || (file && /\.csv$/i.test(file.name))) {
+        const positions = file ? await csvPositions(file) : lines;
+        if (!positions.length) throw Error('NO_POSITIONS');
+        if (positions.length > 100) throw Error('ITEM_COUNT_MAX_100');
+        const targets = positions.map((position,index) => itemView({requested_text:position},index + 1));
+        setStatus(`${t('searching')} 0/${positions.length}`,'local');
+        for (let index = 0; index < positions.length; index++) {
+          const position = positions[index];
+          const target = targets[index];
+          if (position.length < 2 || position.length > 160) {
+            text(target,`${t('error')} [INVALID_POSITION_${index + 1}]`);
+            continue;
+          }
+          try { render((await guestSearch({query:position,locale:lang})).report,target); }
+          catch (error) { text(target,`${t('error')} [${error.message}]`); }
+          setStatus(`${t('searching')} ${index + 1}/${positions.length}`,'local');
+        }
+        setStatus(t('ready'));
+        return;
+      }
+      if (value.length > 160) throw Error('QUERY_MAX_160');
+      let payload = {query:value, locale:lang};
+      if (file) {
+        if (file.size > 3 * 1024 * 1024) throw Error('FILE_MAX_3_MB');
+        const mime = file.type || ({pdf:'application/pdf',txt:'text/plain',csv:'text/csv',jpg:'image/jpeg',jpeg:'image/jpeg',png:'image/png',webp:'image/webp'})[file.name.split('.').pop().toLowerCase()];
+        if (!['application/pdf','text/plain','text/csv','image/jpeg','image/png','image/webp','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'].includes(mime)) throw Error('UNSUPPORTED_FILE_FORMAT');
+        const data = await new Promise((resolve,reject) => { const reader = new FileReader(); reader.onerror = () => reject(Error('FILE_READ')); reader.onload = () => resolve(String(reader.result).split(',')[1]); reader.readAsDataURL(file); });
+        payload = {...payload,mime,filename:file.name,data};
+      }
+      setStatus(t('searching'), 'local');
+      const found = await guestSearch(payload);
+      render(found.report);
+      if (file && signedIn) {
+        try {
+          await commerce('/sourcing/import-guest-job','POST',{job_id:found.jobId,filename:file.name});
+        } catch (_) {
+          setStatus(historyErrors[lang] || historyErrors.en,'offline');
+          return;
+        }
+      }
+      setStatus(t('ready'));
+    } catch (error) { setStatus(`${t('error')} [${String(error.message || 'ERR')}]`, 'offline'); }
+    finally { busy = false; submit.disabled = false; }
+  });
+  legacyLanguage?.addEventListener('change', () => { lang = supported.includes(legacyLanguage.value) ? legacyLanguage.value : 'en'; const next = new URL(location.href); next.searchParams.set('lang', lang); location.assign(next); });
+  attach.addEventListener('change', () => { const names = [...attach.files].map(file => file.name).join(', '); text(files, names ? t('files') + names : ''); });
+  applyLanguage(); showSignedInAccount();
+})();
+
