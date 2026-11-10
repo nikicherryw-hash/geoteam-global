@@ -25,6 +25,13 @@ def model_matches(query, candidate):
     for token in tokens:
         parts = re.split(r'[-/]', token)
         pattern = r'[-/\s]*'.join(re.escape(part) for part in parts)
+        # A family number may refer to a named suffix variant. The reverse
+        # must stay exact: a request for 916iS cannot match 916iSc.
+        if token.isdecimal():
+            pattern += r'(?=is(?:c)?\b|\b)'
+            if not re.search(r'(?<!\w)' + pattern, found):
+                return False
+            continue
         if not re.search(r'(?<!\w)' + pattern + r'(?!\w)', found):
             return False
     return True
