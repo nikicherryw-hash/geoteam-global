@@ -23,6 +23,7 @@ NEW_FUNCTION_SHA256 = '1c1c7addbd5f77d759b6a77e9bdb8be12a70ed51664cb1365f3f67cac
 BASE = 'https://raw.githubusercontent.com/nikicherryw-hash/geoteam-global/'
 NEW_WORKER = BASE + 'c2ddbecc77f7e114e1dc4cede7e65faf787df57f/sourcing/search_v2/commerce_sourcing_worker.py'
 TEST = BASE + '0cac35e74652ae48233cd12e09a0471d64781c5b/sourcing/search_v2/test_commerce_sourcing_worker.py'
+MIGRATION = BASE + '08a82f4baf756e9e3bb8307dbfce42a5155a9aa2/scripts/migrate_commerce_sourcing_foundation.py'
 
 
 def fetch(url: str) -> bytes:
@@ -60,7 +61,7 @@ def main() -> None:
         (tree / 'test_commerce_sourcing_worker.py').write_bytes(fetch(TEST))
         migration = Path(temp) / 'scripts/migrate_commerce_sourcing_foundation.py'
         migration.parent.mkdir(parents=True)
-        shutil.copy2(ROOT / 'scripts/migrate_commerce_sourcing_foundation.py', migration)
+        migration.write_bytes(fetch(MIGRATION))
         py_compile.compile(str(tree / SOURCE.name), doraise=True)
         subprocess.run((str(PYTHON), '-m', 'unittest',
                         'sourcing.search_v2.test_commerce_sourcing_worker', '-v'),
