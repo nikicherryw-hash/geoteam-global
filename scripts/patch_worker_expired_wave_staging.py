@@ -48,7 +48,7 @@ def main() -> None:
     old_block = claim_wave_block(original)
     if hashlib.sha256(old_block.encode()).hexdigest() != OLD_FUNCTION_SHA256:
         raise SystemExit('REFUSED SOURCE_MISMATCH claim_wave')
-    new_block = claim_wave_block(fetch(NEW_WORKER).decode('utf-8'))
+    new_block = claim_wave_block(fetch(NEW_WORKER).decode('utf-8').replace('\r\n', '\n'))
     if hashlib.sha256(new_block.encode()).hexdigest() != NEW_FUNCTION_SHA256:
         raise SystemExit('REFUSED untrusted replacement')
     after = original.replace(old_block, new_block, 1).encode('utf-8')
