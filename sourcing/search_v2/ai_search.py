@@ -14,7 +14,7 @@ from urllib.parse import parse_qsl, urljoin, urlsplit
 import httpx
 
 from .core import identity, safe_url
-from .matching import model_matches
+from .matching import model_matches, candidate_matches
 from .usage_cost import estimated_cents
 
 MAX_IMAGE_BYTES = 5 * 1024 * 1024
@@ -293,7 +293,7 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
         if not isinstance(item, dict):
             continue
         source_url = str(item.get("url") or "")
-        if not safe_url(source_url) or not cited_item(source_url, refs) or not model_matches(query, item.get("model", "")):
+        if not safe_url(source_url) or not cited_item(source_url, refs) or not candidate_matches(query, item):
             continue
         if re.search(r"\b(sold|ended|expired|out of stock|продан|заверш)\b", str(item.get("availability_claim", "")).lower()):
             continue
@@ -336,10 +336,10 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
 
 
 async def search_once(query, locale, hints, api_key, model, client, budget):
-    compact = re.sub(r'(?<=\d)\s+(?=iS(?:c)?\b)', '', query, flags=re.I)
+    compact = re.sub(r'(?<=\d)\s+(?=[A-Za-z]{1,4}\b)', '', query)
     lookup_terms = list(dict.fromkeys((query, compact)))
     payload = {"model": model, "store": False, "instructions": SYSTEM,
-        "input": "Research globally the exact item " + repr(query) + ". Search spellings: " + json.dumps(lookup_terms, ensure_ascii=False) + ". Language: " + locale + ". Search direct product listings with a visible public price, then used/refurbished marketplace listings and independent suppliers; include at least two priced sources when they actually exist. Do not report prices for a whole aircraft, a different engine or a component as the requested engine price. For each result preserve the listed variant, seller URL and cited price currency; use null when price is absent. Return a source-grounded identity card and distinct direct public item pages. Keep valid offers even without an image; one representative product photo is enough. Optional source hints, not offers: " + json.dumps(hints[:12]),
+        "input": "Research globally the exact technical item " + repr(query) + ". Search spellings: " + json.dumps(lookup_terms, ensure_ascii=False) + ". Language: " + locale + ". Search direct product listings with visible public prices and product images, then used/refurbished marketplace listings and independent suppliers across regions. Seek multiple independent exact-item listings when they exist. Distinguish complete equipment from accessories, whole machines containing the item, compatible alternatives and adjacent variants. Preserve each listing's exact model, part number, condition, seller and dispatch country only when evidenced on that page. Use null for absent facts. Return a source-grounded identity card and direct public item pages. One verified representative image is enough; never use a logo or generic banner. Optional source hints are discovery leads, not offers: " + json.dumps(hints[:12]),
         "tools": [{"type": "web_search"}], "tool_choice": "required", "include": ["web_search_call.action.sources"], "text": {"format": JSON_FORMAT}, "max_tool_calls": 12, "max_output_tokens": 24000}
     ticket = budget.reserve_call()
     try:

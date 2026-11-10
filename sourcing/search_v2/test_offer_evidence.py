@@ -15,6 +15,12 @@ class EvidenceTests(unittest.TestCase):
         page = '<script type="application/ld+json">' + json.dumps({'@type':'Product','name':'ROTAX 912'}) + '</script><meta property="og:image" content="/rotax-912.jpg">'
         self.assertEqual(product_image(page, 'ROTAX 912'), '/rotax-912.jpg')
 
+    def test_exact_page_social_image_without_structured_data(self):
+        page = '<title>Siemens 6ES7315-2EH14-0AB0 module</title><meta property="og:image" content="/images/6ES7315-2EH14-0AB0.webp">'
+        self.assertEqual(product_image(page, 'Siemens 6ES7315-2EH14-0AB0'), '/images/6ES7315-2EH14-0AB0.webp')
+        self.assertIsNone(product_image(page, 'Siemens 6ES7315-2EH14-0AB1'))
+        self.assertIsNone(product_image(page.replace('6ES7315-2EH14-0AB0.webp', 'banner.webp'), 'Siemens 6ES7315-2EH14-0AB0'))
+
     def test_photo_requires_matching_model(self):
         page = '<script type="application/ld+json">' + json.dumps({'@type':'Product','name':'ROTAX 912','image':'/912.jpg'}) + '</script>'
         self.assertEqual(product_image(page,'ROTAX 912'), '/912.jpg')
