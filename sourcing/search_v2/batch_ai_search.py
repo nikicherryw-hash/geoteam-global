@@ -44,7 +44,7 @@ async def search_wave_once(queries: list[str], locale: str, hints: list[str],
         "price or country from one item to another. Return an item for every ordinal, even if evidence is absent.",
         "input": "Research these exact independent parts worldwide: " +
                  json.dumps([{"ordinal": i + 1, "query": q} for i, q in enumerate(queries)], ensure_ascii=False) +
-                 ". Language: " + locale + ". Source registry hints are discovery leads, not offers: " +
+                 ". Language: " + locale + ". For each numbered item independently seek exact product pages with visible prices and one matching product image, including used and refurbished markets; preserve evidenced condition and country. Do not substitute nearby models or quote an accessory as the full item. Source registry hints are discovery leads, not offers: " +
                  json.dumps(hints[:20], ensure_ascii=False),
         "tools": [{"type": "web_search"}], "tool_choice": "required",
         "include": ["web_search_call.action.sources"], "text": {"format": WAVE_FORMAT},
@@ -123,4 +123,3 @@ async def search_wave_once(queries: list[str], locale: str, hints: list[str],
         result["usage"] = data.get("usage", {})
         result["pilot"] = budget.status()
     return results
-
