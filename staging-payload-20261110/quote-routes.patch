@@ -1,0 +1,72 @@
+diff --git a/sourcing/search_v2/commerce_sourcing_routes.py b/sourcing/search_v2/commerce_sourcing_routes.py
+index 7934e85..4dc363b 100644
+--- a/sourcing/search_v2/commerce_sourcing_routes.py
++++ b/sourcing/search_v2/commerce_sourcing_routes.py
+@@ -17,6 +17,7 @@ from fastapi import Depends, HTTPException, Query, Response
+ from pydantic import BaseModel, Field
+ 
+ from .commerce_sourcing import create_request, link_rfq, public_request, queue_draft
++from .commerce_quote_drafts import create_quote_draft, list_quote_drafts, quote_draft_detail
+ from .batch_budget import can_accept_batch
+ from .batch_document import extract_list_items
+ 
+@@ -57,9 +58,58 @@ class DocumentPreviewInput(BaseModel):
+     data_base64: str = Field(min_length=1, max_length=4 * 1024 * 1024)
+ 
+ 
++class QuoteLineInput(BaseModel):
++    request_id: str = Field(min_length=1, max_length=64)
++    ordinal: int = Field(ge=1, le=100)
++    public_offer_id: str = Field(min_length=1, max_length=128)
++    quantity: str = Field(min_length=1, max_length=24)
++
++
++class QuoteDraftInput(BaseModel):
++    idempotency_key: str = Field(min_length=8, max_length=128)
++    destination_country: str = Field(min_length=2, max_length=2)
++    locale: str = Field(default='en', max_length=8)
++    lines: list[QuoteLineInput] = Field(min_length=1, max_length=100)
++
++
+ def install(router: Any, connect: Callable, current: Callable, write_guard: Callable) -> None:
+     """Called once by commerce_gateway after its existing dependencies exist."""
+ 
++    @router.post('/sourcing/quote-drafts', status_code=201)
++    def create_draft(payload: QuoteDraftInput, session: sqlite3.Row = Depends(write_guard)) -> dict:
++        with closing(connect()) as db:
++            try:
++                return create_quote_draft(
++                    db, user_id=session['user_id'], organization_id=session['organization_id'],
++                    idempotency_key=payload.idempotency_key,
++                    destination_country=payload.destination_country, locale=payload.locale,
++                    lines=[line.dict() for line in payload.lines],
++                )
++            except PermissionError as exc:
++                raise HTTPException(403, str(exc)) from exc
++            except ValueError as exc:
++                raise HTTPException(422, str(exc)) from exc
++            except LookupError as exc:
++                raise HTTPException(404, str(exc)) from exc
++
++    @router.get('/sourcing/quote-drafts')
++    def drafts(session: sqlite3.Row = Depends(current), page: int = Query(1, ge=1),
++               page_size: int = Query(20, ge=1, le=50)) -> dict:
++        with closing(connect()) as db:
++            return {'items': list_quote_drafts(db, user_id=session['user_id'],
++                                               organization_id=session['organization_id'],
++                                               limit=page_size, offset=(page - 1) * page_size),
++                    'page': page, 'page_size': page_size}
++
++    @router.get('/sourcing/quote-drafts/{draft_id}')
++    def draft_detail(draft_id: str, session: sqlite3.Row = Depends(current)) -> dict:
++        with closing(connect()) as db:
++            try:
++                return quote_draft_detail(db, draft_id=draft_id, user_id=session['user_id'],
++                                          organization_id=session['organization_id'])
++            except LookupError as exc:
++                raise HTTPException(404, str(exc)) from exc
++
+     @router.post("/sourcing/preview")
+     def preview(payload: DocumentPreviewInput, session: sqlite3.Row = Depends(write_guard)) -> dict:
+         try:
+
