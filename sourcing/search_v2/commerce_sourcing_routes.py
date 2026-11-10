@@ -71,6 +71,8 @@ class QuoteDraftInput(BaseModel):
     idempotency_key: str = Field(min_length=8, max_length=128)
     destination_country: str = Field(min_length=2, max_length=2)
     locale: str = Field(default='en', max_length=8)
+    importer_type: str = Field(default='BUSINESS', pattern='^(BUSINESS|PERSONAL)$')
+    destination_city: str | None = Field(default=None, max_length=120)
     lines: list[QuoteLineInput] = Field(min_length=1, max_length=100)
 
 
@@ -110,6 +112,7 @@ def install(router: Any, connect: Callable, current: Callable, write_guard: Call
                     db, user_id=session['user_id'], organization_id=session['organization_id'],
                     idempotency_key=payload.idempotency_key,
                     destination_country=payload.destination_country, locale=payload.locale,
+                    importer_type=payload.importer_type, destination_city=payload.destination_city,
                     lines=[line.dict() for line in payload.lines],
                 )
             except PermissionError as exc:

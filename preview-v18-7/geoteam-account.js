@@ -33,6 +33,19 @@
     zh:['申请商业报价计算','从已保存的搜索中选择报价。GeoTeam 将在出具报价前核实产品、关税和交付。','目的地国家（ISO 代码，例如 TR）','提交计算申请','已选报价：','选择','数量','计算申请已保存','初步计算','请至少选择一项报价。']
   };
   const q = index => (quoteCopy[language] || quoteCopy.en)[index];
+  const estimateCopy = {
+    ru:['Получатель','Юридическое лицо','Физическое лицо','Город доставки','Турция','Россия','Кыргызстан','Казахстан','Детали расчёта','Для расчёта требуются подтверждённые данные: ','Авиа','Авто','Железная дорога','Море / контейнер','Стоимость и срок уточняются','Предварительный итог','Расчёт не является коммерческим предложением.'],
+    en:['Importer','Business','Individual','Delivery city','Türkiye','Russia','Kyrgyzstan','Kazakhstan','Calculation details','Verified data required: ','Air','Road','Rail','Sea / container','Cost and transit time pending','Preliminary total','This calculation is not a commercial quotation.'],
+    tr:['İthalatçı','Şirket','Birey','Teslimat şehri','Türkiye','Rusya','Kırgızistan','Kazakistan','Hesaplama ayrıntıları','Doğrulanmış veriler gerekli: ','Hava','Karayolu','Demiryolu','Deniz / konteyner','Maliyet ve süre bekleniyor','Ön toplam','Bu hesaplama ticari teklif değildir.'],
+    de:['Importeur','Unternehmen','Privatperson','Lieferort','Türkei','Russland','Kirgisistan','Kasachstan','Berechnungsdetails','Verifizierte Daten erforderlich: ','Luft','Straße','Bahn','See / Container','Kosten und Laufzeit offen','Vorläufige Summe','Dies ist kein verbindliches Angebot.'],
+    fr:['Importateur','Entreprise','Particulier','Ville de livraison','Turquie','Russie','Kirghizistan','Kazakhstan','Détails du calcul','Données vérifiées requises : ','Air','Route','Rail','Mer / conteneur','Coût et délai à confirmer','Total provisoire','Ce calcul ne constitue pas une offre commerciale.'],
+    es:['Importador','Empresa','Particular','Ciudad de entrega','Turquía','Rusia','Kirguistán','Kazajistán','Detalles del cálculo','Datos verificados necesarios: ','Aire','Carretera','Ferrocarril','Mar / contenedor','Costo y plazo pendientes','Total preliminar','Este cálculo no es una oferta comercial.'],
+    it:['Importatore','Azienda','Privato','Città di consegna','Turchia','Russia','Kirghizistan','Kazakistan','Dettagli del calcolo','Dati verificati necessari: ','Aereo','Strada','Ferrovia','Mare / container','Costo e tempi da confermare','Totale preliminare','Questo calcolo non è un’offerta commerciale.'],
+    pt:['Importador','Empresa','Pessoa física','Cidade de entrega','Turquia','Rússia','Quirguistão','Cazaquistão','Detalhes do cálculo','Dados verificados necessários: ','Aéreo','Rodoviário','Ferroviário','Marítimo / contentor','Custo e prazo pendentes','Total preliminar','Este cálculo não constitui proposta comercial.'],
+    ar:['المستورد','شركة','فرد','مدينة التسليم','تركيا','روسيا','قيرغيزستان','كازاخستان','تفاصيل الحساب','البيانات المؤكدة المطلوبة: ','جوي','بري','سكك حديدية','بحري / حاوية','التكلفة والمدة قيد التحقق','الإجمالي الأولي','هذا الحساب ليس عرض سعر تجارياً.'],
+    zh:['进口方','企业','个人','交货城市','土耳其','俄罗斯','吉尔吉斯斯坦','哈萨克斯坦','计算详情','需要核实的数据：','空运','公路','铁路','海运 / 集装箱','费用与时效待确认','初步总额','此计算并非正式商业报价。']
+  };
+  const e = index => (estimateCopy[language] || estimateCopy.en)[index];
   const dateText = seconds => seconds ? new Intl.DateTimeFormat(language, {dateStyle:'medium',timeStyle:'short'}).format(new Date(Number(seconds) * 1000)) : '';
   const updateSelectionCount = () => { $('selection-count').textContent = q(4) + selectedOffers.size; };
   const t = key => copy[language][key] || copy.en[key] || key;
@@ -50,6 +63,11 @@
     document.title = t('title') + ' · GeoTeam Global';
     $('quote-title').textContent = q(0); $('quote-help').textContent = q(1);
     $('destination-label').firstChild.textContent = q(2);
+    $('importer-label').firstChild.textContent = e(0);
+    $('city-label').firstChild.textContent = e(3);
+    const importerOptions = $('importer-type').options;
+    importerOptions[0].textContent=e(1); importerOptions[1].textContent=e(2);
+    [...$('destination').options].forEach((option,index)=>{option.textContent=e(4+index);});
     $('quote-submit').textContent = q(3); updateSelectionCount();
   }
   function notice(message, error = false) { $('notice').textContent = message; $('notice').classList.toggle('error', error); }
@@ -178,8 +196,32 @@
   async function loadQuoteDrafts() {
     const data = await api('/sourcing/quote-drafts'); $('quote-drafts').replaceChildren();
     const heading = document.createElement('h3'); heading.textContent = q(8); $('quote-drafts').append(heading);
-    data.items.forEach(row => p($('quote-drafts'), [dateText(row.created_at),row.destination_country,
-      row.lines_total,row.status,row.id.slice(0,8)].join(' · '), 'status'));
+    data.items.forEach(row => {
+      const box=document.createElement('div');box.className='status';
+      p(box,[dateText(row.created_at),row.destination_country,row.lines_total,row.status,row.id.slice(0,8)].join(' · '));
+      const button=document.createElement('button');button.type='button';button.className='secondary';button.textContent=e(8);
+      button.addEventListener('click',async()=>{
+        try {
+          const detail=await api('/sourcing/quote-drafts/'+encodeURIComponent(row.id));
+          const target=$('quote-estimate');target.replaceChildren();
+          const estimate=detail.estimate;
+          if(!estimate){p(target,e(15));return;}
+          estimate.lines.forEach(line=>{
+            const item=document.createElement('section');item.className='panel';
+            const title=document.createElement('h3');title.textContent=[line.product_name,line.part_number].filter(Boolean).join(' · ')||line.public_offer_id;item.append(title);
+            const gaps=line.calculation.gaps||[];
+            if(gaps.length)p(item,e(9)+gaps.join(', '),'muted');
+            line.calculation.routes.forEach((route,index)=>{
+              const label=e(10+index);
+              p(item,label+' · '+(route.estimated_subtotal ? e(15)+': '+route.estimated_subtotal+' '+route.currency : e(14)));
+            });
+            target.append(item);
+          });
+          p(target,e(16),'muted');
+        } catch(error){notice(error.message||t('error'),true);}
+      });
+      box.append(button);$('quote-drafts').append(box);
+    });
   }
   async function load() {
     let me;
@@ -212,6 +254,7 @@
     try {
       await api('/sourcing/quote-drafts','POST',{idempotency_key:quoteKey,
         destination_country:$('destination').value.trim().toUpperCase(),locale:language,
+        importer_type:$('importer-type').value,destination_city:$('destination-city').value.trim(),
         lines:[...selectedOffers.values()]});
       quoteKey = crypto.randomUUID(); selectedOffers.clear(); updateSelectionCount();
       notice(q(7)); await loadQuoteDrafts();
