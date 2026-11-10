@@ -23,6 +23,19 @@ class BatchDocumentTests(unittest.TestCase):
             archive.writestr("xl/worksheets/sheet1.xml", sheet)
         self.assertEqual(extract_list_items(buffer.getvalue(), XLSX)[0]["part_number"], "5SY6106-7")
 
+    def test_excel_name_only_list_keeps_positions_without_inventing_part_numbers(self):
+        sheet = ('<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>'
+                 '<row><c t="inlineStr"><is><t>Наименование товара</t></is></c></row>'
+                 '<row><c t="inlineStr"><is><t>ROTAX 912 engine</t></is></c></row>'
+                 '<row><c t="inlineStr"><is><t>Siemens motor</t></is></c></row>'
+                 '</sheetData></worksheet>')
+        buffer = io.BytesIO()
+        with zipfile.ZipFile(buffer, "w") as archive:
+            archive.writestr("xl/worksheets/sheet1.xml", sheet)
+        items = extract_list_items(buffer.getvalue(), XLSX)
+        self.assertEqual([item["requested_text"] for item in items], ["ROTAX 912 engine", "Siemens motor"])
+        self.assertTrue(all("part_number" not in item for item in items))
+
     def test_excel_keeps_empty_column_and_separate_sheets(self):
         prefix = '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>'
         suffix = '</sheetData></worksheet>'

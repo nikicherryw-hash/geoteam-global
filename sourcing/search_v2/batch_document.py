@@ -19,7 +19,7 @@ MAX_INPUT_BYTES = 3 * 1024 * 1024
 MAX_ITEMS = 100
 PART_HEADERS = {"p/n", "pn", "part number", "part no", "part #", "артикул", "номер детали", "parça numarası"}
 MAKER_HEADERS = {"manufacturer", "maker", "brand", "производитель", "üretici"}
-NAME_HEADERS = {"name", "description", "product", "наименование", "описание", "ürün"}
+NAME_HEADERS = {"name", "description", "product", "наименование", "наименование товара", "номенклатура", "описание", "товар", "изделие", "модель", "ürün"}
 _SHEET_NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
 
 
@@ -116,7 +116,7 @@ def extract_list_items(data: bytes, mime: str) -> list[dict[str, str]]:
         raise ValueError("DOCUMENT_EMPTY")
     items: list[dict[str, str]] = []
     for rows in tables:
-        items.extend(_items_from_rows(rows))
+        items.extend(_items_from_rows(rows, allow_name_only=mime == XLSX))
         if len(items) > MAX_ITEMS:
             raise ValueError("DOCUMENT_ITEM_LIMIT")
     if not items:
@@ -124,25 +124,41 @@ def extract_list_items(data: bytes, mime: str) -> list[dict[str, str]]:
     return items
 
 
-def _items_from_rows(rows: list[list[str]]) -> list[dict[str, str]]:
-    headers = [_header(cell) for cell in rows[0]]
-    part_col = next((i for i, h in enumerate(headers) if h in PART_HEADERS), None)
-    if part_col is None:
+def _items_from_rows(rows: list[list[str]], *, allow_name_only: bool = False) -> list[dict[str, str]]:
+    header_row = 0
+    part_col = name_col = maker_col = None
+    for index, row in enumerate(rows[:10]):
+        headers = [_header(cell) for cell in row]
+        part_col = next((i for i, h in enumerate(headers) if h in PART_HEADERS), None)
+        name_col = next((i for i, h in enumerate(headers) if h in NAME_HEADERS), None)
+        if part_col is not None or (allow_name_only and name_col is not None):
+            header_row = index
+            maker_col = next((i for i, h in enumerate(headers) if h in MAKER_HEADERS), None)
+            break
+    if part_col is None and not allow_name_only:
         raise ValueError("PART_NUMBER_COLUMN_REQUIRED")
-    maker_col = next((i for i, h in enumerate(headers) if h in MAKER_HEADERS), None)
-    name_col = next((i for i, h in enumerate(headers) if h in NAME_HEADERS), None)
+    if part_col is None and name_col is None:
+        if any(sum(bool(cell.strip()) for cell in row) > 1 for row in rows):
+            raise ValueError("PART_NUMBER_COLUMN_REQUIRED")
+        name_col = next((i for i, cell in enumerate(rows[0]) if cell.strip()), None)
+        header_row = -1
+    if part_col is None and name_col is None:
+        raise ValueError("NO_PART_NUMBERS_FOUND")
     items: list[dict[str, str]] = []
-    for row in rows[1:]:
-        part = row[part_col].strip() if part_col < len(row) else ""
-        if not part:
+    for row in rows[header_row + 1:]:
+        part = row[part_col].strip() if part_col is not None and part_col < len(row) else ""
+        name = row[name_col].strip() if name_col is not None and name_col < len(row) else ""
+        if not part and not name:
             continue
-        if len(part) > 120 or not re.fullmatch(r"[\w .+/#()-]+", part, re.UNICODE):
+        if part and (len(part) > 120 or not re.fullmatch(r"[\w .+/#()-]+", part, re.UNICODE)):
             raise ValueError("INVALID_PART_NUMBER_CELL")
-        item = {"requested_text": part, "part_number": part}
+        if len(name) > 500:
+            raise ValueError("INVALID_ITEM_TEXT")
+        item = {"requested_text": (part + " " + name).strip()[:500]}
+        if part:
+            item["part_number"] = part
         if maker_col is not None and maker_col < len(row) and row[maker_col]:
             item["manufacturer"] = row[maker_col][:120]
-        if name_col is not None and name_col < len(row) and row[name_col]:
-            item["requested_text"] = (part + " " + row[name_col])[:500]
         items.append(item)
         if len(items) > MAX_ITEMS:
             raise ValueError("DOCUMENT_ITEM_LIMIT")
