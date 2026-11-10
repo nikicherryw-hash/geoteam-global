@@ -69,11 +69,36 @@ def claim_wave(db: sqlite3.Connection, *, limit: int = 5, now: int | None = None
     now = int(time.time()) if now is None else now
     db.execute("BEGIN IMMEDIATE")
     try:
+        # A process can die after the third claim without calling fail(). Do
+        # not leave that position (and its request) RUNNING indefinitely.
+        exhausted = db.execute(
+            """SELECT request_id,item_id,id FROM sourcing_work_items
+               WHERE work_kind='RESEARCH' AND status='RUNNING'
+                 AND lease_expires_at<? AND attempt_count>=3""", (now,)
+        ).fetchall()
+        for row in exhausted:
+            db.execute(
+                """UPDATE sourcing_work_items SET status='FAILED',error_code='LEASE_EXPIRED',
+                   lease_token=NULL,lease_expires_at=NULL,finished_at=?,updated_at=? WHERE id=?""",
+                (now, now, row['id']),
+            )
+            db.execute("UPDATE sourcing_items SET status='FAILED',updated_at=? WHERE id=?",
+                       (now, row['item_id']))
+        for request_id in {row['request_id'] for row in exhausted}:
+            db.execute(
+                """UPDATE sourcing_requests SET status=CASE
+                     WHEN (SELECT count(*) FROM sourcing_items WHERE request_id=?
+                           AND status IN ('QUEUED','RUNNING'))=0 THEN 'PARTIAL_FAILED'
+                     ELSE 'RUNNING' END, error_code='LEASE_EXPIRED',updated_at=? WHERE id=?""",
+                (request_id, now, request_id),
+            )
         first = db.execute(
             """SELECT w.request_id FROM sourcing_work_items w
-               WHERE w.work_kind='RESEARCH' AND w.status='QUEUED'
-                 AND COALESCE(w.next_attempt_at,0)<=? AND w.attempt_count<3
-               ORDER BY w.created_at,w.id LIMIT 1""", (now,)
+               WHERE w.work_kind='RESEARCH' AND
+                 ((w.status='QUEUED' AND COALESCE(w.next_attempt_at,0)<=?) OR
+                  (w.status='RUNNING' AND w.lease_expires_at<?))
+                 AND w.attempt_count<3
+               ORDER BY w.created_at,w.id LIMIT 1""", (now, now)
         ).fetchone()
         if not first:
             db.execute("COMMIT")
@@ -82,9 +107,11 @@ def claim_wave(db: sqlite3.Connection, *, limit: int = 5, now: int | None = None
             """SELECT w.id,w.request_id,w.item_id,w.attempt_count,i.requested_text,r.locale
                FROM sourcing_work_items w JOIN sourcing_items i ON i.id=w.item_id
                JOIN sourcing_requests r ON r.id=w.request_id
-               WHERE w.request_id=? AND w.work_kind='RESEARCH' AND w.status='QUEUED'
-                 AND COALESCE(w.next_attempt_at,0)<=? AND w.attempt_count<3
-               ORDER BY i.ordinal LIMIT ?""", (first[0], now, limit),
+               WHERE w.request_id=? AND w.work_kind='RESEARCH' AND
+                 ((w.status='QUEUED' AND COALESCE(w.next_attempt_at,0)<=?) OR
+                  (w.status='RUNNING' AND w.lease_expires_at<?))
+                 AND w.attempt_count<3
+               ORDER BY i.ordinal LIMIT ?""", (first[0], now, now, limit),
         ).fetchall()
         jobs = []
         for row in rows:

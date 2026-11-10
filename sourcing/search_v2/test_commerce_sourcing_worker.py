@@ -2,6 +2,7 @@ import importlib.util
 import asyncio
 import os
 import tempfile
+import time
 import unittest
 from contextlib import closing
 from pathlib import Path
@@ -113,6 +114,30 @@ class SourcingWorkerTests(unittest.TestCase):
             self.assertEqual(len({job["request_id"] for job in jobs}), 1)
             self.assertEqual(db.execute("SELECT count(*) FROM sourcing_work_items WHERE status='RUNNING'").fetchone()[0], 2)
 
+    def test_expired_wave_is_reclaimed_without_losing_positions(self):
+        with closing(connect(self.path)) as db:
+            start = int(time.time())
+            first = claim_wave(db, now=start)
+            self.assertEqual(len(first), 2)
+            self.assertEqual(claim_wave(db, now=start + 100), [])
+            reclaimed = claim_wave(db, now=start + 241)
+            self.assertEqual([job['requested_text'] for job in reclaimed], ['PN-1', 'PN-2'])
+            self.assertTrue(all(job['attempt_count'] == 1 for job in reclaimed))
+            self.assertTrue(all(complete(db, job, {'product': {'part_number': job['requested_text']},
+                                                    'offers': [], '_internal_sources': []}) for job in reclaimed))
+            self.assertEqual(public_request(db, request_id=self.request['id'],
+                                            organization_id='o', user_id='u')['status'], 'COMPLETED')
+
+    def test_third_expired_wave_finishes_instead_of_hanging(self):
+        with closing(connect(self.path)) as db:
+            start = int(time.time())
+            for now in (start, start + 241, start + 482):
+                self.assertEqual(len(claim_wave(db, now=now)), 2)
+            self.assertEqual(claim_wave(db, now=start + 723), [])
+            result = public_request(db, request_id=self.request['id'], organization_id='o', user_id='u')
+            self.assertEqual(result['status'], 'PARTIAL_FAILED')
+            self.assertEqual([item['status'] for item in result['items']], ['FAILED', 'FAILED'])
+
     def test_wave_uses_one_research_call_and_persists_independent_results(self):
         seen = []
         async def research(queries, locale):
@@ -140,13 +165,15 @@ class SourcingWorkerTests(unittest.TestCase):
             return [{"product": {"part_number": query}, "offers": [], "_internal_sources": []}
                     for query in queries]
 
-        async def drain():
-            for _ in range(25):
-                if await process_wave(self.path, research) == "EMPTY":
-                    return
+        for _ in range(25):
+            # Injected research has no suspension points; drive the coroutine
+            # directly so this deterministic test needs no OS event loop.
+            with self.assertRaises(StopIteration) as completed:
+                process_wave(self.path, research).send(None)
+            if completed.exception.value == "EMPTY":
+                break
+        else:
             self.fail("queue did not drain")
-
-        asyncio.run(drain())
         with closing(connect(self.path)) as db:
             head = public_request(db, request_id=large["id"], organization_id="o", user_id="u")
             self.assertEqual((head["status"], head["positions_completed"], head["positions_total"]),
