@@ -6,7 +6,10 @@ import unicodedata
 def normalized_identity(value):
     text = unicodedata.normalize('NFKC', str(value or '')).casefold()
     text = text.translate(str.maketrans({'–':'-', '—':'-', '‑':'-'}))
-    return re.sub(r'\b(?:ротакс|ротокс)\b', 'rotax', text)
+    text = re.sub(r'\b(?:ротакс|ротокс)\b', 'rotax', text)
+    # Rotax and seller catalogues write 916 iS / 916iS interchangeably.
+    # Keep the optional certified ``iSc`` suffix distinct from ``iS``.
+    return re.sub(r'(?<=\d)\s+(?=is(?:c)?\b)', '', text)
 
 
 def model_matches(query, candidate):
@@ -25,3 +28,4 @@ def model_matches(query, candidate):
         if not re.search(r'(?<!\w)' + pattern + r'(?!\w)', found):
             return False
     return True
+
