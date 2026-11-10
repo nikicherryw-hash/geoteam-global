@@ -23,6 +23,7 @@
   const legacyLanguage = $('lang'), hint = $('hint'), attach = $('attach'), files = $('files'), back = $('back');
   const accountLink = $('account-link');
   const accountLabels = {ru:'Кабинет',en:'Account',tr:'Hesabım',de:'Konto',fr:'Compte',es:'Cuenta',it:'Account',pt:'Conta',ar:'الحساب',zh:'账户'};
+  const historyErrors = {ru:'Поиск завершён, но результат не сохранился в кабинете. Повторите сохранение позже.',en:'Search completed, but the result was not saved to your account. Please try again later.',tr:'Arama tamamlandı ancak sonuç hesabınıza kaydedilemedi. Daha sonra tekrar deneyin.',de:'Suche abgeschlossen, aber das Ergebnis wurde nicht im Konto gespeichert.',fr:'Recherche terminée, mais le résultat n’a pas été enregistré dans votre compte.',es:'Búsqueda completada, pero el resultado no se guardó en su cuenta.',it:'Ricerca completata, ma il risultato non è stato salvato nel tuo account.',pt:'Busca concluída, mas o resultado não foi salvo em sua conta.',ar:'اكتمل البحث، لكن لم تُحفظ النتيجة في حسابك.',zh:'搜索已完成，但结果未保存到您的账户。'};
   let busy = false;
   attach.accept = 'image/jpeg,image/png,image/webp,.pdf,.txt,.csv,.docx,.xlsx';
   const t = key => (copy[lang] || copy.en)[key] || copy.en[key] || '';
@@ -127,7 +128,7 @@
     if (!response.ok) throw Error(`START_${response.status}`);
     const job = await response.json();
     if (!/^[a-f0-9]{32}$/i.test(String(job.job_id || ''))) throw Error('JOB');
-    return poll(job.job_id);
+    return {report:await poll(job.job_id),jobId:job.job_id};
   }
   async function commerce(path, method = 'GET', payload) {
     async function refreshCsrf() {
@@ -258,7 +259,7 @@
             text(target,`${t('error')} [INVALID_POSITION_${index + 1}]`);
             continue;
           }
-          try { render(await guestSearch({query:position,locale:lang}),target); }
+          try { render((await guestSearch({query:position,locale:lang})).report,target); }
           catch (error) { text(target,`${t('error')} [${error.message}]`); }
           setStatus(`${t('searching')} ${index + 1}/${positions.length}`,'local');
         }
@@ -274,7 +275,18 @@
         const data = await new Promise((resolve,reject) => { const reader = new FileReader(); reader.onerror = () => reject(Error('FILE_READ')); reader.onload = () => resolve(String(reader.result).split(',')[1]); reader.readAsDataURL(file); });
         payload = {...payload,mime,filename:file.name,data};
       }
-      setStatus(t('searching'), 'local'); render(await guestSearch(payload)); setStatus(t('ready'));
+      setStatus(t('searching'), 'local');
+      const found = await guestSearch(payload);
+      render(found.report);
+      if (file && signedIn) {
+        try {
+          await commerce('/sourcing/import-guest-job','POST',{job_id:found.jobId,filename:file.name});
+        } catch (_) {
+          setStatus(historyErrors[lang] || historyErrors.en,'offline');
+          return;
+        }
+      }
+      setStatus(t('ready'));
     } catch (error) { setStatus(`${t('error')} [${String(error.message || 'ERR')}]`, 'offline'); }
     finally { busy = false; submit.disabled = false; }
   });
