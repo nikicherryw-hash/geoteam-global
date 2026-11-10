@@ -1,0 +1,117 @@
+diff --git a/preview-v18-7/index.html b/preview-v18-7/index.html
+index 022b795..52e9c08 100644
+--- a/preview-v18-7/index.html
++++ b/preview-v18-7/index.html
+@@ -2438,8 +2438,7 @@ a:focus-visible,button:focus-visible,select:focus-visible{
+             </a>
+           </div>
+           <div class="lang"><button id="langToggle" type="button" class="langToggle" aria-label="Legacy language toggle" hidden>EN</button><label class="gt-lang-wrap" aria-label="Website language"><span class="gt-lang-display" aria-hidden="true"><span id="gtLangCode">EN</span><span class="gt-lang-chevron">⌄</span></span><select class="gt-lang-select" id="gtLanguageSelect" aria-label="Choose language"><option value="en">EN · English</option><option value="tr">TR · Türkçe</option><option value="ru">RU · Русский</option><option value="de">DE · Deutsch</option><option value="fr">FR · Français</option><option value="es">ES · Español</option><option value="it">IT · Italiano</option><option value="pt">PT · Português</option><option value="ar">AR · العربية</option><option value="zh">ZH · 中文</option></select></label></div>
+-          <!-- Account UI is intentionally non-interactive until the homepage is wired to the existing auth contract. -->
+-          <div class="gt-account-links gt-account--planned" aria-label="Customer account integration pending"><span id="gtLoginLink" aria-disabled="true">Sign in</span></div>
++          <div class="gt-account-links"><a id="gtLoginLink" href="account.html?lang=en">Sign in</a></div>
+         </div>
+       </div>
+       <div class="tickerbar" aria-label="News ticker">
+@@ -3995,7 +3994,7 @@ $("btnBrowse")?.addEventListener("click", (e) => {
+   .gt-sector-nav a{display:inline-flex!important;align-items:center!important;font-family:var(--gt-display-font)!important;font-size:12px!important;font-weight:610!important;letter-spacing:-.01em!important;padding:5px 8px!important;}
+   .gt-sector-nav a+a::before{content:"•";margin-right:12px;color:rgba(118,229,173,.76);font-size:11px;line-height:1;}
+   .gt-account-links{display:flex;align-items:center;gap:5px;color:rgba(234,247,247,.5);font:600 11px/1 var(--gt-display-font);white-space:nowrap;}
+-  .gt-account--planned span{display:inline-flex;align-items:center;justify-content:center;min-height:28px;padding:0 10px;border:1px solid rgba(135,234,219,.32);border-radius:999px;background:rgba(87,208,195,.08);color:rgba(239,255,251,.88);box-shadow:inset 0 1px 0 rgba(255,255,255,.05);}
++  .gt-account-links #gtLoginLink{display:inline-flex;align-items:center;justify-content:center;min-height:28px;padding:0 10px;border:1px solid rgba(135,234,219,.32);border-radius:999px;background:rgba(87,208,195,.08);color:rgba(239,255,251,.88);box-shadow:inset 0 1px 0 rgba(255,255,255,.05);}
+   .gt-account-links a{color:rgba(234,247,247,.82);text-decoration:none;transition:color .18s ease;}
+   .gt-account-links a:hover,.gt-account-links a:focus-visible{color:#fff;}
+   .right{gap:8px!important;}
+@@ -4084,7 +4083,7 @@ $("btnBrowse")?.addEventListener("click", (e) => {
+     .gt-brand-mark{flex-basis:36px;width:36px;height:36px;}
+     .gt-brand-mark img{width:36px!important;height:36px!important;}
+   }
+-  @media (max-width:380px){.gt-account-links a:last-child{display:none}.gt-account-links span{display:none}.hero .stage{width:min(305px,85vw)!important;max-width:305px!important;}}
++  @media (max-width:380px){.hero .stage{width:min(305px,85vw)!important;max-width:305px!important;}}
+   @media (prefers-reduced-motion:reduce){#gtMainRfq .gt-search-arrow{transition:none!important;}}
+ </style>
+ <script id="gt-v18-50-home-final-script">
+@@ -4137,6 +4136,7 @@ $("btnBrowse")?.addEventListener("click", (e) => {
+     document.documentElement.lang=lang;
+     document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+     set('navAviation',t.aviation);set('navIndustry',t.industry);set('navMarine',t.marine);set('navElectronics',t.electronics);set('gtRareTitle',t.rareTitle);set('gtRareCopyPrimary',t.rarePrimary);set('gtRareCopySecondary',t.rareSecondary);set('gtRareCopyTertiary',t.rareTertiary);set('gtMarineTitle',t.marineTitle);set('gtMarineCopyPrimary',t.marinePrimary);set('gtMarineCopySecondary',t.marineSecondary);set('gtLoginLink',t.login);set('tickerTag',t.news);
++    const login=document.getElementById('gtLoginLink');if(login)login.href='account.html?lang='+encodeURIComponent(lang);
+     const h=document.getElementById('headline');if(h&&h.textContent.trim()!==t.title){h.replaceChildren();const span=document.createElement('span');span.textContent=t.title;h.appendChild(span);}if(h)h.setAttribute('aria-label',t.title);
+     const cta=document.getElementById('gtMainRfq');if(cta&&cta.textContent.trim()!==t.search+' →'){cta.replaceChildren(document.createTextNode(t.search+' '));const arrow=document.createElement('span');arrow.className='gt-search-arrow';arrow.setAttribute('aria-hidden','true');arrow.textContent='→';cta.appendChild(arrow);}if(cta)cta.setAttribute('aria-label',t.search);
+     document.querySelectorAll('.tick--status').forEach(el=>el.textContent=t.status);
+diff --git a/sourcing/search_v2/batch_document.py b/sourcing/search_v2/batch_document.py
+index b8e6a24..cb6cd0a 100644
+--- a/sourcing/search_v2/batch_document.py
++++ b/sourcing/search_v2/batch_document.py
+@@ -19,7 +19,7 @@ MAX_INPUT_BYTES = 3 * 1024 * 1024
+ MAX_ITEMS = 100
+ PART_HEADERS = {"p/n", "pn", "part number", "part no", "part #", "артикул", "номер детали", "parça numarası"}
+ MAKER_HEADERS = {"manufacturer", "maker", "brand", "производитель", "üretici"}
+-NAME_HEADERS = {"name", "description", "product", "наименование", "описание", "ürün"}
++NAME_HEADERS = {"name", "description", "product", "наименование", "наименование товара", "номенклатура", "описание", "товар", "изделие", "модель", "ürün"}
+ _SHEET_NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
+ 
+ 
+@@ -116,7 +116,7 @@ def extract_list_items(data: bytes, mime: str) -> list[dict[str, str]]:
+         raise ValueError("DOCUMENT_EMPTY")
+     items: list[dict[str, str]] = []
+     for rows in tables:
+-        items.extend(_items_from_rows(rows))
++        items.extend(_items_from_rows(rows, allow_name_only=mime == XLSX))
+         if len(items) > MAX_ITEMS:
+             raise ValueError("DOCUMENT_ITEM_LIMIT")
+     if not items:
+@@ -124,25 +124,41 @@ def extract_list_items(data: bytes, mime: str) -> list[dict[str, str]]:
+     return items
+ 
+ 
+-def _items_from_rows(rows: list[list[str]]) -> list[dict[str, str]]:
+-    headers = [_header(cell) for cell in rows[0]]
+-    part_col = next((i for i, h in enumerate(headers) if h in PART_HEADERS), None)
+-    if part_col is None:
++def _items_from_rows(rows: list[list[str]], *, allow_name_only: bool = False) -> list[dict[str, str]]:
++    header_row = 0
++    part_col = name_col = maker_col = None
++    for index, row in enumerate(rows[:10]):
++        headers = [_header(cell) for cell in row]
++        part_col = next((i for i, h in enumerate(headers) if h in PART_HEADERS), None)
++        name_col = next((i for i, h in enumerate(headers) if h in NAME_HEADERS), None)
++        if part_col is not None or (allow_name_only and name_col is not None):
++            header_row = index
++            maker_col = next((i for i, h in enumerate(headers) if h in MAKER_HEADERS), None)
++            break
++    if part_col is None and not allow_name_only:
+         raise ValueError("PART_NUMBER_COLUMN_REQUIRED")
+-    maker_col = next((i for i, h in enumerate(headers) if h in MAKER_HEADERS), None)
+-    name_col = next((i for i, h in enumerate(headers) if h in NAME_HEADERS), None)
++    if part_col is None and name_col is None:
++        if any(sum(bool(cell.strip()) for cell in row) > 1 for row in rows):
++            raise ValueError("PART_NUMBER_COLUMN_REQUIRED")
++        name_col = next((i for i, cell in enumerate(rows[0]) if cell.strip()), None)
++        header_row = -1
++    if part_col is None and name_col is None:
++        raise ValueError("NO_PART_NUMBERS_FOUND")
+     items: list[dict[str, str]] = []
+-    for row in rows[1:]:
+-        part = row[part_col].strip() if part_col < len(row) else ""
+-        if not part:
++    for row in rows[header_row + 1:]:
++        part = row[part_col].strip() if part_col is not None and part_col < len(row) else ""
++        name = row[name_col].strip() if name_col is not None and name_col < len(row) else ""
++        if not part and not name:
+             continue
+-        if len(part) > 120 or not re.fullmatch(r"[\w .+/#()-]+", part, re.UNICODE):
++        if part and (len(part) > 120 or not re.fullmatch(r"[\w .+/#()-]+", part, re.UNICODE)):
+             raise ValueError("INVALID_PART_NUMBER_CELL")
+-        item = {"requested_text": part, "part_number": part}
++        if len(name) > 500:
++            raise ValueError("INVALID_ITEM_TEXT")
++        item = {"requested_text": (part + " " + name).strip()[:500]}
++        if part:
++            item["part_number"] = part
+         if maker_col is not None and maker_col < len(row) and row[maker_col]:
+             item["manufacturer"] = row[maker_col][:120]
+-        if name_col is not None and name_col < len(row) and row[name_col]:
+-            item["requested_text"] = (part + " " + row[name_col])[:500]
+         items.append(item)
+         if len(items) > MAX_ITEMS:
+             raise ValueError("DOCUMENT_ITEM_LIMIT")
