@@ -1,7 +1,7 @@
 """Offline validation tests, no real API usage."""
 import json
 import unittest
-from sourcing.search_v2.ai_search import validate_output
+from sourcing.search_v2.ai_search import validate_output, source_identifier
 from sourcing.search_v2.registry_hints import pick
 
 U="https://seller.example/rotax-916"
@@ -21,6 +21,17 @@ def payload(model="ROTAX 916 iS",source=True,url=U):
            "warnings":[]})}]}]}
 
 class Tests(unittest.TestCase):
+ def test_source_page_uses_buyer_part_number(self):
+    self.assertEqual(source_identifier('Siemens 6ES7315-2EH14-0AB0'), '6es7315-2eh14-0ab0')
+    self.assertEqual(source_identifier('ROTAX 916 iS'), '916is')
+    data = payload(model='6ES7315-2EH14-0AB0')
+    report = json.loads(data['output'][1]['content'][0]['text'])
+    report['candidates'][0]['model'] = '6ES7315EH140AB0'
+    report['candidates'][0]['part_number'] = '6ES7315-2EH14-0AB0'
+    report['candidates'][0]['product_name'] = 'Siemens S7 controller'
+    data['output'][1]['content'][0]['text'] = json.dumps(report)
+    result = validate_output(data, 'Siemens 6ES7315-2EH14-0AB0', 'ru')
+    self.assertEqual(result['_internal_sources'][0]['requested_part_number'], '6es7315-2eh14-0ab0')
  def test_genuine_search_source_required(self):
     o=validate_output(payload(),"rotax 916","ru")
     self.assertEqual(len(o["offers"]),1)

@@ -14,7 +14,7 @@ from urllib.parse import parse_qsl, urljoin, urlsplit
 import httpx
 
 from .core import identity, safe_url
-from .matching import model_matches, candidate_matches
+from .matching import model_matches, candidate_matches, normalized_identity
 from .usage_cost import estimated_cents
 
 MAX_IMAGE_BYTES = 5 * 1024 * 1024
@@ -116,6 +116,17 @@ def cited_item(url: str, refs: set[str]) -> bool:
         return False
 
 
+def source_identifier(query: str) -> str:
+    """Use the buyer's exact numbered P/N when checking a cited product page.
+
+    Research summaries may drop punctuation or even a digit.  They can help
+    discover a page, but must not replace the buyer's identifier as evidence.
+    """
+    tokens = re.findall(r'[^\W_]+(?:[-/][^\W_]+)*', normalized_identity(query))
+    numbered = [token for token in tokens if any(char.isdigit() for char in token)]
+    return max(numbered, key=len) if numbered else query
+
+
 def public_offer_id(source_url: str, ordinal: int) -> str:
     digest = hashlib.sha256(source_url.encode("utf-8")).hexdigest()[:12].upper()
     return f"GTO-{ordinal:02d}-{digest}"
@@ -164,12 +175,12 @@ async def _source_page_image(source_url: str, lead: dict | None = None) -> str |
         return None
     if lead is not None:
         from .offer_evidence import offer_facts
-        facts = offer_facts(page, lead.get('model', ''))
+        facts = offer_facts(page, lead.get('requested_part_number') or lead.get('model', ''))
         lead['page_facts'] = facts
         lead['page_checked_at'] = datetime.now(timezone.utc).isoformat()
         lead['page_evidence'] = {'kind':'PRODUCT_JSON_LD', 'fields':facts, 'content_sha256':hashlib.sha256(page.encode()).hexdigest()}
     from .offer_evidence import product_image
-    candidate = product_image(page, (lead or {}).get('model', ''))
+    candidate = product_image(page, (lead or {}).get('requested_part_number') or (lead or {}).get('model', ''))
     if candidate:
         image = urljoin(page_url, html.unescape(candidate.strip()))
         if _public_page_url(image):
@@ -311,7 +322,7 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
         declared_image = str(item.get("image_url") or "")
         image_source = str(item.get("image_source_url") or "")
         image_url = declared_image if _public_page_url(declared_image) and image_source == source_url else None
-        internal_leads.append({"source_url": source_url, "model": str(item.get('model') or ''), "public_offer_id":public_offer_id(source_url, len(public_offers) + 1), "seller": str(item.get("seller") or "")[:120], "evidence": str(item.get("evidence") or "")[:280], "image_url": image_url, "condition": condition})
+        internal_leads.append({"source_url": source_url, "model": str(item.get('model') or ''), "requested_part_number": source_identifier(query), "public_offer_id":public_offer_id(source_url, len(public_offers) + 1), "seller": str(item.get("seller") or "")[:120], "evidence": str(item.get("evidence") or "")[:280], "image_url": image_url, "condition": condition})
         public_offers.append({"public_offer_id": public_offer_id(source_url, len(public_offers) + 1), "part_number": str(item.get('part_number') or item.get('model') or '')[:100] or None, "country": None, "condition": condition, "price": raw_price if price_ok else None, "currency": currency if price_ok else None, "availability": "NOT_CONFIRMED", "lead_time": None, "updated_at": datetime.now(timezone.utc).isoformat(), "status": "SEARCH_CITATION_ONLY"})
         role = item.get('source_role', 'PRODUCT_OFFER')
         authorization = item.get('authorization_url')
@@ -359,7 +370,7 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
     known = {lead['source_url'] for lead in result['_internal_sources']}
     image_refs = [url for url in sorted(source_urls(data)) if url not in known and model_tokens and all(t in url.lower() for t in model_tokens)]
     for url in image_refs[:6]:
-        result['_internal_sources'].append({'source_url': url, 'model': query, 'source_role': 'IMAGE_REFERENCE'})
+        result['_internal_sources'].append({'source_url': url, 'model': query, 'requested_part_number': source_identifier(query), 'source_role': 'IMAGE_REFERENCE'})
     try:
         await asyncio.wait_for(attach_source_images(result["_internal_sources"], result['offers']), timeout=35.0)
     except asyncio.TimeoutError:

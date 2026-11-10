@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 import httpx
 
 from .ai_search import (JSON_FORMAT, SYSTEM, _product_card, attach_source_images,
-                        source_urls, validate_output)
+                        source_identifier, source_urls, validate_output)
 from .usage_cost import estimated_cents
 
 MAX_WAVE_ITEMS = 5
@@ -92,7 +92,7 @@ async def search_wave_once(queries: list[str], locale: str, hints: list[str],
                       and all(token in url.lower() for token in model_tokens)]
         for url in image_refs[:6]:
             result["_internal_sources"].append(
-                {"source_url": url, "model": query, "source_role": "IMAGE_REFERENCE"})
+                {"source_url": url, "model": query, "requested_part_number": source_identifier(query), "source_role": "IMAGE_REFERENCE"})
         results.append(result)
 
     # Give each item a fair chance to verify its own source pages. Serial
