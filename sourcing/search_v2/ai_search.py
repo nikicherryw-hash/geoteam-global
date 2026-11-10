@@ -312,7 +312,7 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
         image_source = str(item.get("image_source_url") or "")
         image_url = declared_image if _public_page_url(declared_image) and image_source == source_url else None
         internal_leads.append({"source_url": source_url, "model": str(item.get('model') or ''), "public_offer_id":public_offer_id(source_url, len(public_offers) + 1), "seller": str(item.get("seller") or "")[:120], "evidence": str(item.get("evidence") or "")[:280], "image_url": image_url, "condition": condition})
-        public_offers.append({"public_offer_id": public_offer_id(source_url, len(public_offers) + 1), "country": None, "condition": condition, "price": raw_price if price_ok else None, "currency": currency if price_ok else None, "availability": "NOT_CONFIRMED", "lead_time": None, "updated_at": datetime.now(timezone.utc).isoformat(), "status": "SEARCH_CITATION_ONLY"})
+        public_offers.append({"public_offer_id": public_offer_id(source_url, len(public_offers) + 1), "part_number": str(item.get('part_number') or item.get('model') or '')[:100] or None, "country": None, "condition": condition, "price": raw_price if price_ok else None, "currency": currency if price_ok else None, "availability": "NOT_CONFIRMED", "lead_time": None, "updated_at": datetime.now(timezone.utc).isoformat(), "status": "SEARCH_CITATION_ONLY"})
         role = item.get('source_role', 'PRODUCT_OFFER')
         authorization = item.get('authorization_url')
         # Citation alone does not prove that its publisher is the manufacturer.
@@ -336,9 +336,11 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
 
 
 async def search_once(query, locale, hints, api_key, model, client, budget):
+    compact = re.sub(r'(?<=\d)\s+(?=iS(?:c)?\b)', '', query, flags=re.I)
+    lookup_terms = list(dict.fromkeys((query, compact)))
     payload = {"model": model, "store": False, "instructions": SYSTEM,
-        "input": "Research globally the exact item " + repr(query) + ". Language: " + locale + ". Return a source-grounded product identity card and distinct direct public item pages when available. For an attached multi-item list, keep every candidate tied to its exact requested P/N; seek at least one direct citation per P/N where public results exist and never merge adjacent variants. Keep valid offers even without an image; one representative product photo is enough. Optional source hints, not offers: " + json.dumps(hints[:12]),
-        "tools": [{"type": "web_search"}], "tool_choice": "required", "include": ["web_search_call.action.sources"], "text": {"format": JSON_FORMAT}, "max_tool_calls": 8, "max_output_tokens": 24000}
+        "input": "Research globally the exact item " + repr(query) + ". Search spellings: " + json.dumps(lookup_terms, ensure_ascii=False) + ". Language: " + locale + ". Search direct product listings with a visible public price, then used/refurbished marketplace listings and independent suppliers; include at least two priced sources when they actually exist. Do not report prices for a whole aircraft, a different engine or a component as the requested engine price. For each result preserve the listed variant, seller URL and cited price currency; use null when price is absent. Return a source-grounded identity card and distinct direct public item pages. Keep valid offers even without an image; one representative product photo is enough. Optional source hints, not offers: " + json.dumps(hints[:12]),
+        "tools": [{"type": "web_search"}], "tool_choice": "required", "include": ["web_search_call.action.sources"], "text": {"format": JSON_FORMAT}, "max_tool_calls": 12, "max_output_tokens": 24000}
     ticket = budget.reserve_call()
     try:
         response = await client.post("https://api.openai.com/v1/responses", json=payload, headers={"Authorization": "Bearer " + api_key}, timeout=httpx.Timeout(150.0, connect=10.0))
@@ -371,4 +373,3 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
     result["usage"] = data.get("usage", {})
     result["pilot"] = budget.status()
     return result
-
