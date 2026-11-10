@@ -53,6 +53,15 @@ class Tests(unittest.TestCase):
     self.assertFalse(model_matches("Siemens 6ES7315-2EH14-0AB0","Siemens 6ES7315-2EH14-0AB1"))
     self.assertFalse(model_matches("ABB DI524","Siemens DI524"))
     self.assertTrue(model_matches("ABB DI524","ABB DI524"))
+ def test_listing_model_and_title_are_combined_without_crossing_variants(self):
+    data = payload(model="6ES7315-2EH14-0AB0")
+    report = json.loads(data['output'][1]['content'][0]['text'])
+    report['candidates'][0]['product_name'] = 'Siemens S7 controller'
+    data['output'][1]['content'][0]['text'] = json.dumps(report)
+    self.assertEqual(len(validate_output(data, 'Siemens 6ES7315-2EH14-0AB0', 'ru')['offers']), 1)
+    report['candidates'][0]['model'] = '6ES7315-2EH14-0AB1'
+    data['output'][1]['content'][0]['text'] = json.dumps(report)
+    self.assertEqual(validate_output(data, 'Siemens 6ES7315-2EH14-0AB0', 'ru')['offers'], [])
  def test_registry_only_a_hint(self):
     a=pick("Rotax 916")
     self.assertLessEqual(len(a),12)
@@ -60,4 +69,3 @@ class Tests(unittest.TestCase):
     self.assertTrue(any("PartsBase" in x for x in a))
 if __name__=="__main__":
  unittest.main()
-
