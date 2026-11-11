@@ -1,0 +1,156 @@
+diff --git a/sourcing/search_v2/ai_search.py b/sourcing/search_v2/ai_search.py
+index 275abb1..db92cca 100644
+--- a/sourcing/search_v2/ai_search.py
++++ b/sourcing/search_v2/ai_search.py
+@@ -37,6 +37,9 @@ SYSTEM = (
+     "An official branch or authorized dealer is not proof of stock. Authorization requires a manufacturer-published citation. "
+     "Never put manufacturing country in seller_country or dispatch_country. Never infer country from language, currency or domain. "
+     "A quotation-only catalogue page has no published price. Identify manufacturer and regional procurement channels even when no priced listings exist. "
++    "Independently research product and shipping measurements on manufacturer pages, manuals and public technical catalogues, even when seller listings omit them. "
++    "Report net or dry weight separately from packed gross weight, and product dimensions separately from package dimensions. "
++    "Do not derive shipping dimensions from bare product dimensions or guess packaging. Each measurement needs its own cited source page and exact model. "
+     "Return zero offers rather than an unsupported offer."
+ )
+ 
+@@ -58,6 +61,11 @@ JSON_FORMAT = {
+                     "identity_confidence": {"type": "string"}
+                 },
+                 "required": ["manufacturer", "part_number", "product_name", "product_category", "short_description", "intended_use", "technical_specifications", "identity_confidence"]},
++            "measurements": {"type":"array", "items":{"type":"object", "additionalProperties":False,
++                "properties":{"kind":{"type":"string", "enum":["NET_WEIGHT", "GROSS_WEIGHT", "PRODUCT_LENGTH", "PRODUCT_WIDTH", "PRODUCT_HEIGHT", "PACKAGE_LENGTH", "PACKAGE_WIDTH", "PACKAGE_HEIGHT"]},
++                              "value":{"type":"number"}, "unit":{"type":"string", "enum":["kg", "g", "lb", "cm", "mm", "in"]},
++                              "source_url":{"type":"string"}, "source_model":{"type":"string"}},
++                "required":["kind", "value", "unit", "source_url", "source_model"]}},
+             "candidates": {"type": "array", "items": {"type": "object", "additionalProperties": False,
+                 "properties": {
+                     "url": {"type": "string"}, "seller": {"type": "string"}, "model": {"type": "string"},
+@@ -69,7 +77,7 @@ JSON_FORMAT = {
+                 "required": ["url", "seller", "model", "product_name", "part_number", "country", "condition", "image_url", "image_source_url", "price", "currency", "evidence", "availability_claim"]}},
+             "warnings": {"type": "array", "items": {"type": "string"}}
+         },
+-        "required": ["summary", "resolved_product", "product", "candidates", "warnings"]
++        "required": ["summary", "resolved_product", "product", "measurements", "candidates", "warnings"]
+     }
+ }
+ 
+@@ -132,6 +140,36 @@ def public_offer_id(source_url: str, ordinal: int) -> str:
+     return f"GTO-{ordinal:02d}-{digest}"
+ 
+ 
++def cited_measurements(report: dict, query: str, refs: set[str]) -> list[dict]:
++    """Keep independently cited measurements private until page readback.
++
++    A citation and model match make a research lead, not verified packing data.
++    """
++    allowed = {
++        'NET_WEIGHT': {'kg', 'g', 'lb'}, 'GROSS_WEIGHT': {'kg', 'g', 'lb'},
++        **{kind: {'cm', 'mm', 'in'} for kind in (
++            'PRODUCT_LENGTH', 'PRODUCT_WIDTH', 'PRODUCT_HEIGHT',
++            'PACKAGE_LENGTH', 'PACKAGE_WIDTH', 'PACKAGE_HEIGHT')},
++    }
++    found = []
++    for entry in (report.get('measurements') or [])[:24]:
++        if not isinstance(entry, dict):
++            continue
++        kind, unit = entry.get('kind'), entry.get('unit')
++        url, model = str(entry.get('source_url') or ''), str(entry.get('source_model') or '')
++        try:
++            value = float(entry.get('value'))
++        except (TypeError, ValueError):
++            continue
++        if (kind not in allowed or unit not in allowed[kind] or not 0 < value < 1_000_000
++                or not cited_item(url, refs) or not model_matches(query, model)):
++            continue
++        found.append({'kind': kind, 'value': value, 'unit': unit,
++                      'source_url': url, 'source_model': model,
++                      'status': 'CITED_NOT_PAGE_VERIFIED'})
++    return found
++
++
+ def _public_page_url(url: str) -> bool:
+     if not safe_url(url):
+         return False
+@@ -174,6 +212,25 @@ async def _source_page_image(source_url: str, lead: dict | None = None) -> str |
+     except (httpx.HTTPError, UnicodeError, LookupError, ValueError):
+         return None
+     if lead is not None:
++        if lead.get('source_role') == 'MEASUREMENT_REFERENCE':
++            plain = html.unescape(re.sub(r'<[^>]+>', ' ', page))
++            plain = re.sub(r'\s+', ' ', plain)
++            identifier = str(lead.get('requested_part_number') or '')
++            checked = []
++            if identifier and model_matches(identifier, plain):
++                for claim in lead.get('measurement_claims') or []:
++                    value = str(claim['value']).removesuffix('.0')
++                    unit = claim['unit']
++                    labels = ('weight', 'mass', 'вес', 'масса', 'ağırlık') if 'WEIGHT' in claim['kind'] else ('dimension', 'size', 'length', 'width', 'height', 'размер', 'длина', 'ширина', 'высота', 'ölçü')
++                    pattern = r'(?<!\d)' + re.escape(value) + r'\s*' + re.escape(unit) + r'\b'
++                    for match in re.finditer(pattern, plain, re.I):
++                        context = plain[max(0, match.start()-200):match.end()+120].lower()
++                        nearby_model = plain[max(0, match.start()-500):match.end()+200]
++                        if any(label in context for label in labels) and model_matches(identifier, nearby_model):
++                            checked.append({**claim, 'status':'SOURCE_PAGE_CHECKED'})
++                            break
++            lead['checked_measurements'] = checked
++            lead['page_checked_at'] = datetime.now(timezone.utc).isoformat()
+         from .offer_evidence import offer_facts
+         facts = offer_facts(page, lead.get('requested_part_number') or lead.get('model', ''))
+         lead['page_facts'] = facts
+@@ -297,6 +354,7 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
+     if data.get("status") == "incomplete":
+         raise ValueError("AI_RESPONSE_INCOMPLETE")
+     report = json.loads("".join(block["text"] for block in messages))
++    measurements = cited_measurements(report, query, refs)
+     internal_leads: list[dict] = []
+     public_offers: list[dict] = []
+     seen_offer_urls: set[str] = set()
+@@ -343,14 +401,16 @@ def validate_output(data: dict, query: str, locale: str) -> dict:
+         internal_leads[-1]['source_role'] = role
+         if role != 'PRODUCT_OFFER':
+             public_offers[-1].update(price=None, currency=None, status='PROCUREMENT_CHANNEL', availability='NOT_CONFIRMED')
+-    return {"product_id": "GEOTEAM_GLOBAL", "query": query, "locale": locale, "_report": report, "_internal_sources": internal_leads, "offers": public_offers, "warnings": list(report.get("warnings", []))[:8] + ["Web search citations do not confirm inventory or binding prices."], "citations_returned": len(refs)}
++    return {"product_id": "GEOTEAM_GLOBAL", "query": query, "locale": locale, "_report": report,
++            "_measurements": measurements, "_internal_sources": internal_leads,
++            "offers": public_offers, "warnings": list(report.get("warnings", []))[:8] + ["Web search citations do not confirm inventory or binding prices."], "citations_returned": len(refs)}
+ 
+ 
+ async def search_once(query, locale, hints, api_key, model, client, budget):
+     compact = re.sub(r'(?<=\d)\s+(?=[A-Za-z]{1,4}\b)', '', query)
+     lookup_terms = list(dict.fromkeys((query, compact)))
+     payload = {"model": model, "store": False, "instructions": SYSTEM,
+-        "input": "Research globally the exact technical item " + repr(query) + ". Search spellings: " + json.dumps(lookup_terms, ensure_ascii=False) + ". Language: " + locale + ". Search direct product listings with visible public prices and product images, then used/refurbished marketplace listings and independent suppliers across regions. Seek multiple independent exact-item listings when they exist. Distinguish complete equipment from accessories, whole machines containing the item, compatible alternatives and adjacent variants. Preserve each listing's exact model, part number, condition, seller and dispatch country only when evidenced on that page. Use null for absent facts. Return a source-grounded identity card and direct public item pages. One verified representative image is enough; never use a logo or generic banner. Optional source hints are discovery leads, not offers: " + json.dumps(hints[:12]),
++        "input": "Research globally the exact technical item " + repr(query) + ". Search spellings: " + json.dumps(lookup_terms, ensure_ascii=False) + ". Language: " + locale + ". Search direct product listings with visible public prices and product images, then used/refurbished marketplace listings and independent suppliers across regions. Independently search manufacturer datasheets, manuals and public technical catalogues for exact-model net weight, packed gross weight, product dimensions and package dimensions. Return only explicitly stated measurements with a citation to the exact page; leave the measurements array empty when absent. Never treat bare product size as shipping package size. Seek multiple independent exact-item listings when they exist. Distinguish complete equipment from accessories, whole machines containing the item, compatible alternatives and adjacent variants. Preserve each listing's exact model, part number, condition, seller and dispatch country only when evidenced on that page. Use null for absent facts. Return a source-grounded identity card and direct public item pages. One verified representative image is enough; never use a logo or generic banner. Optional source hints are discovery leads, not offers: " + json.dumps(hints[:12]),
+         "tools": [{"type": "web_search"}], "tool_choice": "required", "include": ["web_search_call.action.sources"], "text": {"format": JSON_FORMAT}, "max_tool_calls": 12, "max_output_tokens": 24000}
+     ticket = budget.reserve_call()
+     try:
+@@ -365,6 +425,13 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
+     if not any(item.get("type") == "web_search_call" for item in data.get("output", []) if isinstance(item, dict)):
+         raise ValueError("No web search performed")
+     result = validate_output(data, query, locale)
++    measurement_urls: dict[str, list[dict]] = {}
++    for claim in result.pop('_measurements'):
++        measurement_urls.setdefault(claim['source_url'], []).append(claim)
++    for url, claims in list(measurement_urls.items())[:8]:
++        result['_internal_sources'].insert(0, {'source_url':url, 'model':query,
++            'requested_part_number':source_identifier(query),
++            'source_role':'MEASUREMENT_REFERENCE', 'measurement_claims':claims})
+     # Identity references can supply a photo without becoming commercial offers.
+     model_tokens = [t.lower() for t in re.findall(r'[A-Za-z0-9-]*\d[A-Za-z0-9-]*', query)]
+     known = {lead['source_url'] for lead in result['_internal_sources']}
+@@ -377,6 +444,16 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
+         result['warnings'].append('SOURCE_PAGE_CHECK_PARTIAL')
+     image_url = next((lead.get("image_url") for lead in result["_internal_sources"] if lead.get("image_url")), None)
+     product = _product_card(result.pop("_report"), query, result["citations_returned"], bool(image_url))
++    checked = [claim for lead in result['_internal_sources']
++               for claim in lead.get('checked_measurements', [])]
++    if checked:
++        names = {'NET_WEIGHT':'Net weight', 'GROSS_WEIGHT':'Shipping weight',
++                 'PRODUCT_LENGTH':'Product length', 'PRODUCT_WIDTH':'Product width',
++                 'PRODUCT_HEIGHT':'Product height', 'PACKAGE_LENGTH':'Package length',
++                 'PACKAGE_WIDTH':'Package width', 'PACKAGE_HEIGHT':'Package height'}
++        product['technical_specifications'].extend(
++            f"{names[claim['kind']]}: {claim['value']:g} {claim['unit']}" for claim in checked[:8])
++    product['measurement_status'] = 'SOURCE_PAGE_CHECKED' if checked else 'NOT_CONFIRMED'
+     result["product"] = product
+     result["image"] = None
+     result["_representative_image_url"] = image_url
