@@ -219,7 +219,7 @@
           const target=$('quote-estimate');target.replaceChildren();
           const estimate=detail.estimate;
           if(!estimate){p(target,e(15));return;}
-          Object.entries(estimate.goods_subtotals||{}).forEach(([currency,amount])=>p(target,g(0)+': '+amount+' '+currency));
+          Object.entries(estimate.goods_subtotals||{}).forEach(([currency,amount])=>p(target,g(0)+' ('+estimate.priced_lines_total+'/'+estimate.lines_total+'): '+amount+' '+currency));
           if(Object.keys(estimate.goods_subtotals||{}).length)p(target,g(1),'muted');
           estimate.lines.forEach(line=>{
             const item=document.createElement('section');item.className='panel';
