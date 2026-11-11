@@ -6,15 +6,19 @@ price is evidence for sourcing, not a binding GeoTeam quotation.
 from __future__ import annotations
 
 from decimal import Decimal, InvalidOperation
+import json
 import sqlite3
 import time
 import uuid
 from typing import Any
 
+from .quote_estimate import SUPPORTED_DESTINATIONS, calculate_line, cargo_from_technical_specs
+
 
 def create_quote_draft(db: sqlite3.Connection, *, user_id: str, organization_id: str,
                        idempotency_key: str, destination_country: str, locale: str,
-                       lines: list[dict[str, Any]]) -> dict[str, Any]:
+                       lines: list[dict[str, Any]], importer_type: str = 'BUSINESS',
+                       destination_city: str | None = None) -> dict[str, Any]:
     member = db.execute('SELECT 1 FROM organization_memberships WHERE user_id=? AND organization_id=?',
                         (user_id, organization_id)).fetchone()
     if not member:
@@ -25,6 +29,9 @@ def create_quote_draft(db: sqlite3.Connection, *, user_id: str, organization_id:
         raise ValueError('INVALID_IDEMPOTENCY_KEY')
     if len(country) != 2 or not country.isalpha():
         raise ValueError('INVALID_DESTINATION_COUNTRY')
+    if importer_type not in {'BUSINESS','PERSONAL'}:
+        raise ValueError('INVALID_IMPORTER_TYPE')
+    city = str(destination_city or '').strip()[:120] or None
     if not 1 <= len(lines) <= 100:
         raise ValueError('QUOTE_LINES_OUT_OF_RANGE')
     prior = db.execute('SELECT id,status,created_at FROM sourcing_quote_drafts WHERE user_id=? AND idempotency_key=?',
@@ -66,6 +73,32 @@ def create_quote_draft(db: sqlite3.Connection, *, user_id: str, organization_id:
                           (id,draft_id,request_id,item_id,offer_id,quantity,created_at)
                           VALUES (?,?,?,?,?,?,?)''',
                        [(uuid.uuid4().hex, draft_id, *entry, now) for entry in checked])
+        estimate_lines = []
+        for request_id, item_id, offer_id, quantity in checked:
+            offer = db.execute('''SELECT o.public_offer_id,o.public_price,o.currency,o.country,
+                                         i.product_name,i.part_number,i.technical_specifications_json
+                                  FROM sourcing_offers o JOIN sourcing_items i ON i.id=o.item_id
+                                  WHERE o.id=? AND i.id=?''', (offer_id,item_id)).fetchone()
+            calculation = (calculate_line(
+                    destination=country, importer_type=importer_type, quantity=quantity,
+                    unit_price=offer['public_price'], currency=offer['currency'],
+                    origin=None, dispatch=None,
+                    cargo=cargo_from_technical_specs(json.loads(offer['technical_specifications_json'] or '[]')),
+                ) if country in SUPPORTED_DESTINATIONS else {'status':'DESTINATION_NOT_SUPPORTED_YET','gaps':['DESTINATION_RULES'],'routes':[]})
+            estimate_lines.append({
+                'public_offer_id': offer['public_offer_id'],
+                'product_name': offer['product_name'], 'part_number': offer['part_number'],
+                'seller_country': offer['country'],
+                'calculation': calculation,
+            })
+        estimate = {'status':'NEEDS_DATA','destination_country':country,
+                    'destination_city':city,'importer_type':importer_type,
+                    'lines':estimate_lines,'issued_quote':False}
+        db.execute('''INSERT INTO sourcing_quote_estimates
+                      (draft_id,organization_id,user_id,importer_type,destination_city,result_json,created_at,updated_at)
+                      VALUES (?,?,?,?,?,?,?,?)''',
+                   (draft_id,organization_id,user_id,importer_type,city,
+                    json.dumps(estimate,ensure_ascii=False),now,now))
         db.execute('RELEASE SAVEPOINT quote_draft_create')
     except BaseException:
         db.execute('ROLLBACK TO SAVEPOINT quote_draft_create')
@@ -101,5 +134,9 @@ def quote_draft_detail(db: sqlite3.Connection, *, draft_id: str, user_id: str,
         FROM sourcing_quote_lines l JOIN sourcing_items i ON i.id=l.item_id
         JOIN sourcing_offers o ON o.id=l.offer_id
         WHERE l.draft_id=? ORDER BY l.created_at,l.id''', (draft_id,)).fetchall()]
+    estimate = db.execute('''SELECT result_json FROM sourcing_quote_estimates
+                            WHERE draft_id=? AND organization_id=? AND user_id=?''',
+                          (draft_id,organization_id,user_id)).fetchone()
+    result['estimate'] = json.loads(estimate['result_json']) if estimate else None
     return result
 
