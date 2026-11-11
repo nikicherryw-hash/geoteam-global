@@ -33,6 +33,7 @@ class QuoteDraftTests(unittest.TestCase):
         ''')
         self.db.executescript(migration('migrate_commerce_sourcing_foundation.py').DDL)
         self.db.executescript(migration('migrate_commerce_quote_drafts.py').DDL)
+        self.db.executescript(migration('migrate_quote_estimates.py').DDL)
         request = create_request(self.db, user_id='u', organization_id='o',
                                  idempotency_key='quote-source-1', query_text='PN-1', locale='en',
                                  items=[{'requested_text': 'PN-1'}], queue_research=False)
@@ -59,6 +60,8 @@ class QuoteDraftTests(unittest.TestCase):
         detail = quote_draft_detail(self.db, draft_id=created['id'], user_id='u', organization_id='o')
         self.assertEqual(len(detail['lines']), 2)
         self.assertEqual(detail['status'], 'NEEDS_REVIEW')
+        self.assertEqual(detail['estimate']['lines'][0]['calculation']['status'], 'NEEDS_DATA')
+        self.assertEqual(len(detail['estimate']['lines'][0]['calculation']['routes']), 4)
         self.assertNotIn('private.example', str(detail))
         self.assertNotIn('landed_total', str(detail))
         self.assertEqual(created['id'], create_quote_draft(
