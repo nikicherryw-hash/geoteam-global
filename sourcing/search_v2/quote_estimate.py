@@ -148,6 +148,9 @@ def calculate_line(*, destination: str, importer_type: str, quantity: Any,
                        "tariff_code": tariff["code"], "tax_source": tariff["source_url"],
                        "freight_source": quote["source_url"]})
     return {"destination": destination, "importer_type": importer_type,
+            "goods_subtotal": money(goods) if goods is not None else None,
+            "currency": currency if goods is not None else None,
+            "goods_subtotal_status": "PUBLISHED_SOURCE_PRICE" if goods is not None else "PRICE_REQUIRED",
             "trade_regime": "EEU_INTERNAL_REVIEW" if destination in EEU and dispatch in EEU else "THIRD_COUNTRY_REVIEW",
             "cargo": cargo, "gaps": gaps, "routes": routes,
             "status": "PRELIMINARY" if any(r["status"] == "PRELIMINARY" for r in routes) else "NEEDS_DATA"}
