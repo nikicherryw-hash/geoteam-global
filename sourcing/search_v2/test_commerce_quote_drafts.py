@@ -42,9 +42,10 @@ class QuoteDraftTests(unittest.TestCase):
                                   (self.request_id,)).fetchone()[0]
         record_result(self.db, request_id=self.request_id, item_id=item_id,
                       report={'product': {'part_number': 'PN-1'},
-                              'offers': [{'public_offer_id': 'GTO-1'}, {'public_offer_id': 'GTO-2'}]},
+                              'offers': [{'public_offer_id': 'GTO-1', 'price': '37.20', 'currency': 'EUR'}, {'public_offer_id': 'GTO-2'}]},
                       internal_sources=[
-                          {'public_offer_id': 'GTO-1', 'source_url': 'https://private.example/one'},
+                          {'public_offer_id': 'GTO-1', 'source_url': 'https://private.example/one',
+                           'verified_fields': ['public_price', 'currency']},
                           {'public_offer_id': 'GTO-2', 'source_url': 'https://private.example/two'},
                       ])
 
@@ -61,6 +62,10 @@ class QuoteDraftTests(unittest.TestCase):
         self.assertEqual(len(detail['lines']), 2)
         self.assertEqual(detail['status'], 'NEEDS_REVIEW')
         self.assertEqual(detail['estimate']['lines'][0]['calculation']['status'], 'NEEDS_DATA')
+        self.assertEqual(detail['estimate']['goods_subtotals'], {'EUR': '74.40'})
+        self.assertEqual(detail['estimate']['priced_lines_total'], 1)
+        self.assertEqual(detail['estimate']['lines_total'], 2)
+        self.assertEqual(detail['estimate']['lines'][0]['calculation']['goods_subtotal'], '74.40')
         self.assertEqual(len(detail['estimate']['lines'][0]['calculation']['routes']), 4)
         self.assertNotIn('private.example', str(detail))
         self.assertNotIn('landed_total', str(detail))
