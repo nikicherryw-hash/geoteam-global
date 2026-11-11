@@ -15,6 +15,15 @@ EEU = {"RU", "KG", "KZ", "BY", "AM"}
 MODES = ("air", "road", "rail", "sea")
 MONEY = Decimal("0.01")
 
+# General VAT rates are orientation only. Product exemptions, importer status and
+# the customs regime must be checked before any tax is put into a quotation.
+VAT_REFERENCE = {
+    "TR": {"percent": "20", "source_url": "https://cdn.gib.gov.tr/api/gibportal-file/file/getFileResources?objectKey=arsiv%2Fyardim-kaynaklar%2Fyararli-bilgiler%2Fkdv-oranlari.pdf"},
+    "RU": {"percent": "22", "source_url": "https://www.nalog.gov.ru/rn77/promo/new2026/"},
+    "KG": {"percent": "12", "source_url": "https://invest.gov.kg/ru/invest-compass/taxes/taxation"},
+    "KZ": {"percent": "16", "source_url": "https://astana.kgd.gov.kz/ru/news/stavki-naloga-na-dobavlennuyu-stoimost-2-163774"},
+}
+
 
 def positive(value: Any) -> Decimal | None:
     if value is None or str(value).strip() == "":
@@ -148,6 +157,7 @@ def calculate_line(*, destination: str, importer_type: str, quantity: Any,
                        "tariff_code": tariff["code"], "tax_source": tariff["source_url"],
                        "freight_source": quote["source_url"]})
     return {"destination": destination, "importer_type": importer_type,
+            "vat_reference": {**VAT_REFERENCE[destination], "status": "GENERAL_RATE_ONLY_NOT_PRODUCT_CLASSIFICATION"},
             "goods_subtotal": money(goods) if goods is not None else None,
             "currency": currency if goods is not None else None,
             "goods_subtotal_status": "PUBLISHED_SOURCE_PRICE" if goods is not None else "PRICE_REQUIRED",

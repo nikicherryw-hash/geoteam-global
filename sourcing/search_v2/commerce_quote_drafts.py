@@ -98,6 +98,11 @@ def create_quote_draft(db: sqlite3.Connection, *, user_id: str, organization_id:
                 'calculation': calculation,
             })
         estimate = {'status':'PARTIAL_GOODS_ONLY' if goods_by_currency else 'NEEDS_DATA',
+                    'document_type':'PRELIMINARY_COST_WORKSHEET',
+                    'calculation_date':now,
+                    'pricing_basis':'PUBLIC_SELLER_LISTING_NOT_GEOTEAM_OFFER',
+                    'commercial_total':None,
+                    'commercial_total_status':'AWAITING_CLASSIFICATION_CARGO_AND_FREIGHT',
                     'goods_subtotals': {currency: str(amount) for currency, amount in sorted(goods_by_currency.items())},
                     'priced_lines_total': priced_lines, 'lines_total': len(estimate_lines),
                     'destination_country':country,

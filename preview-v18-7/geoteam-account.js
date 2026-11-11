@@ -59,6 +59,18 @@
     zh:['有公开价格的物料金额','不含运费、关税、增值税及清关费用']
   };
   const g = index => (goodsCopy[language] || goodsCopy.en)[index];
+  const vatHint = {
+    ru:'Ориентир общей ставки НДС; для товара и импортёра требуется проверка',
+    en:'General VAT reference; verify for the product and importer',
+    tr:'Genel KDV oranı; ürün ve ithalatçı için doğrulanmalı',
+    de:'Allgemeiner MwSt.-Richtwert; Produkt und Importeur prüfen',
+    fr:'Taux général de TVA indicatif ; vérifier le produit et l’importateur',
+    es:'IVA general orientativo; verificar producto e importador',
+    it:'Aliquota IVA generale indicativa; verificare prodotto e importatore',
+    pt:'IVA geral indicativo; verificar produto e importador',
+    ar:'معدل ضريبة القيمة المضافة العام استرشادي؛ يلزم التحقق للمنتج والمستورد',
+    zh:'一般增值税税率仅供参考；需核实商品及进口人'
+  };
   const dateText = seconds => seconds ? new Intl.DateTimeFormat(language, {dateStyle:'medium',timeStyle:'short'}).format(new Date(Number(seconds) * 1000)) : '';
   const updateSelectionCount = () => { $('selection-count').textContent = q(4) + selectedOffers.size; };
   const t = key => copy[language][key] || copy.en[key] || key;
@@ -221,6 +233,9 @@
           if(!estimate){p(target,e(15));return;}
           Object.entries(estimate.goods_subtotals||{}).forEach(([currency,amount])=>p(target,g(0)+' ('+estimate.priced_lines_total+'/'+estimate.lines_total+'): '+amount+' '+currency));
           if(Object.keys(estimate.goods_subtotals||{}).length)p(target,g(1),'muted');
+          const vat=estimate.lines?.[0]?.calculation?.vat_reference;
+          if(vat){const hint=p(target,(vatHint[language]||vatHint.en)+': '+vat.percent+'%','muted');
+            const source=document.createElement('a');source.href=vat.source_url;source.target='_blank';source.rel='noopener noreferrer';source.textContent=' · '+(language==='ru'?'Источник':'Source');hint.append(source);}
           estimate.lines.forEach(line=>{
             const item=document.createElement('section');item.className='panel';
             const title=document.createElement('h3');title.textContent=[line.product_name,line.part_number].filter(Boolean).join(' · ')||line.public_offer_id;item.append(title);
