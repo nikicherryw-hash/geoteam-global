@@ -1,7 +1,7 @@
 """Offline validation tests, no real API usage."""
 import json
 import unittest
-from sourcing.search_v2.ai_search import validate_output, source_identifier
+from sourcing.search_v2.ai_search import validate_output, source_identifier, cited_measurements
 from sourcing.search_v2.registry_hints import pick
 
 U="https://seller.example/rotax-916"
@@ -21,6 +21,13 @@ def payload(model="ROTAX 916 iS",source=True,url=U):
            "warnings":[]})}]}]}
 
 class Tests(unittest.TestCase):
+ def test_independent_measurements_require_citation_and_exact_variant(self):
+    claims=[{'kind':'NET_WEIGHT','value':82,'unit':'kg','source_url':'https://maker.example/916is','source_model':'ROTAX 916 iS'},
+            {'kind':'GROSS_WEIGHT','value':93,'unit':'kg','source_url':'https://maker.example/915is','source_model':'ROTAX 915 iS'},
+            {'kind':'PACKAGE_LENGTH','value':-1,'unit':'cm','source_url':'https://maker.example/916is','source_model':'ROTAX 916 iS'}]
+    found=cited_measurements({'measurements':claims},'ROTAX 916 iS',{'https://maker.example/916is','https://maker.example/915is'})
+    self.assertEqual(len(found),1)
+    self.assertEqual(found[0]['status'],'CITED_NOT_PAGE_VERIFIED')
  def test_source_page_uses_buyer_part_number(self):
     self.assertEqual(source_identifier('Siemens 6ES7315-2EH14-0AB0'), '6es7315-2eh14-0ab0')
     self.assertEqual(source_identifier('ROTAX 916 iS'), '916is')
