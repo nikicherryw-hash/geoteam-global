@@ -46,6 +46,19 @@
     zh:['进口方','企业','个人','交货城市','土耳其','俄罗斯','吉尔吉斯斯坦','哈萨克斯坦','计算详情','需要核实的数据：','空运','公路','铁路','海运 / 集装箱','费用与时效待确认','初步总额','此计算并非正式商业报价。']
   };
   const e = index => (estimateCopy[language] || estimateCopy.en)[index];
+  const goodsCopy = {
+    ru:['Стоимость позиций с опубликованной ценой','Без доставки, пошлины, НДС и оформления'],
+    en:['Cost of items with published prices','Excludes freight, duty, VAT and clearance'],
+    tr:['Yayımlanan fiyatlı kalemlerin bedeli','Navlun, gümrük vergisi, KDV ve işlemler hariç'],
+    de:['Wert der Positionen mit veröffentlichtem Preis','Ohne Fracht, Zoll, MwSt. und Abfertigung'],
+    fr:['Valeur des articles à prix publiés','Hors transport, droits, TVA et dédouanement'],
+    es:['Valor de artículos con precio publicado','Sin transporte, aranceles, IVA ni despacho'],
+    it:['Valore degli articoli con prezzo pubblicato','Esclusi trasporto, dazi, IVA e sdoganamento'],
+    pt:['Valor dos itens com preço publicado','Exclui frete, direitos, IVA e desalfandegamento'],
+    ar:['قيمة البنود ذات الأسعار المنشورة','لا تشمل الشحن والرسوم والضريبة والتخليص'],
+    zh:['有公开价格的物料金额','不含运费、关税、增值税及清关费用']
+  };
+  const g = index => (goodsCopy[language] || goodsCopy.en)[index];
   const dateText = seconds => seconds ? new Intl.DateTimeFormat(language, {dateStyle:'medium',timeStyle:'short'}).format(new Date(Number(seconds) * 1000)) : '';
   const updateSelectionCount = () => { $('selection-count').textContent = q(4) + selectedOffers.size; };
   const t = key => copy[language][key] || copy.en[key] || key;
@@ -206,9 +219,12 @@
           const target=$('quote-estimate');target.replaceChildren();
           const estimate=detail.estimate;
           if(!estimate){p(target,e(15));return;}
+          Object.entries(estimate.goods_subtotals||{}).forEach(([currency,amount])=>p(target,g(0)+' ('+estimate.priced_lines_total+'/'+estimate.lines_total+'): '+amount+' '+currency));
+          if(Object.keys(estimate.goods_subtotals||{}).length)p(target,g(1),'muted');
           estimate.lines.forEach(line=>{
             const item=document.createElement('section');item.className='panel';
             const title=document.createElement('h3');title.textContent=[line.product_name,line.part_number].filter(Boolean).join(' · ')||line.public_offer_id;item.append(title);
+            if(line.calculation.goods_subtotal)p(item,g(0)+': '+line.calculation.goods_subtotal+' '+line.calculation.currency);
             const gaps=line.calculation.gaps||[];
             if(gaps.length)p(item,e(9)+gaps.join(', '),'muted');
             line.calculation.routes.forEach((route,index)=>{
