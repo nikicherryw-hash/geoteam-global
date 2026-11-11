@@ -74,6 +74,8 @@ def create_quote_draft(db: sqlite3.Connection, *, user_id: str, organization_id:
                           VALUES (?,?,?,?,?,?,?)''',
                        [(uuid.uuid4().hex, draft_id, *entry, now) for entry in checked])
         estimate_lines = []
+        goods_by_currency: dict[str, Decimal] = {}
+        priced_lines = 0
         for request_id, item_id, offer_id, quantity in checked:
             offer = db.execute('''SELECT o.public_offer_id,o.public_price,o.currency,o.country,
                                          i.product_name,i.part_number,i.technical_specifications_json
@@ -85,13 +87,20 @@ def create_quote_draft(db: sqlite3.Connection, *, user_id: str, organization_id:
                     origin=None, dispatch=None,
                     cargo=cargo_from_technical_specs(json.loads(offer['technical_specifications_json'] or '[]')),
                 ) if country in SUPPORTED_DESTINATIONS else {'status':'DESTINATION_NOT_SUPPORTED_YET','gaps':['DESTINATION_RULES'],'routes':[]})
+            if calculation.get('goods_subtotal') and calculation.get('currency'):
+                priced_lines += 1
+                currency = calculation['currency']
+                goods_by_currency[currency] = goods_by_currency.get(currency, Decimal('0')) + Decimal(calculation['goods_subtotal'])
             estimate_lines.append({
                 'public_offer_id': offer['public_offer_id'],
                 'product_name': offer['product_name'], 'part_number': offer['part_number'],
                 'seller_country': offer['country'],
                 'calculation': calculation,
             })
-        estimate = {'status':'NEEDS_DATA','destination_country':country,
+        estimate = {'status':'PARTIAL_GOODS_ONLY' if goods_by_currency else 'NEEDS_DATA',
+                    'goods_subtotals': {currency: str(amount) for currency, amount in sorted(goods_by_currency.items())},
+                    'priced_lines_total': priced_lines, 'lines_total': len(estimate_lines),
+                    'destination_country':country,
                     'destination_city':city,'importer_type':importer_type,
                     'lines':estimate_lines,'issued_quote':False}
         db.execute('''INSERT INTO sourcing_quote_estimates

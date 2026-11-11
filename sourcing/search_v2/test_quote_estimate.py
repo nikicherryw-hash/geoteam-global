@@ -9,6 +9,8 @@ class QuoteEstimateTests(unittest.TestCase):
                                 quantity="2", unit_price="100", currency="EUR",
                                 origin=None, dispatch=None, cargo=cargo_from_evidence())
         self.assertEqual(result["status"], "NEEDS_DATA")
+        self.assertEqual(result["goods_subtotal"], "200.00")
+        self.assertEqual(result["currency"], "EUR")
         self.assertTrue(all(route["status"] == "QUOTE_REQUIRED" for route in result["routes"]))
         self.assertIn("GROSS_WEIGHT", result["gaps"])
 
