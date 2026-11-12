@@ -1,7 +1,21 @@
 {
-  "generated_at": "2026-11-12T07:14:55.597559Z",
+  "generated_at": "2026-11-12T16:50:10.751414Z",
   "mode": "automatic_rss",
   "items": [
+    {
+      "title": "Sunny Swift: Threat and error management - Part 1",
+      "source": "EASA",
+      "country": "EU",
+      "date": "2026-11-12",
+      "url": "https://www.easa.europa.eu/newsroom-and-events/news/sunny-swift-threat-and-error-management-part-1"
+    },
+    {
+      "title": "EU-Armenia: New agreements on closer cooperation in the areas of customs and taxation",
+      "source": "European Commission",
+      "country": "EU",
+      "date": "2026-11-12",
+      "url": "https://taxation-customs.ec.europa.eu/news/eu-armenia-new-agreements-closer-cooperation-areas-customs-and-taxation-2026-11-12_en"
+    },
     {
       "title": "South Africa notifies launch of safeguard investigation into certain non-wired float glass products",
       "source": "WTO",
@@ -71,20 +85,6 @@
       "country": "EU",
       "date": "2026-11-03",
       "url": "https://taxation-customs.ec.europa.eu/news/product-identifiers-e-commerce-imports-mandatory-1-november-2026-2026-11-03_en"
-    },
-    {
-      "title": "EU launches safeguard investigation on certain new hybrid vehicles",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-11-02",
-      "url": "https://www.wto.org/english/news_e/news26_e/safe_eec_02nov26_536_e.htm"
-    },
-    {
-      "title": "Working Party chair visits Uzbekistan as WTO accession negotiations enter critical phase",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-11-01",
-      "url": "https://www.wto.org/english/news_e/news26_e/acc_01nov26_545_e.htm"
     }
   ]
 }
