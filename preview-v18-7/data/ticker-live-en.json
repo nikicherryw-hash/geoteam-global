@@ -1,7 +1,14 @@
 {
-  "generated_at": "2026-11-13T01:06:33.168158Z",
+  "generated_at": "2026-11-13T12:15:21.841914Z",
   "mode": "automatic_rss",
   "items": [
+    {
+      "title": "Ireland contributes EUR 200,000 to strengthen trade opportunities in developing countries",
+      "source": "WTO",
+      "country": "UN",
+      "date": "2026-11-13",
+      "url": "https://www.wto.org/english/news_e/pres26_e/pr998_551_e.htm"
+    },
     {
       "title": "Sunny Swift: Threat and error management - Part 1",
       "source": "EASA",
@@ -78,13 +85,6 @@
       "country": "UN",
       "date": "2026-11-04",
       "url": "https://www.wto.org/english/news_e/news26_e/sps_04nov26_548_e.htm"
-    },
-    {
-      "title": "Trade Policy Review: Viet Nam",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-11-04",
-      "url": "https://www.wto.org/english/tratop_e/tpr_e/tpr_vnm_04nov26_e.htm"
     }
   ]
 }
