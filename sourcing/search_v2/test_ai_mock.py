@@ -2,6 +2,7 @@
 import json
 import tempfile
 import unittest
+from unittest.mock import AsyncMock, patch
 from pathlib import Path
 import httpx
 from sourcing.search_v2.ai_search import search_once
@@ -23,6 +24,10 @@ def response(with_search=True):
         "usage":{"input_tokens":100,"output_tokens":100}}
 
 class AsyncResearchTests(unittest.IsolatedAsyncioTestCase):
+ def setUp(self):
+    self.source_patch = patch('sourcing.search_v2.ai_search.attach_source_images', new_callable=AsyncMock)
+    self.source_patch.start()
+    self.addCleanup(self.source_patch.stop)
  async def test_api_billed_attempt_only_after_reservation(self):
     calls=[]
     def handler(req):
@@ -32,10 +37,10 @@ class AsyncResearchTests(unittest.IsolatedAsyncioTestCase):
         budget=PilotBudget(str(Path(tmp)/"pilot.db"))
         async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
             result=await search_once("Rotax 916","ru",[],"test-key","gpt-6.1-sol",client,budget)
-        self.assertEqual(len(calls),1)
+        self.assertEqual(len(calls),2)
         self.assertEqual(calls[0]["tools"],[{"type":"web_search"}])
         self.assertEqual(calls[0]["store"],False)
-        self.assertEqual(result["pilot"]["calls_reserved"],1)
+        self.assertEqual(result["pilot"]["calls_reserved"],2)
  async def test_new_rotax_918_is_searched_but_916_price_is_rejected(self):
     calls=[]
     def handler(req):
@@ -45,10 +50,10 @@ class AsyncResearchTests(unittest.IsolatedAsyncioTestCase):
         budget=PilotBudget(str(Path(tmp)/"pilot.db"))
         async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
             result=await search_once("Rotax 918","ru",[],"test-key","gpt-6-luna",client,budget)
-        self.assertEqual(len(calls),1)
+        self.assertEqual(len(calls),2)
         self.assertEqual(result["status"],"NO_EVIDENCED_OFFER")
         self.assertEqual(result["offers"],[])
-        self.assertEqual(budget.status()["calls_reserved"],1)
+        self.assertEqual(budget.status()["calls_reserved"],2)
  async def test_no_actual_search_no_fake_result(self):
     with tempfile.TemporaryDirectory() as tmp:
         budget=PilotBudget(str(Path(tmp)/"pilot.db"))

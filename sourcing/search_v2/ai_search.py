@@ -15,7 +15,9 @@ import httpx
 
 from .core import identity, safe_url
 from .matching import model_matches, candidate_matches, normalized_identity
+from .measurement_evidence import MAX_PDF_BYTES, checked_claims, pdf_text, planning_cargo
 from .usage_cost import estimated_cents
+from .budget import BudgetExhausted
 
 MAX_IMAGE_BYTES = 5 * 1024 * 1024
 MAX_SOURCE_BYTES = 500000
@@ -81,6 +83,13 @@ JSON_FORMAT = {
     }
 }
 
+MEASUREMENT_FORMAT = {
+    'type':'json_schema', 'name':'technical_measurements', 'strict':True,
+    'schema':{'type':'object', 'additionalProperties':False,
+        'properties':{'measurements':JSON_FORMAT['schema']['properties']['measurements']},
+        'required':['measurements']}
+}
+
 # Additive source-role contract shared by text and attachment research.
 _candidate = JSON_FORMAT['schema']['properties']['candidates']['items']
 for _field in ('seller_country', 'dispatch_country', 'manufacturing_country', 'authorization_url'):
@@ -130,7 +139,11 @@ def source_identifier(query: str) -> str:
     Research summaries may drop punctuation or even a digit.  They can help
     discover a page, but must not replace the buyer's identifier as evidence.
     """
-    tokens = re.findall(r'[^\W_]+(?:[-/][^\W_]+)*', normalized_identity(query))
+    normalized = normalized_identity(query)
+    rotax_variant = re.search(r'\brotax\s+(\d{3,4})\s+(uls|ul|isc|is|a|f|s)\b', normalized)
+    if rotax_variant:
+        return rotax_variant.group(1) + ' ' + rotax_variant.group(2)
+    tokens = re.findall(r'[^\W_]+(?:[-/][^\W_]+)*', normalized)
     numbered = [token for token in tokens if any(char.isdigit() for char in token)]
     return max(numbered, key=len) if numbered else query
 
@@ -170,6 +183,45 @@ def cited_measurements(report: dict, query: str, refs: set[str]) -> list[dict]:
     return found
 
 
+async def research_missing_measurements(query, api_key, model, client, budget) -> list[dict]:
+    """One bounded follow-up when broad sourcing found no cited dimensions."""
+    try:
+        ticket = budget.reserve_call()
+    except BudgetExhausted:
+        return []
+    payload = {'model':model, 'store':False,
+        'instructions':('Find exact-model product measurements in manufacturer datasheets, manuals '
+                        'or product pages. Do not infer shipping package data from product data. '
+                        'Do not substitute another variant. Return only measurements explicitly '
+                        'printed in a cited source; otherwise return an empty array.'),
+        'input':('Find net or dry weight, packed gross weight, product and packed dimensions for '
+                 + repr(query) + '. Inspect weight and dimensions tables, including PDF documents. '
+                 'Use the exact source URL and exact model for each measurement.'),
+        'tools':[{'type':'web_search'}], 'tool_choice':'required',
+        'include':['web_search_call.action.sources'],
+        'text':{'format':MEASUREMENT_FORMAT}, 'max_tool_calls':4, 'max_output_tokens':2000}
+    try:
+        response = await client.post('https://api.openai.com/v1/responses', json=payload,
+            headers={'Authorization':'Bearer ' + api_key},
+            timeout=httpx.Timeout(100.0, connect=10.0))
+        response.raise_for_status()
+        data = response.json()
+        web_calls = sum(item.get('type') == 'web_search_call' for item in data.get('output', []) if isinstance(item, dict))
+        budget.mark(ticket, 'SUCCESS', estimated_cents(data.get('usage'), model, web_calls))
+    except (httpx.HTTPError, ValueError):
+        budget.mark(ticket, 'UNKNOWN_AFTER_SEND')
+        return []
+    messages = [block for item in data.get('output', []) if item.get('type') == 'message'
+                for block in item.get('content', []) if block.get('type') == 'output_text']
+    if not web_calls or not messages or data.get('status') == 'incomplete':
+        return []
+    try:
+        return cited_measurements(json.loads(''.join(block['text'] for block in messages)),
+                                  query, source_urls(data))
+    except (KeyError, TypeError, ValueError):
+        return []
+
+
 def _public_page_url(url: str) -> bool:
     if not safe_url(url):
         return False
@@ -194,42 +246,40 @@ async def _source_page_image(source_url: str, lead: dict | None = None) -> str |
                         if attempt or not _public_page_url(target):
                             return None
                         continue
-                    if response.status_code != 200 or 'html' not in response.headers.get('content-type', '').lower():
+                    content_type = response.headers.get('content-type', '').lower()
+                    is_pdf = 'application/pdf' in content_type or urlsplit(target).path.lower().endswith('.pdf')
+                    if response.status_code != 200 or not (is_pdf or 'html' in content_type):
                         return None
                     declared = response.headers.get('content-length')
-                    if declared and int(declared) > MAX_SOURCE_BYTES:
+                    max_bytes = MAX_PDF_BYTES if is_pdf else MAX_SOURCE_BYTES
+                    if declared and int(declared) > max_bytes:
                         return None
                     content = bytearray()
                     async for chunk in response.aiter_bytes():
-                        if len(content) + len(chunk) > MAX_SOURCE_BYTES:
+                        if len(content) + len(chunk) > max_bytes:
                             return None
                         content.extend(chunk)
                     page_url = str(response.url)
-                    page = bytes(content).decode(response.encoding or 'utf-8', errors='replace')
+                    page = bytes(content).decode(response.encoding or 'utf-8', errors='replace') if not is_pdf else ''
                     break
             else:
                 return None
     except (httpx.HTTPError, UnicodeError, LookupError, ValueError):
         return None
+    if is_pdf:
+        try:
+            plain = await asyncio.wait_for(asyncio.to_thread(pdf_text, bytes(content)), timeout=8.0)
+        except Exception:
+            return None
+        if lead is not None and lead.get('source_role') == 'MEASUREMENT_REFERENCE':
+            lead['checked_measurements'] = checked_claims(plain, str(lead.get('requested_part_number') or ''), lead.get('measurement_claims') or [])
+            lead['page_checked_at'] = datetime.now(timezone.utc).isoformat()
+            lead['page_evidence'] = {'kind':'TECHNICAL_PDF', 'content_sha256':hashlib.sha256(content).hexdigest()}
+        return None
     if lead is not None:
         if lead.get('source_role') == 'MEASUREMENT_REFERENCE':
             plain = html.unescape(re.sub(r'<[^>]+>', ' ', page))
-            plain = re.sub(r'\s+', ' ', plain)
-            identifier = str(lead.get('requested_part_number') or '')
-            checked = []
-            if identifier and model_matches(identifier, plain):
-                for claim in lead.get('measurement_claims') or []:
-                    value = str(claim['value']).removesuffix('.0')
-                    unit = claim['unit']
-                    labels = ('weight', 'mass', 'вес', 'масса', 'ağırlık') if 'WEIGHT' in claim['kind'] else ('dimension', 'size', 'length', 'width', 'height', 'размер', 'длина', 'ширина', 'высота', 'ölçü')
-                    pattern = r'(?<!\d)' + re.escape(value) + r'\s*' + re.escape(unit) + r'\b'
-                    for match in re.finditer(pattern, plain, re.I):
-                        context = plain[max(0, match.start()-200):match.end()+120].lower()
-                        nearby_model = plain[max(0, match.start()-500):match.end()+200]
-                        if any(label in context for label in labels) and model_matches(identifier, nearby_model):
-                            checked.append({**claim, 'status':'SOURCE_PAGE_CHECKED'})
-                            break
-            lead['checked_measurements'] = checked
+            lead['checked_measurements'] = checked_claims(plain, str(lead.get('requested_part_number') or ''), lead.get('measurement_claims') or [])
             lead['page_checked_at'] = datetime.now(timezone.utc).isoformat()
         from .offer_evidence import offer_facts
         facts = offer_facts(page, lead.get('requested_part_number') or lead.get('model', ''))
@@ -410,7 +460,7 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
     compact = re.sub(r'(?<=\d)\s+(?=[A-Za-z]{1,4}\b)', '', query)
     lookup_terms = list(dict.fromkeys((query, compact)))
     payload = {"model": model, "store": False, "instructions": SYSTEM,
-        "input": "Research globally the exact technical item " + repr(query) + ". Search spellings: " + json.dumps(lookup_terms, ensure_ascii=False) + ". Language: " + locale + ". Search direct product listings with visible public prices and product images, then used/refurbished marketplace listings and independent suppliers across regions. Independently search manufacturer datasheets, manuals and public technical catalogues for exact-model net weight, packed gross weight, product dimensions and package dimensions. Return only explicitly stated measurements with a citation to the exact page; leave the measurements array empty when absent. Never treat bare product size as shipping package size. Seek multiple independent exact-item listings when they exist. Distinguish complete equipment from accessories, whole machines containing the item, compatible alternatives and adjacent variants. Preserve each listing's exact model, part number, condition, seller and dispatch country only when evidenced on that page. Use null for absent facts. Return a source-grounded identity card and direct public item pages. One verified representative image is enough; never use a logo or generic banner. Optional source hints are discovery leads, not offers: " + json.dumps(hints[:12]),
+        "input": "Research globally the exact technical item " + repr(query) + ". Search spellings: " + json.dumps(lookup_terms, ensure_ascii=False) + ". Language: " + locale + ". First find a manufacturer datasheet or manual for this exact model and explicitly inspect its Weight/Mass and Dimensions rows; cite the document URL in each applicable measurements entry. For a family query, keep variant measurements separate and do not assign one variant's value to the whole family. Separate dry/net product weight from packed gross weight, and bare product dimensions from transport package dimensions. An absent packed measurement stays absent; do not estimate it in the verified measurements array. Then search direct product listings with visible public prices and product images, used/refurbished marketplace listings and independent suppliers across regions. Seek multiple independent exact-item listings when they exist. Distinguish complete equipment from accessories, whole machines containing the item, compatible alternatives and adjacent variants. Preserve each listing's exact model, part number, condition, seller and dispatch country only when evidenced on that page. Use null for absent facts. Return a source-grounded identity card and direct public item pages. One verified representative image is enough; never use a logo or generic banner. Optional source hints are discovery leads, not offers: " + json.dumps(hints[:12]),
         "tools": [{"type": "web_search"}], "tool_choice": "required", "include": ["web_search_call.action.sources"], "text": {"format": JSON_FORMAT}, "max_tool_calls": 12, "max_output_tokens": 24000}
     ticket = budget.reserve_call()
     try:
@@ -425,6 +475,8 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
     if not any(item.get("type") == "web_search_call" for item in data.get("output", []) if isinstance(item, dict)):
         raise ValueError("No web search performed")
     result = validate_output(data, query, locale)
+    if not result['_measurements']:
+        result['_measurements'] = await research_missing_measurements(query, api_key, model, client, budget)
     measurement_urls: dict[str, list[dict]] = {}
     for claim in result.pop('_measurements'):
         measurement_urls.setdefault(claim['source_url'], []).append(claim)
@@ -454,6 +506,7 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
         product['technical_specifications'].extend(
             f"{names[claim['kind']]}: {claim['value']:g} {claim['unit']}" for claim in checked[:8])
     product['measurement_status'] = 'SOURCE_PAGE_CHECKED' if checked else 'NOT_CONFIRMED'
+    product['shipping_planning'] = planning_cargo(checked)
     result["product"] = product
     result["image"] = None
     result["_representative_image_url"] = image_url
