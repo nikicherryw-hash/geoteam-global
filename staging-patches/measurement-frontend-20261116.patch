@@ -1,0 +1,39 @@
+diff --git a/preview-v18-7/geoteam-ai-pilot.js b/preview-v18-7/geoteam-ai-pilot.js
+index 3040d25..18667fe 100644
+--- a/preview-v18-7/geoteam-ai-pilot.js
++++ b/preview-v18-7/geoteam-ai-pilot.js
+@@ -35,6 +35,18 @@
+     en:['','New','Used','Refurbished','','','Price on request','Public price reference; configuration and sales unit require confirmation.','Offer details are not confirmed from the source page and require an RFQ.'],
+     tr:['','Yeni','Kullanılmış','Yenilenmiş','','','Fiyat talep üzerine','Herkese açık fiyat referansı; yapılandırma ve satış birimi teyit edilmelidir.','Teklif ayrıntıları kaynak sayfasında doğrulanmadı; RFQ ile teyit edilir.']
+   };
++  const cargoWords = {
++    ru:['Предварительная масса для планирования перевозки','Брутто с упаковкой:','Это расчётный диапазон, а не подтверждённый вес груза. Упаковка и тариф требуют проверки.'],
++    en:['Preliminary transport planning','Packed gross estimate:','This is a planning range, not a confirmed shipment weight. Packaging and freight rate require confirmation.'],
++    tr:['Ön taşıma planlaması','Tahmini paketli brüt ağırlık:','Bu, doğrulanmış sevkiyat ağırlığı değil, planlama aralığıdır. Ambalaj ve navlun teyit edilmelidir.'],
++    de:['Vorläufige Transportplanung','Geschätztes Bruttogewicht mit Verpackung:','Dies ist ein Planungsbereich, kein bestätigtes Versandgewicht. Verpackung und Frachtkosten sind zu prüfen.'],
++    fr:['Planification préliminaire du transport','Poids brut emballé estimé :','Il s’agit d’une fourchette indicative, pas d’un poids expédié confirmé. Emballage et fret à vérifier.'],
++    es:['Planificación preliminar del transporte','Peso bruto embalado estimado:','Es un intervalo orientativo, no un peso de envío confirmado. Embalaje y flete pendientes de confirmación.'],
++    it:['Pianificazione preliminare del trasporto','Peso lordo imballato stimato:','È un intervallo indicativo, non un peso di spedizione confermato. Imballo e trasporto da verificare.'],
++    pt:['Planeamento preliminar do transporte','Peso bruto embalado estimado:','É um intervalo de planeamento, não um peso de envio confirmado. Embalagem e frete precisam de confirmação.'],
++    ar:['تقدير أولي للنقل','الوزن الإجمالي المعبأ التقديري:','هذا نطاق تقديري وليس وزن شحنة مؤكداً. يجب تأكيد التغليف وتكلفة النقل.'],
++    zh:['初步运输规划','预计包装毛重：','这是规划范围，并非已确认的发运重量。包装和运费仍需确认。']
++  };
+ 
+   function setStatus(message, state = 'global') {
+     status.dataset.state = ['global', 'local', 'offline'].includes(state) ? state : 'offline';
+@@ -79,6 +91,15 @@
+       if (facts.childNodes.length) card.append(facts);
+       const specifications = Array.isArray(product.technical_specifications) ? product.technical_specifications.filter(hasValue).slice(0, 12) : [];
+       if (specifications.length) { const specTitle = make('h3'); text(specTitle, t('specs')); const list = make('ul', 'product-specifications'); specifications.forEach(item => { const row = make('li'); text(row, item); list.append(row); }); card.append(specTitle, list); }
++      const cargo = product.shipping_planning;
++      if (cargo && Array.isArray(cargo.planning_gross_kg_range) && cargo.planning_gross_kg_range.length === 2) {
++        const labels = cargoWords[lang] || cargoWords.en;
++        const block = make('div', 'shipping-planning');
++        const title = make('h3'); text(title, labels[0]);
++        const range = make('p'); text(range, `${labels[1]} ${cargo.planning_gross_kg_range[0]}–${cargo.planning_gross_kg_range[1]} kg`);
++        const note = make('p', 'meta'); text(note, labels[2]);
++        block.append(title, range, note); card.append(block);
++      }
+       target.append(card);
+     }
+     const section = make('section', 'offers'), heading = make('h2'); text(heading, t('offers')); section.append(heading);
