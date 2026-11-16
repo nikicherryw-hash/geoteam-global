@@ -61,3 +61,17 @@ class AsyncResearchTests(unittest.IsolatedAsyncioTestCase):
             with self.assertRaises(ValueError):
                 await search_once("Rotax 916","ru",[],"test-key","gpt-6.1-sol",client,budget)
         self.assertEqual(budget.status()["calls_reserved"],1)
+ async def test_timeout_retries_with_smaller_research_request(self):
+    calls=[]
+    def handler(req):
+        calls.append(json.loads(req.content))
+        if len(calls) == 1:
+            raise httpx.ReadTimeout('slow upstream', request=req)
+        return httpx.Response(200,json=response())
+    with tempfile.TemporaryDirectory() as tmp:
+        budget=PilotBudget(str(Path(tmp)/'pilot.db'))
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            result=await search_once('Rotax 916','ru',[],'test-key','gpt-6-luna',client,budget)
+        self.assertEqual(len(calls),3)  # retry plus optional measurement follow-up
+        self.assertLess(calls[1]['max_tool_calls'],calls[0]['max_tool_calls'])
+        self.assertEqual(result['product']['part_number'],'916 iS')

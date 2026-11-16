@@ -461,7 +461,7 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
     lookup_terms = list(dict.fromkeys((query, compact)))
     payload = {"model": model, "store": False, "instructions": SYSTEM,
         "input": "Research globally the exact technical item " + repr(query) + ". Search spellings: " + json.dumps(lookup_terms, ensure_ascii=False) + ". Language: " + locale + ". First find a manufacturer datasheet or manual for this exact model and explicitly inspect its Weight/Mass and Dimensions rows; cite the document URL in each applicable measurements entry. For a family query, keep variant measurements separate and do not assign one variant's value to the whole family. Separate dry/net product weight from packed gross weight, and bare product dimensions from transport package dimensions. An absent packed measurement stays absent; do not estimate it in the verified measurements array. Then search direct product listings with visible public prices and product images, used/refurbished marketplace listings and independent suppliers across regions. Seek multiple independent exact-item listings when they exist. Distinguish complete equipment from accessories, whole machines containing the item, compatible alternatives and adjacent variants. Preserve each listing's exact model, part number, condition, seller and dispatch country only when evidenced on that page. Use null for absent facts. Return a source-grounded identity card and direct public item pages. One verified representative image is enough; never use a logo or generic banner. Optional source hints are discovery leads, not offers: " + json.dumps(hints[:12]),
-        "tools": [{"type": "web_search"}], "tool_choice": "required", "include": ["web_search_call.action.sources"], "text": {"format": JSON_FORMAT}, "max_tool_calls": 12, "max_output_tokens": 24000}
+        "tools": [{"type": "web_search"}], "tool_choice": "required", "include": ["web_search_call.action.sources"], "text": {"format": JSON_FORMAT}, "max_tool_calls": 8, "max_output_tokens": 12000}
     ticket = budget.reserve_call()
     try:
         response = await client.post("https://api.openai.com/v1/responses", json=payload, headers={"Authorization": "Bearer " + api_key}, timeout=httpx.Timeout(150.0, connect=10.0))
@@ -469,6 +469,23 @@ async def search_once(query, locale, hints, api_key, model, client, budget):
         data = response.json()
         web_calls = sum(item.get("type") == "web_search_call" for item in data.get("output", []) if isinstance(item, dict))
         budget.mark(ticket, "SUCCESS", estimated_cents(data.get("usage"), model, web_calls))
+    except httpx.ReadTimeout:
+        budget.mark(ticket, "UNKNOWN_AFTER_SEND")
+        # One smaller retry keeps a slow broad web crawl from failing the
+        # whole request. It is separately reserved and accounted for.
+        retry_ticket = budget.reserve_call()
+        retry_payload = {**payload, "max_tool_calls": 4, "max_output_tokens": 6000,
+            "input": "Identify the exact item " + repr(query) + " and find direct public product listings with cited prices and a product image. Return only source-grounded facts, preserving exact model and condition. Language: " + locale}
+        try:
+            response = await client.post("https://api.openai.com/v1/responses", json=retry_payload,
+                headers={"Authorization": "Bearer " + api_key}, timeout=httpx.Timeout(100.0, connect=10.0))
+            response.raise_for_status()
+            data = response.json()
+            web_calls = sum(item.get("type") == "web_search_call" for item in data.get("output", []) if isinstance(item, dict))
+            budget.mark(retry_ticket, "SUCCESS", estimated_cents(data.get("usage"), model, web_calls))
+        except (httpx.HTTPError, ValueError):
+            budget.mark(retry_ticket, "UNKNOWN_AFTER_SEND")
+            raise
     except (httpx.HTTPError, ValueError):
         budget.mark(ticket, "UNKNOWN_AFTER_SEND")
         raise
