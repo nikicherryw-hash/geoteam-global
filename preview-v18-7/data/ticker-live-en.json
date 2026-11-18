@@ -1,7 +1,21 @@
 {
-  "generated_at": "2026-11-18T07:33:03.563173Z",
+  "generated_at": "2026-11-18T17:16:39.147078Z",
   "mode": "automatic_rss",
   "items": [
+    {
+      "title": "Extension of CBAM to Iceland and Norway",
+      "source": "European Commission",
+      "country": "EU",
+      "date": "2026-11-18",
+      "url": "https://taxation-customs.ec.europa.eu/news/extension-cbam-iceland-and-norway-2026-11-18_en"
+    },
+    {
+      "title": "Trade Policy Review: Peru",
+      "source": "WTO",
+      "country": "UN",
+      "date": "2026-11-18",
+      "url": "https://www.wto.org/english/tratop_e/tpr_e/tpr_per_18nov26_e.htm"
+    },
     {
       "title": "New trade-restrictive measures surge but WTO members step up trade facilitation efforts",
       "source": "WTO",
@@ -15,6 +29,13 @@
       "country": "EU",
       "date": "2026-11-16",
       "url": "https://taxation-customs.ec.europa.eu/news/cbam-commission-adopts-rules-recognition-carbon-prices-paid-non-eu-countries-2026-11-16_en"
+    },
+    {
+      "title": "DDG Nordquist: Global trade is adapting, not retreating",
+      "source": "WTO",
+      "country": "UN",
+      "date": "2026-11-16",
+      "url": "https://www.wto.org/english/news_e/news26_e/ddgjn_16nov26_555_e.htm"
     },
     {
       "title": "Ireland contributes EUR 200,000 to strengthen trade opportunities in developing countries",
@@ -38,6 +59,13 @@
       "url": "https://taxation-customs.ec.europa.eu/news/eu-armenia-new-agreements-closer-cooperation-areas-customs-and-taxation-2026-11-12_en"
     },
     {
+      "title": "Members review LDC support, discuss public health and small business IP assistance",
+      "source": "WTO",
+      "country": "UN",
+      "date": "2026-11-12",
+      "url": "https://www.wto.org/english/news_e/news26_e/trip_12nov26_553_e.htm"
+    },
+    {
       "title": "South Africa notifies launch of safeguard investigation into certain non-wired float glass products",
       "source": "WTO",
       "country": "UN",
@@ -45,46 +73,18 @@
       "url": "https://www.wto.org/english/news_e/news26_e/safe_zaf_11nov26_546_e.htm"
     },
     {
+      "title": "Director-General praises work of Technical Barriers to Trade Committee at 100th meeting",
+      "source": "WTO",
+      "country": "UN",
+      "date": "2026-11-10",
+      "url": "https://www.wto.org/english/news_e/news26_e/tbt_10nov26_554_e.htm"
+    },
+    {
       "title": "Ethiopia's accession maintains momentum as WTO members review progress",
       "source": "WTO",
       "country": "UN",
       "date": "2026-11-10",
       "url": "https://www.wto.org/english/news_e/news26_e/acc_10nov26_550_e.htm"
-    },
-    {
-      "title": "Commission welcomes Council agreement on removing the €150 threshold for the VAT Import One-Stop Shop",
-      "source": "European Commission",
-      "country": "EU",
-      "date": "2026-11-09",
-      "url": "https://taxation-customs.ec.europa.eu/news/commission-welcomes-council-agreement-removing-eur150-threshold-vat-import-one-stop-shop-2026-11-09_en"
-    },
-    {
-      "title": "Germany contributes EUR 500,000 to strengthen developing economies' trade capacity",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-11-09",
-      "url": "https://www.wto.org/english/news_e/news26_e/tech_09nov26_543_e.htm"
-    },
-    {
-      "title": "New guidance on electricity imports under Centralised Clearance for Import (CCI)",
-      "source": "European Commission",
-      "country": "EU",
-      "date": "2026-11-06",
-      "url": "https://taxation-customs.ec.europa.eu/news/new-guidance-electricity-imports-under-centralised-clearance-import-cci-2026-11-06_en"
-    },
-    {
-      "title": "EU launches safeguard investigation on certain PET resin chemicals",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-11-06",
-      "url": "https://www.wto.org/english/news_e/news26_e/safe_eec_06nov26_542_e.htm"
-    },
-    {
-      "title": "EASA provides complete Easy Access Rules publication history in XML",
-      "source": "EASA",
-      "country": "EU",
-      "date": "2026-11-05",
-      "url": "https://www.easa.europa.eu/newsroom-and-events/news/easa-provides-complete-easy-access-rules-publication-history-xml"
     }
   ]
 }
