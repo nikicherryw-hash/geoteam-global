@@ -1,7 +1,21 @@
 {
-  "generated_at": "2026-11-20T07:20:20.359047Z",
+  "generated_at": "2026-11-20T16:58:53.035131Z",
   "mode": "automatic_rss",
   "items": [
+    {
+      "title": "EU Customs Authority holds first management board meeting in Lille",
+      "source": "European Commission",
+      "country": "EU",
+      "date": "2026-11-20",
+      "url": "https://taxation-customs.ec.europa.eu/news/eu-customs-authority-holds-first-management-board-meeting-lille-2026-11-20_en"
+    },
+    {
+      "title": "EU and UK agree to link Emission Trading Systems (ETS)",
+      "source": "European Commission",
+      "country": "EU",
+      "date": "2026-11-20",
+      "url": "https://taxation-customs.ec.europa.eu/news/eu-and-uk-agree-link-emission-trading-systems-ets-2026-11-20_en"
+    },
     {
       "title": "Panama submits request to join Expansion of the Information Technology Agreement",
       "source": "WTO",
@@ -71,20 +85,6 @@
       "country": "UN",
       "date": "2026-11-13",
       "url": "https://www.wto.org/english/news_e/pres26_e/pr998_551_e.htm"
-    },
-    {
-      "title": "Sunny Swift: Threat and error management - Part 1",
-      "source": "EASA",
-      "country": "EU",
-      "date": "2026-11-12",
-      "url": "https://www.easa.europa.eu/newsroom-and-events/news/sunny-swift-threat-and-error-management-part-1"
-    },
-    {
-      "title": "EU-Armenia: New agreements on closer cooperation in the areas of customs and taxation",
-      "source": "European Commission",
-      "country": "EU",
-      "date": "2026-11-12",
-      "url": "https://taxation-customs.ec.europa.eu/news/eu-armenia-new-agreements-closer-cooperation-areas-customs-and-taxation-2026-11-12_en"
     }
   ]
 }
