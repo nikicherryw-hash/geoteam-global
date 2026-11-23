@@ -1,7 +1,21 @@
 {
-  "generated_at": "2026-11-23T00:55:45.493243Z",
+  "generated_at": "2026-11-23T14:42:47.414199Z",
   "mode": "automatic_rss",
   "items": [
+    {
+      "title": "EASA further improves ReFuelEU Aviation reporting with version 3 of the Sustainability Portal",
+      "source": "EASA",
+      "country": "EU",
+      "date": "2026-11-23",
+      "url": "https://www.easa.europa.eu/newsroom-and-events/news/easa-further-improves-refueleu-aviation-reporting-version-3-sustainability-portal"
+    },
+    {
+      "title": "Trade-facilitating measures help offset rise in new G20 trade restrictions",
+      "source": "WTO",
+      "country": "UN",
+      "date": "2026-11-23",
+      "url": "https://www.wto.org/english/news_e/news26_e/tmg20_23nov26_559_e.htm"
+    },
     {
       "title": "EU Customs Authority holds first management board meeting in Lille",
       "source": "European Commission",
@@ -71,20 +85,6 @@
       "country": "UN",
       "date": "2026-11-16",
       "url": "https://www.wto.org/english/news_e/news26_e/ddgjn_16nov26_555_e.htm"
-    },
-    {
-      "title": "Goods Council agrees to modernize notification reporting, reviews trade concerns",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-11-16",
-      "url": "https://www.wto.org/english/news_e/news26_e/good_16nov26_556_e.htm"
-    },
-    {
-      "title": "Ireland contributes EUR 200,000 to strengthen trade opportunities in developing countries",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-11-13",
-      "url": "https://www.wto.org/english/news_e/pres26_e/pr998_551_e.htm"
     }
   ]
 }
