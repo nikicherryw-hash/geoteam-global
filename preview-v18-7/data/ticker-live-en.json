@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T14:42:47.414199Z",
+  "generated_at": "2026-11-24T02:54:38.822947Z",
   "mode": "automatic_rss",
   "items": [
     {
@@ -17,11 +17,11 @@
       "url": "https://www.wto.org/english/news_e/news26_e/tmg20_23nov26_559_e.htm"
     },
     {
-      "title": "EU Customs Authority holds first management board meeting in Lille",
-      "source": "European Commission",
-      "country": "EU",
-      "date": "2026-11-20",
-      "url": "https://taxation-customs.ec.europa.eu/news/eu-customs-authority-holds-first-management-board-meeting-lille-2026-11-20_en"
+      "title": "EU launches safeguard investigation into certain composite input materials",
+      "source": "WTO",
+      "country": "UN",
+      "date": "2026-11-23",
+      "url": "https://www.wto.org/english/news_e/news26_e/safe_eec_23nov26_561_e.htm"
     },
     {
       "title": "EU and UK agree to link Emission Trading Systems (ETS)",
@@ -29,6 +29,13 @@
       "country": "EU",
       "date": "2026-11-20",
       "url": "https://taxation-customs.ec.europa.eu/news/eu-and-uk-agree-link-emission-trading-systems-ets-2026-11-20_en"
+    },
+    {
+      "title": "EU Customs Authority holds first management board meeting in Lille",
+      "source": "European Commission",
+      "country": "EU",
+      "date": "2026-11-20",
+      "url": "https://taxation-customs.ec.europa.eu/news/eu-customs-authority-holds-first-management-board-meeting-lille-2026-11-20_en"
     },
     {
       "title": "Panama submits request to join Expansion of the Information Technology Agreement",
@@ -78,13 +85,6 @@
       "country": "EU",
       "date": "2026-11-16",
       "url": "https://taxation-customs.ec.europa.eu/news/cbam-commission-adopts-rules-recognition-carbon-prices-paid-non-eu-countries-2026-11-16_en"
-    },
-    {
-      "title": "DDG Nordquist: Global trade is adapting, not retreating",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-11-16",
-      "url": "https://www.wto.org/english/news_e/news26_e/ddgjn_16nov26_555_e.htm"
     }
   ]
 }
