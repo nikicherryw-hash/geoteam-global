@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T00:23:17.018814Z",
+  "generated_at": "2026-11-26T13:56:13.586830Z",
   "mode": "automatic_rss",
   "items": [
     {
@@ -29,6 +29,13 @@
       "country": "EU",
       "date": "2026-11-23",
       "url": "https://www.easa.europa.eu/newsroom-and-events/news/easa-further-improves-refueleu-aviation-reporting-version-3-sustainability-portal"
+    },
+    {
+      "title": "Members briefed on food export restrictions history, safeguard mechanism",
+      "source": "WTO",
+      "country": "UN",
+      "date": "2026-11-23",
+      "url": "https://www.wto.org/english/news_e/news26_e/agng_23nov26_565_e.htm"
     },
     {
       "title": "Trade-facilitating measures help offset rise in new G20 trade restrictions",
@@ -78,13 +85,6 @@
       "country": "UN",
       "date": "2026-11-19",
       "url": "https://www.wto.org/english/news_e/news26_e/ita_19nov26_560_e.htm"
-    },
-    {
-      "title": "Applications open for WIPO-WTO Executive Programme on Intellectual Property Issues",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-11-19",
-      "url": "https://www.wto.org/english/news_e/news26_e/trip_19nov26_557_e.htm"
     }
   ]
 }
