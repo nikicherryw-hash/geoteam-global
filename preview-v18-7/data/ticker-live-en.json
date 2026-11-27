@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T00:37:08.529391Z",
+  "generated_at": "2026-11-27T13:55:07.319789Z",
   "mode": "automatic_rss",
   "items": [
     {
@@ -8,6 +8,13 @@
       "country": "EU",
       "date": "2026-11-25",
       "url": "https://www.easa.europa.eu/newsroom-and-events/news/new-easa-pro-homepage-discover-breadth-easas-work"
+    },
+    {
+      "title": "Services domestic regulation disciplines enter into force for Kazakhstan",
+      "source": "WTO",
+      "country": "UN",
+      "date": "2026-11-25",
+      "url": "https://www.wto.org/english/news_e/news26_e/jssdr_25nov26_566_e.htm"
     },
     {
       "title": "Publication of the Mind the Gap Communication",
@@ -78,13 +85,6 @@
       "country": "UN",
       "date": "2026-11-20",
       "url": "https://www.wto.org/english/news_e/news26_e/val_20nov26_564_e.htm"
-    },
-    {
-      "title": "Panama submits request to join Expansion of the Information Technology Agreement",
-      "source": "WTO",
-      "country": "UN",
-      "date": "2026-11-19",
-      "url": "https://www.wto.org/english/news_e/news26_e/ita_19nov26_560_e.htm"
     }
   ]
 }
